@@ -26,7 +26,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/mint"
 )
 
-func TestKvCLIKeysAddMultisig(t *testing.T) {
+func TestMgeCliKeysAddMultisig(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -53,7 +53,7 @@ func TestKvCLIKeysAddMultisig(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIKeysAddRecover(t *testing.T) {
+func TestMgeCliKeysAddRecover(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -109,7 +109,7 @@ func TestMageCLIKeysAddRecoverHDPath(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIMinimumFees(t *testing.T) {
+func TestMgeCliMinimumFees(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -147,7 +147,7 @@ func TestKvCLIMinimumFees(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIGasPrices(t *testing.T) {
+func TestMgeCliGasPrices(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -181,7 +181,7 @@ func TestKvCLIGasPrices(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIFeesDeduction(t *testing.T) {
+func TestMgeCliFeesDeduction(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -234,7 +234,7 @@ func TestKvCLIFeesDeduction(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLISend(t *testing.T) {
+func TestMgeCliSend(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -303,7 +303,7 @@ func TestKvCLISend(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLISendMultiplePerBlock(t *testing.T) {
+func TestMgeCliSendMultiplePerBlock(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -337,7 +337,7 @@ func TestKvCLISendMultiplePerBlock(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIGasAuto(t *testing.T) {
+func TestMgeCliGasAuto(t *testing.T) {
 	// https://github.com/cosmos/cosmos-sdk/pull/5179
 	t.Skip()
 	t.Parallel()
@@ -398,7 +398,7 @@ func TestKvCLIGasAuto(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLICreateValidator(t *testing.T) {
+func TestMgeCliCreateValidator(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -471,7 +471,7 @@ func TestKvCLICreateValidator(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIQueryRewards(t *testing.T) {
+func TestMgeCliQueryRewards(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -503,7 +503,7 @@ func TestKvCLIQueryRewards(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIQuerySupply(t *testing.T) {
+func TestMgeCliQuerySupply(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -520,7 +520,7 @@ func TestKvCLIQuerySupply(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLISubmitProposal(t *testing.T) {
+func TestMgeCliSubmitProposal(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -665,7 +665,7 @@ func TestKvCLISubmitProposal(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLISubmitParamChangeProposal(t *testing.T) {
+func TestMgeCliSubmitParamChangeProposal(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -729,7 +729,7 @@ func TestKvCLISubmitParamChangeProposal(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLISubmitCommunityPoolSpendProposal(t *testing.T) {
+func TestMgeCliSubmitCommunityPoolSpendProposal(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -812,7 +812,7 @@ func TestKvCLISubmitCommunityPoolSpendProposal(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIQueryTxPagination(t *testing.T) {
+func TestMgeCliQueryTxPagination(t *testing.T) {
 	// Skip until https://github.com/tendermint/tendermint/issues/4432 has been
 	// resolved and included in a release.
 	t.SkipNow()
@@ -870,7 +870,7 @@ func TestKvCLIQueryTxPagination(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIValidateSignatures(t *testing.T) {
+func TestMgeCliValidateSignatures(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -919,7 +919,7 @@ func TestKvCLIValidateSignatures(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLISendGenerateSignAndBroadcast(t *testing.T) {
+func TestMgeCliSendGenerateSignAndBroadcast(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -1003,7 +1003,7 @@ func TestKvCLISendGenerateSignAndBroadcast(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIMultisignInsufficientCosigners(t *testing.T) {
+func TestMgeCliMultisignInsufficientCosigners(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -1056,7 +1056,7 @@ func TestKvCLIMultisignInsufficientCosigners(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIEncode(t *testing.T) {
+func TestMgeCliEncode(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -1092,7 +1092,7 @@ func TestKvCLIEncode(t *testing.T) {
 	require.Equal(t, "deadbeef", decodedTx.Memo)
 }
 
-func TestKvCLIMultisignSortSignatures(t *testing.T) {
+func TestMgeCliMultisignSortSignatures(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -1158,7 +1158,7 @@ func TestKvCLIMultisignSortSignatures(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIMultisign(t *testing.T) {
+func TestMgeCliMultisign(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
@@ -1234,7 +1234,7 @@ func TestKvCLIMultisign(t *testing.T) {
 	f.Cleanup()
 }
 
-func TestKvCLIConfig(t *testing.T) {
+func TestMgeCliConfig(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 	node := fmt.Sprintf("%s:%s", f.RPCAddr, f.Port)
@@ -1249,7 +1249,7 @@ func TestKvCLIConfig(t *testing.T) {
 	f.CLIConfig("indent", "true")
 	f.CLIConfig("keyring-backend", "test")
 
-	config, err := ioutil.ReadFile(path.Join(f.KvcliHome, "config", "config.toml"))
+	config, err := ioutil.ReadFile(path.Join(f.MgeCliHome, "config", "config.toml"))
 	require.NoError(t, err)
 	expectedConfig := fmt.Sprintf(`broadcast-mode = "block"
 chain-id = "%s"

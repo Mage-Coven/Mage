@@ -1,4 +1,4 @@
 all:
-	docker build --tag mage/local/magenode magenode
+	docker build --tag mage/magenode magenode
 
 .PHONY: all
