@@ -19,13 +19,13 @@ func c(denom string, amount int64) sdk.Coin { return sdk.NewInt64Coin(denom, amo
 func cs(coins ...sdk.Coin) sdk.Coins { return sdk.NewCoins(coins...) }
 
 func TestClaims_Validate(t *testing.T) {
-	owner := sdk.AccAddress(crypto.AddressHash([]byte("KavaTestUser1")))
+	owner := sdk.AccAddress(crypto.AddressHash([]byte("MageTestUser1")))
 
 	t.Run("Claims", func(t *testing.T) {
-		validRewardIndexes := RewardIndexes{}.With("ukava", d("0.002"))
-		validMultiRewardIndexes := MultiRewardIndexes{}.With("ukava", validRewardIndexes)
-		invalidRewardIndexes := RewardIndexes{}.With("ukava", d("-0.002"))
-		invalidMultiRewardIndexes := MultiRewardIndexes{}.With("ukava", invalidRewardIndexes)
+		validRewardIndexes := RewardIndexes{}.With("umage", d("0.002"))
+		validMultiRewardIndexes := MultiRewardIndexes{}.With("umage", validRewardIndexes)
+		invalidRewardIndexes := RewardIndexes{}.With("umage", d("-0.002"))
+		invalidMultiRewardIndexes := MultiRewardIndexes{}.With("umage", invalidRewardIndexes)
 
 		testCases := []struct {
 			name    string
@@ -35,28 +35,28 @@ func TestClaims_Validate(t *testing.T) {
 			{
 				name: "valid",
 				claims: Claims{
-					NewClaim(CLAIM_TYPE_USDX_MINTING, owner, cs(c("bnb", 1)), validMultiRewardIndexes),
+					NewClaim(CLAIM_TYPE_FUSD_MINTING, owner, cs(c("bnb", 1)), validMultiRewardIndexes),
 				},
 				expPass: true,
 			},
 			{
 				name: "invalid owner",
 				claims: Claims{
-					NewClaim(CLAIM_TYPE_USDX_MINTING, nil, cs(c("bnb", 1)), validMultiRewardIndexes),
+					NewClaim(CLAIM_TYPE_FUSD_MINTING, nil, cs(c("bnb", 1)), validMultiRewardIndexes),
 				},
 				expPass: false,
 			},
 			{
 				name: "invalid reward",
 				claims: Claims{
-					NewClaim(CLAIM_TYPE_USDX_MINTING, owner, sdk.Coins{sdk.Coin{Denom: "invalid😫"}}, validMultiRewardIndexes),
+					NewClaim(CLAIM_TYPE_FUSD_MINTING, owner, sdk.Coins{sdk.Coin{Denom: "invalid😫"}}, validMultiRewardIndexes),
 				},
 				expPass: false,
 			},
 			{
 				name: "invalid indexes",
 				claims: Claims{
-					NewClaim(CLAIM_TYPE_USDX_MINTING, nil, cs(c("bnb", 1)), invalidMultiRewardIndexes),
+					NewClaim(CLAIM_TYPE_FUSD_MINTING, nil, cs(c("bnb", 1)), invalidMultiRewardIndexes),
 				},
 				expPass: false,
 			},
@@ -74,23 +74,23 @@ func TestClaims_Validate(t *testing.T) {
 		}
 	})
 
-	t.Run("USDXMintingClaims", func(t *testing.T) {
+	t.Run("FUSDMintingClaims", func(t *testing.T) {
 		testCases := []struct {
 			name    string
-			claims  USDXMintingClaims
+			claims  FUSDMintingClaims
 			expPass bool
 		}{
 			{
 				"valid",
-				USDXMintingClaims{
-					NewUSDXMintingClaim(owner, sdk.NewCoin("bnb", sdk.OneInt()), RewardIndexes{NewRewardIndex("bnb-a", sdk.ZeroDec())}),
+				FUSDMintingClaims{
+					NewFUSDMintingClaim(owner, sdk.NewCoin("bnb", sdk.OneInt()), RewardIndexes{NewRewardIndex("bnb-a", sdk.ZeroDec())}),
 				},
 				true,
 			},
 			{
 				"invalid owner",
-				USDXMintingClaims{
-					USDXMintingClaim{
+				FUSDMintingClaims{
+					FUSDMintingClaim{
 						BaseClaim: BaseClaim{
 							Owner: nil,
 						},
@@ -100,7 +100,7 @@ func TestClaims_Validate(t *testing.T) {
 			},
 			{
 				"invalid reward",
-				USDXMintingClaims{
+				FUSDMintingClaims{
 					{
 						BaseClaim: BaseClaim{
 							Owner:  owner,
@@ -112,7 +112,7 @@ func TestClaims_Validate(t *testing.T) {
 			},
 			{
 				"invalid collateral type",
-				USDXMintingClaims{
+				FUSDMintingClaims{
 					{
 						BaseClaim: BaseClaim{
 							Owner:  owner,
@@ -138,9 +138,9 @@ func TestClaims_Validate(t *testing.T) {
 	})
 	t.Run("SwapClaims", func(t *testing.T) {
 		validRewardIndexes := RewardIndexes{}.With("swap", d("0.002"))
-		validMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/usdx", validRewardIndexes)
+		validMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/fusd", validRewardIndexes)
 		invalidRewardIndexes := RewardIndexes{}.With("swap", d("-0.002"))
-		invalidMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/usdx", invalidRewardIndexes)
+		invalidMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/fusd", invalidRewardIndexes)
 
 		testCases := []struct {
 			name    string
@@ -190,10 +190,10 @@ func TestClaims_Validate(t *testing.T) {
 	})
 
 	t.Run("SavingsClaims", func(t *testing.T) {
-		validRewardIndexes := RewardIndexes{}.With("ukava", d("0.002"))
-		validMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/usdx", validRewardIndexes)
-		invalidRewardIndexes := RewardIndexes{}.With("ukava", d("-0.002"))
-		invalidMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/usdx", invalidRewardIndexes)
+		validRewardIndexes := RewardIndexes{}.With("umage", d("0.002"))
+		validMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/fusd", validRewardIndexes)
+		invalidRewardIndexes := RewardIndexes{}.With("umage", d("-0.002"))
+		invalidMultiRewardIndexes := MultiRewardIndexes{}.With("btcb/fusd", invalidRewardIndexes)
 
 		testCases := []struct {
 			name    string
@@ -808,7 +808,7 @@ func TestMultiRewardIndexes(t *testing.T) {
 
 var normalRewardIndexes = RewardIndexes{
 	NewRewardIndex("hard", sdk.MustNewDecFromStr("0.000001")),
-	NewRewardIndex("ukava", sdk.MustNewDecFromStr("0.1")),
+	NewRewardIndex("umage", sdk.MustNewDecFromStr("0.1")),
 }
 
 var invalidRewardIndexes = RewardIndexes{

@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/incentive/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 type AccumulateEarnRewardsTests struct {
@@ -39,7 +39,7 @@ func TestAccumulateEarnRewards(t *testing.T) {
 }
 
 func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper().addVault(vaultDenom, earntypes.NewVaultShare(vaultDenom, d("1000000")))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
@@ -53,7 +53,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -70,7 +70,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 		vaultDenom,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateEarnRewards(suite.ctx, period)
@@ -84,15 +84,15 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 			RewardFactor:   d("7.22"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor:   d("3.64"),
 		},
 	})
 }
 
-func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased_bkava() {
-	vaultDenom1 := "bkava-meow"
-	vaultDenom2 := "bkava-woof"
+func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased_bmage() {
+	vaultDenom1 := "bmage-meow"
+	vaultDenom2 := "bmage-woof"
 
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
 	suite.ctx = suite.ctx.WithBlockTime(previousAccrualTime)
@@ -116,7 +116,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -129,7 +129,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -145,10 +145,10 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 
 	rewardPeriod := types.NewMultiRewardPeriod(
 		true,
-		"bkava",         // reward period is set for "bkava" to apply to all vaults
+		"bmage",         // reward period is set for "bmage" to apply to all vaults
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 	suite.keeper.AccumulateEarnRewards(suite.ctx, rewardPeriod)
 
@@ -157,7 +157,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 	suite.storedTimeEquals(vaultDenom1, newAccrualTime)
 	suite.storedTimeEquals(vaultDenom2, newAccrualTime)
 
-	// Each vault gets the same ukava per second, assuming shares prices are the same.
+	// Each vault gets the same umage per second, assuming shares prices are the same.
 	// The share amount determines how much is actually distributed to the vault.
 	expectedIndexes := types.RewardIndexes{
 		{
@@ -165,9 +165,9 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 			RewardFactor:   d("7.22"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor: d("3.64"). // base incentive
-							Add(d("360")), // staking rewards, 10% of total bkava per second
+							Add(d("360")), // staking rewards, 10% of total bmage per second
 		},
 	}
 
@@ -175,9 +175,9 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 	suite.storedIndexesEqual(vaultDenom2, expectedIndexes)
 }
 
-func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased_bkava_partialDeposit() {
-	vaultDenom1 := "bkava-meow"
-	vaultDenom2 := "bkava-woof"
+func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased_bmage_partialDeposit() {
+	vaultDenom1 := "bmage-meow"
+	vaultDenom2 := "bmage-woof"
 
 	vaultDenom1Supply := i(800000)
 	vaultDenom2Supply := i(200000)
@@ -192,7 +192,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 	vault1Shares := d("700000")
 	vault2Shares := d("100000")
 
-	// More bkava minted than deposited into earn
+	// More bmage minted than deposited into earn
 	// Rewards are higher per-share as a result
 	earnKeeper := newFakeEarnKeeper().
 		addVault(vaultDenom1, earntypes.NewVaultShare(vaultDenom1, vault1Shares)).
@@ -209,7 +209,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -222,7 +222,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -239,10 +239,10 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 
 	rewardPeriod := types.NewMultiRewardPeriod(
 		true,
-		"bkava",         // reward period is set for "bkava" to apply to all vaults
+		"bmage",         // reward period is set for "bmage" to apply to all vaults
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 	suite.keeper.AccumulateEarnRewards(suite.ctx, rewardPeriod)
 
@@ -251,14 +251,14 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 	suite.storedTimeEquals(vaultDenom1, newAccrualTime)
 	suite.storedTimeEquals(vaultDenom2, newAccrualTime)
 
-	// Slightly increased rewards due to less bkava deposited
+	// Slightly increased rewards due to less bmage deposited
 	suite.storedIndexesEqual(vaultDenom1, types.RewardIndexes{
 		{
 			CollateralType: "earn",
 			RewardFactor:   d("8.248571428571428571"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor: d("4.154285714285714286"). // base incentive
 									Add(vaultDenom1Supply.ToDec(). // staking rewards
 													QuoInt64(10).
@@ -268,20 +268,20 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 		},
 	})
 
-	// Much higher rewards per share because only a small amount of bkava is
+	// Much higher rewards per share because only a small amount of bmage is
 	// deposited. The **total** amount of incentives distributed to this vault
 	// is still the same proportional amount.
 
 	// Fixed amount total rewards distributed to the vault
 	// Fewer shares deposited -> higher rewards per share
 
-	// 7.2ukava shares per second for 1 hour (started with 0.04)
-	// total rewards claimable = 7.2 * 100000 shares = 720000 ukava
+	// 7.2umage shares per second for 1 hour (started with 0.04)
+	// total rewards claimable = 7.2 * 100000 shares = 720000 umage
 
-	// 720000ukava distributed which is 20% of total bkava ukava rewards
-	// total rewards for *all* bkava vaults for 1 hour
-	// = 1000ukava per second * 3600 == 3600000ukava
-	// vaultDenom2 has 20% of the total bkava amount so it should get 20% of 3600000ukava == 720000ukava
+	// 720000umage distributed which is 20% of total bmage umage rewards
+	// total rewards for *all* bmage vaults for 1 hour
+	// = 1000umage per second * 3600 == 3600000umage
+	// vaultDenom2 has 20% of the total bmage amount so it should get 20% of 3600000umage == 720000umage
 
 	vault2expectedIndexes := types.RewardIndexes{
 		{
@@ -289,7 +289,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 			RewardFactor:   d("14.42"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor: d("7.24").
 				Add(vaultDenom2Supply.ToDec().
 					QuoInt64(10).
@@ -302,7 +302,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 }
 
 func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIncreased() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper().addVault(vaultDenom, earntypes.NewVaultShare(vaultDenom, d("1000000")))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
@@ -316,7 +316,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -333,7 +333,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 		vaultDenom,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateEarnRewards(suite.ctx, period)
@@ -346,9 +346,9 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 	suite.storedIndexesEqual(vaultDenom, expected)
 }
 
-func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIncreased_bkava() {
-	vaultDenom1 := "bkava-meow"
-	vaultDenom2 := "bkava-woof"
+func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIncreased_bmage() {
+	vaultDenom1 := "bmage-meow"
+	vaultDenom2 := "bmage-woof"
 
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
 	suite.ctx = suite.ctx.WithBlockTime(previousAccrualTime)
@@ -372,7 +372,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -385,7 +385,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -398,10 +398,10 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 
 	period := types.NewMultiRewardPeriod(
 		true,
-		"bkava",
+		"bmage",
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateEarnRewards(suite.ctx, period)
@@ -421,7 +421,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 }
 
 func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZero() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper() // no vault, so no source shares
 	liquidKeeper := newFakeLiquidKeeper()
@@ -437,7 +437,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -455,7 +455,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 		vaultDenom,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateEarnRewards(suite.ctx, period)
@@ -468,9 +468,9 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 	suite.storedIndexesEqual(vaultDenom, expected)
 }
 
-func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZero_bkava() {
-	vaultDenom1 := "bkava-meow"
-	vaultDenom2 := "bkava-woof"
+func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZero_bmage() {
+	vaultDenom1 := "bmage-meow"
+	vaultDenom2 := "bmage-woof"
 
 	earnKeeper := newFakeEarnKeeper() // no vault, so no source shares
 	liquidKeeper := newFakeLiquidKeeper()
@@ -486,7 +486,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -499,7 +499,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -515,13 +515,13 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 
 	period := types.NewMultiRewardPeriod(
 		true,
-		"bkava",
+		"bmage",
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("earn", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
-	// TODO: There are no bkava vaults to iterate over, so the accrual times are
+	// TODO: There are no bmage vaults to iterate over, so the accrual times are
 	// not updated
 	suite.keeper.AccumulateEarnRewards(suite.ctx, period)
 
@@ -540,7 +540,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 }
 
 func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper().addVault(vaultDenom, earntypes.NewVaultShare(vaultDenom, d("1000000")))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
@@ -550,7 +550,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist() {
 		vaultDenom,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)),
+		cs(c("earn", 2000), c("umage", 1000)),
 	)
 
 	firstAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
@@ -576,15 +576,15 @@ func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist() {
 			RewardFactor:   d("0.02"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor:   d("0.01"),
 		},
 	})
 }
 
-func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist_bkava() {
-	vaultDenom1 := "bkava-meow"
-	vaultDenom2 := "bkava-woof"
+func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist_bmage() {
+	vaultDenom1 := "bmage-meow"
+	vaultDenom2 := "bmage-woof"
 
 	firstAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
@@ -601,10 +601,10 @@ func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist_bka
 
 	period := types.NewMultiRewardPeriod(
 		true,
-		"bkava",
+		"bmage",
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)),
+		cs(c("earn", 2000), c("umage", 1000)),
 	)
 
 	suite.keeper.AccumulateEarnRewards(suite.ctx, period)
@@ -632,9 +632,9 @@ func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist_bka
 			RewardFactor:   d("0.01"),
 		},
 		{
-			CollateralType: "ukava",
-			// 10% of total bkava for rewards per second for 10 seconds
-			// 1ukava per share per second + regular 0.005ukava incentive rewards
+			CollateralType: "umage",
+			// 10% of total bmage for rewards per second for 10 seconds
+			// 1umage per share per second + regular 0.005umage incentive rewards
 			RewardFactor: d("1.005"),
 		},
 	}
@@ -644,7 +644,7 @@ func (suite *AccumulateEarnRewardsTests) TestStateAddedWhenStateDoesNotExist_bka
 }
 
 func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper()
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
@@ -671,9 +671,9 @@ func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist() {
 	suite.storedIndexesEqual(vaultDenom, nil)
 }
 
-func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist_bkava() {
-	vaultDenom1 := "bkava-meow"
-	vaultDenom2 := "bkava-woof"
+func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist_bmage() {
+	vaultDenom1 := "bmage-meow"
+	vaultDenom2 := "bmage-woof"
 
 	earnKeeper := newFakeEarnKeeper()
 	liquidKeeper := newFakeLiquidKeeper()
@@ -682,7 +682,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist_bkava(
 
 	period := types.NewMultiRewardPeriod(
 		true,
-		"bkava",
+		"bmage",
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
 		cs(),
@@ -695,7 +695,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist_bkava(
 	// No increment and no previous indexes stored, results in an updated of nil. Setting this in the state panics.
 	// Check there is no panic.
 	suite.NotPanics(func() {
-		// This does not update any state, as there are no bkava vaults
+		// This does not update any state, as there are no bmage vaults
 		// to iterate over, denoms are unknown
 		suite.keeper.AccumulateEarnRewards(suite.ctx, period)
 	})
@@ -708,7 +708,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoPanicWhenStateDoesNotExist_bkava(
 }
 
 func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenBeforeStartTime() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper().addVault(vaultDenom, earntypes.NewVaultShare(vaultDenom, d("1000000")))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
@@ -722,7 +722,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenBeforeStartTime()
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -739,7 +739,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenBeforeStartTime()
 		vaultDenom,
 		firstAccrualTime.Add(time.Nanosecond), // start time after accrual time
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)),
+		cs(c("earn", 2000), c("umage", 1000)),
 	)
 
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
@@ -754,7 +754,7 @@ func (suite *AccumulateEarnRewardsTests) TestNoAccumulationWhenBeforeStartTime()
 }
 
 func (suite *AccumulateEarnRewardsTests) TestPanicWhenCurrentTimeLessThanPrevious() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	earnKeeper := newFakeEarnKeeper().addVault(vaultDenom, earntypes.NewVaultShare(vaultDenom, d("1000000")))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
@@ -769,7 +769,7 @@ func (suite *AccumulateEarnRewardsTests) TestPanicWhenCurrentTimeLessThanPreviou
 		vaultDenom,
 		time.Time{}, // start time after accrual time
 		distantFuture,
-		cs(c("earn", 2000), c("ukava", 1000)),
+		cs(c("earn", 2000), c("umage", 1000)),
 	)
 
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)

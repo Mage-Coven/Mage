@@ -3,11 +3,11 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/x/cdp/types"
 )
 
 const (
-	// factor for setting the initial value of gov tokens to sell at debt auctions -- assuming stable token is ~1 usd, this starts the auction with a price of $0.01 KAVA
+	// factor for setting the initial value of gov tokens to sell at debt auctions -- assuming stable token is ~1 usd, this starts the auction with a price of $0.01 MAGE
 	dump = 100
 )
 

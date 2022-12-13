@@ -8,9 +8,9 @@ import (
 
 	tmprototypes "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/incentive/keeper/adapters/swap"
-	swaptypes "github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/incentive/keeper/adapters/swap"
+	swaptypes "github.com/mage-coven/mage/x/swap/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -81,8 +81,8 @@ func (suite *SwapAdapterTestSuite) TestSwapAdapter_OwnerSharesBySource_Empty() {
 }
 
 func (suite *SwapAdapterTestSuite) TestSwapAdapter_OwnerSharesBySource() {
-	poolDenomA := "ukava"
-	poolDenomB := "usdx"
+	poolDenomA := "umage"
+	poolDenomB := "fusd"
 
 	swapKeeper := suite.app.GetSwapKeeper()
 	swapKeeper.SetParams(suite.ctx, swaptypes.NewParams(
@@ -211,8 +211,8 @@ func (suite *SwapAdapterTestSuite) TestSwapAdapter_TotalSharesBySource_Empty() {
 }
 
 func (suite *SwapAdapterTestSuite) TestSwapAdapter_TotalSharesBySource() {
-	poolDenomA := "ukava"
-	poolDenomB := "usdx"
+	poolDenomA := "umage"
+	poolDenomB := "fusd"
 
 	swapKeeper := suite.app.GetSwapKeeper()
 	swapKeeper.SetParams(suite.ctx, swaptypes.NewParams(

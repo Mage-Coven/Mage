@@ -16,10 +16,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/bep3/client/cli"
-	"github.com/kava-labs/kava/x/bep3/client/rest"
-	"github.com/kava-labs/kava/x/bep3/keeper"
-	"github.com/kava-labs/kava/x/bep3/types"
+	"github.com/mage-coven/mage/x/bep3/client/cli"
+	"github.com/mage-coven/mage/x/bep3/client/rest"
+	"github.com/mage-coven/mage/x/bep3/keeper"
+	"github.com/mage-coven/mage/x/bep3/types"
 )
 
 var (

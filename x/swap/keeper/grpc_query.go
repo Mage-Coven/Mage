@@ -11,7 +11,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
 
-	"github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/x/swap/types"
 )
 
 type queryServer struct {

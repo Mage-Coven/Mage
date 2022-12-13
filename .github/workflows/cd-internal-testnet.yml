@@ -2,14 +2,14 @@ name: Continuous Deployment (Internal Testnet)
 # run after every successful CI job of new commits to the master branch
 on:
   workflow_run:
-    workflows: [Continuous Integration (Kava Master)]
+    workflows: [Continuous Integration (Mage Master)]
     types:
       - completed
 
 jobs:
   # in order:
   # enter standby (prevents autoscaling group from killing node during deploy)
-  # stop kava
+  # stop mage
   # take ebs + zfs snapshots
   # download updated binary and genesis
   # reset application database state (only done on internal testnet)
@@ -20,18 +20,18 @@ jobs:
     with:
       aws-region: us-east-1
       chain-id: demo_2221-17000
-      ssm-document-name: kava-demonet-node-update
+      ssm-document-name: mage-demonet-node-update
       playbook-name: reset-internal-testnet-playbook.yml
       playbook-infrastructure-branch: master
     secrets: inherit
 
-  # start kava with new binary and genesis state on api, peer and seed nodes, place nodes in service once they start and are synched to live
+  # start mage with new binary and genesis state on api, peer and seed nodes, place nodes in service once they start and are synched to live
   start-chain-api:
     uses: ./.github/workflows/cd-start-chain.yml
     with:
       aws-region: us-east-1
       chain-id: demo_2221-17000
-      ssm-document-name: kava-demonet-node-update
+      ssm-document-name: mage-demonet-node-update
       playbook-name: start-chain-api-playbook.yml
       playbook-infrastructure-branch: master
     secrets: inherit
@@ -41,8 +41,8 @@ jobs:
   seed-chain-state:
     uses: ./.github/workflows/cd-seed-chain.yml
     with:
-      chain-api-url: https://rpc.data.demonet.us-east.production.kava.io:443
-      chain-id: kava_2221-17000
+      chain-api-url: https://rpc.data.demonet.us-east.production.mage.io:443
+      chain-id: mage_2221-17000
       seed-script-filename: seed-internal-testnet.sh
     secrets: inherit
     needs: [start-chain-api]

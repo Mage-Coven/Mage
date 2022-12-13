@@ -10,18 +10,18 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/tendermint/tendermint/crypto"
 
-	"github.com/kava-labs/kava/x/committee/testutil"
-	"github.com/kava-labs/kava/x/committee/types"
+	"github.com/mage-coven/mage/x/committee/testutil"
+	"github.com/mage-coven/mage/x/committee/types"
 )
 
 func TestGenesisState_Validate(t *testing.T) {
 	testTime := time.Date(1998, time.January, 1, 0, 0, 0, 0, time.UTC)
 	addresses := []sdk.AccAddress{
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest1"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest2"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest3"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest4"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest5"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest1"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest2"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest3"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest4"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest5"))),
 	}
 
 	testGenesis := types.NewGenesisState(

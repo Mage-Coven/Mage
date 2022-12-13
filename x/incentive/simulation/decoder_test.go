@@ -12,7 +12,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/kv"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 func makeTestCodec() (cdc *codec.Codec) {
@@ -24,15 +24,15 @@ func makeTestCodec() (cdc *codec.Codec) {
 
 func TestDecodeDistributionStore(t *testing.T) {
 	cdc := makeTestCodec()
-	addr, _ := sdk.AccAddressFromBech32("kava15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw")
-	claim := types.NewUSDXMintingClaim(addr, sdk.NewCoin("ukava", sdk.NewInt(1000000)), types.RewardIndexes{types.NewRewardIndex("bnb-a", sdk.ZeroDec())})
+	addr, _ := sdk.AccAddressFromBech32("mage15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw")
+	claim := types.NewFUSDMintingClaim(addr, sdk.NewCoin("umage", sdk.NewInt(1000000)), types.RewardIndexes{types.NewRewardIndex("bnb-a", sdk.ZeroDec())})
 	prevBlockTime := time.Now().Add(time.Hour * -1).UTC()
 	factor := sdk.ZeroDec()
 
 	kvPairs := kv.Pairs{
-		kv.Pair{Key: types.USDXMintingClaimKeyPrefix, Value: cdc.MustMarshalBinaryBare(claim)},
-		kv.Pair{Key: []byte(types.PreviousUSDXMintingRewardAccrualTimeKeyPrefix), Value: cdc.MustMarshalBinaryBare(prevBlockTime)},
-		kv.Pair{Key: []byte(types.USDXMintingRewardFactorKeyPrefix), Value: cdc.MustMarshalBinaryBare(factor)},
+		kv.Pair{Key: types.FUSDMintingClaimKeyPrefix, Value: cdc.MustMarshalBinaryBare(claim)},
+		kv.Pair{Key: []byte(types.PreviousFUSDMintingRewardAccrualTimeKeyPrefix), Value: cdc.MustMarshalBinaryBare(prevBlockTime)},
+		kv.Pair{Key: []byte(types.FUSDMintingRewardFactorKeyPrefix), Value: cdc.MustMarshalBinaryBare(factor)},
 		// kv.Pair{Key: types.HardLiquidityClaimKeyPrefix, Value: cdc.MustMarshalBinaryBare(claim)},
 		// kv.Pair{Key: []byte(types.HardSupplyRewardFactorKeyPrefix), Value: cdc.MustMarshalBinaryBare(factor)},
 		// kv.Pair{Key: []byte(types.PreviousHardSupplyRewardAccrualTimeKeyPrefix), Value: cdc.MustMarshalBinaryBare(prevBlockTime)},
@@ -47,9 +47,9 @@ func TestDecodeDistributionStore(t *testing.T) {
 		name        string
 		expectedLog string
 	}{
-		{"USDXMintingClaim", fmt.Sprintf("%v\n%v", claim, claim)},
-		{"PreviousUSDXMintingRewardAccrualTime", fmt.Sprintf("%v\n%v", prevBlockTime, prevBlockTime)},
-		{"USDXMintingRewardFactor", fmt.Sprintf("%v\n%v", factor, factor)},
+		{"FUSDMintingClaim", fmt.Sprintf("%v\n%v", claim, claim)},
+		{"PreviousFUSDMintingRewardAccrualTime", fmt.Sprintf("%v\n%v", prevBlockTime, prevBlockTime)},
+		{"FUSDMintingRewardFactor", fmt.Sprintf("%v\n%v", factor, factor)},
 		// {"HardLiquidityClaim", fmt.Sprintf("%v\n%v", claim, claim)},
 		// {"PreviousHardSupplyRewardAccrualTime", fmt.Sprintf("%v\n%v", prevBlockTime, prevBlockTime)},
 		// {"HardSupplyRewardFactor", fmt.Sprintf("%v\n%v", factor, factor)},

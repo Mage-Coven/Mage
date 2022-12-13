@@ -10,8 +10,8 @@ package keeper_test
 // 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 // 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-// 	"github.com/kava-labs/kava/app"
-// 	"github.com/kava-labs/kava/x/committee/types"
+// 	"github.com/mage-coven/mage/app"
+// 	"github.com/mage-coven/mage/x/committee/types"
 // )
 
 // type TypesTestSuite struct {
@@ -43,7 +43,7 @@ package keeper_test
 // 						Subspace: "cdp",
 // 						Key:      "DebtThreshold",
 
-// 						Value: `{"denom": "usdx", "amount": "1000000"}`,
+// 						Value: `{"denom": "fusd", "amount": "1000000"}`,
 // 					},
 // 				},
 // 			),
@@ -134,7 +134,7 @@ package keeper_test
 // 						Subspace: "cdp",
 // 						Key:      "DebtThreshold",
 
-// 						Value: `{"denom": "usdx", "amount": "1000000"}`,
+// 						Value: `{"denom": "fusd", "amount": "1000000"}`,
 // 					},
 // 					{
 // 						Subspace: "cdp",

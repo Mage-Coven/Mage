@@ -1,16 +1,16 @@
 swagger: '2.0'
 info:
-  title: Kava - Legacy REST and gRPC Gateway docs
+  title: Mage - Legacy REST and gRPC Gateway docs
   description: A REST interface for state queries
   version: 1.0.0
 externalDocs:
   description: GitHub
-  url: https://github.com/Kava-Labs/kava
-host: api.data.kava.io
+  url: https://github.com/Mage-Coven/mage
+host: api.data.mage.io
 schemes:
   - https
 paths:
-  /kava/auction/v1beta1/auctions:
+  /mage/auction/v1beta1/auctions:
     get:
       summary: >-
         Auctions queries auctions filtered by asset denom, owner address, phase,
@@ -488,7 +488,7 @@ paths:
           type: boolean
       tags:
         - Auction
-  /kava/auction/v1beta1/auctions/{auction_id}:
+  /mage/auction/v1beta1/auctions/{auction_id}:
     get:
       summary: Auction queries an individual Auction by auction ID
       operationId: AuctionAuction
@@ -873,7 +873,7 @@ paths:
           format: uint64
       tags:
         - Auction
-  /kava/auction/v1beta1/next-auction-id:
+  /mage/auction/v1beta1/next-auction-id:
     get:
       summary: NextAuctionID queries the next auction ID
       operationId: AuctionNextAuctionID
@@ -1082,7 +1082,7 @@ paths:
                         }
       tags:
         - Auction
-  /kava/auction/v1beta1/params:
+  /mage/auction/v1beta1/params:
     get:
       summary: Params queries all parameters of the auction module.
       operationId: AuctionParams
@@ -1307,7 +1307,7 @@ paths:
                         }
       tags:
         - Auction
-  /kava/bep3/v1beta1/assetsupplies:
+  /mage/bep3/v1beta1/assetsupplies:
     get:
       summary: AssetSupplies queries a list of asset supplies
       operationId: BEP3AssetSupplies
@@ -1428,7 +1428,7 @@ paths:
                       format: byte
       tags:
         - BEP3
-  /kava/bep3/v1beta1/assetsupply/{denom}:
+  /mage/bep3/v1beta1/assetsupply/{denom}:
     get:
       summary: AssetSupply queries info about an asset's supply
       operationId: BEP3AssetSupply
@@ -1549,7 +1549,7 @@ paths:
           type: string
       tags:
         - BEP3
-  /kava/bep3/v1beta1/atomicswap/{swap_id}:
+  /mage/bep3/v1beta1/atomicswap/{swap_id}:
     get:
       summary: AtomicSwap queries info about an atomic swap
       operationId: BEP3AtomicSwap
@@ -1598,10 +1598,10 @@ paths:
                     title: timestamp represents the timestamp of the swap
                   sender:
                     type: string
-                    title: sender is the kava chain sender of the swap
+                    title: sender is the mage chain sender of the swap
                   recipient:
                     type: string
-                    title: recipient is the kava chain recipient of the swap
+                    title: recipient is the mage chain recipient of the swap
                   sender_other_chain:
                     type: string
                     title: sender_other_chain is the sender on the other chain
@@ -1643,8 +1643,8 @@ paths:
                     description: >-
                       - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED
                       represents unspecified or invalid swap direcation
-                       - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-                       - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+                       - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+                       - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
                 title: >-
                   AtomicSwapResponse represents the returned atomic swap
                   properties
@@ -1681,7 +1681,7 @@ paths:
           type: string
       tags:
         - BEP3
-  /kava/bep3/v1beta1/atomicswaps:
+  /mage/bep3/v1beta1/atomicswaps:
     get:
       summary: AtomicSwaps queries a list of atomic swaps
       operationId: BEP3AtomicSwaps
@@ -1735,10 +1735,10 @@ paths:
                       title: timestamp represents the timestamp of the swap
                     sender:
                       type: string
-                      title: sender is the kava chain sender of the swap
+                      title: sender is the mage chain sender of the swap
                     recipient:
                       type: string
-                      title: recipient is the kava chain recipient of the swap
+                      title: recipient is the mage chain recipient of the swap
                     sender_other_chain:
                       type: string
                       title: sender_other_chain is the sender on the other chain
@@ -1782,8 +1782,8 @@ paths:
                       description: >-
                         - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED
                         represents unspecified or invalid swap direcation
-                         - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-                         - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+                         - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+                         - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
                   title: >-
                     AtomicSwapResponse represents the returned atomic swap
                     properties
@@ -1876,8 +1876,8 @@ paths:
             direction fitlers by swap direction.
 
              - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED represents unspecified or invalid swap direcation
-             - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-             - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+             - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+             - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
           in: query
           required: false
           type: string
@@ -1944,7 +1944,7 @@ paths:
           type: boolean
       tags:
         - BEP3
-  /kava/bep3/v1beta1/params:
+  /mage/bep3/v1beta1/params:
     get:
       summary: Params queries module params
       operationId: BEP3Params
@@ -2005,7 +2005,7 @@ paths:
                         deputy_address:
                           type: string
                           format: byte
-                          title: deputy_address the kava address of the deputy
+                          title: deputy_address the mage address of the deputy
                         fixed_fee:
                           type: string
                           title: fixed_fee defines the fee for incoming swaps
@@ -2057,7 +2057,7 @@ paths:
                       format: byte
       tags:
         - BEP3
-  /kava/cdp/v1beta1/accounts:
+  /mage/cdp/v1beta1/accounts:
     get:
       summary: Accounts queries the CDP module accounts.
       operationId: CDPAccounts
@@ -2476,7 +2476,7 @@ paths:
                         }
       tags:
         - CDP
-  /kava/cdp/v1beta1/cdps:
+  /mage/cdp/v1beta1/cdps:
     get:
       summary: Cdps queries all active CDPs.
       operationId: CDPCdps
@@ -2866,7 +2866,7 @@ paths:
           type: boolean
       tags:
         - CDP
-  /kava/cdp/v1beta1/cdps/deposits/{owner}/{collateral_type}:
+  /mage/cdp/v1beta1/cdps/deposits/{owner}/{collateral_type}:
     get:
       summary: >-
         Deposits queries deposits associated with the CDP owned by an address
@@ -3111,7 +3111,7 @@ paths:
           type: string
       tags:
         - CDP
-  /kava/cdp/v1beta1/cdps/{owner}/{collateral_type}:
+  /mage/cdp/v1beta1/cdps/{owner}/{collateral_type}:
     get:
       summary: Cdp queries a CDP with the input owner address and collateral type.
       operationId: CDPCdp
@@ -3406,7 +3406,7 @@ paths:
           type: string
       tags:
         - CDP
-  /kava/cdp/v1beta1/params:
+  /mage/cdp/v1beta1/params:
     get:
       summary: Params queries all parameters of the cdp module.
       operationId: CDPParams
@@ -3699,7 +3699,7 @@ paths:
                         }
       tags:
         - CDP
-  /kava/cdp/v1beta1/totalCollateral:
+  /mage/cdp/v1beta1/totalCollateral:
     get:
       summary: TotalCollateral queries the total collateral of a given collateral type.
       operationId: CDPTotalCollateral
@@ -3935,7 +3935,7 @@ paths:
           type: string
       tags:
         - CDP
-  /kava/cdp/v1beta1/totalPrincipal:
+  /mage/cdp/v1beta1/totalPrincipal:
     get:
       summary: TotalPrincipal queries the total principal of a given collateral type.
       operationId: CDPTotalPrincipal
@@ -4171,7 +4171,7 @@ paths:
           type: string
       tags:
         - CDP
-  /kava/committee/v1beta1/committees:
+  /mage/committee/v1beta1/committees:
     get:
       summary: Committees queries all committess of the committee module.
       operationId: CommitteeCommittees
@@ -4556,7 +4556,7 @@ paths:
                         }
       tags:
         - Committee
-  /kava/committee/v1beta1/committees/{committee_id}:
+  /mage/committee/v1beta1/committees/{committee_id}:
     get:
       summary: Committee queries a committee based on committee ID.
       operationId: CommitteeCommittee
@@ -4941,7 +4941,7 @@ paths:
           format: uint64
       tags:
         - Committee
-  /kava/committee/v1beta1/next-proposal-id:
+  /mage/committee/v1beta1/next-proposal-id:
     get:
       summary: NextProposalID queries the next proposal ID of the committee module.
       operationId: CommitteeNextProposalID
@@ -5150,7 +5150,7 @@ paths:
                         }
       tags:
         - Committee
-  /kava/committee/v1beta1/proposals:
+  /mage/committee/v1beta1/proposals:
     get:
       summary: Proposals queries proposals based on committee ID.
       operationId: CommitteeProposals
@@ -5558,7 +5558,7 @@ paths:
           format: uint64
       tags:
         - Committee
-  /kava/committee/v1beta1/proposals/{proposal_id}:
+  /mage/committee/v1beta1/proposals/{proposal_id}:
     get:
       summary: Deposits queries a proposal based on proposal ID.
       operationId: CommitteeProposal
@@ -5952,7 +5952,7 @@ paths:
           format: uint64
       tags:
         - Committee
-  /kava/committee/v1beta1/proposals/{proposal_id}/tally:
+  /mage/committee/v1beta1/proposals/{proposal_id}/tally:
     get:
       summary: Tally queries the tally of a single proposal ID.
       operationId: CommitteeTally
@@ -6179,7 +6179,7 @@ paths:
           format: uint64
       tags:
         - Committee
-  /kava/committee/v1beta1/proposals/{proposal_id}/votes:
+  /mage/committee/v1beta1/proposals/{proposal_id}/votes:
     get:
       summary: Votes queries all votes for a single proposal ID.
       operationId: CommitteeVotes
@@ -6494,7 +6494,7 @@ paths:
           type: boolean
       tags:
         - Committee
-  /kava/committee/v1beta1/proposals/{proposal_id}/votes/{voter}:
+  /mage/committee/v1beta1/proposals/{proposal_id}/votes/{voter}:
     get:
       summary: Vote queries the vote of a single voter for a single proposal ID.
       operationId: CommitteeVote
@@ -6730,7 +6730,7 @@ paths:
           type: string
       tags:
         - Committee
-  /kava/committee/v1beta1/raw-params:
+  /mage/committee/v1beta1/raw-params:
     get:
       summary: RawParams queries the raw params data of any subspace and key.
       operationId: CommitteeRawParams
@@ -6947,7 +6947,7 @@ paths:
           type: string
       tags:
         - Committee
-  /kava/earn/v1beta1/deposits:
+  /mage/earn/v1beta1/deposits:
     get:
       summary: Deposits queries deposit details based on depositor address and vault
       operationId: EarnDeposits
@@ -7065,7 +7065,7 @@ paths:
           required: false
           type: string
         - name: value_in_staked_tokens
-          description: respond with vault value in ukava for bkava vaults.
+          description: respond with vault value in umage for bmage vaults.
           in: query
           required: false
           type: boolean
@@ -7127,7 +7127,7 @@ paths:
           type: boolean
       tags:
         - Earn
-  /kava/earn/v1beta1/params:
+  /mage/earn/v1beta1/params:
     get:
       summary: Params queries all parameters of the earn module.
       operationId: EarnParams
@@ -7226,7 +7226,7 @@ paths:
                       format: byte
       tags:
         - Earn
-  /kava/earn/v1beta1/total_supply:
+  /mage/earn/v1beta1/total_supply:
     get:
       summary: >-
         TotalSupply returns the total sum of all coins currently locked into the
@@ -7287,7 +7287,7 @@ paths:
                       format: byte
       tags:
         - Earn
-  /kava/earn/v1beta1/vaults:
+  /mage/earn/v1beta1/vaults:
     get:
       summary: Vaults queries all vaults
       operationId: EarnVaults
@@ -7387,7 +7387,7 @@ paths:
                       format: byte
       tags:
         - Earn
-  /kava/earn/v1beta1/vaults/{denom}:
+  /mage/earn/v1beta1/vaults/{denom}:
     get:
       summary: Vault queries a single vault based on the vault denom
       operationId: EarnVault
@@ -7491,7 +7491,7 @@ paths:
           type: string
       tags:
         - Earn
-  /kava/hard/v1beta1/accounts:
+  /mage/hard/v1beta1/accounts:
     get:
       summary: Accounts queries module accounts.
       operationId: HardAccounts
@@ -7910,7 +7910,7 @@ paths:
                         }
       tags:
         - Hard
-  /kava/hard/v1beta1/borrows:
+  /mage/hard/v1beta1/borrows:
     get:
       summary: Borrows queries hard borrows.
       operationId: HardBorrows
@@ -8249,7 +8249,7 @@ paths:
           type: boolean
       tags:
         - Hard
-  /kava/hard/v1beta1/deposits:
+  /mage/hard/v1beta1/deposits:
     get:
       summary: Deposits queries hard deposits.
       operationId: HardDeposits
@@ -8588,7 +8588,7 @@ paths:
           type: boolean
       tags:
         - Hard
-  /kava/hard/v1beta1/interest-factors/{denom}:
+  /mage/hard/v1beta1/interest-factors/{denom}:
     get:
       summary: InterestFactors queries hard module interest factors.
       operationId: HardInterestFactors
@@ -8815,7 +8815,7 @@ paths:
           type: string
       tags:
         - Hard
-  /kava/hard/v1beta1/interest-rate/{denom}:
+  /mage/hard/v1beta1/interest-rate/{denom}:
     get:
       summary: InterestRate queries the hard module interest rates.
       operationId: HardInterestRate
@@ -9042,7 +9042,7 @@ paths:
           type: string
       tags:
         - Hard
-  /kava/hard/v1beta1/params:
+  /mage/hard/v1beta1/params:
     get:
       summary: Params queries module params.
       operationId: HardParams
@@ -9294,7 +9294,7 @@ paths:
                         }
       tags:
         - Hard
-  /kava/hard/v1beta1/reserves/{denom}:
+  /mage/hard/v1beta1/reserves/{denom}:
     get:
       summary: Reserves queries total hard reserve coins.
       operationId: HardReserves
@@ -9522,7 +9522,7 @@ paths:
           type: string
       tags:
         - Hard
-  /kava/hard/v1beta1/total-borrowed/{denom}:
+  /mage/hard/v1beta1/total-borrowed/{denom}:
     get:
       summary: TotalBorrowed queries total coins borrowed from hard liquidity pools.
       operationId: HardTotalBorrowed
@@ -9750,7 +9750,7 @@ paths:
           type: string
       tags:
         - Hard
-  /kava/hard/v1beta1/total-deposited/{denom}:
+  /mage/hard/v1beta1/total-deposited/{denom}:
     get:
       summary: TotalDeposited queries total coins deposited to hard liquidity pools.
       operationId: HardTotalDeposited
@@ -9978,7 +9978,7 @@ paths:
           type: string
       tags:
         - Hard
-  /kava/hard/v1beta1/unsynced-borrows:
+  /mage/hard/v1beta1/unsynced-borrows:
     get:
       summary: UnsyncedBorrows queries unsynced borrows.
       operationId: HardUnsyncedBorrows
@@ -10317,7 +10317,7 @@ paths:
           type: boolean
       tags:
         - Hard
-  /kava/hard/v1beta1/unsynced-deposits:
+  /mage/hard/v1beta1/unsynced-deposits:
     get:
       summary: UnsyncedDeposits queries unsynced deposits.
       operationId: HardUnsyncedDeposits
@@ -10656,7 +10656,7 @@ paths:
           type: boolean
       tags:
         - Hard
-  /kava/issuance/v1beta1/params:
+  /mage/issuance/v1beta1/params:
     get:
       summary: Params queries all parameters of the issuance module.
       operationId: IssuanceParams
@@ -10728,10 +10728,10 @@ paths:
                       format: byte
       tags:
         - Issuance
-  /kava/kavadist/v1beta1/balance:
+  /mage/magedist/v1beta1/balance:
     get:
-      summary: Balance queries the balance of all coins of x/kavadist module.
-      operationId: KavadistBalance
+      summary: Balance queries the balance of all coins of x/magedist module.
+      operationId: MagedistBalance
       responses:
         '200':
           description: A successful response.
@@ -10757,7 +10757,7 @@ paths:
                     signatures required by gogoproto.
             description: >-
               QueryBalanceResponse defines the response type for querying
-              x/kavadist balance.
+              x/magedist balance.
         default:
           description: An unexpected error response.
           schema:
@@ -10781,11 +10781,11 @@ paths:
                       type: string
                       format: byte
       tags:
-        - Kavadist
-  /kava/kavadist/v1beta1/parameters:
+        - Magedist
+  /mage/magedist/v1beta1/parameters:
     get:
-      summary: Params queries the parameters of x/kavadist module.
-      operationId: KavadistParams
+      summary: Params queries the parameters of x/magedist module.
+      operationId: MagedistParams
       responses:
         '200':
           description: A successful response.
@@ -10818,7 +10818,7 @@ paths:
                         Period stores the specified start and end dates, and the
                         inflation, expressed as a decimal
 
-                        representing the yearly APR of KAVA tokens that will be
+                        representing the yearly APR of MAGE tokens that will be
                         minted during that period
                   infrastructure_params:
                     type: object
@@ -10844,7 +10844,7 @@ paths:
                             Period stores the specified start and end dates, and
                             the inflation, expressed as a decimal
 
-                            representing the yearly APR of KAVA tokens that will
+                            representing the yearly APR of MAGE tokens that will
                             be minted during that period
                       core_rewards:
                         type: array
@@ -10889,10 +10889,10 @@ paths:
                     description: >-
                       InfrastructureParams define the parameters for
                       infrastructure rewards.
-                title: Params governance parameters for kavadist module
+                title: Params governance parameters for magedist module
             description: >-
               QueryParamsResponse defines the response type for querying
-              x/kavadist parameters.
+              x/magedist parameters.
         default:
           description: An unexpected error response.
           schema:
@@ -10916,8 +10916,8 @@ paths:
                       type: string
                       format: byte
       tags:
-        - Kavadist
-  /kava/liquid/v1beta1/delegated_balance/{delegator}:
+        - Magedist
+  /mage/liquid/v1beta1/delegated_balance/{delegator}:
     get:
       summary: >-
         DelegatedBalance returns an account's vesting and vested coins currently
@@ -11000,7 +11000,7 @@ paths:
           type: string
       tags:
         - Liquid
-  /kava/liquid/v1beta1/total_supply:
+  /mage/liquid/v1beta1/total_supply:
     get:
       summary: >-
         TotalSupply returns the total sum of all coins currently locked into the
@@ -11061,7 +11061,7 @@ paths:
                       format: byte
       tags:
         - Liquid
-  /kava/pricefeed/v1beta1/markets:
+  /mage/pricefeed/v1beta1/markets:
     get:
       summary: Markets queries all markets
       operationId: PricefeedMarkets
@@ -11117,7 +11117,7 @@ paths:
                       format: byte
       tags:
         - Pricefeed
-  /kava/pricefeed/v1beta1/oracles/{market_id}:
+  /mage/pricefeed/v1beta1/oracles/{market_id}:
     get:
       summary: Oracles queries all oracles based on a market
       operationId: PricefeedOracles
@@ -11164,7 +11164,7 @@ paths:
           type: string
       tags:
         - Pricefeed
-  /kava/pricefeed/v1beta1/params:
+  /mage/pricefeed/v1beta1/params:
     get:
       summary: Params queries all parameters of the pricefeed module.
       operationId: PricefeedParams
@@ -11226,7 +11226,7 @@ paths:
                       format: byte
       tags:
         - Pricefeed
-  /kava/pricefeed/v1beta1/prices:
+  /mage/pricefeed/v1beta1/prices:
     get:
       summary: Prices queries all prices
       operationId: PricefeedPrices
@@ -11277,7 +11277,7 @@ paths:
                       format: byte
       tags:
         - Pricefeed
-  /kava/pricefeed/v1beta1/prices/{market_id}:
+  /mage/pricefeed/v1beta1/prices/{market_id}:
     get:
       summary: Price queries price details based on a market
       operationId: PricefeedPrice
@@ -11331,7 +11331,7 @@ paths:
           type: string
       tags:
         - Pricefeed
-  /kava/pricefeed/v1beta1/rawprices/{market_id}:
+  /mage/pricefeed/v1beta1/rawprices/{market_id}:
     get:
       summary: RawPrices queries all raw prices based on a market
       operationId: PricefeedRawPrices
@@ -11392,7 +11392,7 @@ paths:
           type: string
       tags:
         - Pricefeed
-  /kava/swap/v1beta1/deposits:
+  /mage/swap/v1beta1/deposits:
     get:
       summary: Deposits queries deposit details based on owner address and pool
       operationId: SwapDeposits
@@ -11557,7 +11557,7 @@ paths:
           type: boolean
       tags:
         - Swap
-  /kava/swap/v1beta1/params:
+  /mage/swap/v1beta1/params:
     get:
       summary: Params queries all parameters of the swap module.
       operationId: SwapParams
@@ -11617,7 +11617,7 @@ paths:
                       format: byte
       tags:
         - Swap
-  /kava/swap/v1beta1/pools:
+  /mage/swap/v1beta1/pools:
     get:
       summary: Pools queries pools based on pool ID
       operationId: SwapPools
@@ -11766,7 +11766,7 @@ paths:
           type: boolean
       tags:
         - Swap
-  /kava/savings/v1beta1/deposits:
+  /mage/savings/v1beta1/deposits:
     get:
       summary: Deposits queries savings deposits.
       operationId: SavingsDeposits
@@ -11925,7 +11925,7 @@ paths:
           type: boolean
       tags:
         - Savings
-  /kava/savings/v1beta1/params:
+  /mage/savings/v1beta1/params:
     get:
       summary: Params queries all parameters of the savings module.
       operationId: SavingsParams
@@ -11972,7 +11972,7 @@ paths:
                       format: byte
       tags:
         - Savings
-  /kava/savings/v1beta1/total_supply:
+  /mage/savings/v1beta1/total_supply:
     get:
       summary: >-
         TotalSupply returns the total sum of all coins currently locked into the
@@ -12033,12 +12033,12 @@ paths:
                       format: byte
       tags:
         - Savings
-  /kava/kavamint/v1beta1/inflation:
+  /mage/magemint/v1beta1/inflation:
     get:
       summary: >-
-        Inflation queries x/kavamint for the overall cumulative inflation rate
-        of KAVA.
-      operationId: KavamintInflation
+        Inflation queries x/magemint for the overall cumulative inflation rate
+        of MAGE.
+      operationId: MagemintInflation
       responses:
         '200':
           description: A successful response.
@@ -12076,11 +12076,11 @@ paths:
                       type: string
                       format: byte
       tags:
-        - Kavamint
-  /kava/kavamint/v1beta1/params:
+        - Magemint
+  /mage/magemint/v1beta1/params:
     get:
-      summary: Params queries the parameters of x/kavamint module.
-      operationId: KavamintParams
+      summary: Params queries the parameters of x/magemint module.
+      operationId: MagemintParams
       responses:
         '200':
           description: A successful response.
@@ -12100,10 +12100,10 @@ paths:
                     description: >-
                       yearly inflation of bonded tokens minted for staking
                       rewards to validators.
-                title: Params wraps the governance parameters for the kavamint module
+                title: Params wraps the governance parameters for the magemint module
             description: >-
               QueryParamsResponse defines the response type for querying
-              x/kavamint parameters.
+              x/magemint parameters.
         default:
           description: An unexpected error response.
           schema:
@@ -12127,13 +12127,13 @@ paths:
                       type: string
                       format: byte
       tags:
-        - Kavamint
+        - Magemint
   /node_info:
     get:
       description: Information about the connected node
       summary: The properties of the connected node
       tags:
-        - KAVA Rest
+        - MAGE Rest
       produces:
         - application/json
       responses:
@@ -44386,7 +44386,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -44413,7 +44413,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44426,7 +44426,7 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               collateral:
                 type: object
                 properties:
@@ -44441,7 +44441,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '10000000'
@@ -44467,10 +44467,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -44478,7 +44478,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -44495,7 +44495,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44539,7 +44539,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -44558,7 +44558,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -44585,7 +44585,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44598,11 +44598,11 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               depositor:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               collateral:
                 type: object
                 properties:
@@ -44634,10 +44634,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -44645,7 +44645,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -44662,7 +44662,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44706,7 +44706,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -44725,7 +44725,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -44752,7 +44752,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44765,11 +44765,11 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               depositor:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               collateral:
                 type: object
                 properties:
@@ -44801,10 +44801,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -44812,7 +44812,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -44829,7 +44829,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44873,7 +44873,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -44892,7 +44892,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -44919,7 +44919,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -44932,13 +44932,13 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               principal:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '10000000'
@@ -44964,10 +44964,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -44975,7 +44975,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -44992,7 +44992,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -45036,7 +45036,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -45055,7 +45055,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -45082,7 +45082,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -45095,13 +45095,13 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               payment:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '10000000'
@@ -45127,10 +45127,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -45138,7 +45138,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -45155,7 +45155,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -45201,7 +45201,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -45220,7 +45220,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -45247,7 +45247,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -45260,7 +45260,7 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               collateral_type:
                 type: string
                 example: xrpb-a
@@ -45283,10 +45283,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -45294,7 +45294,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -45311,7 +45311,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -45366,7 +45366,7 @@ paths:
                     address:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     coins:
                       type: array
                       items:
@@ -45374,7 +45374,7 @@ paths:
                         properties:
                           denom:
                             type: string
-                            example: ukava
+                            example: umage
                           amount:
                             type: string
                             example: '50000'
@@ -45428,7 +45428,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45466,7 +45466,7 @@ paths:
                   properties:
                     denom:
                       type: string
-                      example: usdx
+                      example: fusd
                     reference_asset:
                       type: string
                       example: usd
@@ -45518,7 +45518,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -45536,7 +45536,7 @@ paths:
                 example: '1'
               owner:
                 type: string
-                example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+                example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
               collateral:
                 type: object
                 properties:
@@ -45554,7 +45554,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '10000000'
@@ -45563,7 +45563,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '10000000'
@@ -45575,7 +45575,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '10000000'
@@ -45619,7 +45619,7 @@ paths:
                       example: '1'
                     owner:
                       type: string
-                      example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+                      example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
                     collateral:
                       type: object
                       properties:
@@ -45637,7 +45637,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45646,7 +45646,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45658,7 +45658,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45712,7 +45712,7 @@ paths:
                       example: '1'
                     owner:
                       type: string
-                      example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+                      example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
                     collateral:
                       type: object
                       properties:
@@ -45730,7 +45730,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45739,7 +45739,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45751,7 +45751,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45776,7 +45776,7 @@ paths:
           description: Owner address in bech32 format
           required: true
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: path
           name: collateral_type
           description: Collateral type
@@ -45802,7 +45802,7 @@ paths:
                       example: '1'
                     depositor:
                       type: string
-                      example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+                      example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
                     amount:
                       type: object
                       properties:
@@ -45828,7 +45828,7 @@ paths:
           description: Owner address in bech32 format
           required: false
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: query
           name: collateral_type
           description: Collateral type
@@ -45866,7 +45866,7 @@ paths:
                       example: '1'
                     owner:
                       type: string
-                      example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+                      example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
                     collateral:
                       type: object
                       properties:
@@ -45884,7 +45884,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45893,7 +45893,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45905,7 +45905,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: usdx
+                          example: fusd
                         amount:
                           type: string
                           example: '10000000'
@@ -45934,7 +45934,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -45961,7 +45961,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -45974,11 +45974,11 @@ paths:
               from:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               to:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               recipient_other_chain:
                 type: string
                 description: address on another chain (binance)
@@ -46022,10 +46022,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -46033,7 +46033,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -46050,7 +46050,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46098,7 +46098,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -46125,7 +46125,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46138,7 +46138,7 @@ paths:
               from:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               swap_id:
                 type: string
                 example: >-
@@ -46166,10 +46166,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -46177,7 +46177,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -46194,7 +46194,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46242,7 +46242,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -46269,7 +46269,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46282,7 +46282,7 @@ paths:
               from:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               swap_id:
                 type: string
                 example: >-
@@ -46306,10 +46306,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -46317,7 +46317,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -46334,7 +46334,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46418,11 +46418,11 @@ paths:
                   sender:
                     type: string
                     description: bech32 encoded address
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                   recipient:
                     type: string
                     description: bech32 encoded address
-                    example: kava1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
+                    example: mage1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
                   sender_other_chain:
                     type: string
                     description: address on another chain (binance)
@@ -46494,11 +46494,11 @@ paths:
                     sender:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     recipient:
                       type: string
                       description: bech32 encoded address
-                      example: kava1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
+                      example: mage1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
                     sender_other_chain:
                       type: string
                       description: address on another chain (binance)
@@ -46607,7 +46607,7 @@ paths:
                 properties:
                   bnb_deputy_address:
                     type: string
-                    example: kava1aphsdnz5hu2t5ty2au6znprug5kx3zpy6zwq29
+                    example: mage1aphsdnz5hu2t5ty2au6znprug5kx3zpy6zwq29
                   min_block_lock:
                     type: string
                     example: '80'
@@ -46659,7 +46659,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -46686,7 +46686,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46701,7 +46701,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: usdx
+                    example: fusd
                   amount:
                     type: string
                     example: '100000000'
@@ -46724,10 +46724,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -46735,7 +46735,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -46752,7 +46752,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46852,13 +46852,13 @@ paths:
                     bidder:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     bid:
                       type: object
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -46919,13 +46919,13 @@ paths:
               bidder:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               bid:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -46971,7 +46971,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -46998,7 +46998,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47036,10 +47036,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -47047,7 +47047,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -47064,7 +47064,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47126,7 +47126,7 @@ paths:
                       items:
                         type: string
                         description: bech32 encoded address
-                        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     active:
                       type: boolean
                       example: true
@@ -47169,7 +47169,7 @@ paths:
                       items:
                         type: string
                         description: bech32 encoded address
-                        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     active:
                       type: boolean
                       example: true
@@ -47204,7 +47204,7 @@ paths:
                 items:
                   type: string
                   description: bech32 encoded address
-                  example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                  example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         '500':
           description: Internal Server Error
   /pricefeed/rawprices/{market_id}:
@@ -47241,7 +47241,7 @@ paths:
                       example: xrp:usd
                     oracle_address:
                       type: string
-                      example: kava10cw2m04528dwlc44k0myd7strj3eq5jr6s8pxs
+                      example: mage10cw2m04528dwlc44k0myd7strj3eq5jr6s8pxs
                     price:
                       type: string
                       example: '0.298758999999999997'
@@ -47282,7 +47282,7 @@ paths:
   /incentive/claim-cdp:
     post:
       deprecated: true
-      summary: Claim USDX incentive rewards from earned from CDPs
+      summary: Claim FUSD incentive rewards from earned from CDPs
       tags:
         - Incentive
       consumes:
@@ -47299,7 +47299,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -47326,7 +47326,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47339,7 +47339,7 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               multiplier_name:
                 type: string
                 example: small
@@ -47347,7 +47347,7 @@ paths:
                 type: array
                 items:
                   type: string
-                  example: ukava
+                  example: umage
       responses:
         '200':
           description: OK
@@ -47367,10 +47367,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -47378,7 +47378,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -47395,7 +47395,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47443,7 +47443,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -47470,7 +47470,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47483,7 +47483,7 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               multiplier_name:
                 type: string
                 example: small
@@ -47491,7 +47491,7 @@ paths:
                 type: array
                 items:
                   type: string
-                  example: ukava
+                  example: umage
       responses:
         '200':
           description: OK
@@ -47511,10 +47511,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -47522,7 +47522,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -47539,7 +47539,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47570,7 +47570,7 @@ paths:
   /incentive/claim-delegator:
     post:
       deprecated: true
-      summary: Claim Kava delegation rewards
+      summary: Claim Mage delegation rewards
       tags:
         - Incentive
       consumes:
@@ -47587,7 +47587,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -47614,7 +47614,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47627,7 +47627,7 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               multiplier_name:
                 type: string
                 example: small
@@ -47635,7 +47635,7 @@ paths:
                 type: array
                 items:
                   type: string
-                  example: ukava
+                  example: umage
       responses:
         '200':
           description: OK
@@ -47655,10 +47655,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -47666,7 +47666,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -47683,7 +47683,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47731,7 +47731,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -47758,7 +47758,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47771,7 +47771,7 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               multiplier_name:
                 type: string
                 example: small
@@ -47779,7 +47779,7 @@ paths:
                 type: array
                 items:
                   type: string
-                  example: ukava
+                  example: umage
       responses:
         '200':
           description: OK
@@ -47799,10 +47799,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -47810,7 +47810,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -47827,7 +47827,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -47889,7 +47889,7 @@ paths:
                               owner:
                                 type: string
                                 description: bech32 encoded address
-                                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                               reward:
                                 type: array
                                 items:
@@ -47897,7 +47897,7 @@ paths:
                                   properties:
                                     denom:
                                       type: string
-                                      example: ukava
+                                      example: umage
                                     amount:
                                       type: string
                                       example: '50000'
@@ -47950,7 +47950,7 @@ paths:
                                 reward_factor:
                                   type: string
                                   example: '1.2581'
-                    usdx_minting_claims:
+                    fusd_minting_claims:
                       type: array
                       items:
                         type: object
@@ -47961,13 +47961,13 @@ paths:
                               owner:
                                 type: string
                                 description: bech32 encoded address
-                                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                               reward:
                                 type: object
                                 properties:
                                   denom:
                                     type: string
-                                    example: ukava
+                                    example: umage
                                   amount:
                                     type: string
                                     example: '50000'
@@ -47994,7 +47994,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: USDX Incentive Claims
+          description: FUSD Incentive Claims
           schema:
             type: object
             properties:
@@ -48007,7 +48007,7 @@ paths:
                 items:
                   type: object
                   properties:
-                    usdx_minting_reward_periods:
+                    fusd_minting_reward_periods:
                       type: array
                       items:
                         type: object
@@ -48029,7 +48029,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -48057,7 +48057,7 @@ paths:
                               properties:
                                 denom:
                                   type: string
-                                  example: ukava
+                                  example: umage
                                 amount:
                                   type: string
                                   example: '50000'
@@ -48085,7 +48085,7 @@ paths:
                               properties:
                                 denom:
                                   type: string
-                                  example: ukava
+                                  example: umage
                                 amount:
                                   type: string
                                   example: '50000'
@@ -48111,7 +48111,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -48137,14 +48137,14 @@ paths:
   /vesting/circulatingsupply:
     get:
       deprecated: true
-      summary: Get the current circulating supply of KAVA
+      summary: Get the current circulating supply of MAGE
       tags:
         - Vesting
       produces:
         - application/json
       responses:
         '200':
-          description: KAVA circulating supply
+          description: MAGE circulating supply
           schema:
             properties:
               height:
@@ -48158,14 +48158,14 @@ paths:
   /vesting/totalsupply:
     get:
       deprecated: true
-      summary: Get the total supply of KAVA
+      summary: Get the total supply of MAGE
       tags:
         - Vesting
       produces:
         - application/json
       responses:
         '200':
-          description: KAVA total supply
+          description: MAGE total supply
           schema:
             properties:
               height:
@@ -48239,17 +48239,17 @@ paths:
                 example: '63750000'
         '500':
           description: Server internal error
-  /vesting/circulatingsupplyusdx:
+  /vesting/circulatingsupplyfusd:
     get:
       deprecated: true
-      summary: Get the current circulating supply of USDX
+      summary: Get the current circulating supply of FUSD
       tags:
         - Vesting
       produces:
         - application/json
       responses:
         '200':
-          description: USDX circulating supply
+          description: FUSD circulating supply
           schema:
             properties:
               height:
@@ -48260,17 +48260,17 @@ paths:
                 example: '63750000'
         '500':
           description: Server internal error
-  /vesting/totalsupplyusdx:
+  /vesting/totalsupplyfusd:
     get:
       deprecated: true
-      summary: Get the total supply of USDX
+      summary: Get the total supply of FUSD
       tags:
         - Vesting
       produces:
         - application/json
       responses:
         '200':
-          description: USDX total supply
+          description: FUSD total supply
           schema:
             properties:
               height:
@@ -48306,7 +48306,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -48333,7 +48333,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -48355,7 +48355,7 @@ paths:
               proposer:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       responses:
         '200':
           description: The transaction was successfully generated
@@ -48375,10 +48375,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -48386,7 +48386,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -48403,7 +48403,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -48506,7 +48506,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -48533,7 +48533,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -48546,7 +48546,7 @@ paths:
               voter:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               vote_type:
                 type: string
                 example: 'yes'
@@ -48569,10 +48569,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -48580,7 +48580,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -48597,7 +48597,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -48697,7 +48697,7 @@ paths:
                       items:
                         type: string
                         description: bech32 encoded address
-                        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     permissions:
                       type: array
                       items:
@@ -48765,7 +48765,7 @@ paths:
                     items:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                   permissions:
                     type: array
                     items:
@@ -48876,7 +48876,7 @@ paths:
                     example: '1'
                   proposer:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         '400':
           description: Invalid query parameters
         '500':
@@ -48932,7 +48932,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -48959,7 +48959,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -48972,7 +48972,7 @@ paths:
               depositor:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               amount:
                 $ref: '#/definitions/LegacyCoins'
       responses:
@@ -48994,10 +48994,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -49005,7 +49005,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -49022,7 +49022,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49070,7 +49070,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -49097,7 +49097,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49110,7 +49110,7 @@ paths:
               depositor:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               amount:
                 $ref: '#/definitions/LegacyCoins'
       responses:
@@ -49132,10 +49132,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -49143,7 +49143,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -49160,7 +49160,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49208,7 +49208,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -49235,7 +49235,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49248,7 +49248,7 @@ paths:
               depositor:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               amount:
                 $ref: '#/definitions/LegacyCoins'
       responses:
@@ -49270,10 +49270,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -49281,7 +49281,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -49298,7 +49298,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49346,7 +49346,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -49373,7 +49373,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49386,7 +49386,7 @@ paths:
               owner:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               amount:
                 $ref: '#/definitions/LegacyCoins'
       responses:
@@ -49408,10 +49408,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -49419,7 +49419,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -49436,7 +49436,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49484,7 +49484,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -49511,7 +49511,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49524,7 +49524,7 @@ paths:
               borrower:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       responses:
         '200':
           description: OK
@@ -49544,10 +49544,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -49555,7 +49555,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -49572,7 +49572,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -49707,7 +49707,7 @@ paths:
                   properties:
                     denom:
                       type: string
-                      example: ukava
+                      example: umage
                     amount:
                       type: string
                       example: '50000'
@@ -49745,7 +49745,7 @@ paths:
                   properties:
                     denom:
                       type: string
-                      example: ukava
+                      example: umage
                     amount:
                       type: string
                       example: '50000'
@@ -49783,7 +49783,7 @@ paths:
                   properties:
                     denom:
                       type: string
-                      example: ukava
+                      example: umage
                     amount:
                       type: string
                       example: '50000'
@@ -49857,7 +49857,7 @@ paths:
                     address:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     coins:
                       type: array
                       items:
@@ -49865,7 +49865,7 @@ paths:
                         properties:
                           denom:
                             type: string
-                            example: ukava
+                            example: umage
                           amount:
                             type: string
                             example: '50000'
@@ -49906,7 +49906,7 @@ paths:
           description: Owner address in bech32 format
           required: false
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: query
           name: page
           description: The page number.
@@ -49935,7 +49935,7 @@ paths:
                     depositor:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     amount:
                       type: array
                       items:
@@ -49943,7 +49943,7 @@ paths:
                         properties:
                           denom:
                             type: string
-                            example: ukava
+                            example: umage
                           amount:
                             type: string
                             example: '50000'
@@ -49980,7 +49980,7 @@ paths:
           description: Owner address in bech32 format
           required: false
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: query
           name: page
           description: The page number.
@@ -50009,7 +50009,7 @@ paths:
                     borrower:
                       type: string
                       description: bech32 encoded address
-                      example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                      example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     amount:
                       type: array
                       items:
@@ -50017,7 +50017,7 @@ paths:
                         properties:
                           denom:
                             type: string
-                            example: ukava
+                            example: umage
                           amount:
                             type: string
                             example: '50000'
@@ -50054,7 +50054,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -50081,7 +50081,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50094,20 +50094,20 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               tokens:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
               receiver:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       responses:
         '200':
           description: OK
@@ -50127,10 +50127,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -50138,7 +50138,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -50155,7 +50155,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50203,7 +50203,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -50230,7 +50230,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50243,13 +50243,13 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               tokens:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -50272,10 +50272,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -50283,7 +50283,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -50300,7 +50300,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50348,7 +50348,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -50375,7 +50375,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50388,14 +50388,14 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               denom:
                 type: string
                 example: usdt
               blocked_address:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       responses:
         '200':
           description: OK
@@ -50415,10 +50415,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -50426,7 +50426,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -50443,7 +50443,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50491,7 +50491,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -50518,7 +50518,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50531,14 +50531,14 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               denom:
                 type: string
                 example: usdt
               address:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       responses:
         '200':
           description: OK
@@ -50558,10 +50558,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -50569,7 +50569,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -50586,7 +50586,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50634,7 +50634,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -50661,7 +50661,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50674,7 +50674,7 @@ paths:
               sender:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               denom:
                 type: string
                 example: usdt
@@ -50700,10 +50700,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -50711,7 +50711,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -50728,7 +50728,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50787,7 +50787,7 @@ paths:
                           owner:
                             type: string
                             description: bech32 encoded address
-                            example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                            example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                           denom:
                             type: string
                             example: btc
@@ -50796,7 +50796,7 @@ paths:
                             items:
                               type: string
                               description: bech32 encoded address
-                              example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                              example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                           paused:
                             type: boolean
                             example: false
@@ -50837,7 +50837,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -50864,7 +50864,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50877,13 +50877,13 @@ paths:
               depositor:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               token_a:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -50892,7 +50892,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -50921,10 +50921,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -50932,7 +50932,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -50949,7 +50949,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -50997,7 +50997,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -51024,7 +51024,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -51037,7 +51037,7 @@ paths:
               from:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               shares:
                 type: string
                 example: '5000'
@@ -51046,7 +51046,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -51055,7 +51055,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -51081,10 +51081,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -51092,7 +51092,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -51109,7 +51109,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -51159,7 +51159,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -51186,7 +51186,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -51199,13 +51199,13 @@ paths:
               requester:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               exact_token_a:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -51214,7 +51214,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -51243,10 +51243,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -51254,7 +51254,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -51271,7 +51271,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -51321,7 +51321,7 @@ paths:
                 properties:
                   from:
                     type: string
-                    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                     description: Sender address or Keybase name to generate a transaction
                   memo:
                     type: string
@@ -51348,7 +51348,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -51361,13 +51361,13 @@ paths:
               requester:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
               token_a:
                 type: object
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -51376,7 +51376,7 @@ paths:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -51405,10 +51405,10 @@ paths:
                       properties:
                         from_address:
                           type: string
-                          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                         to_address:
                           type: string
-                          example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                          example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                         amount:
                           type: array
                           items:
@@ -51416,7 +51416,7 @@ paths:
                             properties:
                               denom:
                                 type: string
-                                example: ukava
+                                example: umage
                               amount:
                                 type: string
                                 example: '50000'
@@ -51433,7 +51433,7 @@ paths:
                       properties:
                         denom:
                           type: string
-                          example: ukava
+                          example: umage
                         amount:
                           type: string
                           example: '50000'
@@ -51491,10 +51491,10 @@ paths:
                         properties:
                           token_a:
                             type: string
-                            example: ukava
+                            example: umage
                           token_b:
                             type: string
-                            example: usdx
+                            example: fusd
                     swap_fee:
                       type: string
                       example: '0.03'
@@ -51514,7 +51514,7 @@ paths:
           description: Owner address in bech32 format
           required: false
           type: string
-          x-example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          x-example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         - in: query
           name: pool
           description: Pool ID
@@ -51591,12 +51591,12 @@ paths:
                   $ref: '#/definitions/LegacySwapPoolStatsQueryResult'
         '500':
           description: Server internal error
-  /kavadist/parameters:
+  /magedist/parameters:
     get:
       deprecated: true
-      summary: Get the current kavadist parameter values
+      summary: Get the current magedist parameter values
       tags:
-        - Kavadist
+        - Magedist
       produces:
         - application/json
       responses:
@@ -52035,7 +52035,7 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  kava.auction.v1beta1.Params:
+  mage.auction.v1beta1.Params:
     type: object
     properties:
       max_auction_duration:
@@ -52054,7 +52054,7 @@ definitions:
         type: string
         format: byte
     description: Params defines the parameters for the issuance module.
-  kava.auction.v1beta1.QueryAuctionResponse:
+  mage.auction.v1beta1.QueryAuctionResponse:
     type: object
     properties:
       auction:
@@ -52221,7 +52221,7 @@ definitions:
     description: >-
       QueryAuctionResponse is the response type for the Query/Auction RPC
       method.
-  kava.auction.v1beta1.QueryAuctionsResponse:
+  mage.auction.v1beta1.QueryAuctionsResponse:
     type: object
     properties:
       auctions:
@@ -52411,7 +52411,7 @@ definitions:
     description: >-
       QueryAuctionsResponse is the response type for the Query/Auctions RPC
       method.
-  kava.auction.v1beta1.QueryNextAuctionIDResponse:
+  mage.auction.v1beta1.QueryNextAuctionIDResponse:
     type: object
     properties:
       id:
@@ -52420,7 +52420,7 @@ definitions:
     description: >-
       QueryNextAuctionIDResponse defines the response type for querying
       x/auction next auction ID.
-  kava.auction.v1beta1.QueryParamsResponse:
+  mage.auction.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -52457,7 +52457,7 @@ definitions:
 
       NOTE: The amount field is an Int which implements the custom method
       signatures required by gogoproto.
-  kava.bep3.v1beta1.AssetParam:
+  mage.bep3.v1beta1.AssetParam:
     type: object
     properties:
       denom:
@@ -52500,7 +52500,7 @@ definitions:
       deputy_address:
         type: string
         format: byte
-        title: deputy_address the kava address of the deputy
+        title: deputy_address the mage address of the deputy
       fixed_fee:
         type: string
         title: fixed_fee defines the fee for incoming swaps
@@ -52523,7 +52523,7 @@ definitions:
         format: uint64
         title: min_block_lock defined the maximum blocks to lock
     description: AssetParam defines parameters for each bep3 asset.
-  kava.bep3.v1beta1.AssetSupplyResponse:
+  mage.bep3.v1beta1.AssetSupplyResponse:
     type: object
     properties:
       incoming_supply:
@@ -52584,7 +52584,7 @@ definitions:
         type: string
         title: time_elapsed represents the time elapsed
     description: AssetSupplyResponse defines information about an asset's supply.
-  kava.bep3.v1beta1.AtomicSwapResponse:
+  mage.bep3.v1beta1.AtomicSwapResponse:
     type: object
     properties:
       id:
@@ -52618,10 +52618,10 @@ definitions:
         title: timestamp represents the timestamp of the swap
       sender:
         type: string
-        title: sender is the kava chain sender of the swap
+        title: sender is the mage chain sender of the swap
       recipient:
         type: string
-        title: recipient is the kava chain recipient of the swap
+        title: recipient is the mage chain recipient of the swap
       sender_other_chain:
         type: string
         title: sender_other_chain is the sender on the other chain
@@ -52661,10 +52661,10 @@ definitions:
         description: >-
           - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED represents
           unspecified or invalid swap direcation
-           - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-           - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+           - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+           - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
     title: AtomicSwapResponse represents the returned atomic swap properties
-  kava.bep3.v1beta1.Params:
+  mage.bep3.v1beta1.Params:
     type: object
     properties:
       asset_params:
@@ -52712,7 +52712,7 @@ definitions:
             deputy_address:
               type: string
               format: byte
-              title: deputy_address the kava address of the deputy
+              title: deputy_address the mage address of the deputy
             fixed_fee:
               type: string
               title: fixed_fee defines the fee for incoming swaps
@@ -52737,7 +52737,7 @@ definitions:
           description: AssetParam defines parameters for each bep3 asset.
         title: asset_params define the parameters for each bep3 asset
     description: Params defines the parameters for the bep3 module.
-  kava.bep3.v1beta1.QueryAssetSuppliesResponse:
+  mage.bep3.v1beta1.QueryAssetSuppliesResponse:
     type: object
     properties:
       asset_supplies:
@@ -52821,7 +52821,7 @@ definitions:
     description: >-
       QueryAssetSuppliesResponse is the response type for the
       Query/AssetSupplies RPC method.
-  kava.bep3.v1beta1.QueryAssetSupplyResponse:
+  mage.bep3.v1beta1.QueryAssetSupplyResponse:
     type: object
     properties:
       asset_supply:
@@ -52901,7 +52901,7 @@ definitions:
     description: >-
       QueryAssetSupplyResponse is the response type for the Query/AssetSupply
       RPC method.
-  kava.bep3.v1beta1.QueryAtomicSwapResponse:
+  mage.bep3.v1beta1.QueryAtomicSwapResponse:
     type: object
     properties:
       atomic_swap:
@@ -52941,10 +52941,10 @@ definitions:
             title: timestamp represents the timestamp of the swap
           sender:
             type: string
-            title: sender is the kava chain sender of the swap
+            title: sender is the mage chain sender of the swap
           recipient:
             type: string
-            title: recipient is the kava chain recipient of the swap
+            title: recipient is the mage chain recipient of the swap
           sender_other_chain:
             type: string
             title: sender_other_chain is the sender on the other chain
@@ -52984,13 +52984,13 @@ definitions:
             description: >-
               - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED
               represents unspecified or invalid swap direcation
-               - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-               - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+               - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+               - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
         title: AtomicSwapResponse represents the returned atomic swap properties
     description: >-
       QueryAtomicSwapResponse is the response type for the Query/AtomicSwap RPC
       method.
-  kava.bep3.v1beta1.QueryAtomicSwapsResponse:
+  mage.bep3.v1beta1.QueryAtomicSwapsResponse:
     type: object
     properties:
       atomic_swaps:
@@ -53032,10 +53032,10 @@ definitions:
               title: timestamp represents the timestamp of the swap
             sender:
               type: string
-              title: sender is the kava chain sender of the swap
+              title: sender is the mage chain sender of the swap
             recipient:
               type: string
-              title: recipient is the kava chain recipient of the swap
+              title: recipient is the mage chain recipient of the swap
             sender_other_chain:
               type: string
               title: sender_other_chain is the sender on the other chain
@@ -53075,8 +53075,8 @@ definitions:
               description: >-
                 - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED
                 represents unspecified or invalid swap direcation
-                 - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-                 - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+                 - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+                 - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
           title: AtomicSwapResponse represents the returned atomic swap properties
         title: atomic_swap represents the returned atomic swaps for the request
       pagination:
@@ -53107,7 +53107,7 @@ definitions:
     description: >-
       QueryAtomicSwapsResponse is the response type for the Query/AtomicSwaps
       RPC method.
-  kava.bep3.v1beta1.QueryParamsResponse:
+  mage.bep3.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -53161,7 +53161,7 @@ definitions:
                 deputy_address:
                   type: string
                   format: byte
-                  title: deputy_address the kava address of the deputy
+                  title: deputy_address the mage address of the deputy
                 fixed_fee:
                   type: string
                   title: fixed_fee defines the fee for incoming swaps
@@ -53189,7 +53189,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for querying x/bep3
       parameters.
-  kava.bep3.v1beta1.SupplyLimit:
+  mage.bep3.v1beta1.SupplyLimit:
     type: object
     properties:
       limit:
@@ -53209,7 +53209,7 @@ definitions:
     description: >-
       SupplyLimit define the absolute and time-based limits for an assets's
       supply.
-  kava.bep3.v1beta1.SwapDirection:
+  mage.bep3.v1beta1.SwapDirection:
     type: string
     enum:
       - SWAP_DIRECTION_UNSPECIFIED
@@ -53219,10 +53219,10 @@ definitions:
     description: >-
       - SWAP_DIRECTION_UNSPECIFIED: SWAP_DIRECTION_UNSPECIFIED represents
       unspecified or invalid swap direcation
-       - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain)
-       - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain)
+       - SWAP_DIRECTION_INCOMING: SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain)
+       - SWAP_DIRECTION_OUTGOING: SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain)
     title: SwapDirection is the direction of an AtomicSwap
-  kava.bep3.v1beta1.SwapStatus:
+  mage.bep3.v1beta1.SwapStatus:
     type: string
     enum:
       - SWAP_STATUS_UNSPECIFIED
@@ -53613,7 +53613,7 @@ definitions:
         items:
           type: string
     description: ModuleAccount defines an account for modules that holds coins on a pool.
-  kava.cdp.v1beta1.CDPResponse:
+  mage.cdp.v1beta1.CDPResponse:
     type: object
     properties:
       id:
@@ -53679,7 +53679,7 @@ definitions:
       collateralization_ratio:
         type: string
     description: CDPResponse defines the state of a single collateralized debt position.
-  kava.cdp.v1beta1.CollateralParam:
+  mage.cdp.v1beta1.CollateralParam:
     type: object
     properties:
       denom:
@@ -53719,7 +53719,7 @@ definitions:
     title: >-
       CollateralParam defines governance parameters for each collateral type
       within the cdp module
-  kava.cdp.v1beta1.DebtParam:
+  mage.cdp.v1beta1.DebtParam:
     type: object
     properties:
       denom:
@@ -53731,7 +53731,7 @@ definitions:
       debt_floor:
         type: string
     title: DebtParam defines governance params for debt assets
-  kava.cdp.v1beta1.Deposit:
+  mage.cdp.v1beta1.Deposit:
     type: object
     properties:
       cdp_id:
@@ -53752,7 +53752,7 @@ definitions:
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
     title: Deposit defines an amount of coins deposited by an account to a cdp
-  kava.cdp.v1beta1.Params:
+  mage.cdp.v1beta1.Params:
     type: object
     properties:
       collateral_params:
@@ -53835,7 +53835,7 @@ definitions:
       circuit_breaker:
         type: boolean
     description: Params defines the parameters for the cdp module.
-  kava.cdp.v1beta1.QueryAccountsResponse:
+  mage.cdp.v1beta1.QueryAccountsResponse:
     type: object
     properties:
       accounts:
@@ -54051,7 +54051,7 @@ definitions:
     description: >-
       QueryAccountsResponse defines the response type for the Query/Accounts RPC
       method.
-  kava.cdp.v1beta1.QueryCdpResponse:
+  mage.cdp.v1beta1.QueryCdpResponse:
     type: object
     properties:
       cdp:
@@ -54135,7 +54135,7 @@ definitions:
           CDPResponse defines the state of a single collateralized debt
           position.
     description: QueryCdpResponse defines the response type for the Query/Cdp RPC method.
-  kava.cdp.v1beta1.QueryCdpsResponse:
+  mage.cdp.v1beta1.QueryCdpsResponse:
     type: object
     properties:
       cdps:
@@ -54246,7 +54246,7 @@ definitions:
                    PageResponse page = 2;
            }
     description: QueryCdpsResponse defines the response type for the Query/Cdps RPC method.
-  kava.cdp.v1beta1.QueryDepositsResponse:
+  mage.cdp.v1beta1.QueryDepositsResponse:
     type: object
     properties:
       deposits:
@@ -54278,7 +54278,7 @@ definitions:
     description: >-
       QueryDepositsResponse defines the response type for the Query/Deposits RPC
       method.
-  kava.cdp.v1beta1.QueryParamsResponse:
+  mage.cdp.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -54370,7 +54370,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for the Query/Params RPC
       method.
-  kava.cdp.v1beta1.QueryTotalCollateralResponse:
+  mage.cdp.v1beta1.QueryTotalCollateralResponse:
     type: object
     properties:
       total_collateral:
@@ -54401,7 +54401,7 @@ definitions:
     description: >-
       QueryTotalCollateralResponse defines the response type for the
       Query/TotalCollateral RPC method.
-  kava.cdp.v1beta1.QueryTotalPrincipalResponse:
+  mage.cdp.v1beta1.QueryTotalPrincipalResponse:
     type: object
     properties:
       total_principal:
@@ -54432,7 +54432,7 @@ definitions:
     description: >-
       QueryTotalPrincipalResponse defines the response type for the
       Query/TotalPrincipal RPC method.
-  kava.cdp.v1beta1.TotalCollateral:
+  mage.cdp.v1beta1.TotalCollateral:
     type: object
     properties:
       collateral_type:
@@ -54450,7 +54450,7 @@ definitions:
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
     title: TotalCollateral defines the total collateral of a given collateral type
-  kava.cdp.v1beta1.TotalPrincipal:
+  mage.cdp.v1beta1.TotalPrincipal:
     type: object
     properties:
       collateral_type:
@@ -54468,7 +54468,7 @@ definitions:
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
     title: TotalPrincipal defines the total principal of a given collateral type
-  kava.committee.v1beta1.QueryCommitteeResponse:
+  mage.committee.v1beta1.QueryCommitteeResponse:
     type: object
     properties:
       committee:
@@ -54635,7 +54635,7 @@ definitions:
     description: >-
       QueryCommitteeResponse defines the response type for querying x/committee
       committee.
-  kava.committee.v1beta1.QueryCommitteesResponse:
+  mage.committee.v1beta1.QueryCommitteesResponse:
     type: object
     properties:
       committees:
@@ -54807,7 +54807,7 @@ definitions:
     description: >-
       QueryCommitteesResponse defines the response type for querying x/committee
       committees.
-  kava.committee.v1beta1.QueryNextProposalIDResponse:
+  mage.committee.v1beta1.QueryNextProposalIDResponse:
     type: object
     properties:
       next_proposal_id:
@@ -54816,7 +54816,7 @@ definitions:
     description: >-
       QueryNextProposalIDRequest defines the response type for querying
       x/committee NextProposalID.
-  kava.committee.v1beta1.QueryProposalResponse:
+  mage.committee.v1beta1.QueryProposalResponse:
     type: object
     properties:
       pub_proposal:
@@ -54992,7 +54992,7 @@ definitions:
     description: >-
       QueryProposalResponse defines the response type for querying x/committee
       proposal.
-  kava.committee.v1beta1.QueryProposalsResponse:
+  mage.committee.v1beta1.QueryProposalsResponse:
     type: object
     properties:
       proposals:
@@ -55186,7 +55186,7 @@ definitions:
     description: >-
       QueryProposalsResponse defines the response type for querying x/committee
       proposals.
-  kava.committee.v1beta1.QueryRawParamsResponse:
+  mage.committee.v1beta1.QueryRawParamsResponse:
     type: object
     properties:
       raw_data:
@@ -55194,7 +55194,7 @@ definitions:
     description: >-
       QueryRawParamsResponse defines the response type for querying x/committee
       raw params.
-  kava.committee.v1beta1.QueryTallyResponse:
+  mage.committee.v1beta1.QueryTallyResponse:
     type: object
     properties:
       proposal_id:
@@ -55215,7 +55215,7 @@ definitions:
     description: >-
       QueryTallyResponse defines the response type for querying x/committee
       tally.
-  kava.committee.v1beta1.QueryVoteResponse:
+  mage.committee.v1beta1.QueryVoteResponse:
     type: object
     properties:
       proposal_id:
@@ -55239,7 +55239,7 @@ definitions:
            - VOTE_TYPE_NO: VOTE_TYPE_NO defines a no vote option.
            - VOTE_TYPE_ABSTAIN: VOTE_TYPE_ABSTAIN defines an abstain vote option.
     description: QueryVoteResponse defines the response type for querying x/committee vote.
-  kava.committee.v1beta1.QueryVotesResponse:
+  mage.committee.v1beta1.QueryVotesResponse:
     type: object
     properties:
       votes:
@@ -55292,7 +55292,7 @@ definitions:
     description: >-
       QueryVotesResponse defines the response type for querying x/committee
       votes.
-  kava.committee.v1beta1.VoteType:
+  mage.committee.v1beta1.VoteType:
     type: string
     enum:
       - VOTE_TYPE_UNSPECIFIED
@@ -55307,7 +55307,7 @@ definitions:
        - VOTE_TYPE_YES: VOTE_TYPE_YES defines a yes vote option.
        - VOTE_TYPE_NO: VOTE_TYPE_NO defines a no vote option.
        - VOTE_TYPE_ABSTAIN: VOTE_TYPE_ABSTAIN defines an abstain vote option.
-  kava.earn.v1beta1.AllowedVault:
+  mage.earn.v1beta1.AllowedVault:
     type: object
     properties:
       denom:
@@ -55360,7 +55360,7 @@ definitions:
     description: |-
       AllowedVault is a vault that is allowed to be created. These can be
       modified via parameter governance.
-  kava.earn.v1beta1.DepositResponse:
+  mage.earn.v1beta1.DepositResponse:
     type: object
     properties:
       depositor:
@@ -55400,7 +55400,7 @@ definitions:
 
           the strategy.
     description: DepositResponse defines a deposit query response type.
-  kava.earn.v1beta1.Params:
+  mage.earn.v1beta1.Params:
     type: object
     properties:
       allowed_vaults:
@@ -55459,7 +55459,7 @@ definitions:
             AllowedVault is a vault that is allowed to be created. These can be
             modified via parameter governance.
     description: Params defines the parameters of the earn module.
-  kava.earn.v1beta1.QueryDepositsResponse:
+  mage.earn.v1beta1.QueryDepositsResponse:
     type: object
     properties:
       deposits:
@@ -55531,7 +55531,7 @@ definitions:
     description: >-
       QueryDepositsResponse is the response type for the Query/Deposits RPC
       method.
-  kava.earn.v1beta1.QueryParamsResponse:
+  mage.earn.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -55599,7 +55599,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for querying x/earn
       parameters.
-  kava.earn.v1beta1.QueryTotalSupplyResponse:
+  mage.earn.v1beta1.QueryTotalSupplyResponse:
     type: object
     properties:
       height:
@@ -55624,7 +55624,7 @@ definitions:
     description: >-
       TotalSupplyResponse defines the response type for the Query/TotalSupply
       method.
-  kava.earn.v1beta1.QueryVaultResponse:
+  mage.earn.v1beta1.QueryVaultResponse:
     type: object
     properties:
       vault:
@@ -55687,7 +55687,7 @@ definitions:
         description: VaultResponse is the response type for a vault.
         title: vault represents the queried earn module vault
     description: QueryVaultResponse is the response type for the Query/Vault RPC method.
-  kava.earn.v1beta1.QueryVaultsResponse:
+  mage.earn.v1beta1.QueryVaultsResponse:
     type: object
     properties:
       vaults:
@@ -55752,7 +55752,7 @@ definitions:
           description: VaultResponse is the response type for a vault.
         title: vaults represents the earn module vaults
     description: QueryVaultsResponse is the response type for the Query/Vaults RPC method.
-  kava.earn.v1beta1.StrategyType:
+  mage.earn.v1beta1.StrategyType:
     type: string
     enum:
       - STRATEGY_TYPE_UNSPECIFIED
@@ -55767,7 +55767,7 @@ definitions:
       module.
        - STRATEGY_TYPE_SAVINGS: STRATEGY_TYPE_SAVINGS represents the strategy that deposits assets in the
       Savings module.
-  kava.earn.v1beta1.VaultResponse:
+  mage.earn.v1beta1.VaultResponse:
     type: object
     properties:
       denom:
@@ -55825,7 +55825,7 @@ definitions:
 
           vault were to be liquidated.
     description: VaultResponse is the response type for a vault.
-  kava.earn.v1beta1.VaultShare:
+  mage.earn.v1beta1.VaultShare:
     type: object
     properties:
       denom:
@@ -55833,7 +55833,7 @@ definitions:
       amount:
         type: string
     description: VaultShare defines shares of a vault owned by a depositor.
-  kava.hard.v1beta1.BorrowInterestFactorResponse:
+  mage.hard.v1beta1.BorrowInterestFactorResponse:
     type: object
     properties:
       denom:
@@ -55842,7 +55842,7 @@ definitions:
         type: string
         title: sdk.Dec as string
     description: BorrowInterestFactorResponse defines an individual borrow interest factor.
-  kava.hard.v1beta1.BorrowLimit:
+  mage.hard.v1beta1.BorrowLimit:
     type: object
     properties:
       has_max_limit:
@@ -55852,7 +55852,7 @@ definitions:
       loan_to_value:
         type: string
     description: BorrowLimit enforces restrictions on a money market.
-  kava.hard.v1beta1.BorrowResponse:
+  mage.hard.v1beta1.BorrowResponse:
     type: object
     properties:
       borrower:
@@ -55887,7 +55887,7 @@ definitions:
     description: >-
       BorrowResponse defines an amount of coins borrowed from a hard module
       account.
-  kava.hard.v1beta1.DepositResponse:
+  mage.hard.v1beta1.DepositResponse:
     type: object
     properties:
       depositor:
@@ -55922,7 +55922,7 @@ definitions:
     description: >-
       DepositResponse defines an amount of coins deposited into a hard module
       account.
-  kava.hard.v1beta1.InterestFactor:
+  mage.hard.v1beta1.InterestFactor:
     type: object
     properties:
       denom:
@@ -55934,7 +55934,7 @@ definitions:
         type: string
         title: sdk.Dec as String
     title: InterestFactor is a unique type returned by interest factor queries
-  kava.hard.v1beta1.InterestRateModel:
+  mage.hard.v1beta1.InterestRateModel:
     type: object
     properties:
       base_rate_apy:
@@ -55946,7 +55946,7 @@ definitions:
       jump_multiplier:
         type: string
     description: InterestRateModel contains information about an asset's interest rate.
-  kava.hard.v1beta1.MoneyMarket:
+  mage.hard.v1beta1.MoneyMarket:
     type: object
     properties:
       denom:
@@ -55982,7 +55982,7 @@ definitions:
       keeper_reward_percentage:
         type: string
     description: MoneyMarket is a money market for an individual asset.
-  kava.hard.v1beta1.MoneyMarketInterestRate:
+  mage.hard.v1beta1.MoneyMarketInterestRate:
     type: object
     properties:
       denom:
@@ -55994,7 +55994,7 @@ definitions:
         type: string
         title: sdk.Dec as String
     title: MoneyMarketInterestRate is a unique type returned by interest rate queries
-  kava.hard.v1beta1.Params:
+  mage.hard.v1beta1.Params:
     type: object
     properties:
       money_markets:
@@ -56040,7 +56040,7 @@ definitions:
       minimum_borrow_usd_value:
         type: string
     description: Params defines the parameters for the hard module.
-  kava.hard.v1beta1.QueryAccountsResponse:
+  mage.hard.v1beta1.QueryAccountsResponse:
     type: object
     properties:
       accounts:
@@ -56256,7 +56256,7 @@ definitions:
     description: >-
       QueryAccountsResponse is the response type for the Query/Accounts RPC
       method.
-  kava.hard.v1beta1.QueryBorrowsResponse:
+  mage.hard.v1beta1.QueryBorrowsResponse:
     type: object
     properties:
       borrows:
@@ -56327,7 +56327,7 @@ definitions:
     description: >-
       QueryBorrowsResponse is the response type for the Query/Borrows RPC
       method.
-  kava.hard.v1beta1.QueryDepositsResponse:
+  mage.hard.v1beta1.QueryDepositsResponse:
     type: object
     properties:
       deposits:
@@ -56398,7 +56398,7 @@ definitions:
     description: >-
       QueryDepositsResponse is the response type for the Query/Deposits RPC
       method.
-  kava.hard.v1beta1.QueryInterestFactorsResponse:
+  mage.hard.v1beta1.QueryInterestFactorsResponse:
     type: object
     properties:
       interest_factors:
@@ -56418,7 +56418,7 @@ definitions:
     description: >-
       QueryInterestFactorsResponse is the response type for the
       Query/InterestFactors RPC method.
-  kava.hard.v1beta1.QueryInterestRateResponse:
+  mage.hard.v1beta1.QueryInterestRateResponse:
     type: object
     properties:
       interest_rates:
@@ -56440,7 +56440,7 @@ definitions:
     description: >-
       QueryInterestRateResponse is the response type for the Query/InterestRate
       RPC method.
-  kava.hard.v1beta1.QueryParamsResponse:
+  mage.hard.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -56490,7 +56490,7 @@ definitions:
             type: string
         description: Params defines the parameters for the hard module.
     description: QueryParamsResponse is the response type for the Query/Params RPC method.
-  kava.hard.v1beta1.QueryReservesResponse:
+  mage.hard.v1beta1.QueryReservesResponse:
     type: object
     properties:
       amount:
@@ -56510,7 +56510,7 @@ definitions:
     description: >-
       QueryReservesResponse is the response type for the Query/Reserves RPC
       method.
-  kava.hard.v1beta1.QueryTotalBorrowedResponse:
+  mage.hard.v1beta1.QueryTotalBorrowedResponse:
     type: object
     properties:
       borrowed_coins:
@@ -56530,7 +56530,7 @@ definitions:
     description: >-
       QueryTotalBorrowedResponse is the response type for the
       Query/TotalBorrowed RPC method.
-  kava.hard.v1beta1.QueryTotalDepositedResponse:
+  mage.hard.v1beta1.QueryTotalDepositedResponse:
     type: object
     properties:
       supplied_coins:
@@ -56550,7 +56550,7 @@ definitions:
     description: >-
       QueryTotalDepositedResponse is the response type for the
       Query/TotalDeposited RPC method.
-  kava.hard.v1beta1.QueryUnsyncedBorrowsResponse:
+  mage.hard.v1beta1.QueryUnsyncedBorrowsResponse:
     type: object
     properties:
       borrows:
@@ -56621,7 +56621,7 @@ definitions:
     description: >-
       QueryUnsyncedBorrowsResponse is the response type for the
       Query/UnsyncedBorrows RPC method.
-  kava.hard.v1beta1.QueryUnsyncedDepositsResponse:
+  mage.hard.v1beta1.QueryUnsyncedDepositsResponse:
     type: object
     properties:
       deposits:
@@ -56692,7 +56692,7 @@ definitions:
     description: >-
       QueryUnsyncedDepositsResponse is the response type for the
       Query/UnsyncedDeposits RPC method.
-  kava.hard.v1beta1.SupplyInterestFactorResponse:
+  mage.hard.v1beta1.SupplyInterestFactorResponse:
     type: object
     properties:
       denom:
@@ -56701,7 +56701,7 @@ definitions:
         type: string
         title: sdk.Dec as string
     description: SupplyInterestFactorResponse defines an individual borrow interest factor.
-  kava.issuance.v1beta1.Asset:
+  mage.issuance.v1beta1.Asset:
     type: object
     properties:
       owner:
@@ -56728,7 +56728,7 @@ definitions:
             type: string
         title: RateLimit parameters for rate-limiting the supply of an issued asset
     title: Asset type for assets in the issuance module
-  kava.issuance.v1beta1.Params:
+  mage.issuance.v1beta1.Params:
     type: object
     properties:
       assets:
@@ -56763,7 +56763,7 @@ definitions:
                 asset
           title: Asset type for assets in the issuance module
     description: Params defines the parameters for the issuance module.
-  kava.issuance.v1beta1.QueryParamsResponse:
+  mage.issuance.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -56804,7 +56804,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for querying x/issuance
       parameters.
-  kava.issuance.v1beta1.RateLimit:
+  mage.issuance.v1beta1.RateLimit:
     type: object
     properties:
       active:
@@ -56815,7 +56815,7 @@ definitions:
       time_period:
         type: string
     title: RateLimit parameters for rate-limiting the supply of an issued asset
-  kava.kavadist.v1beta1.CoreReward:
+  mage.magedist.v1beta1.CoreReward:
     type: object
     properties:
       address:
@@ -56824,7 +56824,7 @@ definitions:
       weight:
         type: string
     description: CoreReward defines the reward weights for core infrastructure providers.
-  kava.kavadist.v1beta1.InfrastructureParams:
+  mage.magedist.v1beta1.InfrastructureParams:
     type: object
     properties:
       infrastructure_periods:
@@ -56848,7 +56848,7 @@ definitions:
             Period stores the specified start and end dates, and the inflation,
             expressed as a decimal
 
-            representing the yearly APR of KAVA tokens that will be minted
+            representing the yearly APR of MAGE tokens that will be minted
             during that period
       core_rewards:
         type: array
@@ -56890,7 +56890,7 @@ definitions:
             PartnerRewards defines the reward schedule for partner
             infrastructure providers.
     description: InfrastructureParams define the parameters for infrastructure rewards.
-  kava.kavadist.v1beta1.Params:
+  mage.magedist.v1beta1.Params:
     type: object
     properties:
       active:
@@ -56916,7 +56916,7 @@ definitions:
             Period stores the specified start and end dates, and the inflation,
             expressed as a decimal
 
-            representing the yearly APR of KAVA tokens that will be minted
+            representing the yearly APR of MAGE tokens that will be minted
             during that period
       infrastructure_params:
         type: object
@@ -56942,7 +56942,7 @@ definitions:
                 Period stores the specified start and end dates, and the
                 inflation, expressed as a decimal
 
-                representing the yearly APR of KAVA tokens that will be minted
+                representing the yearly APR of MAGE tokens that will be minted
                 during that period
           core_rewards:
             type: array
@@ -56984,8 +56984,8 @@ definitions:
                 PartnerRewards defines the reward schedule for partner
                 infrastructure providers.
         description: InfrastructureParams define the parameters for infrastructure rewards.
-    title: Params governance parameters for kavadist module
-  kava.kavadist.v1beta1.PartnerReward:
+    title: Params governance parameters for magedist module
+  mage.magedist.v1beta1.PartnerReward:
     type: object
     properties:
       address:
@@ -57006,7 +57006,7 @@ definitions:
     description: >-
       PartnerRewards defines the reward schedule for partner infrastructure
       providers.
-  kava.kavadist.v1beta1.Period:
+  mage.magedist.v1beta1.Period:
     type: object
     properties:
       start:
@@ -57025,9 +57025,9 @@ definitions:
       Period stores the specified start and end dates, and the inflation,
       expressed as a decimal
 
-      representing the yearly APR of KAVA tokens that will be minted during that
+      representing the yearly APR of MAGE tokens that will be minted during that
       period
-  kava.kavadist.v1beta1.QueryBalanceResponse:
+  mage.magedist.v1beta1.QueryBalanceResponse:
     type: object
     properties:
       coins:
@@ -57045,9 +57045,9 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     description: >-
-      QueryBalanceResponse defines the response type for querying x/kavadist
+      QueryBalanceResponse defines the response type for querying x/magedist
       balance.
-  kava.kavadist.v1beta1.QueryParamsResponse:
+  mage.magedist.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -57076,7 +57076,7 @@ definitions:
                 Period stores the specified start and end dates, and the
                 inflation, expressed as a decimal
 
-                representing the yearly APR of KAVA tokens that will be minted
+                representing the yearly APR of MAGE tokens that will be minted
                 during that period
           infrastructure_params:
             type: object
@@ -57102,7 +57102,7 @@ definitions:
                     Period stores the specified start and end dates, and the
                     inflation, expressed as a decimal
 
-                    representing the yearly APR of KAVA tokens that will be
+                    representing the yearly APR of MAGE tokens that will be
                     minted during that period
               core_rewards:
                 type: array
@@ -57146,11 +57146,11 @@ definitions:
             description: >-
               InfrastructureParams define the parameters for infrastructure
               rewards.
-        title: Params governance parameters for kavadist module
+        title: Params governance parameters for magedist module
     description: >-
-      QueryParamsResponse defines the response type for querying x/kavadist
+      QueryParamsResponse defines the response type for querying x/magedist
       parameters.
-  kava.liquid.v1beta1.QueryDelegatedBalanceResponse:
+  mage.liquid.v1beta1.QueryDelegatedBalanceResponse:
     type: object
     properties:
       vested:
@@ -57186,7 +57186,7 @@ definitions:
     description: >-
       DelegatedBalanceResponse defines the response type for the
       Query/DelegatedBalance method.
-  kava.liquid.v1beta1.QueryTotalSupplyResponse:
+  mage.liquid.v1beta1.QueryTotalSupplyResponse:
     type: object
     properties:
       height:
@@ -57211,7 +57211,7 @@ definitions:
     description: >-
       TotalSupplyResponse defines the response type for the Query/TotalSupply
       method.
-  kava.pricefeed.v1beta1.CurrentPriceResponse:
+  mage.pricefeed.v1beta1.CurrentPriceResponse:
     type: object
     properties:
       market_id:
@@ -57223,7 +57223,7 @@ definitions:
       the pricefeed
 
       module.
-  kava.pricefeed.v1beta1.Market:
+  mage.pricefeed.v1beta1.Market:
     type: object
     properties:
       market_id:
@@ -57240,7 +57240,7 @@ definitions:
       active:
         type: boolean
     description: Market defines an asset in the pricefeed.
-  kava.pricefeed.v1beta1.MarketResponse:
+  mage.pricefeed.v1beta1.MarketResponse:
     type: object
     properties:
       market_id:
@@ -57256,7 +57256,7 @@ definitions:
       active:
         type: boolean
     description: MarketResponse defines an asset in the pricefeed.
-  kava.pricefeed.v1beta1.Params:
+  mage.pricefeed.v1beta1.Params:
     type: object
     properties:
       markets:
@@ -57279,7 +57279,7 @@ definitions:
               type: boolean
           description: Market defines an asset in the pricefeed.
     description: Params defines the parameters for the pricefeed module.
-  kava.pricefeed.v1beta1.PostedPriceResponse:
+  mage.pricefeed.v1beta1.PostedPriceResponse:
     type: object
     properties:
       market_id:
@@ -57294,7 +57294,7 @@ definitions:
     description: >-
       PostedPriceResponse defines a price for market posted by a specific
       oracle.
-  kava.pricefeed.v1beta1.QueryMarketsResponse:
+  mage.pricefeed.v1beta1.QueryMarketsResponse:
     type: object
     properties:
       markets:
@@ -57319,7 +57319,7 @@ definitions:
     description: >-
       QueryMarketsResponse is the response type for the Query/Markets RPC
       method.
-  kava.pricefeed.v1beta1.QueryOraclesResponse:
+  mage.pricefeed.v1beta1.QueryOraclesResponse:
     type: object
     properties:
       oracles:
@@ -57330,7 +57330,7 @@ definitions:
     description: >-
       QueryOraclesResponse is the response type for the Query/Oracles RPC
       method.
-  kava.pricefeed.v1beta1.QueryParamsResponse:
+  mage.pricefeed.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -57359,7 +57359,7 @@ definitions:
     description: |-
       QueryParamsResponse defines the response type for querying x/pricefeed
       parameters.
-  kava.pricefeed.v1beta1.QueryPriceResponse:
+  mage.pricefeed.v1beta1.QueryPriceResponse:
     type: object
     properties:
       price:
@@ -57375,7 +57375,7 @@ definitions:
 
           module.
     description: QueryPriceResponse is the response type for the Query/Prices RPC method.
-  kava.pricefeed.v1beta1.QueryPricesResponse:
+  mage.pricefeed.v1beta1.QueryPricesResponse:
     type: object
     properties:
       prices:
@@ -57393,7 +57393,7 @@ definitions:
 
             module.
     description: QueryPricesResponse is the response type for the Query/Prices RPC method.
-  kava.pricefeed.v1beta1.QueryRawPricesResponse:
+  mage.pricefeed.v1beta1.QueryRawPricesResponse:
     type: object
     properties:
       raw_prices:
@@ -57416,7 +57416,7 @@ definitions:
     description: |-
       QueryRawPricesResponse is the response type for the Query/RawPrices RPC
       method.
-  kava.swap.v1beta1.AllowedPool:
+  mage.swap.v1beta1.AllowedPool:
     type: object
     properties:
       token_a:
@@ -57426,7 +57426,7 @@ definitions:
         type: string
         title: token_b represents the b token allowed
     title: AllowedPool defines a pool that is allowed to be created
-  kava.swap.v1beta1.DepositResponse:
+  mage.swap.v1beta1.DepositResponse:
     type: object
     properties:
       depositor:
@@ -57454,7 +57454,7 @@ definitions:
             signatures required by gogoproto.
         title: shares_value represents the coin value of the shares_owned
     description: DepositResponse defines a single deposit query response type.
-  kava.swap.v1beta1.Params:
+  mage.swap.v1beta1.Params:
     type: object
     properties:
       allowed_pools:
@@ -57474,7 +57474,7 @@ definitions:
         type: string
         title: swap_fee defines the swap fee for all pools
     description: Params defines the parameters for the swap module.
-  kava.swap.v1beta1.PoolResponse:
+  mage.swap.v1beta1.PoolResponse:
     type: object
     properties:
       name:
@@ -57499,7 +57499,7 @@ definitions:
         type: string
         title: total_shares represents the total shares of the pool
     title: Pool represents the state of a single pool
-  kava.swap.v1beta1.QueryDepositsResponse:
+  mage.swap.v1beta1.QueryDepositsResponse:
     type: object
     properties:
       deposits:
@@ -57559,7 +57559,7 @@ definitions:
     description: >-
       QueryDepositsResponse is the response type for the Query/Deposits RPC
       method.
-  kava.swap.v1beta1.QueryParamsResponse:
+  mage.swap.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -57586,7 +57586,7 @@ definitions:
     description: >-
       QueryParamsResponse defines the response type for querying x/swap
       parameters.
-  kava.swap.v1beta1.QueryPoolsResponse:
+  mage.swap.v1beta1.QueryPoolsResponse:
     type: object
     properties:
       pools:
@@ -57639,7 +57639,7 @@ definitions:
 
               was set, its value is undefined otherwise
     description: QueryPoolsResponse is the response type for the Query/Pools RPC method.
-  kava.savings.v1beta1.Deposit:
+  mage.savings.v1beta1.Deposit:
     type: object
     properties:
       depositor:
@@ -57661,7 +57661,7 @@ definitions:
     description: >-
       Deposit defines an amount of coins deposited into a savings module
       account.
-  kava.savings.v1beta1.Params:
+  mage.savings.v1beta1.Params:
     type: object
     properties:
       supported_denoms:
@@ -57669,7 +57669,7 @@ definitions:
         items:
           type: string
     description: Params defines the parameters for the savings module.
-  kava.savings.v1beta1.QueryDepositsResponse:
+  mage.savings.v1beta1.QueryDepositsResponse:
     type: object
     properties:
       deposits:
@@ -57727,7 +57727,7 @@ definitions:
     description: |-
       QueryDepositsResponse defines the response type for querying x/savings
       deposits.
-  kava.savings.v1beta1.QueryParamsResponse:
+  mage.savings.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -57741,7 +57741,7 @@ definitions:
     description: |-
       QueryParamsResponse defines the response type for querying x/savings
       parameters.
-  kava.savings.v1beta1.QueryTotalSupplyResponse:
+  mage.savings.v1beta1.QueryTotalSupplyResponse:
     type: object
     properties:
       height:
@@ -57766,7 +57766,7 @@ definitions:
     description: >-
       TotalSupplyResponse defines the response type for the Query/TotalSupply
       method.
-  kava.kavamint.v1beta1.Params:
+  mage.magemint.v1beta1.Params:
     type: object
     properties:
       community_pool_inflation:
@@ -57777,8 +57777,8 @@ definitions:
         description: >-
           yearly inflation of bonded tokens minted for staking rewards to
           validators.
-    title: Params wraps the governance parameters for the kavamint module
-  kava.kavamint.v1beta1.QueryInflationResponse:
+    title: Params wraps the governance parameters for the magemint module
+  mage.magemint.v1beta1.QueryInflationResponse:
     type: object
     properties:
       inflation:
@@ -57789,7 +57789,7 @@ definitions:
     description: >-
       QueryInflationResponse is the response type for the Query/Inflation RPC
       method.
-  kava.kavamint.v1beta1.QueryParamsResponse:
+  mage.magemint.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -57805,9 +57805,9 @@ definitions:
             description: >-
               yearly inflation of bonded tokens minted for staking rewards to
               validators.
-        title: Params wraps the governance parameters for the kavamint module
+        title: Params wraps the governance parameters for the magemint module
     description: >-
-      QueryParamsResponse defines the response type for querying x/kavamint
+      QueryParamsResponse defines the response type for querying x/magemint
       parameters.
   CheckTxResult:
     type: object
@@ -78257,10 +78257,10 @@ definitions:
         properties:
           from_address:
             type: string
-            example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+            example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
           to_address:
             type: string
-            example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+            example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
           amount:
             type: array
             items:
@@ -78268,18 +78268,18 @@ definitions:
               properties:
                 denom:
                   type: string
-                  example: ukava
+                  example: umage
                 amount:
                   type: string
                   example: '50000'
   LegacyAddress:
     type: string
     description: bech32 encoded address
-    example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+    example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
   LegacyAddress2:
     type: string
     description: bech32 encoded address
-    example: kava1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
+    example: mage1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
   LegacyBinanceChainAddress:
     type: string
     description: address on another chain (binance)
@@ -78305,7 +78305,7 @@ definitions:
     properties:
       denom:
         type: string
-        example: ukava
+        example: umage
       amount:
         type: string
         example: '50000'
@@ -78339,7 +78339,7 @@ definitions:
     properties:
       denom:
         type: string
-        example: usdx
+        example: fusd
       amount:
         type: string
         example: '10000000'
@@ -78348,7 +78348,7 @@ definitions:
     properties:
       denom:
         type: string
-        example: usdx
+        example: fusd
       amount:
         type: string
         example: '100000000'
@@ -78384,10 +78384,10 @@ definitions:
               properties:
                 from_address:
                   type: string
-                  example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                  example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                 to_address:
                   type: string
-                  example: kava1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
+                  example: mage1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz
                 amount:
                   type: array
                   items:
@@ -78395,7 +78395,7 @@ definitions:
                     properties:
                       denom:
                         type: string
-                        example: ukava
+                        example: umage
                       amount:
                         type: string
                         example: '50000'
@@ -78412,7 +78412,7 @@ definitions:
               properties:
                 denom:
                   type: string
-                  example: ukava
+                  example: umage
                 amount:
                   type: string
                   example: '50000'
@@ -78441,7 +78441,7 @@ definitions:
     properties:
       from:
         type: string
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
         description: Sender address or Keybase name to generate a transaction
       memo:
         type: string
@@ -78468,7 +78468,7 @@ definitions:
           properties:
             denom:
               type: string
-              example: ukava
+              example: umage
             amount:
               type: string
               example: '50000'
@@ -78508,11 +78508,11 @@ definitions:
       sender:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       recipient:
         type: string
         description: bech32 encoded address
-        example: kava1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
+        example: mage1atsrkjac6ulgmwhudfc36lnjfgv340vlvm757z
       sender_other_chain:
         type: string
         description: address on another chain (binance)
@@ -78577,7 +78577,7 @@ definitions:
     properties:
       bnb_deputy_address:
         type: string
-        example: kava1aphsdnz5hu2t5ty2au6znprug5kx3zpy6zwq29
+        example: mage1aphsdnz5hu2t5ty2au6znprug5kx3zpy6zwq29
       min_block_lock:
         type: string
         example: '80'
@@ -78630,7 +78630,7 @@ definitions:
                 owner:
                   type: string
                   description: bech32 encoded address
-                  example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                  example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                 reward:
                   type: array
                   items:
@@ -78638,7 +78638,7 @@ definitions:
                     properties:
                       denom:
                         type: string
-                        example: ukava
+                        example: umage
                       amount:
                         type: string
                         example: '50000'
@@ -78691,7 +78691,7 @@ definitions:
                   reward_factor:
                     type: string
                     example: '1.2581'
-      usdx_minting_claims:
+      fusd_minting_claims:
         type: array
         items:
           type: object
@@ -78702,13 +78702,13 @@ definitions:
                 owner:
                   type: string
                   description: bech32 encoded address
-                  example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                  example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
                 reward:
                   type: object
                   properties:
                     denom:
                       type: string
-                      example: ukava
+                      example: umage
                     amount:
                       type: string
                       example: '50000'
@@ -78732,7 +78732,7 @@ definitions:
           owner:
             type: string
             description: bech32 encoded address
-            example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+            example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
           reward:
             type: array
             items:
@@ -78740,7 +78740,7 @@ definitions:
               properties:
                 denom:
                   type: string
-                  example: ukava
+                  example: umage
                 amount:
                   type: string
                   example: '50000'
@@ -78793,7 +78793,7 @@ definitions:
             reward_factor:
               type: string
               example: '1.2581'
-  LegacyUSDXMintingClaims:
+  LegacyFUSDMintingClaims:
     type: object
     properties:
       base_claim:
@@ -78802,13 +78802,13 @@ definitions:
           owner:
             type: string
             description: bech32 encoded address
-            example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+            example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
           reward:
             type: object
             properties:
               denom:
                 type: string
-                example: ukava
+                example: umage
               amount:
                 type: string
                 example: '50000'
@@ -78829,13 +78829,13 @@ definitions:
       owner:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       reward:
         type: object
         properties:
           denom:
             type: string
-            example: ukava
+            example: umage
           amount:
             type: string
             example: '50000'
@@ -78845,7 +78845,7 @@ definitions:
       owner:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       reward:
         type: array
         items:
@@ -78853,7 +78853,7 @@ definitions:
           properties:
             denom:
               type: string
-              example: ukava
+              example: umage
             amount:
               type: string
               example: '50000'
@@ -78886,7 +78886,7 @@ definitions:
   LegacyIncentiveParams:
     type: object
     properties:
-      usdx_minting_reward_periods:
+      fusd_minting_reward_periods:
         type: array
         items:
           type: object
@@ -78908,7 +78908,7 @@ definitions:
               properties:
                 denom:
                   type: string
-                  example: ukava
+                  example: umage
                 amount:
                   type: string
                   example: '50000'
@@ -78936,7 +78936,7 @@ definitions:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -78964,7 +78964,7 @@ definitions:
                 properties:
                   denom:
                     type: string
-                    example: ukava
+                    example: umage
                   amount:
                     type: string
                     example: '50000'
@@ -78990,7 +78990,7 @@ definitions:
               properties:
                 denom:
                   type: string
-                  example: ukava
+                  example: umage
                 amount:
                   type: string
                   example: '50000'
@@ -79031,7 +79031,7 @@ definitions:
         properties:
           denom:
             type: string
-            example: ukava
+            example: umage
           amount:
             type: string
             example: '50000'
@@ -79057,7 +79057,7 @@ definitions:
           properties:
             denom:
               type: string
-              example: ukava
+              example: umage
             amount:
               type: string
               example: '50000'
@@ -79078,7 +79078,7 @@ definitions:
         example: '1'
       owner:
         type: string
-        example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+        example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
       collateral:
         type: object
         properties:
@@ -79096,7 +79096,7 @@ definitions:
         properties:
           denom:
             type: string
-            example: usdx
+            example: fusd
           amount:
             type: string
             example: '10000000'
@@ -79105,7 +79105,7 @@ definitions:
         properties:
           denom:
             type: string
-            example: usdx
+            example: fusd
           amount:
             type: string
             example: '10000000'
@@ -79117,7 +79117,7 @@ definitions:
         properties:
           denom:
             type: string
-            example: usdx
+            example: fusd
           amount:
             type: string
             example: '10000000'
@@ -79132,7 +79132,7 @@ definitions:
         example: '1'
       depositor:
         type: string
-        example: kava1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
+        example: mage1q53rwutgpzx7szcrgzqguxyccjpzt9j4cyctn9
       amount:
         type: object
         properties:
@@ -79165,7 +79165,7 @@ definitions:
               items:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
             active:
               type: boolean
               example: true
@@ -79186,7 +79186,7 @@ definitions:
         example: xrp:usd
       oracle_address:
         type: string
-        example: kava10cw2m04528dwlc44k0myd7strj3eq5jr6s8pxs
+        example: mage10cw2m04528dwlc44k0myd7strj3eq5jr6s8pxs
       price:
         type: string
         example: '0.298758999999999997'
@@ -79211,7 +79211,7 @@ definitions:
         items:
           type: string
           description: bech32 encoded address
-          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       active:
         type: boolean
         example: true
@@ -79225,10 +79225,10 @@ definitions:
           properties:
             token_a:
               type: string
-              example: ukava
+              example: umage
             token_b:
               type: string
-              example: usdx
+              example: fusd
       swap_fee:
         type: string
         example: '0.03'
@@ -79237,17 +79237,17 @@ definitions:
     properties:
       token_a:
         type: string
-        example: ukava
+        example: umage
       token_b:
         type: string
-        example: usdx
+        example: fusd
   LegacySwapDepositsQueryResult:
     type: object
     properties:
       depositor:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       pool_id:
         type: string
         example: abc:xyz
@@ -79398,7 +79398,7 @@ definitions:
       depositor:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       amount:
         type: array
         items:
@@ -79406,7 +79406,7 @@ definitions:
           properties:
             denom:
               type: string
-              example: ukava
+              example: umage
             amount:
               type: string
               example: '50000'
@@ -79427,7 +79427,7 @@ definitions:
       borrower:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       amount:
         type: array
         items:
@@ -79435,7 +79435,7 @@ definitions:
           properties:
             denom:
               type: string
-              example: ukava
+              example: umage
             amount:
               type: string
               example: '50000'
@@ -79506,7 +79506,7 @@ definitions:
             owner:
               type: string
               description: bech32 encoded address
-              example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+              example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
             denom:
               type: string
               example: btc
@@ -79515,7 +79515,7 @@ definitions:
               items:
                 type: string
                 description: bech32 encoded address
-                example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+                example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
             paused:
               type: boolean
               example: false
@@ -79540,7 +79540,7 @@ definitions:
       owner:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       denom:
         type: string
         example: btc
@@ -79549,7 +79549,7 @@ definitions:
         items:
           type: string
           description: bech32 encoded address
-          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       paused:
         type: boolean
         example: false
@@ -79619,13 +79619,13 @@ definitions:
       bidder:
         type: string
         description: bech32 encoded address
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       bid:
         type: object
         properties:
           denom:
             type: string
-            example: ukava
+            example: umage
           amount:
             type: string
             example: '50000'
@@ -79661,7 +79661,7 @@ definitions:
         properties:
           denom:
             type: string
-            example: usdx
+            example: fusd
           amount:
             type: string
             example: '10000000'
@@ -79697,7 +79697,7 @@ definitions:
     properties:
       denom:
         type: string
-        example: usdx
+        example: fusd
       reference_asset:
         type: string
         example: usd
@@ -79715,7 +79715,7 @@ definitions:
         example: '1'
       proposer:
         type: string
-        example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+        example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
   LegacyCommitteeVote:
     type: object
     properties:
@@ -79760,7 +79760,7 @@ definitions:
         items:
           type: string
           description: bech32 encoded address
-          example: kava1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
+          example: mage1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c
       permissions:
         type: array
         items:
@@ -79832,7 +79832,7 @@ definitions:
         type: string
       value:
         type: string
-  LegacyKavadistPeriod:
+  LegacyMagedistPeriod:
     type: object
     properties:
       start:

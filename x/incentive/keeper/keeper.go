@@ -7,9 +7,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/incentive/keeper/adapters"
-	"github.com/kava-labs/kava/x/incentive/keeper/store"
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/keeper/adapters"
+	"github.com/mage-coven/mage/x/incentive/keeper/store"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // Keeper keeper for the incentive module
@@ -31,7 +31,7 @@ type Keeper struct {
 	Store    store.IncentiveStore
 
 	// Keepers used for APY queries
-	kavamintKeeper  types.KavamintKeeper
+	magemintKeeper  types.MagemintKeeper
 	distrKeeper     types.DistrKeeper
 	pricefeedKeeper types.PricefeedKeeper
 }
@@ -41,7 +41,7 @@ func NewKeeper(
 	cdc codec.Codec, key sdk.StoreKey, paramstore types.ParamSubspace, bk types.BankKeeper,
 	cdpk types.CdpKeeper, hk types.HardKeeper, ak types.AccountKeeper, stk types.StakingKeeper,
 	swpk types.SwapKeeper, svk types.SavingsKeeper, lqk types.LiquidKeeper, ek types.EarnKeeper,
-	kmk types.KavamintKeeper, dk types.DistrKeeper, pfk types.PricefeedKeeper,
+	kmk types.MagemintKeeper, dk types.DistrKeeper, pfk types.PricefeedKeeper,
 ) Keeper {
 	if !paramstore.HasKeyTable() {
 		paramstore = paramstore.WithKeyTable(types.ParamKeyTable())
@@ -67,44 +67,44 @@ func NewKeeper(
 		),
 		Store: store.NewIncentiveStore(cdc, key),
 
-		kavamintKeeper:  kmk,
+		magemintKeeper:  kmk,
 		distrKeeper:     dk,
 		pricefeedKeeper: pfk,
 	}
 }
 
-// GetUSDXMintingClaim returns the claim in the store corresponding the the input address collateral type and id and a boolean for if the claim was found
-func (k Keeper) GetUSDXMintingClaim(ctx sdk.Context, addr sdk.AccAddress) (types.USDXMintingClaim, bool) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingClaimKeyPrefix)
+// GetFUSDMintingClaim returns the claim in the store corresponding the the input address collateral type and id and a boolean for if the claim was found
+func (k Keeper) GetFUSDMintingClaim(ctx sdk.Context, addr sdk.AccAddress) (types.FUSDMintingClaim, bool) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingClaimKeyPrefix)
 	bz := store.Get(addr)
 	if bz == nil {
-		return types.USDXMintingClaim{}, false
+		return types.FUSDMintingClaim{}, false
 	}
-	var c types.USDXMintingClaim
+	var c types.FUSDMintingClaim
 	k.cdc.MustUnmarshal(bz, &c)
 	return c, true
 }
 
-// SetUSDXMintingClaim sets the claim in the store corresponding to the input address, collateral type, and id
-func (k Keeper) SetUSDXMintingClaim(ctx sdk.Context, c types.USDXMintingClaim) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingClaimKeyPrefix)
+// SetFUSDMintingClaim sets the claim in the store corresponding to the input address, collateral type, and id
+func (k Keeper) SetFUSDMintingClaim(ctx sdk.Context, c types.FUSDMintingClaim) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingClaimKeyPrefix)
 	bz := k.cdc.MustMarshal(&c)
 	store.Set(c.Owner, bz)
 }
 
-// DeleteUSDXMintingClaim deletes the claim in the store corresponding to the input address, collateral type, and id
-func (k Keeper) DeleteUSDXMintingClaim(ctx sdk.Context, owner sdk.AccAddress) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingClaimKeyPrefix)
+// DeleteFUSDMintingClaim deletes the claim in the store corresponding to the input address, collateral type, and id
+func (k Keeper) DeleteFUSDMintingClaim(ctx sdk.Context, owner sdk.AccAddress) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingClaimKeyPrefix)
 	store.Delete(owner)
 }
 
-// IterateUSDXMintingClaims iterates over all claim  objects in the store and preforms a callback function
-func (k Keeper) IterateUSDXMintingClaims(ctx sdk.Context, cb func(c types.USDXMintingClaim) (stop bool)) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingClaimKeyPrefix)
+// IterateFUSDMintingClaims iterates over all claim  objects in the store and preforms a callback function
+func (k Keeper) IterateFUSDMintingClaims(ctx sdk.Context, cb func(c types.FUSDMintingClaim) (stop bool)) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingClaimKeyPrefix)
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 	defer iterator.Close()
 	for ; iterator.Valid(); iterator.Next() {
-		var c types.USDXMintingClaim
+		var c types.FUSDMintingClaim
 		k.cdc.MustUnmarshal(iterator.Value(), &c)
 		if cb(c) {
 			break
@@ -112,19 +112,19 @@ func (k Keeper) IterateUSDXMintingClaims(ctx sdk.Context, cb func(c types.USDXMi
 	}
 }
 
-// GetAllUSDXMintingClaims returns all Claim objects in the store
-func (k Keeper) GetAllUSDXMintingClaims(ctx sdk.Context) types.USDXMintingClaims {
-	cs := types.USDXMintingClaims{}
-	k.IterateUSDXMintingClaims(ctx, func(c types.USDXMintingClaim) (stop bool) {
+// GetAllFUSDMintingClaims returns all Claim objects in the store
+func (k Keeper) GetAllFUSDMintingClaims(ctx sdk.Context) types.FUSDMintingClaims {
+	cs := types.FUSDMintingClaims{}
+	k.IterateFUSDMintingClaims(ctx, func(c types.FUSDMintingClaim) (stop bool) {
 		cs = append(cs, c)
 		return false
 	})
 	return cs
 }
 
-// GetPreviousUSDXMintingAccrualTime returns the last time a collateral type accrued USDX minting rewards
-func (k Keeper) GetPreviousUSDXMintingAccrualTime(ctx sdk.Context, ctype string) (blockTime time.Time, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.PreviousUSDXMintingRewardAccrualTimeKeyPrefix)
+// GetPreviousFUSDMintingAccrualTime returns the last time a collateral type accrued FUSD minting rewards
+func (k Keeper) GetPreviousFUSDMintingAccrualTime(ctx sdk.Context, ctype string) (blockTime time.Time, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.PreviousFUSDMintingRewardAccrualTimeKeyPrefix)
 	b := store.Get([]byte(ctype))
 	if b == nil {
 		return time.Time{}, false
@@ -135,9 +135,9 @@ func (k Keeper) GetPreviousUSDXMintingAccrualTime(ctx sdk.Context, ctype string)
 	return blockTime, true
 }
 
-// SetPreviousUSDXMintingAccrualTime sets the last time a collateral type accrued USDX minting rewards
-func (k Keeper) SetPreviousUSDXMintingAccrualTime(ctx sdk.Context, ctype string, blockTime time.Time) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.PreviousUSDXMintingRewardAccrualTimeKeyPrefix)
+// SetPreviousFUSDMintingAccrualTime sets the last time a collateral type accrued FUSD minting rewards
+func (k Keeper) SetPreviousFUSDMintingAccrualTime(ctx sdk.Context, ctype string, blockTime time.Time) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.PreviousFUSDMintingRewardAccrualTimeKeyPrefix)
 	bz, err := blockTime.MarshalBinary()
 	if err != nil {
 		panic(err)
@@ -145,9 +145,9 @@ func (k Keeper) SetPreviousUSDXMintingAccrualTime(ctx sdk.Context, ctype string,
 	store.Set([]byte(ctype), bz)
 }
 
-// IterateUSDXMintingAccrualTimes iterates over all previous USDX minting accrual times and preforms a callback function
-func (k Keeper) IterateUSDXMintingAccrualTimes(ctx sdk.Context, cb func(string, time.Time) (stop bool)) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.PreviousUSDXMintingRewardAccrualTimeKeyPrefix)
+// IterateFUSDMintingAccrualTimes iterates over all previous FUSD minting accrual times and preforms a callback function
+func (k Keeper) IterateFUSDMintingAccrualTimes(ctx sdk.Context, cb func(string, time.Time) (stop bool)) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.PreviousFUSDMintingRewardAccrualTimeKeyPrefix)
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 	defer iterator.Close()
 	for ; iterator.Valid(); iterator.Next() {
@@ -162,9 +162,9 @@ func (k Keeper) IterateUSDXMintingAccrualTimes(ctx sdk.Context, cb func(string, 
 	}
 }
 
-// GetUSDXMintingRewardFactor returns the current reward factor for an individual collateral type
-func (k Keeper) GetUSDXMintingRewardFactor(ctx sdk.Context, ctype string) (factor sdk.Dec, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingRewardFactorKeyPrefix)
+// GetFUSDMintingRewardFactor returns the current reward factor for an individual collateral type
+func (k Keeper) GetFUSDMintingRewardFactor(ctx sdk.Context, ctype string) (factor sdk.Dec, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingRewardFactorKeyPrefix)
 	bz := store.Get([]byte(ctype))
 	if bz == nil {
 		return sdk.ZeroDec(), false
@@ -175,9 +175,9 @@ func (k Keeper) GetUSDXMintingRewardFactor(ctx sdk.Context, ctype string) (facto
 	return factor, true
 }
 
-// SetUSDXMintingRewardFactor sets the current reward factor for an individual collateral type
-func (k Keeper) SetUSDXMintingRewardFactor(ctx sdk.Context, ctype string, factor sdk.Dec) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingRewardFactorKeyPrefix)
+// SetFUSDMintingRewardFactor sets the current reward factor for an individual collateral type
+func (k Keeper) SetFUSDMintingRewardFactor(ctx sdk.Context, ctype string, factor sdk.Dec) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingRewardFactorKeyPrefix)
 	bz, err := factor.Marshal()
 	if err != nil {
 		panic(err)
@@ -185,9 +185,9 @@ func (k Keeper) SetUSDXMintingRewardFactor(ctx sdk.Context, ctype string, factor
 	store.Set([]byte(ctype), bz)
 }
 
-// IterateUSDXMintingRewardFactors iterates over all USDX Minting reward factor objects in the store and preforms a callback function
-func (k Keeper) IterateUSDXMintingRewardFactors(ctx sdk.Context, cb func(denom string, factor sdk.Dec) (stop bool)) {
-	store := prefix.NewStore(ctx.KVStore(k.key), types.USDXMintingRewardFactorKeyPrefix)
+// IterateFUSDMintingRewardFactors iterates over all FUSD Minting reward factor objects in the store and preforms a callback function
+func (k Keeper) IterateFUSDMintingRewardFactors(ctx sdk.Context, cb func(denom string, factor sdk.Dec) (stop bool)) {
+	store := prefix.NewStore(ctx.KVStore(k.key), types.FUSDMintingRewardFactorKeyPrefix)
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 	defer iterator.Close()
 	for ; iterator.Valid(); iterator.Next() {

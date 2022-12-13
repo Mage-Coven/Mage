@@ -10,10 +10,10 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/savings"
-	"github.com/kava-labs/kava/x/savings/keeper"
-	"github.com/kava-labs/kava/x/savings/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/savings"
+	"github.com/mage-coven/mage/x/savings/keeper"
+	"github.com/mage-coven/mage/x/savings/types"
 )
 
 type GenesisTestSuite struct {
@@ -39,15 +39,15 @@ func (suite *GenesisTestSuite) SetupTest() {
 
 func (suite *GenesisTestSuite) TestInitExportGenesis() {
 	params := types.NewParams(
-		[]string{"btc", "ukava", "bnb"},
+		[]string{"btc", "umage", "bnb"},
 	)
 
-	depositAmt := sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e8)))
+	depositAmt := sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e8)))
 
 	deposits := types.Deposits{
 		types.NewDeposit(
 			suite.addrs[0],
-			depositAmt, // 100 ukava
+			depositAmt, // 100 umage
 		),
 	}
 	savingsGenesis := types.NewGenesisState(params, deposits)

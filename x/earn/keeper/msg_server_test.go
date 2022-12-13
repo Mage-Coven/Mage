@@ -6,9 +6,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
-	"github.com/kava-labs/kava/x/earn/keeper"
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/keeper"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/crypto"
 )
@@ -33,7 +33,7 @@ func TestMsgServerTestSuite(t *testing.T) {
 }
 
 func (suite *msgServerTestSuite) TestDeposit() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	suite.CreateVault(vaultDenom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
@@ -86,7 +86,7 @@ func (suite *msgServerTestSuite) TestDeposit() {
 }
 
 func (suite *msgServerTestSuite) TestWithdraw() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	suite.CreateVault(vaultDenom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)

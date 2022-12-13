@@ -7,7 +7,7 @@ import (
 // Querier routes for the incentive module
 const (
 	QueryGetHardRewards        = "hard-rewards"
-	QueryGetUSDXMintingRewards = "usdx-minting-rewards"
+	QueryGetFUSDMintingRewards = "fusd-minting-rewards"
 	QueryGetDelegatorRewards   = "delegator-rewards"
 	QueryGetSwapRewards        = "swap-rewards"
 	QueryGetSavingsRewards     = "savings-rewards"
@@ -42,7 +42,7 @@ func NewQueryRewardsParams(page, limit int, owner sdk.AccAddress, unsynchronized
 
 // QueryGetRewardFactorsResponse holds the response to a reward factor query
 type QueryGetRewardFactorsResponse struct {
-	USDXMintingRewardFactors RewardIndexes      `json:"usdx_minting_reward_factors" yaml:"usdx_minting_reward_factors"`
+	FUSDMintingRewardFactors RewardIndexes      `json:"fusd_minting_reward_factors" yaml:"fusd_minting_reward_factors"`
 	HardSupplyRewardFactors  MultiRewardIndexes `json:"hard_supply_reward_factors" yaml:"hard_supply_reward_factors"`
 	HardBorrowRewardFactors  MultiRewardIndexes `json:"hard_borrow_reward_factors" yaml:"hard_borrow_reward_factors"`
 	DelegatorRewardFactors   MultiRewardIndexes `json:"delegator_reward_factors" yaml:"delegator_reward_factors"`
@@ -52,11 +52,11 @@ type QueryGetRewardFactorsResponse struct {
 }
 
 // NewQueryGetRewardFactorsResponse returns a new instance of QueryAllRewardFactorsResponse
-func NewQueryGetRewardFactorsResponse(usdxMintingFactors RewardIndexes, supplyFactors,
+func NewQueryGetRewardFactorsResponse(fusdMintingFactors RewardIndexes, supplyFactors,
 	hardBorrowFactors, delegatorFactors, swapFactors, savingsFactors, earnFactors MultiRewardIndexes,
 ) QueryGetRewardFactorsResponse {
 	return QueryGetRewardFactorsResponse{
-		USDXMintingRewardFactors: usdxMintingFactors,
+		FUSDMintingRewardFactors: fusdMintingFactors,
 		HardSupplyRewardFactors:  supplyFactors,
 		HardBorrowRewardFactors:  hardBorrowFactors,
 		DelegatorRewardFactors:   delegatorFactors,

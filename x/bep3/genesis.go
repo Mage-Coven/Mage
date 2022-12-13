@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/kava-labs/kava/x/bep3/keeper"
-	"github.com/kava-labs/kava/x/bep3/types"
+	"github.com/mage-coven/mage/x/bep3/keeper"
+	"github.com/mage-coven/mage/x/bep3/types"
 )
 
 // InitGenesis initializes the store state from a genesis state.

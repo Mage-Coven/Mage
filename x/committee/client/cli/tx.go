@@ -21,7 +21,7 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	paramsproposal "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 
-	"github.com/kava-labs/kava/x/committee/types"
+	"github.com/mage-coven/mage/x/committee/types"
 )
 
 const PARAMS_CHANGE_PROPOSAL_EXAMPLE = `
@@ -35,15 +35,15 @@ const PARAMS_CHANGE_PROPOSAL_EXAMPLE = `
 
 const COMMITTEE_CHANGE_PROPOSAL_EXAMPLE = `
 {
-	"@type": "/kava.committee.v1beta1.CommitteeChangeProposal",
+	"@type": "/mage.committee.v1beta1.CommitteeChangeProposal",
   "title": "A Title",
   "description": "A proposal description.",
   "new_committee": {
-    "@type": "/kava.committee.v1beta1.MemberCommittee",
+    "@type": "/mage.committee.v1beta1.MemberCommittee",
     "base_committee": {
       "id": "34",
       "description": "member committee",
-      "members": ["kava1ze7y9qwdddejmy7jlw4cymqqlt2wh05yhwmrv2"],
+      "members": ["mage1ze7y9qwdddejmy7jlw4cymqqlt2wh05yhwmrv2"],
       "permissions": [],
       "vote_threshold": "1.000000000000000000",
       "proposal_duration": "86400s",
@@ -55,7 +55,7 @@ const COMMITTEE_CHANGE_PROPOSAL_EXAMPLE = `
 
 const COMMITTEE_DELETE_PROPOSAL_EXAMPLE = `
 {
-	"@type": "/kava.committee.v1beta1.CommitteeDeleteProposal",
+	"@type": "/mage.committee.v1beta1.CommitteeDeleteProposal",
   "title": "A Title",
   "description": "A proposal description.",
   "committee_id": "1"

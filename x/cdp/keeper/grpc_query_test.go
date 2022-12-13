@@ -6,9 +6,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/query"
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/cdp/keeper"
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/cdp/keeper"
+	"github.com/mage-coven/mage/x/cdp/types"
 	"github.com/stretchr/testify/suite"
 	tmprototypes "github.com/tendermint/tendermint/proto/tendermint/types"
 )
@@ -57,13 +57,13 @@ func (suite *grpcQueryTestSuite) addCdp() {
 	ok := suite.keeper.UpdatePricefeedStatus(suite.ctx, "xrp:usd")
 	suite.True(ok)
 
-	err = suite.keeper.AddCdp(suite.ctx, suite.addrs[0], c("xrp", 100000000), c("usdx", 10000000), "xrp-a")
+	err = suite.keeper.AddCdp(suite.ctx, suite.addrs[0], c("xrp", 100000000), c("fusd", 10000000), "xrp-a")
 	suite.NoError(err)
 
 	id := suite.keeper.GetNextCdpID(suite.ctx)
 	suite.Equal(uint64(2), id)
 
-	tp := suite.keeper.GetTotalPrincipal(suite.ctx, "xrp-a", "usdx")
+	tp := suite.keeper.GetTotalPrincipal(suite.ctx, "xrp-a", "fusd")
 	suite.Equal(i(10000000), tp)
 }
 
@@ -109,11 +109,11 @@ func (suite *grpcQueryTestSuite) TestGrpcQueryTotalPrincipal() {
 
 	suite.Contains(res.TotalPrincipal, types.TotalPrincipal{
 		CollateralType: "xrp-a",
-		Amount:         sdk.NewCoin("usdx", sdk.NewInt(10000000)),
+		Amount:         sdk.NewCoin("fusd", sdk.NewInt(10000000)),
 	}, "total principals should include added cdp")
 	suite.Contains(res.TotalPrincipal, types.TotalPrincipal{
 		CollateralType: "busd-a",
-		Amount:         sdk.NewCoin("usdx", sdk.NewInt(0)),
+		Amount:         sdk.NewCoin("fusd", sdk.NewInt(0)),
 	}, "total busd principal should be 0")
 }
 
@@ -152,7 +152,7 @@ func (suite *grpcQueryTestSuite) TestGrpcQueryCdps_InvalidCollateralType() {
 	suite.addCdp()
 
 	_, err := suite.queryServer.Cdps(sdk.WrapSDKContext(suite.ctx), &types.QueryCdpsRequest{
-		CollateralType: "kava-a",
+		CollateralType: "mage-a",
 	})
 	suite.Require().Error(err)
 	suite.Require().Equal("rpc error: code = InvalidArgument desc = invalid collateral type", err.Error())
@@ -179,11 +179,11 @@ func (suite *grpcQueryTestSuite) TestGrpcQueryCdp() {
 		{
 			"invalid collateral",
 			types.QueryCdpRequest{
-				CollateralType: "kava-a",
+				CollateralType: "mage-a",
 				Owner:          suite.addrs[0].String(),
 			},
 			false,
-			"kava-a: invalid collateral for input collateral type",
+			"mage-a: invalid collateral for input collateral type",
 		},
 		{
 			"missing owner",
@@ -245,12 +245,12 @@ func (suite *grpcQueryTestSuite) TestGrpcQueryDeposits() {
 		{
 			"invalid collateral type",
 			&types.QueryDepositsRequest{
-				CollateralType: "kava-a",
+				CollateralType: "mage-a",
 				Owner:          suite.addrs[0].String(),
 			},
 			nil,
 			true,
-			"kava-a: invalid collateral for input collateral type",
+			"mage-a: invalid collateral for input collateral type",
 		},
 		{
 			"missing owner",

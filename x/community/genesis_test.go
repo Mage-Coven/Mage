@@ -6,8 +6,8 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
-	"github.com/kava-labs/kava/x/community"
-	"github.com/kava-labs/kava/x/community/testutil"
+	"github.com/mage-coven/mage/x/community"
+	"github.com/mage-coven/mage/x/community/testutil"
 )
 
 type genesisTestSuite struct {

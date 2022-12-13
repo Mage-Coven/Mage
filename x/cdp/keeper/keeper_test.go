@@ -6,8 +6,8 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/cdp/keeper"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/cdp/keeper"
 )
 
 type KeeperTestSuite struct {

@@ -4,15 +4,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/types"
 	"github.com/stretchr/testify/suite"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var (
-	testDenom1 = "ukava"
-	testDenom2 = "usdx"
+	testDenom1 = "umage"
+	testDenom2 = "fusd"
 )
 
 func d(i int64) sdk.Dec {

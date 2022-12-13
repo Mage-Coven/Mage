@@ -16,10 +16,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/auction/client/cli"
-	"github.com/kava-labs/kava/x/auction/client/rest"
-	"github.com/kava-labs/kava/x/auction/keeper"
-	"github.com/kava-labs/kava/x/auction/types"
+	"github.com/mage-coven/mage/x/auction/client/cli"
+	"github.com/mage-coven/mage/x/auction/client/rest"
+	"github.com/mage-coven/mage/x/auction/keeper"
+	"github.com/mage-coven/mage/x/auction/types"
 )
 
 var (

@@ -2,7 +2,7 @@ package community
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/kava-labs/kava/x/community/keeper"
+	"github.com/mage-coven/mage/x/community/keeper"
 	abci "github.com/tendermint/tendermint/abci/types"
 )
 

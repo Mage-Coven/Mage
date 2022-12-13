@@ -15,11 +15,11 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/earn/keeper"
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
-	liquidtypes "github.com/kava-labs/kava/x/liquid/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/earn/keeper"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
+	liquidtypes "github.com/mage-coven/mage/x/liquid/types"
 )
 
 type grpcQueryTestSuite struct {
@@ -43,7 +43,7 @@ func TestGrpcQueryTestSuite(t *testing.T) {
 }
 
 func (suite *grpcQueryTestSuite) TestQueryParams() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	res, err := suite.queryClient.Params(context.Background(), types.NewQueryParamsRequest())
 	suite.Require().NoError(err)
@@ -66,15 +66,15 @@ func (suite *grpcQueryTestSuite) TestQueryParams() {
 
 func (suite *grpcQueryTestSuite) TestVaults_ZeroSupply() {
 	// Add vaults
-	suite.CreateVault("usdx", types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
+	suite.CreateVault("fusd", types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 	suite.CreateVault("busd", types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 
 	suite.Run("single", func() {
-		res, err := suite.queryClient.Vault(context.Background(), types.NewQueryVaultRequest("usdx"))
+		res, err := suite.queryClient.Vault(context.Background(), types.NewQueryVaultRequest("fusd"))
 		suite.Require().NoError(err)
 		suite.Require().Equal(
 			types.VaultResponse{
-				Denom:             "usdx",
+				Denom:             "fusd",
 				Strategies:        []types.StrategyType{types.STRATEGY_TYPE_HARD},
 				IsPrivateVault:    false,
 				AllowedDepositors: nil,
@@ -90,7 +90,7 @@ func (suite *grpcQueryTestSuite) TestVaults_ZeroSupply() {
 		suite.Require().NoError(err)
 		suite.Require().ElementsMatch([]types.VaultResponse{
 			{
-				Denom:             "usdx",
+				Denom:             "fusd",
 				Strategies:        []types.StrategyType{types.STRATEGY_TYPE_HARD},
 				IsPrivateVault:    false,
 				AllowedDepositors: nil,
@@ -112,14 +112,14 @@ func (suite *grpcQueryTestSuite) TestVaults_ZeroSupply() {
 }
 
 func (suite *grpcQueryTestSuite) TestVaults_WithSupply() {
-	vaultDenom := "usdx"
-	vault2Denom := testutil.TestBkavaDenoms[0]
+	vaultDenom := "fusd"
+	vault2Denom := testutil.TestBmageDenoms[0]
 
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 100)
 	deposit2Amount := sdk.NewInt64Coin(vault2Denom, 100)
 
 	suite.CreateVault(vaultDenom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
-	suite.CreateVault("bkava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+	suite.CreateVault("bmage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 
 	acc := suite.CreateAccount(sdk.NewCoins(
 		sdk.NewInt64Coin(vaultDenom, 1000),
@@ -159,15 +159,15 @@ func (suite *grpcQueryTestSuite) TestVaults_WithSupply() {
 }
 
 func (suite *grpcQueryTestSuite) TestVaults_MixedSupply() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	vault2Denom := "busd"
-	vault3Denom := testutil.TestBkavaDenoms[0]
+	vault3Denom := testutil.TestBmageDenoms[0]
 
 	depositAmount := sdk.NewInt64Coin(vault3Denom, 100)
 
 	suite.CreateVault(vaultDenom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 	suite.CreateVault(vault2Denom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
-	suite.CreateVault("bkava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+	suite.CreateVault("bmage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 
 	acc := suite.CreateAccount(sdk.NewCoins(
 		sdk.NewInt64Coin(vaultDenom, 1000),
@@ -213,29 +213,29 @@ func (suite *grpcQueryTestSuite) TestVaults_MixedSupply() {
 }
 
 func (suite *grpcQueryTestSuite) TestVault_NotFound() {
-	_, err := suite.queryClient.Vault(context.Background(), types.NewQueryVaultRequest("usdx"))
+	_, err := suite.queryClient.Vault(context.Background(), types.NewQueryVaultRequest("fusd"))
 	suite.Require().Error(err)
 	suite.Require().ErrorIs(err, status.Errorf(codes.NotFound, "vault not found with specified denom"))
 }
 
 func (suite *grpcQueryTestSuite) TestDeposits() {
-	// Validator setup for bkava
+	// Validator setup for bmage
 	_, addrs := app.GeneratePrivKeyAddressPairs(5)
 	valAccAddr1, valAccAddr2, delegator := addrs[0], addrs[1], addrs[2]
 	valAddr1 := sdk.ValAddress(valAccAddr1)
 	valAddr2 := sdk.ValAddress(valAccAddr2)
 
-	vault1Denom := "usdx"
+	vault1Denom := "fusd"
 	vault2Denom := "busd"
-	vault3Denom := fmt.Sprintf("bkava-%s", valAddr1.String())
-	vault4Denom := fmt.Sprintf("bkava-%s", valAddr2.String())
+	vault3Denom := fmt.Sprintf("bmage-%s", valAddr1.String())
+	vault4Denom := fmt.Sprintf("bmage-%s", valAddr2.String())
 
-	initialUkavaBalance := sdk.NewInt(1e9)
+	initialUmageBalance := sdk.NewInt(1e9)
 	startBalance := sdk.NewCoins(
-		sdk.NewCoin("ukava", initialUkavaBalance),
+		sdk.NewCoin("umage", initialUmageBalance),
 		sdk.NewInt64Coin(vault1Denom, 1000),
 		sdk.NewInt64Coin(vault2Denom, 1000),
-		// Bkava isn't actually minted via x/liquid
+		// Bmage isn't actually minted via x/liquid
 		sdk.NewInt64Coin(vault3Denom, 1000),
 		sdk.NewInt64Coin(vault4Denom, 1000),
 	)
@@ -246,21 +246,21 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 	suite.App.FundAccount(suite.Ctx, valAccAddr2, startBalance)
 	suite.App.FundAccount(suite.Ctx, delegator, startBalance)
 
-	suite.CreateNewUnbondedValidator(valAddr1, initialUkavaBalance)
-	suite.CreateNewUnbondedValidator(valAddr2, initialUkavaBalance)
+	suite.CreateNewUnbondedValidator(valAddr1, initialUmageBalance)
+	suite.CreateNewUnbondedValidator(valAddr2, initialUmageBalance)
 	suite.CreateDelegation(valAddr1, delegator, delegateAmount)
 	suite.CreateDelegation(valAddr2, delegator, delegateAmount)
 
 	staking.EndBlocker(suite.Ctx, suite.App.GetStakingKeeper())
 
 	savingsParams := suite.SavingsKeeper.GetParams(suite.Ctx)
-	savingsParams.SupportedDenoms = append(savingsParams.SupportedDenoms, "bkava")
+	savingsParams.SupportedDenoms = append(savingsParams.SupportedDenoms, "bmage")
 	suite.SavingsKeeper.SetParams(suite.Ctx, savingsParams)
 
 	// Add vaults
 	suite.CreateVault(vault1Denom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 	suite.CreateVault(vault2Denom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
-	suite.CreateVault("bkava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+	suite.CreateVault("bmage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 
 	deposit1Amount := sdk.NewInt64Coin(vault1Denom, 100)
 	deposit2Amount := sdk.NewInt64Coin(vault2Denom, 200)
@@ -272,8 +272,8 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 	acc2 := delegator
 
 	// Deposit into each vault from each account - 4 total deposits
-	// Acc 1: usdx + busd
-	// Acc 2: usdx + bkava-1 + bkava-2
+	// Acc 1: fusd + busd
+	// Acc 2: fusd + bmage-1 + bmage-2
 	err := suite.Keeper.Deposit(suite.Ctx, acc1, deposit1Amount, types.STRATEGY_TYPE_HARD)
 	suite.Require().NoError(err)
 	err = suite.Keeper.Deposit(suite.Ctx, acc1, deposit2Amount, types.STRATEGY_TYPE_HARD)
@@ -312,7 +312,7 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 		)
 	})
 
-	suite.Run("specific bkava vault", func() {
+	suite.Run("specific bmage vault", func() {
 		res, err := suite.queryClient.Deposits(
 			context.Background(),
 			types.NewQueryDepositsRequest(acc2.String(), vault3Denom, false, nil),
@@ -337,7 +337,7 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 		)
 	})
 
-	suite.Run("specific bkava vault in staked tokens", func() {
+	suite.Run("specific bmage vault in staked tokens", func() {
 		res, err := suite.queryClient.Deposits(
 			context.Background(),
 			types.NewQueryDepositsRequest(acc2.String(), vault3Denom, true, nil),
@@ -353,7 +353,7 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 				),
 				// Only the specified vault denom value
 				Value: sdk.NewCoins(
-					sdk.NewCoin("ukava", deposit3Amount.Amount),
+					sdk.NewCoin("umage", deposit3Amount.Amount),
 				),
 			},
 			res.Deposits[0],
@@ -404,14 +404,14 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 			types.DepositResponse{
 				Depositor: acc2.String(),
 				Shares: types.VaultShares{
-					// Does not include non-bkava vaults
+					// Does not include non-bmage vaults
 					types.NewVaultShare(deposit4Amount.Denom, deposit4Amount.Amount.ToDec()),
 					types.NewVaultShare(deposit3Amount.Denom, deposit3Amount.Amount.ToDec()),
 				},
 				Value: sdk.Coins{
-					// Does not include non-bkava vaults
-					sdk.NewCoin("ukava", deposit4Amount.Amount),
-					sdk.NewCoin("ukava", deposit3Amount.Amount),
+					// Does not include non-bmage vaults
+					sdk.NewCoin("umage", deposit4Amount.Amount),
+					sdk.NewCoin("umage", deposit3Amount.Amount),
 				},
 			},
 			res.Deposits[0],
@@ -427,13 +427,13 @@ func (suite *grpcQueryTestSuite) TestDeposits() {
 }
 
 func (suite *grpcQueryTestSuite) TestDeposits_NoDeposits() {
-	vault1Denom := "usdx"
+	vault1Denom := "fusd"
 	vault2Denom := "busd"
 
 	// Add vaults
 	suite.CreateVault(vault1Denom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 	suite.CreateVault(vault2Denom, types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
-	suite.CreateVault("bkava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+	suite.CreateVault("bmage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 
 	// Accounts
 	acc1 := suite.CreateAccount(sdk.NewCoins(), 0).GetAddress()
@@ -475,7 +475,7 @@ func (suite *grpcQueryTestSuite) TestDeposits_NoDeposits() {
 func (suite *grpcQueryTestSuite) TestDeposits_NoDepositor() {
 	_, err := suite.queryClient.Deposits(
 		context.Background(),
-		types.NewQueryDepositsRequest("", "usdx", false, nil),
+		types.NewQueryDepositsRequest("", "fusd", false, nil),
 	)
 	suite.Require().Error(err)
 	suite.Require().ErrorIs(err, status.Error(codes.InvalidArgument, "depositor is required"))
@@ -484,7 +484,7 @@ func (suite *grpcQueryTestSuite) TestDeposits_NoDepositor() {
 func (suite *grpcQueryTestSuite) TestDeposits_InvalidAddress() {
 	_, err := suite.queryClient.Deposits(
 		context.Background(),
-		types.NewQueryDepositsRequest("asdf", "usdx", false, nil),
+		types.NewQueryDepositsRequest("asdf", "fusd", false, nil),
 	)
 	suite.Require().Error(err)
 	suite.Require().ErrorIs(err, status.Error(codes.InvalidArgument, "Invalid address"))
@@ -497,29 +497,29 @@ func (suite *grpcQueryTestSuite) TestDeposits_InvalidAddress() {
 	suite.Require().ErrorIs(err, status.Error(codes.InvalidArgument, "Invalid address"))
 }
 
-func (suite *grpcQueryTestSuite) TestDeposits_bKava() {
-	// vault denom is only "bkava" which has it's own special handler
+func (suite *grpcQueryTestSuite) TestDeposits_bMage() {
+	// vault denom is only "bmage" which has it's own special handler
 	suite.CreateVault(
-		"bkava",
+		"bmage",
 		types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
 		false,
 		[]sdk.AccAddress{},
 	)
 
 	suite.CreateVault(
-		"ukava",
+		"umage",
 		types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
 		false,
 		[]sdk.AccAddress{},
 	)
 
-	address1, derivatives1, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[0], sdk.NewInt(1e9))
-	address2, derivatives2, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[1], sdk.NewInt(1e9))
+	address1, derivatives1, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[0], sdk.NewInt(1e9))
+	address2, derivatives2, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[1], sdk.NewInt(1e9))
 
-	err := suite.App.FundAccount(suite.Ctx, address1, sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e9))))
+	err := suite.App.FundAccount(suite.Ctx, address1, sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e9))))
 	suite.Require().NoError(err)
 
-	// Slash the last validator to reduce the value of it's derivatives to test bkava to underlying token conversion.
+	// Slash the last validator to reduce the value of it's derivatives to test bmage to underlying token conversion.
 	// First call end block to bond validator to enable slashing.
 	staking.EndBlocker(suite.Ctx, suite.App.GetStakingKeeper())
 	err = suite.slashValidator(sdk.ValAddress(address2), sdk.MustNewDecFromStr("0.5"))
@@ -529,7 +529,7 @@ func (suite *grpcQueryTestSuite) TestDeposits_bKava() {
 		// Query all deposits for account 1
 		res, err := suite.queryClient.Deposits(
 			context.Background(),
-			types.NewQueryDepositsRequest(address1.String(), "bkava", false, nil),
+			types.NewQueryDepositsRequest(address1.String(), "bmage", false, nil),
 		)
 		suite.Require().NoError(err)
 		suite.Require().Len(res.Deposits, 1)
@@ -537,7 +537,7 @@ func (suite *grpcQueryTestSuite) TestDeposits_bKava() {
 			[]types.DepositResponse{
 				{
 					Depositor: address1.String(),
-					// Zero shares for "bkava" aggregate
+					// Zero shares for "bmage" aggregate
 					Shares: nil,
 					// Only the specified vault denom value
 					Value: nil,
@@ -557,26 +557,26 @@ func (suite *grpcQueryTestSuite) TestDeposits_bKava() {
 	err = suite.Keeper.Deposit(suite.Ctx, address1, derivatives2, types.STRATEGY_TYPE_SAVINGS)
 	suite.Require().NoError(err)
 
-	err = suite.Keeper.Deposit(suite.Ctx, address1, sdk.NewInt64Coin("ukava", 1e6), types.STRATEGY_TYPE_SAVINGS)
+	err = suite.Keeper.Deposit(suite.Ctx, address1, sdk.NewInt64Coin("umage", 1e6), types.STRATEGY_TYPE_SAVINGS)
 	suite.Require().NoError(err)
 
 	suite.Run("multiple deposits", func() {
 		// Query all deposits for account 1
 		res, err := suite.queryClient.Deposits(
 			context.Background(),
-			types.NewQueryDepositsRequest(address1.String(), "bkava", false, nil),
+			types.NewQueryDepositsRequest(address1.String(), "bmage", false, nil),
 		)
 		suite.Require().NoError(err)
 		suite.Require().Len(res.Deposits, 1)
-		// first validator isn't slashed, so bkava units equal to underlying staked tokens
+		// first validator isn't slashed, so bmage units equal to underlying staked tokens
 		// last validator slashed 50% so derivatives are worth half
-		// Excludes non-bkava deposits
+		// Excludes non-bmage deposits
 		expectedValue := derivatives1.Amount.Add(derivatives2.Amount.QuoRaw(2))
 		suite.Require().ElementsMatchf(
 			[]types.DepositResponse{
 				{
 					Depositor: address1.String(),
-					// Zero shares for "bkava" aggregate
+					// Zero shares for "bmage" aggregate
 					Shares: nil,
 					// Value returned in units of staked token
 					Value: sdk.NewCoins(
@@ -591,16 +591,16 @@ func (suite *grpcQueryTestSuite) TestDeposits_bKava() {
 	})
 }
 
-func (suite *grpcQueryTestSuite) TestVault_bKava_Single() {
-	vaultDenom := "bkava"
-	coinDenom := testutil.TestBkavaDenoms[0]
+func (suite *grpcQueryTestSuite) TestVault_bMage_Single() {
+	vaultDenom := "bmage"
+	coinDenom := testutil.TestBmageDenoms[0]
 
 	startBalance := sdk.NewInt64Coin(coinDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(coinDenom, 100)
 
 	acc1 := suite.CreateAccount(sdk.NewCoins(startBalance), 0)
 
-	// vault denom is only "bkava" which has it's own special handler
+	// vault denom is only "bmage" which has it's own special handler
 	suite.CreateVault(
 		vaultDenom,
 		types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
@@ -611,7 +611,7 @@ func (suite *grpcQueryTestSuite) TestVault_bKava_Single() {
 	err := suite.Keeper.Deposit(suite.Ctx, acc1.GetAddress(), depositAmount, types.STRATEGY_TYPE_SAVINGS)
 	suite.Require().NoError(
 		err,
-		"should be able to deposit bkava derivative denom in bkava vault",
+		"should be able to deposit bmage derivative denom in bmage vault",
 	)
 
 	res, err := suite.queryClient.Vault(
@@ -634,19 +634,19 @@ func (suite *grpcQueryTestSuite) TestVault_bKava_Single() {
 	)
 }
 
-func (suite *grpcQueryTestSuite) TestVault_bKava_Aggregate() {
-	vaultDenom := "bkava"
+func (suite *grpcQueryTestSuite) TestVault_bMage_Aggregate() {
+	vaultDenom := "bmage"
 
-	address1, derivatives1, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[0], sdk.NewInt(1e9))
-	address2, derivatives2, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[1], sdk.NewInt(1e9))
-	address3, derivatives3, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[2], sdk.NewInt(1e9))
-	// Slash the last validator to reduce the value of it's derivatives to test bkava to underlying token conversion.
+	address1, derivatives1, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[0], sdk.NewInt(1e9))
+	address2, derivatives2, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[1], sdk.NewInt(1e9))
+	address3, derivatives3, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[2], sdk.NewInt(1e9))
+	// Slash the last validator to reduce the value of it's derivatives to test bmage to underlying token conversion.
 	// First call end block to bond validator to enable slashing.
 	staking.EndBlocker(suite.Ctx, suite.App.GetStakingKeeper())
 	err := suite.slashValidator(sdk.ValAddress(address3), sdk.MustNewDecFromStr("0.5"))
 	suite.Require().NoError(err)
 
-	// vault denom is only "bkava" which has it's own special handler
+	// vault denom is only "bmage" which has it's own special handler
 	suite.CreateVault(
 		vaultDenom,
 		types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
@@ -663,13 +663,13 @@ func (suite *grpcQueryTestSuite) TestVault_bKava_Aggregate() {
 	err = suite.Keeper.Deposit(suite.Ctx, address3, derivatives3, types.STRATEGY_TYPE_SAVINGS)
 	suite.Require().NoError(err)
 
-	// Query "bkava" to get aggregate amount
+	// Query "bmage" to get aggregate amount
 	res, err := suite.queryClient.Vault(
 		context.Background(),
 		types.NewQueryVaultRequest(vaultDenom),
 	)
 	suite.Require().NoError(err)
-	// first two validators are not slashed, so bkava units equal to underlying staked tokens
+	// first two validators are not slashed, so bmage units equal to underlying staked tokens
 	expectedValue := derivatives1.Amount.Add(derivatives2.Amount)
 	// last validator slashed 50% so derivatives are worth half
 	expectedValue = expectedValue.Add(derivatives2.Amount.QuoRaw(2))
@@ -712,7 +712,7 @@ func (suite *grpcQueryTestSuite) TestTotalSupply() {
 		{
 			name: "no savings vaults mean no supply",
 			setup: func() {
-				suite.CreateVault("usdx", types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
+				suite.CreateVault("fusd", types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 				suite.CreateVault("busd", types.StrategyTypes{types.STRATEGY_TYPE_HARD}, false, nil)
 			},
 			expectedSupply: nil,
@@ -720,7 +720,7 @@ func (suite *grpcQueryTestSuite) TestTotalSupply() {
 		{
 			name: "empty savings vaults mean no supply",
 			setup: func() {
-				suite.CreateVault("usdx", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+				suite.CreateVault("fusd", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 				suite.CreateVault("busd", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 			},
 			expectedSupply: nil,
@@ -728,7 +728,7 @@ func (suite *grpcQueryTestSuite) TestTotalSupply() {
 		{
 			name: "calculates supply of savings vaults",
 			setup: func() {
-				vault1Denom := "usdx"
+				vault1Denom := "fusd"
 				vault2Denom := "busd"
 				suite.CreateVault(vault1Denom, types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 				suite.CreateVault(vault2Denom, types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
@@ -747,14 +747,14 @@ func (suite *grpcQueryTestSuite) TestTotalSupply() {
 				deposit(acc2.GetAddress(), vault2Denom, 2e5)
 			},
 			expectedSupply: sdk.NewCoins(
-				sdk.NewInt64Coin("usdx", 3e5),
+				sdk.NewInt64Coin("fusd", 3e5),
 				sdk.NewInt64Coin("busd", 3e5),
 			),
 		},
 		{
 			name: "calculates supply of savings vaults, even when private",
 			setup: func() {
-				vault1Denom := "ukava"
+				vault1Denom := "umage"
 				vault2Denom := "busd"
 
 				acc1 := suite.CreateAccount(sdk.NewCoins(
@@ -783,15 +783,15 @@ func (suite *grpcQueryTestSuite) TestTotalSupply() {
 				deposit(acc2.GetAddress(), vault2Denom, 2e5)
 			},
 			expectedSupply: sdk.NewCoins(
-				sdk.NewInt64Coin("ukava", 1e5),
+				sdk.NewInt64Coin("umage", 1e5),
 				sdk.NewInt64Coin("busd", 3e5),
 			),
 		},
 		{
-			name: "aggregates supply of bkava vaults accounting for slashing",
+			name: "aggregates supply of bmage vaults accounting for slashing",
 			setup: func() {
-				address1, derivatives1, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[0], sdk.NewInt(1e9))
-				address2, derivatives2, _ := suite.createAccountWithDerivatives(testutil.TestBkavaDenoms[1], sdk.NewInt(1e9))
+				address1, derivatives1, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[0], sdk.NewInt(1e9))
+				address2, derivatives2, _ := suite.createAccountWithDerivatives(testutil.TestBmageDenoms[1], sdk.NewInt(1e9))
 
 				// bond validators
 				staking.EndBlocker(suite.Ctx, suite.App.GetStakingKeeper())
@@ -799,16 +799,16 @@ func (suite *grpcQueryTestSuite) TestTotalSupply() {
 				err := suite.slashValidator(sdk.ValAddress(address2), sdk.MustNewDecFromStr("0.2"))
 				suite.Require().NoError(err)
 
-				// create "bkava" vault. it holds all bkava denoms
-				suite.CreateVault("bkava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, []sdk.AccAddress{})
+				// create "bmage" vault. it holds all bmage denoms
+				suite.CreateVault("bmage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, []sdk.AccAddress{})
 
-				// deposit bkava
-				deposit(address1, testutil.TestBkavaDenoms[0], derivatives1.Amount.Int64())
-				deposit(address2, testutil.TestBkavaDenoms[1], derivatives2.Amount.Int64())
+				// deposit bmage
+				deposit(address1, testutil.TestBmageDenoms[0], derivatives1.Amount.Int64())
+				deposit(address2, testutil.TestBmageDenoms[1], derivatives2.Amount.Int64())
 			},
 			expectedSupply: sdk.NewCoins(
 				sdk.NewCoin(
-					"bkava",
+					"bmage",
 					sdk.NewIntFromUint64(1e9). // derivative 1
 									Add(sdk.NewInt(1e9).MulRaw(80).QuoRaw(100))), // derivative 2: original value * 80%
 			),

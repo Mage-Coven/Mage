@@ -28,7 +28,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/slashing"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 
-	"github.com/kava-labs/kava/app"
+	"github.com/mage-coven/mage/app"
 )
 
 const (
@@ -92,7 +92,7 @@ type Fixtures struct {
 
 // NewFixtures creates a new instance of Fixtures with many vars set
 func NewFixtures(t *testing.T) *Fixtures {
-	tmpDir, err := ioutil.TempDir("", "kava_integration_"+t.Name()+"_")
+	tmpDir, err := ioutil.TempDir("", "mage_integration_"+t.Name()+"_")
 	require.NoError(t, err)
 
 	servAddr, port, err := server.FreeTCPAddr()
@@ -113,9 +113,9 @@ func NewFixtures(t *testing.T) *Fixtures {
 		T:           t,
 		BuildDir:    buildDir,
 		RootDir:     tmpDir,
-		KvdBinary:   filepath.Join(buildDir, "kvd"),
+		KvdBinary:   filepath.Join(buildDir, "mge"),
 		KvcliBinary: filepath.Join(buildDir, "kvcli"),
-		KvdHome:     filepath.Join(tmpDir, ".kvd"),
+		KvdHome:     filepath.Join(tmpDir, ".mge"),
 		KvcliHome:   filepath.Join(tmpDir, ".kvcli"),
 		RPCAddr:     servAddr,
 		P2PAddr:     p2pAddr,
@@ -201,9 +201,9 @@ func (f *Fixtures) Flags() string {
 }
 
 //___________________________________________________________________________________
-// kavad
+// maged
 
-// UnsafeResetAll is kavad unsafe-reset-all
+// UnsafeResetAll is maged unsafe-reset-all
 func (f *Fixtures) UnsafeResetAll(flags ...string) {
 	cmd := fmt.Sprintf("%s --home=%s unsafe-reset-all", f.KvdBinary, f.KvdHome)
 	executeWrite(f.T, addFlags(cmd, flags))
@@ -211,7 +211,7 @@ func (f *Fixtures) UnsafeResetAll(flags ...string) {
 	require.NoError(f.T, err)
 }
 
-// KvInit is kavad init
+// KvInit is maged init
 // NOTE: KvInit sets the ChainID for the Fixtures instance
 func (f *Fixtures) KvInit(moniker string, flags ...string) {
 	cmd := fmt.Sprintf("%s init -o --home=%s %s", f.KvdBinary, f.KvdHome, moniker)
@@ -229,25 +229,25 @@ func (f *Fixtures) KvInit(moniker string, flags ...string) {
 	f.ChainID = chainID
 }
 
-// AddGenesisAccount is kavad add-genesis-account
+// AddGenesisAccount is maged add-genesis-account
 func (f *Fixtures) AddGenesisAccount(address sdk.AccAddress, coins sdk.Coins, flags ...string) {
 	cmd := fmt.Sprintf("%s add-genesis-account %s %s --home=%s --keyring-backend=test", f.KvdBinary, address, coins, f.KvdHome)
 	executeWriteCheckErr(f.T, addFlags(cmd, flags))
 }
 
-// GenTx is kavad gentx
+// GenTx is maged gentx
 func (f *Fixtures) GenTx(name string, flags ...string) {
 	cmd := fmt.Sprintf("%s gentx --name=%s --home=%s --home-client=%s --keyring-backend=test", f.KvdBinary, name, f.KvdHome, f.KvcliHome)
 	executeWriteCheckErr(f.T, addFlags(cmd, flags))
 }
 
-// CollectGenTxs is kavad collect-gentxs
+// CollectGenTxs is maged collect-gentxs
 func (f *Fixtures) CollectGenTxs(flags ...string) {
 	cmd := fmt.Sprintf("%s collect-gentxs --home=%s", f.KvdBinary, f.KvdHome)
 	executeWriteCheckErr(f.T, addFlags(cmd, flags))
 }
 
-// GDStart runs kavad start with the appropriate flags and returns a process
+// GDStart runs maged start with the appropriate flags and returns a process
 func (f *Fixtures) GDStart(flags ...string) *tests.Process {
 	cmd := fmt.Sprintf("%s start --home=%s --rpc.laddr=%v --p2p.laddr=%v --pruning=everything", f.KvdBinary, f.KvdHome, f.RPCAddr, f.P2PAddr)
 	proc := tests.GoExecuteTWithStdout(f.T, addFlags(cmd, flags))
@@ -256,7 +256,7 @@ func (f *Fixtures) GDStart(flags ...string) *tests.Process {
 	return proc
 }
 
-// GDTendermint returns the results of kavad tendermint [query]
+// GDTendermint returns the results of maged tendermint [query]
 func (f *Fixtures) GDTendermint(query string) string {
 	cmd := fmt.Sprintf("%s tendermint %s --home=%s", f.KvdBinary, query, f.KvdHome)
 	success, stdout, stderr := executeWriteRetStdStreams(f.T, cmd)
@@ -265,7 +265,7 @@ func (f *Fixtures) GDTendermint(query string) string {
 	return strings.TrimSpace(stdout)
 }
 
-// ValidateGenesis runs kavad validate-genesis
+// ValidateGenesis runs maged validate-genesis
 func (f *Fixtures) ValidateGenesis() {
 	cmd := fmt.Sprintf("%s validate-genesis --home=%s", f.KvdBinary, f.KvdHome)
 	executeWriteCheckErr(f.T, cmd)

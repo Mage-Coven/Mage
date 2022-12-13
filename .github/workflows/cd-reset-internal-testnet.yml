@@ -23,12 +23,12 @@ on:
         required: true
       CI_AWS_KEY_SECRET:
         required: true
-      KAVA_PRIVATE_GITHUB_ACCESS_TOKEN:
+      MAGE_PRIVATE_GITHUB_ACCESS_TOKEN:
         required: true
 
 # in order:
 # enter standby (prevents autoscaling group from killing node during deploy)
-# stop kava
+# stop mage
 # download updated binary and genesis
 # reset application database state (only done on internal testnet)
 jobs:
@@ -47,8 +47,8 @@ jobs:
       - name: checkout infrastructure repo
         uses: actions/checkout@v3
         with:
-          repository: Kava-Labs/infrastructure
-          token: ${{ secrets.KAVA_PRIVATE_GITHUB_ACCESS_TOKEN }}
+          repository: Mage-Coven/infrastructure
+          token: ${{ secrets.MAGE_PRIVATE_GITHUB_ACCESS_TOKEN }}
           path: infrastructure
           ref: master
       - name: set up Go
@@ -57,11 +57,11 @@ jobs:
           go-version: '1.18'
           check-latest: true
           cache: true
-      - name: build kava node updater
-        run:  cd infrastructure/cli/kava-node-updater && make install && cd ../../../
+      - name: build mage node updater
+        run:  cd infrastructure/cli/mage-node-updater && make install && cd ../../../
       - name: run reset playbook on all chain nodes
         run: |
-          kava-node-updater \
+          mage-node-updater \
             --debug \
             --max-retries=2 \
             --aws-ssm-document-name=$SSM_DOCUMENT_NAME \

@@ -8,7 +8,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/issuance/types"
+	"github.com/mage-coven/mage/x/issuance/types"
 )
 
 type queryServer struct {

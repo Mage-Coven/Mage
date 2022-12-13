@@ -12,7 +12,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/x/cdp/types"
 )
 
 // NewQuerier returns a new querier function
@@ -207,7 +207,7 @@ func queryGetCdps(ctx sdk.Context, req abci.RequestQuery, keeper Keeper, legacyQ
 	return bz, nil
 }
 
-// query total amount of principal (ie. usdx) that has been minted with a particular collateral type
+// query total amount of principal (ie. fusd) that has been minted with a particular collateral type
 func queryGetTotalPrincipal(ctx sdk.Context, req abci.RequestQuery, keeper Keeper, legacyQuerierCdc *codec.LegacyAmino) ([]byte, error) {
 	var params types.QueryGetTotalPrincipalParams
 	err := legacyQuerierCdc.UnmarshalJSON(req.Data, &params)
@@ -232,7 +232,7 @@ func queryGetTotalPrincipal(ctx sdk.Context, req abci.RequestQuery, keeper Keepe
 	var collateralPrincipals types.TotalPrincipals
 
 	for _, queryType := range queryCollateralTypes {
-		// Hardcoded to default USDX
+		// Hardcoded to default FUSD
 		principalAmount := keeper.GetTotalPrincipal(ctx, queryType, types.DefaultStableDenom)
 		// Wrap it in an sdk.Coin
 		totalAmountCoin := sdk.NewCoin(types.DefaultStableDenom, principalAmount)

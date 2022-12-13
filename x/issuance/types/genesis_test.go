@@ -9,8 +9,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/issuance/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/issuance/types"
 )
 
 type GenesisTestSuite struct {

@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/kava-labs/kava/x/committee/keeper"
-	"github.com/kava-labs/kava/x/committee/types"
+	"github.com/mage-coven/mage/x/committee/keeper"
+	"github.com/mage-coven/mage/x/committee/types"
 )
 
 func NewProposalHandler(k keeper.Keeper) govtypes.Handler {

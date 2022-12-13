@@ -3,10 +3,10 @@ package earn_test
 import (
 	"testing"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/earn"
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/earn"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 	"github.com/stretchr/testify/suite"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -21,7 +21,7 @@ func (suite *genesisTestSuite) Test_InitGenesis_ValidationPanic() {
 		types.Params{
 			AllowedVaults: types.AllowedVaults{
 				types.NewAllowedVault(
-					"usdx", types.StrategyTypes{types.STRATEGY_TYPE_HARD},
+					"fusd", types.StrategyTypes{types.STRATEGY_TYPE_HARD},
 					false,
 					nil,
 				),
@@ -43,9 +43,9 @@ func (suite *genesisTestSuite) Test_InitGenesis_ValidationPanic() {
 }
 
 func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
-	depositor_1, err := sdk.AccAddressFromBech32("kava1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
+	depositor_1, err := sdk.AccAddressFromBech32("mage1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
 	suite.Require().NoError(err)
-	depositor_2, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor_2, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
 
 	// slices are sorted by key as stored in the data store, so init and export can be compared with equal
@@ -53,13 +53,13 @@ func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
 		types.Params{
 			AllowedVaults: types.AllowedVaults{
 				types.NewAllowedVault(
-					"usdx",
+					"fusd",
 					types.StrategyTypes{types.STRATEGY_TYPE_HARD},
 					false,
 					nil,
 				),
 				types.NewAllowedVault(
-					"ukava",
+					"umage",
 					types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
 					true,
 					[]sdk.AccAddress{suite.AccountKeeper.GetModuleAddress("distribution")},
@@ -68,25 +68,25 @@ func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
 		},
 		types.VaultRecords{
 			types.VaultRecord{
-				TotalShares: types.NewVaultShare("ukava", sdk.NewDec(3800000)),
+				TotalShares: types.NewVaultShare("umage", sdk.NewDec(3800000)),
 			},
 			types.VaultRecord{
-				TotalShares: types.NewVaultShare("usdx", sdk.NewDec(1000000)),
+				TotalShares: types.NewVaultShare("fusd", sdk.NewDec(1000000)),
 			},
 		},
 		types.VaultShareRecords{
 			types.VaultShareRecord{
 				Depositor: depositor_1,
 				Shares: types.NewVaultShares(
-					types.NewVaultShare("usdx", sdk.NewDec(500000)),
-					types.NewVaultShare("ukava", sdk.NewDec(1900000)),
+					types.NewVaultShare("fusd", sdk.NewDec(500000)),
+					types.NewVaultShare("umage", sdk.NewDec(1900000)),
 				),
 			},
 			types.VaultShareRecord{
 				Depositor: depositor_2,
 				Shares: types.NewVaultShares(
-					types.NewVaultShare("usdx", sdk.NewDec(500000)),
-					types.NewVaultShare("ukava", sdk.NewDec(1900000)),
+					types.NewVaultShare("fusd", sdk.NewDec(500000)),
+					types.NewVaultShare("umage", sdk.NewDec(1900000)),
 				),
 			},
 		},
@@ -95,8 +95,8 @@ func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
 	earn.InitGenesis(suite.Ctx, suite.Keeper, suite.AccountKeeper, state)
 	suite.Equal(state.Params, suite.Keeper.GetParams(suite.Ctx))
 
-	vaultRecord1, _ := suite.Keeper.GetVaultRecord(suite.Ctx, "ukava")
-	vaultRecord2, _ := suite.Keeper.GetVaultRecord(suite.Ctx, "usdx")
+	vaultRecord1, _ := suite.Keeper.GetVaultRecord(suite.Ctx, "umage")
+	vaultRecord2, _ := suite.Keeper.GetVaultRecord(suite.Ctx, "fusd")
 	suite.Equal(state.VaultRecords[0], vaultRecord1)
 	suite.Equal(state.VaultRecords[1], vaultRecord2)
 
@@ -111,9 +111,9 @@ func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
 }
 
 func (suite *genesisTestSuite) Test_Marshall() {
-	depositor_1, err := sdk.AccAddressFromBech32("kava1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
+	depositor_1, err := sdk.AccAddressFromBech32("mage1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
 	suite.Require().NoError(err)
-	depositor_2, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor_2, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
 
 	// slices are sorted by key as stored in the data store, so init and export can be compared with equal
@@ -121,13 +121,13 @@ func (suite *genesisTestSuite) Test_Marshall() {
 		types.Params{
 			AllowedVaults: types.AllowedVaults{
 				types.NewAllowedVault(
-					"usdx",
+					"fusd",
 					types.StrategyTypes{types.STRATEGY_TYPE_HARD},
 					false,
 					nil,
 				),
 				types.NewAllowedVault(
-					"ukava",
+					"umage",
 					types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
 					true,
 					[]sdk.AccAddress{suite.AccountKeeper.GetModuleAddress("distribution")},
@@ -136,25 +136,25 @@ func (suite *genesisTestSuite) Test_Marshall() {
 		},
 		types.VaultRecords{
 			types.VaultRecord{
-				TotalShares: types.NewVaultShare("ukava", sdk.NewDec(3800000)),
+				TotalShares: types.NewVaultShare("umage", sdk.NewDec(3800000)),
 			},
 			types.VaultRecord{
-				TotalShares: types.NewVaultShare("usdx", sdk.NewDec(1000000)),
+				TotalShares: types.NewVaultShare("fusd", sdk.NewDec(1000000)),
 			},
 		},
 		types.VaultShareRecords{
 			types.VaultShareRecord{
 				Depositor: depositor_1,
 				Shares: types.NewVaultShares(
-					types.NewVaultShare("usdx", sdk.NewDec(500000)),
-					types.NewVaultShare("ukava", sdk.NewDec(1900000)),
+					types.NewVaultShare("fusd", sdk.NewDec(500000)),
+					types.NewVaultShare("umage", sdk.NewDec(1900000)),
 				),
 			},
 			types.VaultShareRecord{
 				Depositor: depositor_2,
 				Shares: types.NewVaultShares(
-					types.NewVaultShare("usdx", sdk.NewDec(500000)),
-					types.NewVaultShare("ukava", sdk.NewDec(1900000)),
+					types.NewVaultShare("fusd", sdk.NewDec(500000)),
+					types.NewVaultShare("umage", sdk.NewDec(1900000)),
 				),
 			},
 		},

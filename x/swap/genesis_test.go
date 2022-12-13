@@ -3,10 +3,10 @@ package swap_test
 import (
 	"testing"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/swap"
-	"github.com/kava-labs/kava/x/swap/testutil"
-	"github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/swap"
+	"github.com/mage-coven/mage/x/swap/testutil"
+	"github.com/mage-coven/mage/x/swap/types"
 	"github.com/stretchr/testify/suite"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -31,38 +31,38 @@ func (suite *genesisTestSuite) Test_InitGenesis_ValidationPanic() {
 }
 
 func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
-	depositor_1, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor_1, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
-	depositor_2, err := sdk.AccAddressFromBech32("kava1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
+	depositor_2, err := sdk.AccAddressFromBech32("mage1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
 	suite.Require().NoError(err)
 
 	// slices are sorted by key as stored in the data store, so init and export can be compared with equal
 	state := types.NewGenesisState(
 		types.Params{
-			AllowedPools: types.AllowedPools{types.NewAllowedPool("ukava", "usdx")},
+			AllowedPools: types.AllowedPools{types.NewAllowedPool("umage", "fusd")},
 			SwapFee:      sdk.MustNewDecFromStr("0.00255"),
 		},
 		types.PoolRecords{
-			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("hard", sdk.NewInt(1e6)), sdk.NewCoin("usdx", sdk.NewInt(2e6))), sdk.NewInt(1e6)),
-			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e6)), sdk.NewCoin("usdx", sdk.NewInt(5e6))), sdk.NewInt(3e6)),
+			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("hard", sdk.NewInt(1e6)), sdk.NewCoin("fusd", sdk.NewInt(2e6))), sdk.NewInt(1e6)),
+			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e6)), sdk.NewCoin("fusd", sdk.NewInt(5e6))), sdk.NewInt(3e6)),
 		},
 		types.ShareRecords{
-			types.NewShareRecord(depositor_2, types.PoolID("hard", "usdx"), sdk.NewInt(1e6)),
-			types.NewShareRecord(depositor_1, types.PoolID("ukava", "usdx"), sdk.NewInt(3e6)),
+			types.NewShareRecord(depositor_2, types.PoolID("hard", "fusd"), sdk.NewInt(1e6)),
+			types.NewShareRecord(depositor_1, types.PoolID("umage", "fusd"), sdk.NewInt(3e6)),
 		},
 	)
 
 	swap.InitGenesis(suite.Ctx, suite.Keeper, state)
 	suite.Equal(state.Params, suite.Keeper.GetParams(suite.Ctx))
 
-	poolRecord1, _ := suite.Keeper.GetPool(suite.Ctx, types.PoolID("hard", "usdx"))
+	poolRecord1, _ := suite.Keeper.GetPool(suite.Ctx, types.PoolID("hard", "fusd"))
 	suite.Equal(state.PoolRecords[0], poolRecord1)
-	poolRecord2, _ := suite.Keeper.GetPool(suite.Ctx, types.PoolID("ukava", "usdx"))
+	poolRecord2, _ := suite.Keeper.GetPool(suite.Ctx, types.PoolID("umage", "fusd"))
 	suite.Equal(state.PoolRecords[1], poolRecord2)
 
-	shareRecord1, _ := suite.Keeper.GetDepositorShares(suite.Ctx, depositor_2, types.PoolID("hard", "usdx"))
+	shareRecord1, _ := suite.Keeper.GetDepositorShares(suite.Ctx, depositor_2, types.PoolID("hard", "fusd"))
 	suite.Equal(state.ShareRecords[0], shareRecord1)
-	shareRecord2, _ := suite.Keeper.GetDepositorShares(suite.Ctx, depositor_1, types.PoolID("ukava", "usdx"))
+	shareRecord2, _ := suite.Keeper.GetDepositorShares(suite.Ctx, depositor_1, types.PoolID("umage", "fusd"))
 	suite.Equal(state.ShareRecords[1], shareRecord2)
 
 	exportedState := swap.ExportGenesis(suite.Ctx, suite.Keeper)
@@ -70,24 +70,24 @@ func (suite *genesisTestSuite) Test_InitAndExportGenesis() {
 }
 
 func (suite *genesisTestSuite) Test_Marshall() {
-	depositor_1, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor_1, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
-	depositor_2, err := sdk.AccAddressFromBech32("kava1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
+	depositor_2, err := sdk.AccAddressFromBech32("mage1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
 	suite.Require().NoError(err)
 
 	// slices are sorted by key as stored in the data store, so init and export can be compared with equal
 	state := types.NewGenesisState(
 		types.Params{
-			AllowedPools: types.AllowedPools{types.NewAllowedPool("ukava", "usdx")},
+			AllowedPools: types.AllowedPools{types.NewAllowedPool("umage", "fusd")},
 			SwapFee:      sdk.MustNewDecFromStr("0.00255"),
 		},
 		types.PoolRecords{
-			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("hard", sdk.NewInt(1e6)), sdk.NewCoin("usdx", sdk.NewInt(2e6))), sdk.NewInt(1e6)),
-			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e6)), sdk.NewCoin("usdx", sdk.NewInt(5e6))), sdk.NewInt(3e6)),
+			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("hard", sdk.NewInt(1e6)), sdk.NewCoin("fusd", sdk.NewInt(2e6))), sdk.NewInt(1e6)),
+			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e6)), sdk.NewCoin("fusd", sdk.NewInt(5e6))), sdk.NewInt(3e6)),
 		},
 		types.ShareRecords{
-			types.NewShareRecord(depositor_2, types.PoolID("hard", "usdx"), sdk.NewInt(1e6)),
-			types.NewShareRecord(depositor_1, types.PoolID("ukava", "usdx"), sdk.NewInt(3e6)),
+			types.NewShareRecord(depositor_2, types.PoolID("hard", "fusd"), sdk.NewInt(1e6)),
+			types.NewShareRecord(depositor_1, types.PoolID("umage", "fusd"), sdk.NewInt(3e6)),
 		},
 	)
 
@@ -105,24 +105,24 @@ func (suite *genesisTestSuite) Test_Marshall() {
 }
 
 func (suite *genesisTestSuite) Test_LegacyJSONConversion() {
-	depositor_1, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor_1, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
-	depositor_2, err := sdk.AccAddressFromBech32("kava1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
+	depositor_2, err := sdk.AccAddressFromBech32("mage1esagqd83rhqdtpy5sxhklaxgn58k2m3s3mnpea")
 	suite.Require().NoError(err)
 
 	// slices are sorted by key as stored in the data store, so init and export can be compared with equal
 	state := types.NewGenesisState(
 		types.Params{
-			AllowedPools: types.AllowedPools{types.NewAllowedPool("ukava", "usdx")},
+			AllowedPools: types.AllowedPools{types.NewAllowedPool("umage", "fusd")},
 			SwapFee:      sdk.MustNewDecFromStr("0.00255"),
 		},
 		types.PoolRecords{
-			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("hard", sdk.NewInt(1e6)), sdk.NewCoin("usdx", sdk.NewInt(2e6))), sdk.NewInt(1e6)),
-			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e6)), sdk.NewCoin("usdx", sdk.NewInt(5e6))), sdk.NewInt(3e6)),
+			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("hard", sdk.NewInt(1e6)), sdk.NewCoin("fusd", sdk.NewInt(2e6))), sdk.NewInt(1e6)),
+			types.NewPoolRecord(sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e6)), sdk.NewCoin("fusd", sdk.NewInt(5e6))), sdk.NewInt(3e6)),
 		},
 		types.ShareRecords{
-			types.NewShareRecord(depositor_2, types.PoolID("hard", "usdx"), sdk.NewInt(1e6)),
-			types.NewShareRecord(depositor_1, types.PoolID("ukava", "usdx"), sdk.NewInt(3e6)),
+			types.NewShareRecord(depositor_2, types.PoolID("hard", "fusd"), sdk.NewInt(1e6)),
+			types.NewShareRecord(depositor_1, types.PoolID("umage", "fusd"), sdk.NewInt(3e6)),
 		},
 	)
 

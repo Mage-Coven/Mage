@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/x/cdp/types"
 )
 
 type QueryServer struct {
@@ -74,7 +74,7 @@ func (s QueryServer) TotalPrincipal(c context.Context, req *types.QueryTotalPrin
 	var collateralPrincipals types.TotalPrincipals
 
 	for _, queryType := range queryCollateralTypes {
-		// Hardcoded to default USDX
+		// Hardcoded to default FUSD
 		principalAmount := s.keeper.GetTotalPrincipal(ctx, queryType, types.DefaultStableDenom)
 		// Wrap it in an sdk.Coin
 		totalAmountCoin := sdk.NewCoin(types.DefaultStableDenom, principalAmount)

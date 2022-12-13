@@ -4,10 +4,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/swap/testutil"
-	"github.com/kava-labs/kava/x/swap/types"
-	"github.com/kava-labs/kava/x/swap/types/mocks"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/swap/testutil"
+	"github.com/mage-coven/mage/x/swap/types"
+	"github.com/mage-coven/mage/x/swap/types/mocks"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
@@ -60,7 +60,7 @@ func (suite keeperTestSuite) TestParams_Persistance() {
 
 	params := types.Params{
 		AllowedPools: types.AllowedPools{
-			types.NewAllowedPool("ukava", "usdx"),
+			types.NewAllowedPool("umage", "fusd"),
 		},
 		SwapFee: sdk.MustNewDecFromStr("0.03"),
 	}
@@ -70,7 +70,7 @@ func (suite keeperTestSuite) TestParams_Persistance() {
 	oldParams := params
 	params = types.Params{
 		AllowedPools: types.AllowedPools{
-			types.NewAllowedPool("hard", "ukava"),
+			types.NewAllowedPool("hard", "umage"),
 		},
 		SwapFee: sdk.MustNewDecFromStr("0.01"),
 	}
@@ -92,8 +92,8 @@ func (suite keeperTestSuite) TestParams_GetSwapFee() {
 
 func (suite *keeperTestSuite) TestPool_Persistance() {
 	reserves := sdk.NewCoins(
-		sdk.NewCoin("ukava", sdk.NewInt(10e6)),
-		sdk.NewCoin("usdx", sdk.NewInt(50e6)),
+		sdk.NewCoin("umage", sdk.NewInt(10e6)),
+		sdk.NewCoin("fusd", sdk.NewInt(50e6)),
 	)
 
 	pool, err := types.NewDenominatedPool(reserves)
@@ -118,7 +118,7 @@ func (suite *keeperTestSuite) TestPool_Persistance() {
 
 func (suite *keeperTestSuite) TestPool_PanicsWhenInvalid() {
 	invalidRecord := types.NewPoolRecord(
-		sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(100e6)), sdk.NewCoin("usdx", sdk.NewInt(100e6))),
+		sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(100e6)), sdk.NewCoin("fusd", sdk.NewInt(100e6))),
 		i(-1),
 	)
 
@@ -128,8 +128,8 @@ func (suite *keeperTestSuite) TestPool_PanicsWhenInvalid() {
 }
 
 func (suite *keeperTestSuite) TestShare_Persistance() {
-	poolID := types.PoolID("ukava", "usdx")
-	depositor, err := sdk.AccAddressFromBech32("kava1skpsgk5cnrarn69ql2tfun47fyjssataz0g07l")
+	poolID := types.PoolID("umage", "fusd")
+	depositor, err := sdk.AccAddressFromBech32("mage1skpsgk5cnrarn69ql2tfun47fyjssataz0g07l")
 	suite.NoError(err)
 	shares := sdk.NewInt(3126432331)
 
@@ -151,12 +151,12 @@ func (suite *keeperTestSuite) TestShare_Persistance() {
 }
 
 func (suite *keeperTestSuite) TestShare_PanicsWhenInvalid() {
-	depositor, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
 
 	invalidRecord := types.NewShareRecord(
 		depositor,
-		"hard/usdx",
+		"hard/fusd",
 		i(-1),
 	)
 
@@ -170,22 +170,22 @@ func (suite *keeperTestSuite) TestHooks() {
 	suite.Keeper.ClearHooks()
 
 	// data
-	depositor, err := sdk.AccAddressFromBech32("kava1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
+	depositor, err := sdk.AccAddressFromBech32("mage1mq9qxlhze029lm0frzw2xr6hem8c3k9ts54w0w")
 	suite.Require().NoError(err)
 
 	// hooks can be called when not set
-	suite.Keeper.AfterPoolDepositCreated(suite.Ctx, "ukava/usdx", depositor, sdk.NewInt(1e6))
-	suite.Keeper.BeforePoolDepositModified(suite.Ctx, "ukava/usdx", depositor, sdk.NewInt(1e6))
+	suite.Keeper.AfterPoolDepositCreated(suite.Ctx, "umage/fusd", depositor, sdk.NewInt(1e6))
+	suite.Keeper.BeforePoolDepositModified(suite.Ctx, "umage/fusd", depositor, sdk.NewInt(1e6))
 
 	// set hooks
 	swapHooks := &mocks.SwapHooks{}
 	suite.Keeper.SetHooks(swapHooks)
 
 	// test hook calls are correct
-	swapHooks.On("AfterPoolDepositCreated", suite.Ctx, "ukava/usdx", depositor, sdk.NewInt(1e6)).Once()
-	suite.Keeper.AfterPoolDepositCreated(suite.Ctx, "ukava/usdx", depositor, sdk.NewInt(1e6))
-	swapHooks.On("BeforePoolDepositModified", suite.Ctx, "ukava/usdx", depositor, sdk.NewInt(1e6)).Once()
-	suite.Keeper.BeforePoolDepositModified(suite.Ctx, "ukava/usdx", depositor, sdk.NewInt(1e6))
+	swapHooks.On("AfterPoolDepositCreated", suite.Ctx, "umage/fusd", depositor, sdk.NewInt(1e6)).Once()
+	suite.Keeper.AfterPoolDepositCreated(suite.Ctx, "umage/fusd", depositor, sdk.NewInt(1e6))
+	swapHooks.On("BeforePoolDepositModified", suite.Ctx, "umage/fusd", depositor, sdk.NewInt(1e6)).Once()
+	suite.Keeper.BeforePoolDepositModified(suite.Ctx, "umage/fusd", depositor, sdk.NewInt(1e6))
 	swapHooks.AssertExpectations(suite.T())
 
 	// test second set panics

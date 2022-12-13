@@ -5,9 +5,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/incentive/keeper/adapters/earn"
-	"github.com/kava-labs/kava/x/incentive/keeper/adapters/swap"
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/keeper/adapters/earn"
+	"github.com/mage-coven/mage/x/incentive/keeper/adapters/swap"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // SourceAdapters is a collection of source adapters.

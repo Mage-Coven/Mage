@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/version"
 
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/types"
 )
 
 // flags for cli queries
@@ -104,7 +104,7 @@ func queryVaultCmd() *cobra.Command {
 		Short:   "get a earn vault",
 		Long:    "Get a specific earn module vault by denom.",
 		Args:    cobra.ExactArgs(1),
-		Example: fmt.Sprintf(`%[1]s q %[2]s vault usdx`, version.AppName, types.ModuleName),
+		Example: fmt.Sprintf(`%[1]s q %[2]s vault fusd`, version.AppName, types.ModuleName),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {
@@ -131,8 +131,8 @@ func queryDepositsCmd() *cobra.Command {
 		Long:  "Get earn vault deposits for all or specific accounts and vaults.",
 		Args:  cobra.NoArgs,
 		Example: fmt.Sprintf(`%[1]s q %[2]s deposits
-%[1]s q %[2]s deposits --owner kava1l0xsq2z7gqd7yly0g40y5836g0appumark77ny --denom usdx
-%[1]s q %[2]s deposits --denom usdx`, version.AppName, types.ModuleName),
+%[1]s q %[2]s deposits --owner mage1l0xsq2z7gqd7yly0g40y5836g0appumark77ny --denom fusd
+%[1]s q %[2]s deposits --denom fusd`, version.AppName, types.ModuleName),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientQueryContext(cmd)
 			if err != nil {

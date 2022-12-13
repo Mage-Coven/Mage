@@ -9,9 +9,9 @@ import (
 
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/evmutil/testutil"
-	"github.com/kava-labs/kava/x/evmutil/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/evmutil/testutil"
+	"github.com/mage-coven/mage/x/evmutil/types"
 )
 
 type ParamsTestSuite struct {

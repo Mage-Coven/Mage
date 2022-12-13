@@ -14,11 +14,11 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	auctiontypes "github.com/kava-labs/kava/x/auction/types"
-	"github.com/kava-labs/kava/x/cdp"
-	"github.com/kava-labs/kava/x/cdp/keeper"
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/app"
+	auctiontypes "github.com/mage-coven/mage/x/auction/types"
+	"github.com/mage-coven/mage/x/cdp"
+	"github.com/mage-coven/mage/x/cdp/keeper"
+	"github.com/mage-coven/mage/x/cdp/types"
 )
 
 type ModuleTestSuite struct {
@@ -97,7 +97,7 @@ func (suite *ModuleTestSuite) createCdps() {
 				tracker.debt += int64(debt)
 			}
 		}
-		suite.Nil(suite.keeper.AddCdp(suite.ctx, addrs[j], c(collateral, int64(amount)), c("usdx", int64(debt)), collateral+"-a"))
+		suite.Nil(suite.keeper.AddCdp(suite.ctx, addrs[j], c(collateral, int64(amount)), c("fusd", int64(debt)), collateral+"-a"))
 		c, f := suite.keeper.GetCDP(suite.ctx, collateral+"-a", uint64(j+1))
 		suite.True(f)
 		cdps[j] = c
@@ -151,9 +151,9 @@ func (suite *ModuleTestSuite) TestBeginBlock() {
 }
 
 func (suite *ModuleTestSuite) TestSeizeSingleCdpWithFees() {
-	err := suite.keeper.AddCdp(suite.ctx, suite.addrs[0], c("xrp", 10000000000), c("usdx", 1000000000), "xrp-a")
+	err := suite.keeper.AddCdp(suite.ctx, suite.addrs[0], c("xrp", 10000000000), c("fusd", 1000000000), "xrp-a")
 	suite.NoError(err)
-	suite.Equal(i(1000000000), suite.keeper.GetTotalPrincipal(suite.ctx, "xrp-a", "usdx"))
+	suite.Equal(i(1000000000), suite.keeper.GetTotalPrincipal(suite.ctx, "xrp-a", "fusd"))
 	ak := suite.app.GetAccountKeeper()
 	bk := suite.app.GetBankKeeper()
 

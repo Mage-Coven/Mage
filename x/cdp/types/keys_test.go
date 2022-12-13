@@ -13,16 +13,16 @@ import (
 var addr = sdk.AccAddress(ed25519.GenPrivKey().PubKey().Address())
 
 func TestCdpKey(t *testing.T) {
-	key := CdpKey("kava-a", 2)
+	key := CdpKey("mage-a", 2)
 	collateralType, id := SplitCdpKey(key)
 	require.Equal(t, int(id), 2)
-	require.Equal(t, "kava-a", collateralType)
+	require.Equal(t, "mage-a", collateralType)
 }
 
 func TestDenomIterKey(t *testing.T) {
-	denomKey := DenomIterKey("kava-a")
+	denomKey := DenomIterKey("mage-a")
 	collateralType := SplitDenomIterKey(denomKey)
-	require.Equal(t, "kava-a", collateralType)
+	require.Equal(t, "mage-a", collateralType)
 }
 
 func TestDepositKey(t *testing.T) {
@@ -43,18 +43,18 @@ func TestDepositIterKey_Invalid(t *testing.T) {
 }
 
 func TestCollateralRatioKey(t *testing.T) {
-	collateralKey := CollateralRatioKey("kava-a", 2, sdk.MustNewDecFromStr("1.50"))
+	collateralKey := CollateralRatioKey("mage-a", 2, sdk.MustNewDecFromStr("1.50"))
 	collateralType, id, ratio := SplitCollateralRatioKey(collateralKey)
-	require.Equal(t, "kava-a", collateralType)
+	require.Equal(t, "mage-a", collateralType)
 	require.Equal(t, 2, int(id))
 	require.Equal(t, ratio, sdk.MustNewDecFromStr("1.50"))
 }
 
 func TestCollateralRatioKey_BigRatio(t *testing.T) {
 	bigRatio := sdk.OneDec().Quo(sdk.SmallestDec()).Mul(sdk.OneDec().Add(sdk.OneDec()))
-	collateralKey := CollateralRatioKey("kava-a", 2, bigRatio)
+	collateralKey := CollateralRatioKey("mage-a", 2, bigRatio)
 	collateralType, id, ratio := SplitCollateralRatioKey(collateralKey)
-	require.Equal(t, "kava-a", collateralType)
+	require.Equal(t, "mage-a", collateralType)
 	require.Equal(t, 2, int(id))
 	require.Equal(t, ratio, MaxSortableDec)
 }
@@ -64,9 +64,9 @@ func TestCollateralRatioKey_Invalid(t *testing.T) {
 }
 
 func TestCollateralRatioIterKey(t *testing.T) {
-	collateralIterKey := CollateralRatioIterKey("kava-a", sdk.MustNewDecFromStr("1.50"))
+	collateralIterKey := CollateralRatioIterKey("mage-a", sdk.MustNewDecFromStr("1.50"))
 	collateralType, ratio := SplitCollateralRatioIterKey(collateralIterKey)
-	require.Equal(t, "kava-a", collateralType)
+	require.Equal(t, "mage-a", collateralType)
 	require.Equal(t, ratio, sdk.MustNewDecFromStr("1.50"))
 }
 

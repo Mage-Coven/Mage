@@ -9,7 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/testutil"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/community/client/utils"
+	"github.com/mage-coven/mage/x/community/client/utils"
 )
 
 func TestParseDepositProposal(t *testing.T) {
@@ -17,10 +17,10 @@ func TestParseDepositProposal(t *testing.T) {
 	okJSON := testutil.WriteToNewTempFile(t, `
 {
   "title": "Community Pool Lend Deposit",
-  "description": "Deposit some KAVA from community pool to Lend!",
+  "description": "Deposit some MAGE from community pool to Lend!",
   "amount": [
     {
-      "denom": "ukava",
+      "denom": "umage",
       "amount": "100000000000"
     }
   ]
@@ -29,11 +29,11 @@ func TestParseDepositProposal(t *testing.T) {
 	proposal, err := utils.ParseCommunityPoolLendDepositProposal(cdc, okJSON.Name())
 	require.NoError(t, err)
 
-	expectedAmount, err := sdk.ParseCoinsNormalized("100000000000ukava")
+	expectedAmount, err := sdk.ParseCoinsNormalized("100000000000umage")
 	require.NoError(t, err)
 
 	require.Equal(t, "Community Pool Lend Deposit", proposal.Title)
-	require.Equal(t, "Deposit some KAVA from community pool to Lend!", proposal.Description)
+	require.Equal(t, "Deposit some MAGE from community pool to Lend!", proposal.Description)
 	require.Equal(t, expectedAmount, proposal.Amount)
 }
 
@@ -42,10 +42,10 @@ func TestParseWithdrawProposal(t *testing.T) {
 	okJSON := testutil.WriteToNewTempFile(t, `
 {
   "title": "Community Pool Lend Withdraw",
-  "description": "Withdraw some KAVA from community pool to Lend!",
+  "description": "Withdraw some MAGE from community pool to Lend!",
   "amount": [
     {
-      "denom": "ukava",
+      "denom": "umage",
       "amount": "100000000000"
     }
   ]
@@ -54,10 +54,10 @@ func TestParseWithdrawProposal(t *testing.T) {
 	proposal, err := utils.ParseCommunityPoolLendWithdrawProposal(cdc, okJSON.Name())
 	require.NoError(t, err)
 
-	expectedAmount, err := sdk.ParseCoinsNormalized("100000000000ukava")
+	expectedAmount, err := sdk.ParseCoinsNormalized("100000000000umage")
 	require.NoError(t, err)
 
 	require.Equal(t, "Community Pool Lend Withdraw", proposal.Title)
-	require.Equal(t, "Withdraw some KAVA from community pool to Lend!", proposal.Description)
+	require.Equal(t, "Withdraw some MAGE from community pool to Lend!", proposal.Description)
 	require.Equal(t, expectedAmount, proposal.Amount)
 }

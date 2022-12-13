@@ -6,9 +6,9 @@
                 "type": "auction/MsgPlaceBid",
                 "value": {
                     "auction_id": "1",
-                    "bidder": "kava1xy7hrjy9r0algz9w3gzm8u6mrpq97kwta747gj",
+                    "bidder": "mage1xy7hrjy9r0algz9w3gzm8u6mrpq97kwta747gj",
                     "amount": {
-                        "denom": "usdx",
+                        "denom": "fusd",
                         "amount": "100000000"
                     }
                 }

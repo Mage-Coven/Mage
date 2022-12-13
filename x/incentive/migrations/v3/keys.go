@@ -3,7 +3,7 @@ package v3
 import (
 	"fmt"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // Legacy store key prefixes
@@ -25,7 +25,7 @@ func LegacyAccrualTimeKeyFromClaimType(claimType types.ClaimType) []byte {
 		panic("todo")
 	case types.CLAIM_TYPE_SWAP:
 		panic("todo")
-	case types.CLAIM_TYPE_USDX_MINTING:
+	case types.CLAIM_TYPE_FUSD_MINTING:
 		panic("todo")
 	default:
 		panic(fmt.Sprintf("unrecognized claim type: %s", claimType))
@@ -44,7 +44,7 @@ func LegacyRewardIndexesKeyFromClaimType(claimType types.ClaimType) []byte {
 		panic("todo")
 	case types.CLAIM_TYPE_SWAP:
 		panic("todo")
-	case types.CLAIM_TYPE_USDX_MINTING:
+	case types.CLAIM_TYPE_FUSD_MINTING:
 		panic("todo")
 	default:
 		panic(fmt.Sprintf("unrecognized claim type: %s", claimType))

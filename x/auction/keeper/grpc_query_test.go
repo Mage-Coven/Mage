@@ -6,9 +6,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/auction/keeper"
-	"github.com/kava-labs/kava/x/auction/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/auction/keeper"
+	"github.com/mage-coven/mage/x/auction/types"
 	"github.com/stretchr/testify/require"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 )
@@ -25,21 +25,21 @@ func TestGrpcAuctionsFilter(t *testing.T) {
 		types.NewSurplusAuction(
 			"sellerMod",
 			c("swp", 12345678),
-			"usdx",
+			"fusd",
 			time.Date(1998, time.January, 1, 0, 0, 0, 0, time.UTC),
 		).WithID(0),
 		types.NewDebtAuction(
 			"buyerMod",
 			c("hard", 12345678),
-			c("usdx", 12345678),
+			c("fusd", 12345678),
 			time.Date(1998, time.January, 1, 0, 0, 0, 0, time.UTC),
 			c("debt", 12345678),
 		).WithID(1),
 		types.NewCollateralAuction(
 			"sellerMod",
-			c("ukava", 12345678),
+			c("umage", 12345678),
 			time.Date(1998, time.January, 1, 0, 0, 0, 0, time.UTC),
-			c("usdx", 12345678),
+			c("fusd", 12345678),
 			types.WeightedAddresses{
 				Addresses: addrs,
 				Weights:   []sdk.Int{sdk.NewInt(100)},
@@ -50,7 +50,7 @@ func TestGrpcAuctionsFilter(t *testing.T) {
 			"sellerMod",
 			c("hard", 12345678),
 			time.Date(1998, time.January, 1, 0, 0, 0, 0, time.UTC),
-			c("usdx", 12345678),
+			c("fusd", 12345678),
 			types.WeightedAddresses{
 				Addresses: addrs,
 				Weights:   []sdk.Int{sdk.NewInt(100)},
@@ -82,9 +82,9 @@ func TestGrpcAuctionsFilter(t *testing.T) {
 			auctions[0:1],
 		},
 		{
-			"denom query usdx all",
+			"denom query fusd all",
 			types.QueryAuctionsRequest{
-				Denom: "usdx",
+				Denom: "fusd",
 			},
 			auctions,
 		},

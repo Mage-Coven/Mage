@@ -9,9 +9,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	tmprototypes "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/incentive/keeper"
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/incentive/keeper"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // Test suite used for all keeper tests
@@ -45,40 +45,40 @@ func (suite *KeeperTestSuite) SetupApp() {
 	suite.ctx = suite.app.NewContext(true, tmprototypes.Header{Time: suite.genesisTime})
 }
 
-func (suite *KeeperTestSuite) TestGetSetDeleteUSDXMintingClaim() {
+func (suite *KeeperTestSuite) TestGetSetDeleteFUSDMintingClaim() {
 	suite.SetupApp()
-	c := types.NewUSDXMintingClaim(suite.addrs[0], c("ukava", 1000000), types.RewardIndexes{types.NewRewardIndex("bnb-a", sdk.ZeroDec())})
-	_, found := suite.keeper.GetUSDXMintingClaim(suite.ctx, suite.addrs[0])
+	c := types.NewFUSDMintingClaim(suite.addrs[0], c("umage", 1000000), types.RewardIndexes{types.NewRewardIndex("bnb-a", sdk.ZeroDec())})
+	_, found := suite.keeper.GetFUSDMintingClaim(suite.ctx, suite.addrs[0])
 	suite.Require().False(found)
 	suite.Require().NotPanics(func() {
-		suite.keeper.SetUSDXMintingClaim(suite.ctx, c)
+		suite.keeper.SetFUSDMintingClaim(suite.ctx, c)
 	})
-	testC, found := suite.keeper.GetUSDXMintingClaim(suite.ctx, suite.addrs[0])
+	testC, found := suite.keeper.GetFUSDMintingClaim(suite.ctx, suite.addrs[0])
 	suite.Require().True(found)
 	suite.Require().Equal(c, testC)
 	suite.Require().NotPanics(func() {
-		suite.keeper.DeleteUSDXMintingClaim(suite.ctx, suite.addrs[0])
+		suite.keeper.DeleteFUSDMintingClaim(suite.ctx, suite.addrs[0])
 	})
-	_, found = suite.keeper.GetUSDXMintingClaim(suite.ctx, suite.addrs[0])
+	_, found = suite.keeper.GetFUSDMintingClaim(suite.ctx, suite.addrs[0])
 	suite.Require().False(found)
 }
 
-func (suite *KeeperTestSuite) TestIterateUSDXMintingClaims() {
+func (suite *KeeperTestSuite) TestIterateFUSDMintingClaims() {
 	suite.SetupApp()
 	for i := 0; i < len(suite.addrs); i++ {
-		c := types.NewUSDXMintingClaim(suite.addrs[i], c("ukava", 100000), types.RewardIndexes{types.NewRewardIndex("bnb-a", sdk.ZeroDec())})
+		c := types.NewFUSDMintingClaim(suite.addrs[i], c("umage", 100000), types.RewardIndexes{types.NewRewardIndex("bnb-a", sdk.ZeroDec())})
 		suite.Require().NotPanics(func() {
-			suite.keeper.SetUSDXMintingClaim(suite.ctx, c)
+			suite.keeper.SetFUSDMintingClaim(suite.ctx, c)
 		})
 	}
-	claims := types.USDXMintingClaims{}
-	suite.keeper.IterateUSDXMintingClaims(suite.ctx, func(c types.USDXMintingClaim) bool {
+	claims := types.FUSDMintingClaims{}
+	suite.keeper.IterateFUSDMintingClaims(suite.ctx, func(c types.FUSDMintingClaim) bool {
 		claims = append(claims, c)
 		return false
 	})
 	suite.Require().Equal(len(suite.addrs), len(claims))
 
-	claims = suite.keeper.GetAllUSDXMintingClaims(suite.ctx)
+	claims = suite.keeper.GetAllFUSDMintingClaims(suite.ctx)
 	suite.Require().Equal(len(suite.addrs), len(claims))
 }
 
@@ -132,14 +132,14 @@ func (suite *KeeperTestSuite) TestGetSetSwapRewardIndexes() {
 	}{
 		{
 			name:     "two factors can be written and read",
-			poolName: "btc/usdx",
+			poolName: "btc/fusd",
 			indexes: types.RewardIndexes{
 				{
 					CollateralType: "hard",
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -149,7 +149,7 @@ func (suite *KeeperTestSuite) TestGetSetSwapRewardIndexes() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -163,7 +163,7 @@ func (suite *KeeperTestSuite) TestGetSetSwapRewardIndexes() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -172,7 +172,7 @@ func (suite *KeeperTestSuite) TestGetSetSwapRewardIndexes() {
 		{
 			// this test is to detect any changes in behavior
 			name:     "setting empty indexes does not panic",
-			poolName: "btc/usdx",
+			poolName: "btc/fusd",
 			// Marshalling empty slice results in [] bytes, unmarshalling the []
 			// empty bytes results in a nil slice instead of an empty slice
 			indexes:   types.RewardIndexes{},
@@ -182,7 +182,7 @@ func (suite *KeeperTestSuite) TestGetSetSwapRewardIndexes() {
 		{
 			// this test is to detect any changes in behavior
 			name:      "setting nil indexes does not panic",
-			poolName:  "btc/usdx",
+			poolName:  "btc/fusd",
 			indexes:   nil,
 			wantIndex: nil,
 			panics:    false,
@@ -215,20 +215,20 @@ func (suite *KeeperTestSuite) TestIterateSwapRewardIndexes() {
 	suite.SetupApp()
 	multiIndexes := types.MultiRewardIndexes{
 		{
-			CollateralType: "bnb/usdx",
+			CollateralType: "bnb/fusd",
 			RewardIndexes: types.RewardIndexes{
 				{
 					CollateralType: "swap",
 					RewardFactor:   d("0.0000002"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
 		},
 		{
-			CollateralType: "btcb/usdx",
+			CollateralType: "btcb/fusd",
 			RewardIndexes: types.RewardIndexes{
 				{
 					CollateralType: "hard",
@@ -259,12 +259,12 @@ func (suite *KeeperTestSuite) TestGetSetSwapRewardAccrualTimes() {
 	}{
 		{
 			name:        "normal time can be written and read",
-			poolName:    "btc/usdx",
+			poolName:    "btc/fusd",
 			accrualTime: time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC),
 		},
 		{
 			name:        "zero time can be written and read",
-			poolName:    "btc/usdx",
+			poolName:    "btc/fusd",
 			accrualTime: time.Time{},
 		},
 	}
@@ -341,14 +341,14 @@ func (suite *KeeperTestSuite) TestGetSetEarnRewardIndexes() {
 	}{
 		{
 			name:       "two factors can be written and read",
-			vaultDenom: "usdx",
+			vaultDenom: "fusd",
 			indexes: types.RewardIndexes{
 				{
 					CollateralType: "hard",
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -358,7 +358,7 @@ func (suite *KeeperTestSuite) TestGetSetEarnRewardIndexes() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -372,7 +372,7 @@ func (suite *KeeperTestSuite) TestGetSetEarnRewardIndexes() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -381,7 +381,7 @@ func (suite *KeeperTestSuite) TestGetSetEarnRewardIndexes() {
 		{
 			// this test is to detect any changes in behavior
 			name:       "setting empty indexes does not panic",
-			vaultDenom: "usdx",
+			vaultDenom: "fusd",
 			// Marshalling empty slice results in [] bytes, unmarshalling the []
 			// empty bytes results in a nil slice instead of an empty slice
 			indexes:   types.RewardIndexes{},
@@ -391,7 +391,7 @@ func (suite *KeeperTestSuite) TestGetSetEarnRewardIndexes() {
 		{
 			// this test is to detect any changes in behavior
 			name:       "setting nil indexes does not panic",
-			vaultDenom: "usdx",
+			vaultDenom: "fusd",
 			indexes:    nil,
 			wantIndex:  nil,
 			panics:     false,
@@ -424,20 +424,20 @@ func (suite *KeeperTestSuite) TestIterateEarnRewardIndexes() {
 	suite.SetupApp()
 	multiIndexes := types.MultiRewardIndexes{
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardIndexes: types.RewardIndexes{
 				{
 					CollateralType: "earn",
 					RewardFactor:   d("0.0000002"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
 		},
 		{
-			CollateralType: "usdx",
+			CollateralType: "fusd",
 			RewardIndexes: types.RewardIndexes{
 				{
 					CollateralType: "hard",
@@ -468,12 +468,12 @@ func (suite *KeeperTestSuite) TestGetSetEarnRewardAccrualTimes() {
 	}{
 		{
 			name:        "normal time can be written and read",
-			vaultDenom:  "usdx",
+			vaultDenom:  "fusd",
 			accrualTime: time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC),
 		},
 		{
 			name:        "zero time can be written and read",
-			vaultDenom:  "usdx",
+			vaultDenom:  "fusd",
 			accrualTime: time.Time{},
 		},
 	}
@@ -511,22 +511,22 @@ var nonEmptyAccrualTimes = []accrualtime{
 		time:  time.Date(1998, 1, 1, 0, 0, 0, 1, time.UTC),
 	},
 	{
-		denom: "ukava",
+		denom: "umage",
 		time:  time.Time{},
 	},
 }
 
-func (suite *KeeperTestSuite) TestIterateUSDXMintingAccrualTimes() {
+func (suite *KeeperTestSuite) TestIterateFUSDMintingAccrualTimes() {
 	suite.SetupApp()
 
 	expectedAccrualTimes := nonEmptyAccrualTimes
 
 	for _, at := range expectedAccrualTimes {
-		suite.keeper.SetPreviousUSDXMintingAccrualTime(suite.ctx, at.denom, at.time)
+		suite.keeper.SetPreviousFUSDMintingAccrualTime(suite.ctx, at.denom, at.time)
 	}
 
 	var actualAccrualTimes []accrualtime
-	suite.keeper.IterateUSDXMintingAccrualTimes(suite.ctx, func(denom string, accrualTime time.Time) bool {
+	suite.keeper.IterateFUSDMintingAccrualTimes(suite.ctx, func(denom string, accrualTime time.Time) bool {
 		actualAccrualTimes = append(actualAccrualTimes, accrualtime{denom: denom, time: accrualTime})
 		return false
 	})

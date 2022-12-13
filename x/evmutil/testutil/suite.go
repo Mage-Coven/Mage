@@ -35,10 +35,10 @@ import (
 	evmtypes "github.com/tharsis/ethermint/x/evm/types"
 	feemarkettypes "github.com/tharsis/ethermint/x/feemarket/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/evmutil/keeper"
-	"github.com/kava-labs/kava/x/evmutil/types"
-	kavaminttypes "github.com/kava-labs/kava/x/kavamint/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/evmutil/keeper"
+	"github.com/mage-coven/mage/x/evmutil/types"
+	mageminttypes "github.com/mage-coven/mage/x/magemint/types"
 )
 
 type Suite struct {
@@ -83,14 +83,14 @@ func (suite *Suite) SetupTest() {
 	suite.Addrs = addrs
 
 	evmGenesis := evmtypes.DefaultGenesisState()
-	evmGenesis.Params.EvmDenom = "akava"
+	evmGenesis.Params.EvmDenom = "amage"
 
 	feemarketGenesis := feemarkettypes.DefaultGenesisState()
 	feemarketGenesis.Params.EnableHeight = 1
 	feemarketGenesis.Params.NoBaseFee = false
 
 	cdc := suite.App.AppCodec()
-	coins := sdk.NewCoins(sdk.NewInt64Coin("ukava", 1000_000_000_000_000_000))
+	coins := sdk.NewCoins(sdk.NewInt64Coin("umage", 1000_000_000_000_000_000))
 	authGS := app.NewFundedGenStateWithSameCoins(cdc, coins, []sdk.AccAddress{
 		sdk.AccAddress(suite.Key1.PubKey().Address()),
 		sdk.AccAddress(suite.Key2.PubKey().Address()),
@@ -110,7 +110,7 @@ func (suite *Suite) SetupTest() {
 	// InitializeFromGenesisStates commits first block so we start at 2 here
 	suite.Ctx = suite.App.NewContext(false, tmproto.Header{
 		Height:          suite.App.LastBlockHeight() + 1,
-		ChainID:         "kavatest_1-1",
+		ChainID:         "magetest_1-1",
 		Time:            time.Now().UTC(),
 		ProposerAddress: consAddress.Bytes(),
 		Version: tmversion.Consensus{
@@ -181,29 +181,29 @@ func (suite *Suite) Commit() {
 	suite.Ctx = suite.App.NewContext(false, header)
 }
 
-func (suite *Suite) FundAccountWithKava(addr sdk.AccAddress, coins sdk.Coins) {
-	ukava := coins.AmountOf("ukava")
-	if ukava.IsPositive() {
-		err := suite.App.FundAccount(suite.Ctx, addr, sdk.NewCoins(sdk.NewCoin("ukava", ukava)))
+func (suite *Suite) FundAccountWithMage(addr sdk.AccAddress, coins sdk.Coins) {
+	umage := coins.AmountOf("umage")
+	if umage.IsPositive() {
+		err := suite.App.FundAccount(suite.Ctx, addr, sdk.NewCoins(sdk.NewCoin("umage", umage)))
 		suite.Require().NoError(err)
 	}
-	akava := coins.AmountOf("akava")
-	if akava.IsPositive() {
-		err := suite.Keeper.SetBalance(suite.Ctx, addr, akava)
+	amage := coins.AmountOf("amage")
+	if amage.IsPositive() {
+		err := suite.Keeper.SetBalance(suite.Ctx, addr, amage)
 		suite.Require().NoError(err)
 	}
 }
 
-func (suite *Suite) FundModuleAccountWithKava(moduleName string, coins sdk.Coins) {
-	ukava := coins.AmountOf("ukava")
-	if ukava.IsPositive() {
-		err := suite.App.FundModuleAccount(suite.Ctx, moduleName, sdk.NewCoins(sdk.NewCoin("ukava", ukava)))
+func (suite *Suite) FundModuleAccountWithMage(moduleName string, coins sdk.Coins) {
+	umage := coins.AmountOf("umage")
+	if umage.IsPositive() {
+		err := suite.App.FundModuleAccount(suite.Ctx, moduleName, sdk.NewCoins(sdk.NewCoin("umage", umage)))
 		suite.Require().NoError(err)
 	}
-	akava := coins.AmountOf("akava")
-	if akava.IsPositive() {
+	amage := coins.AmountOf("amage")
+	if amage.IsPositive() {
 		addr := suite.AccountKeeper.GetModuleAddress(moduleName)
-		err := suite.Keeper.SetBalance(suite.Ctx, addr, akava)
+		err := suite.Keeper.SetBalance(suite.Ctx, addr, amage)
 		suite.Require().NoError(err)
 	}
 }
@@ -214,7 +214,7 @@ func (suite *Suite) DeployERC20() types.InternalEVMAddress {
 	suite.App.FundModuleAccount(
 		suite.Ctx,
 		types.ModuleName,
-		sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(0))),
+		sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(0))),
 	)
 
 	contractAddr, err := suite.Keeper.DeployTestMintableERC20Contract(suite.Ctx, "USDC", "USDC", uint8(18))
@@ -315,7 +315,7 @@ func (suite *Suite) SendTx(
 	// Mint the max gas to the FeeCollector to ensure balance in case of refund
 	suite.MintFeeCollector(sdk.NewCoins(
 		sdk.NewCoin(
-			"ukava",
+			"umage",
 			sdk.NewInt(baseFee.Int64()*int64(gasRes.Gas*2)),
 		)))
 
@@ -348,11 +348,11 @@ func (suite *Suite) SendTx(
 }
 
 func (suite *Suite) MintFeeCollector(coins sdk.Coins) {
-	err := suite.App.GetBankKeeper().MintCoins(suite.Ctx, kavaminttypes.ModuleAccountName, coins)
+	err := suite.App.GetBankKeeper().MintCoins(suite.Ctx, mageminttypes.ModuleAccountName, coins)
 	suite.Require().NoError(err)
 	err = suite.App.GetBankKeeper().SendCoinsFromModuleToModule(
 		suite.Ctx,
-		kavaminttypes.ModuleAccountName,
+		mageminttypes.ModuleAccountName,
 		authtypes.FeeCollectorName,
 		coins,
 	)

@@ -5,7 +5,7 @@
       {
         "type": "cdp/MsgCreateCDP",
         "value": {
-          "sender": "kava12jk3szk45afmvjc3xc6kvj4e40tuy2m8ckgs03",
+          "sender": "mage12jk3szk45afmvjc3xc6kvj4e40tuy2m8ckgs03",
           "collateral": [
             {
               "denom": "xrp",
@@ -14,7 +14,7 @@
           ],
           "principal": [
             {
-              "denom": "usdx",
+              "denom": "fusd",
               "amount": "10000000"
             }
           ]

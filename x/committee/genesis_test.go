@@ -9,11 +9,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/committee"
-	"github.com/kava-labs/kava/x/committee/keeper"
-	"github.com/kava-labs/kava/x/committee/testutil"
-	"github.com/kava-labs/kava/x/committee/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/committee"
+	"github.com/mage-coven/mage/x/committee/keeper"
+	"github.com/mage-coven/mage/x/committee/testutil"
+	"github.com/mage-coven/mage/x/committee/types"
 )
 
 type GenesisTestSuite struct {

@@ -9,10 +9,10 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/hard"
-	"github.com/kava-labs/kava/x/hard/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/hard"
+	"github.com/mage-coven/mage/x/hard/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 func (suite *KeeperTestSuite) TestWithdraw() {
@@ -129,8 +129,8 @@ func (suite *KeeperTestSuite) TestWithdraw() {
 			loanToValue := sdk.MustNewDecFromStr("0.6")
 			hardGS := types.NewGenesisState(types.NewParams(
 				types.MoneyMarkets{
-					types.NewMoneyMarket("usdx", types.NewBorrowLimit(false, sdk.NewDec(1000000000000000), loanToValue), "usdx:usd", sdk.NewInt(1000000), types.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
-					types.NewMoneyMarket("ukava", types.NewBorrowLimit(false, sdk.NewDec(1000000000000000), loanToValue), "kava:usd", sdk.NewInt(1000000), types.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
+					types.NewMoneyMarket("fusd", types.NewBorrowLimit(false, sdk.NewDec(1000000000000000), loanToValue), "fusd:usd", sdk.NewInt(1000000), types.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
+					types.NewMoneyMarket("umage", types.NewBorrowLimit(false, sdk.NewDec(1000000000000000), loanToValue), "mage:usd", sdk.NewInt(1000000), types.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
 					types.NewMoneyMarket("bnb", types.NewBorrowLimit(false, sdk.NewDec(1000000000000000), loanToValue), "bnb:usd", sdk.NewInt(100000000), types.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
 				},
 				sdk.NewDec(10),
@@ -142,20 +142,20 @@ func (suite *KeeperTestSuite) TestWithdraw() {
 			pricefeedGS := pricefeedtypes.GenesisState{
 				Params: pricefeedtypes.Params{
 					Markets: []pricefeedtypes.Market{
-						{MarketID: "usdx:usd", BaseAsset: "usdx", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
-						{MarketID: "kava:usd", BaseAsset: "kava", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+						{MarketID: "fusd:usd", BaseAsset: "fusd", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+						{MarketID: "mage:usd", BaseAsset: "mage", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 						{MarketID: "bnb:usd", BaseAsset: "bnb", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 					},
 				},
 				PostedPrices: []pricefeedtypes.PostedPrice{
 					{
-						MarketID:      "usdx:usd",
+						MarketID:      "fusd:usd",
 						OracleAddress: sdk.AccAddress{},
 						Price:         sdk.MustNewDecFromStr("1.00"),
 						Expiry:        time.Now().Add(100 * time.Hour),
 					},
 					{
-						MarketID:      "kava:usd",
+						MarketID:      "mage:usd",
 						OracleAddress: sdk.AccAddress{},
 						Price:         sdk.MustNewDecFromStr("2.00"),
 						Expiry:        time.Now().Add(100 * time.Hour),
@@ -243,11 +243,11 @@ func (suite *KeeperTestSuite) TestLtvWithdraw() {
 			"invalid: withdraw is outside loan-to-value range",
 			args{
 				borrower:             borrower,
-				initialModuleCoins:   sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(100*KAVA_CF))),
-				initialBorrowerCoins: sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(100*KAVA_CF)), sdk.NewCoin("usdx", sdk.NewInt(100*KAVA_CF))),
-				depositCoins:         sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(100*KAVA_CF))), // 100 * 2 = $200
-				borrowCoins:          sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(80*KAVA_CF))),  // 80 * 2 = $160
-				repayCoins:           sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(60*KAVA_CF))),  // 60 * 2 = $120
+				initialModuleCoins:   sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(100*MAGE_CF))),
+				initialBorrowerCoins: sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(100*MAGE_CF)), sdk.NewCoin("fusd", sdk.NewInt(100*MAGE_CF))),
+				depositCoins:         sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(100*MAGE_CF))), // 100 * 2 = $200
+				borrowCoins:          sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(80*MAGE_CF))),  // 80 * 2 = $160
+				repayCoins:           sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(60*MAGE_CF))),  // 60 * 2 = $120
 				futureTime:           oneMonthInSeconds,
 			},
 			errArgs{
@@ -273,17 +273,17 @@ func (suite *KeeperTestSuite) TestLtvWithdraw() {
 			// Harvest module genesis state
 			harvestGS := types.NewGenesisState(types.NewParams(
 				types.MoneyMarkets{
-					types.NewMoneyMarket("ukava",
-						types.NewBorrowLimit(false, sdk.NewDec(100000000*KAVA_CF), sdk.MustNewDecFromStr("0.8")), // Borrow Limit
-						"kava:usd",                     // Market ID
-						sdk.NewInt(KAVA_CF),            // Conversion Factor
+					types.NewMoneyMarket("umage",
+						types.NewBorrowLimit(false, sdk.NewDec(100000000*MAGE_CF), sdk.MustNewDecFromStr("0.8")), // Borrow Limit
+						"mage:usd",                     // Market ID
+						sdk.NewInt(MAGE_CF),            // Conversion Factor
 						model,                          // Interest Rate Model
 						reserveFactor,                  // Reserve Factor
 						sdk.MustNewDecFromStr("0.05")), // Keeper Reward Percent
-					types.NewMoneyMarket("usdx",
-						types.NewBorrowLimit(false, sdk.NewDec(100000000*KAVA_CF), sdk.MustNewDecFromStr("0.8")), // Borrow Limit
-						"usdx:usd",                     // Market ID
-						sdk.NewInt(KAVA_CF),            // Conversion Factor
+					types.NewMoneyMarket("fusd",
+						types.NewBorrowLimit(false, sdk.NewDec(100000000*MAGE_CF), sdk.MustNewDecFromStr("0.8")), // Borrow Limit
+						"fusd:usd",                     // Market ID
+						sdk.NewInt(MAGE_CF),            // Conversion Factor
 						model,                          // Interest Rate Model
 						reserveFactor,                  // Reserve Factor
 						sdk.MustNewDecFromStr("0.05")), // Keeper Reward Percent
@@ -297,19 +297,19 @@ func (suite *KeeperTestSuite) TestLtvWithdraw() {
 			pricefeedGS := pricefeedtypes.GenesisState{
 				Params: pricefeedtypes.Params{
 					Markets: []pricefeedtypes.Market{
-						{MarketID: "usdx:usd", BaseAsset: "usdx", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
-						{MarketID: "kava:usd", BaseAsset: "kava", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+						{MarketID: "fusd:usd", BaseAsset: "fusd", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+						{MarketID: "mage:usd", BaseAsset: "mage", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 					},
 				},
 				PostedPrices: []pricefeedtypes.PostedPrice{
 					{
-						MarketID:      "usdx:usd",
+						MarketID:      "fusd:usd",
 						OracleAddress: sdk.AccAddress{},
 						Price:         sdk.MustNewDecFromStr("1.00"),
 						Expiry:        time.Now().Add(100 * time.Hour),
 					},
 					{
-						MarketID:      "kava:usd",
+						MarketID:      "mage:usd",
 						OracleAddress: sdk.AccAddress{},
 						Price:         sdk.MustNewDecFromStr("2.00"),
 						Expiry:        time.Now().Add(100 * time.Hour),
@@ -347,7 +347,7 @@ func (suite *KeeperTestSuite) TestLtvWithdraw() {
 			suite.Require().NoError(err)
 
 			// Attempting to withdraw fails
-			err = suite.keeper.Withdraw(suite.ctx, tc.args.borrower, sdk.NewCoins(sdk.NewCoin("ukava", sdk.OneInt())))
+			err = suite.keeper.Withdraw(suite.ctx, tc.args.borrower, sdk.NewCoins(sdk.NewCoin("umage", sdk.OneInt())))
 			suite.Require().Error(err)
 			suite.Require().True(strings.Contains(err.Error(), tc.errArgs.contains))
 
@@ -357,7 +357,7 @@ func (suite *KeeperTestSuite) TestLtvWithdraw() {
 			hard.BeginBlocker(liqCtx, suite.keeper)
 
 			// Attempted withdraw of 1 coin still fails
-			err = suite.keeper.Withdraw(suite.ctx, tc.args.borrower, sdk.NewCoins(sdk.NewCoin("ukava", sdk.OneInt())))
+			err = suite.keeper.Withdraw(suite.ctx, tc.args.borrower, sdk.NewCoins(sdk.NewCoin("umage", sdk.OneInt())))
 			suite.Require().Error(err)
 			suite.Require().True(strings.Contains(err.Error(), tc.errArgs.contains))
 
@@ -371,7 +371,7 @@ func (suite *KeeperTestSuite) TestLtvWithdraw() {
 			suite.Require().True(strings.Contains(err.Error(), tc.errArgs.contains))
 
 			// Withdrawing 10% of the coins should succeed
-			withdrawCoins := sdk.NewCoins(sdk.NewCoin("ukava", tc.args.depositCoins[0].Amount.Quo(sdk.NewInt(10))))
+			withdrawCoins := sdk.NewCoins(sdk.NewCoin("umage", tc.args.depositCoins[0].Amount.Quo(sdk.NewInt(10))))
 			err = suite.keeper.Withdraw(suite.ctx, tc.args.borrower, withdrawCoins)
 			suite.Require().NoError(err)
 		})

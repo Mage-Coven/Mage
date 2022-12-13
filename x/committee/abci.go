@@ -5,7 +5,7 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/committee/keeper"
+	"github.com/mage-coven/mage/x/committee/keeper"
 )
 
 // BeginBlocker runs at the start of every block.

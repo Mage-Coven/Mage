@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/community/testutil"
-	"github.com/kava-labs/kava/x/community/types"
+	"github.com/mage-coven/mage/x/community/testutil"
+	"github.com/mage-coven/mage/x/community/types"
 )
 
 // Test suite used for all keeper tests
@@ -29,8 +29,8 @@ func (suite *KeeperTestSuite) TestCommunityPool() {
 	maccAddr := suite.App.GetAccountKeeper().GetModuleAddress(types.ModuleAccountName)
 
 	funds := sdk.NewCoins(
-		sdk.NewCoin("ukava", sdk.NewInt(10000)),
-		sdk.NewCoin("usdx", sdk.NewInt(100)),
+		sdk.NewCoin("umage", sdk.NewInt(10000)),
+		sdk.NewCoin("fusd", sdk.NewInt(100)),
 	)
 	sender := suite.CreateFundedAccount(funds)
 

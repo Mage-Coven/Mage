@@ -10,12 +10,12 @@ import (
 
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	"github.com/kava-labs/kava/x/incentive"
-	"github.com/kava-labs/kava/x/incentive/keeper"
-	"github.com/kava-labs/kava/x/incentive/types"
-	kavadisttypes "github.com/kava-labs/kava/x/kavadist/types"
+	"github.com/mage-coven/mage/app"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	"github.com/mage-coven/mage/x/incentive"
+	"github.com/mage-coven/mage/x/incentive/keeper"
+	"github.com/mage-coven/mage/x/incentive/types"
+	magedisttypes "github.com/mage-coven/mage/x/magedist/types"
 )
 
 const (
@@ -42,15 +42,15 @@ func (suite *GenesisTestSuite) SetupTest() {
 	_, addrs := app.GeneratePrivKeyAddressPairs(5)
 
 	authBuilder := app.NewAuthBankGenesisBuilder().
-		WithSimpleAccount(addrs[0], cs(c("bnb", 1e10), c("ukava", 1e10))).
-		WithSimpleModuleAccount(kavadisttypes.KavaDistMacc, cs(c("hard", 1e15), c("ukava", 1e15)))
+		WithSimpleAccount(addrs[0], cs(c("bnb", 1e10), c("umage", 1e10))).
+		WithSimpleModuleAccount(magedisttypes.MageDistMacc, cs(c("hard", 1e15), c("umage", 1e15)))
 
 	loanToValue, _ := sdk.NewDecFromStr("0.6")
 	borrowLimit := sdk.NewDec(1000000000000000)
 	hardGS := hardtypes.NewGenesisState(
 		hardtypes.NewParams(
 			hardtypes.MoneyMarkets{
-				hardtypes.NewMoneyMarket("ukava", hardtypes.NewBorrowLimit(false, borrowLimit, loanToValue), "kava:usd", sdk.NewInt(1000000), hardtypes.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
+				hardtypes.NewMoneyMarket("umage", hardtypes.NewBorrowLimit(false, borrowLimit, loanToValue), "mage:usd", sdk.NewInt(1000000), hardtypes.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
 				hardtypes.NewMoneyMarket("bnb", hardtypes.NewBorrowLimit(false, borrowLimit, loanToValue), "bnb:usd", sdk.NewInt(1000000), hardtypes.NewInterestRateModel(sdk.MustNewDecFromStr("0.05"), sdk.MustNewDecFromStr("2"), sdk.MustNewDecFromStr("0.8"), sdk.MustNewDecFromStr("10")), sdk.MustNewDecFromStr("0.05"), sdk.ZeroDec()),
 			},
 			sdk.NewDec(10),
@@ -64,16 +64,16 @@ func (suite *GenesisTestSuite) SetupTest() {
 	)
 	incentiveGS := types.NewGenesisState(
 		types.NewParams(
-			types.RewardPeriods{types.NewRewardPeriod(true, "bnb-a", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), c("ukava", 122354))},
+			types.RewardPeriods{types.NewRewardPeriod(true, "bnb-a", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), c("umage", 122354))},
 			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "bnb", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
 			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "bnb", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "ukava", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "btcb/usdx", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("swp", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "ukava", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "ukava", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "umage", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "btcb/fusd", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("swp", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "umage", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "umage", suite.genesisTime.Add(-1*oneYear), suite.genesisTime.Add(oneYear), cs(c("hard", 122354)))},
 			types.MultipliersPerDenoms{
 				{
-					Denom: "ukava",
+					Denom: "umage",
 					Multipliers: types.Multipliers{
 						types.NewMultiplier("large", 12, d("1.0")),
 					},
@@ -104,7 +104,7 @@ func (suite *GenesisTestSuite) SetupTest() {
 		types.DefaultGenesisRewardState,
 		types.DefaultGenesisRewardState,
 		types.DefaultClaims,
-		types.DefaultUSDXClaims,
+		types.DefaultFUSDClaims,
 		types.DefaultHardClaims,
 		types.DefaultDelegatorClaims,
 		types.DefaultSwapClaims,
@@ -136,16 +136,16 @@ func (suite *GenesisTestSuite) TestExportedGenesisMatchesImported() {
 	genesisTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
 	genesisState := types.NewGenesisState(
 		types.NewParams(
-			types.RewardPeriods{types.NewRewardPeriod(true, "bnb-a", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), c("ukava", 122354))},
+			types.RewardPeriods{types.NewRewardPeriod(true, "bnb-a", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), c("umage", 122354))},
 			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "bnb", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
 			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "bnb", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "ukava", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "btcb/usdx", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("swp", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "ukava", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
-			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "ukava", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "umage", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "btcb/fusd", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("swp", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "umage", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
+			types.MultiRewardPeriods{types.NewMultiRewardPeriod(true, "umage", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354)))},
 			types.MultipliersPerDenoms{
 				{
-					Denom: "ukava",
+					Denom: "umage",
 					Multipliers: types.Multipliers{
 						types.NewMultiplier("large", 12, d("1.0")),
 					},
@@ -170,7 +170,7 @@ func (suite *GenesisTestSuite) TestExportedGenesisMatchesImported() {
 				types.NewTypedMultiRewardPeriod(
 					types.CLAIM_TYPE_SWAP,
 					types.MultiRewardPeriods{
-						types.NewMultiRewardPeriod(true, "ukava", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354))),
+						types.NewMultiRewardPeriod(true, "umage", genesisTime.Add(-1*oneYear), genesisTime.Add(oneYear), cs(c("hard", 122354))),
 					},
 				),
 			},
@@ -180,7 +180,7 @@ func (suite *GenesisTestSuite) TestExportedGenesisMatchesImported() {
 				types.NewAccumulationTime("bnb-a", genesisTime),
 			},
 			types.MultiRewardIndexes{
-				types.NewMultiRewardIndex("bnb-a", types.RewardIndexes{{CollateralType: "ukava", RewardFactor: d("0.3")}}),
+				types.NewMultiRewardIndex("bnb-a", types.RewardIndexes{{CollateralType: "umage", RewardFactor: d("0.3")}}),
 			},
 		),
 		types.NewGenesisRewardState(
@@ -201,60 +201,60 @@ func (suite *GenesisTestSuite) TestExportedGenesisMatchesImported() {
 		),
 		types.NewGenesisRewardState(
 			types.AccumulationTimes{
-				types.NewAccumulationTime("ukava", genesisTime.Add(-3*time.Hour)),
+				types.NewAccumulationTime("umage", genesisTime.Add(-3*time.Hour)),
 			},
 			types.MultiRewardIndexes{
-				types.NewMultiRewardIndex("ukava", types.RewardIndexes{{CollateralType: "hard", RewardFactor: d("0.2")}}),
+				types.NewMultiRewardIndex("umage", types.RewardIndexes{{CollateralType: "hard", RewardFactor: d("0.2")}}),
 			},
 		),
 		types.NewGenesisRewardState(
 			types.AccumulationTimes{
-				types.NewAccumulationTime("bctb/usdx", genesisTime.Add(-4*time.Hour)),
+				types.NewAccumulationTime("bctb/fusd", genesisTime.Add(-4*time.Hour)),
 			},
 			types.MultiRewardIndexes{
-				types.NewMultiRewardIndex("btcb/usdx", types.RewardIndexes{{CollateralType: "swap", RewardFactor: d("0.001")}}),
+				types.NewMultiRewardIndex("btcb/fusd", types.RewardIndexes{{CollateralType: "swap", RewardFactor: d("0.001")}}),
 			},
 		),
 		types.NewGenesisRewardState(
 			types.AccumulationTimes{
-				types.NewAccumulationTime("ukava", genesisTime.Add(-3*time.Hour)),
+				types.NewAccumulationTime("umage", genesisTime.Add(-3*time.Hour)),
 			},
 			types.MultiRewardIndexes{
-				types.NewMultiRewardIndex("ukava", types.RewardIndexes{{CollateralType: "ukava", RewardFactor: d("0.2")}}),
+				types.NewMultiRewardIndex("umage", types.RewardIndexes{{CollateralType: "umage", RewardFactor: d("0.2")}}),
 			},
 		),
 		types.NewGenesisRewardState(
 			types.AccumulationTimes{
-				types.NewAccumulationTime("usdx", genesisTime.Add(-3*time.Hour)),
+				types.NewAccumulationTime("fusd", genesisTime.Add(-3*time.Hour)),
 			},
 			types.MultiRewardIndexes{
-				types.NewMultiRewardIndex("usdx", types.RewardIndexes{{CollateralType: "usdx", RewardFactor: d("0.2")}}),
+				types.NewMultiRewardIndex("fusd", types.RewardIndexes{{CollateralType: "fusd", RewardFactor: d("0.2")}}),
 			},
 		),
 		types.Claims{
 			types.NewClaim(
-				types.CLAIM_TYPE_USDX_MINTING,
+				types.CLAIM_TYPE_FUSD_MINTING,
 				suite.addrs[3],
 				nil,
-				types.MultiRewardIndexes{{CollateralType: "btcb/usdx", RewardIndexes: types.RewardIndexes{{CollateralType: "swap", RewardFactor: d("0.0")}}}},
+				types.MultiRewardIndexes{{CollateralType: "btcb/fusd", RewardIndexes: types.RewardIndexes{{CollateralType: "swap", RewardFactor: d("0.0")}}}},
 			),
 		},
-		types.USDXMintingClaims{
-			types.NewUSDXMintingClaim(
+		types.FUSDMintingClaims{
+			types.NewFUSDMintingClaim(
 				suite.addrs[0],
-				c("ukava", 1e9),
+				c("umage", 1e9),
 				types.RewardIndexes{{CollateralType: "bnb-a", RewardFactor: d("0.3")}},
 			),
-			types.NewUSDXMintingClaim(
+			types.NewFUSDMintingClaim(
 				suite.addrs[1],
-				c("ukava", 1),
+				c("umage", 1),
 				types.RewardIndexes{{CollateralType: "bnb-a", RewardFactor: d("0.001")}},
 			),
 		},
 		types.HardLiquidityProviderClaims{
 			types.NewHardLiquidityProviderClaim(
 				suite.addrs[0],
-				cs(c("ukava", 1e9), c("hard", 1e9)),
+				cs(c("umage", 1e9), c("hard", 1e9)),
 				types.MultiRewardIndexes{{CollateralType: "bnb", RewardIndexes: types.RewardIndexes{{CollateralType: "hard", RewardFactor: d("0.01")}}}},
 				types.MultiRewardIndexes{{CollateralType: "bnb", RewardIndexes: types.RewardIndexes{{CollateralType: "hard", RewardFactor: d("0.0")}}}},
 			),
@@ -269,36 +269,36 @@ func (suite *GenesisTestSuite) TestExportedGenesisMatchesImported() {
 			types.NewDelegatorClaim(
 				suite.addrs[2],
 				cs(c("hard", 5)),
-				types.MultiRewardIndexes{{CollateralType: "ukava", RewardIndexes: types.RewardIndexes{{CollateralType: "hard", RewardFactor: d("0.2")}}}},
+				types.MultiRewardIndexes{{CollateralType: "umage", RewardIndexes: types.RewardIndexes{{CollateralType: "hard", RewardFactor: d("0.2")}}}},
 			),
 		},
 		types.SwapClaims{
 			types.NewSwapClaim(
 				suite.addrs[3],
 				nil,
-				types.MultiRewardIndexes{{CollateralType: "btcb/usdx", RewardIndexes: types.RewardIndexes{{CollateralType: "swap", RewardFactor: d("0.0")}}}},
+				types.MultiRewardIndexes{{CollateralType: "btcb/fusd", RewardIndexes: types.RewardIndexes{{CollateralType: "swap", RewardFactor: d("0.0")}}}},
 			),
 		},
 		types.SavingsClaims{
 			types.NewSavingsClaim(
 				suite.addrs[3],
 				nil,
-				types.MultiRewardIndexes{{CollateralType: "ukava", RewardIndexes: types.RewardIndexes{{CollateralType: "ukava", RewardFactor: d("0.0")}}}},
+				types.MultiRewardIndexes{{CollateralType: "umage", RewardIndexes: types.RewardIndexes{{CollateralType: "umage", RewardFactor: d("0.0")}}}},
 			),
 		},
 		types.EarnClaims{
 			types.NewEarnClaim(
 				suite.addrs[3],
 				nil,
-				types.MultiRewardIndexes{{CollateralType: "usdx", RewardIndexes: types.RewardIndexes{{CollateralType: "earn", RewardFactor: d("0.0")}}}},
+				types.MultiRewardIndexes{{CollateralType: "fusd", RewardIndexes: types.RewardIndexes{{CollateralType: "earn", RewardFactor: d("0.0")}}}},
 			),
 		},
 		types.AccrualTimes{
-			types.NewAccrualTime(types.CLAIM_TYPE_USDX_MINTING, "usdx", genesisTime.Add(-2*time.Hour)),
+			types.NewAccrualTime(types.CLAIM_TYPE_FUSD_MINTING, "fusd", genesisTime.Add(-2*time.Hour)),
 		},
 		types.TypedRewardIndexesList{
-			types.NewTypedRewardIndexes(types.CLAIM_TYPE_EARN, "ukava", types.RewardIndexes{
-				types.NewRewardIndex("ukava", d("0.1")),
+			types.NewTypedRewardIndexes(types.CLAIM_TYPE_EARN, "umage", types.RewardIndexes{
+				types.NewRewardIndex("umage", d("0.1")),
 			}),
 		},
 	)
@@ -348,7 +348,7 @@ func (suite *GenesisTestSuite) TestInitGenesisPanicsWhenAccumulationTimesToLongA
 		{
 			types.GenesisState{
 				Params:          minimalParams,
-				USDXRewardState: invalidRewardState,
+				FUSDRewardState: invalidRewardState,
 			},
 		},
 		{

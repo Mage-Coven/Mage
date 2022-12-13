@@ -4,7 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/kava-labs/kava/x/evmutil/types"
+	"github.com/mage-coven/mage/x/evmutil/types"
 )
 
 // RegisterInvariants registers the swap module invariants

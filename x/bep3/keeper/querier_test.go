@@ -15,9 +15,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/bep3/keeper"
-	"github.com/kava-labs/kava/x/bep3/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/bep3/keeper"
+	"github.com/mage-coven/mage/x/bep3/types"
 )
 
 const (
@@ -41,7 +41,7 @@ func (suite *QuerierTestSuite) SetupTest() {
 
 	// Set up auth GenesisState
 	_, addrs := app.GeneratePrivKeyAddressPairs(11)
-	coins := sdk.NewCoins(c("bnb", 10000000000), c("ukava", 10000000000))
+	coins := sdk.NewCoins(c("bnb", 10000000000), c("umage", 10000000000))
 	authGS := app.NewFundedGenStateWithSameCoins(tApp.AppCodec(), coins, addrs)
 
 	tApp.InitializeFromGenesisStates(

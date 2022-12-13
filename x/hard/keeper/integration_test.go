@@ -6,9 +6,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/hard/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/hard/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 func NewHARDGenState(cdc codec.JSONCodec) app.GenesisState {
@@ -16,14 +16,14 @@ func NewHARDGenState(cdc codec.JSONCodec) app.GenesisState {
 		Params: types.NewParams(
 			types.MoneyMarkets{
 				types.MoneyMarket{
-					Denom: "usdx",
+					Denom: "fusd",
 					BorrowLimit: types.BorrowLimit{
 						HasMaxLimit:  true,
 						MaximumLimit: sdk.MustNewDecFromStr("100000000000"),
 						LoanToValue:  sdk.MustNewDecFromStr("1"),
 					},
-					SpotMarketID:     "usdx:usd",
-					ConversionFactor: sdk.NewInt(USDX_CF),
+					SpotMarketID:     "fusd:usd",
+					ConversionFactor: sdk.NewInt(FUSD_CF),
 					InterestRateModel: types.InterestRateModel{
 						BaseRateAPY:    sdk.MustNewDecFromStr("0.05"),
 						BaseMultiplier: sdk.MustNewDecFromStr("2"),
@@ -41,7 +41,7 @@ func NewHARDGenState(cdc codec.JSONCodec) app.GenesisState {
 						LoanToValue:  sdk.MustNewDecFromStr("0.5"),
 					},
 					SpotMarketID:     "bnb:usd",
-					ConversionFactor: sdk.NewInt(USDX_CF),
+					ConversionFactor: sdk.NewInt(FUSD_CF),
 					InterestRateModel: types.InterestRateModel{
 						BaseRateAPY:    sdk.MustNewDecFromStr("0"),
 						BaseMultiplier: sdk.MustNewDecFromStr("0.05"),
@@ -74,7 +74,7 @@ func NewHARDGenState(cdc codec.JSONCodec) app.GenesisState {
 		),
 		PreviousAccumulationTimes: types.GenesisAccumulationTimes{
 			types.NewGenesisAccumulationTime(
-				"usdx",
+				"fusd",
 				time.Date(2020, 12, 15, 14, 0, 0, 0, time.UTC),
 				sdk.OneDec(),
 				sdk.OneDec(),
@@ -93,7 +93,7 @@ func NewPricefeedGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 	pfGenesis := pricefeedtypes.GenesisState{
 		Params: pricefeedtypes.Params{
 			Markets: []pricefeedtypes.Market{
-				{MarketID: "usdx:usd", BaseAsset: "usdx", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "fusd:usd", BaseAsset: "fusd", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "xrp:usd", BaseAsset: "xrp", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "bnb:usd", BaseAsset: "bnb", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "busd:usd", BaseAsset: "busd", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
@@ -101,7 +101,7 @@ func NewPricefeedGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 		},
 		PostedPrices: []pricefeedtypes.PostedPrice{
 			{
-				MarketID:      "usdx:usd",
+				MarketID:      "fusd:usd",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.OneDec(),
 				Expiry:        time.Now().Add(1 * time.Hour),

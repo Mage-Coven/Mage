@@ -1,6 +1,6 @@
 Sample configuration files for:
 
 ```
-SystemD: kvd.service
-macOS:  io.kava.kvd.plist
+SystemD: mge.service
+macOS:  io.mage.mge.plist
 ```

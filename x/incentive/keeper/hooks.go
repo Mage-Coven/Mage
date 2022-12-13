@@ -4,11 +4,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	savingstypes "github.com/kava-labs/kava/x/savings/types"
-	swaptypes "github.com/kava-labs/kava/x/swap/types"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	savingstypes "github.com/mage-coven/mage/x/savings/types"
+	swaptypes "github.com/mage-coven/mage/x/swap/types"
 )
 
 // Hooks wrapper struct for hooks
@@ -32,14 +32,14 @@ func (k Keeper) Hooks() Hooks { return Hooks{k} }
 
 // AfterCDPCreated function that runs after a cdp is created
 func (h Hooks) AfterCDPCreated(ctx sdk.Context, cdp cdptypes.CDP) {
-	h.k.InitializeUSDXMintingClaim(ctx, cdp)
+	h.k.InitializeFUSDMintingClaim(ctx, cdp)
 }
 
 // BeforeCDPModified function that runs before a cdp is modified
 // note that this is called immediately after interest is synchronized, and so could potentially
 // be called AfterCDPInterestUpdated or something like that, if we we're to expand the scope of cdp hooks
 func (h Hooks) BeforeCDPModified(ctx sdk.Context, cdp cdptypes.CDP) {
-	h.k.SynchronizeUSDXMintingReward(ctx, cdp)
+	h.k.SynchronizeFUSDMintingReward(ctx, cdp)
 }
 
 // ------------------- Hard Module Hooks -------------------

@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/x/swap/types"
 )
 
 // Implements SwapHooks interface

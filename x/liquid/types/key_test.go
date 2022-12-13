@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/liquid/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/liquid/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -22,19 +22,19 @@ func TestParseLiquidStakingTokenDenom(t *testing.T) {
 	}{
 		{
 			name:        "valid denom",
-			giveDenom:   "bkava-kavavaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a",
-			wantAddress: mustValAddressFromBech32("kavavaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a"),
+			giveDenom:   "bmage-magevaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a",
+			wantAddress: mustValAddressFromBech32("magevaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a"),
 			wantErr:     nil,
 		},
 		{
 			name:        "invalid prefix",
-			giveDenom:   "ukava-kavavaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a",
-			wantAddress: mustValAddressFromBech32("kavavaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a"),
-			wantErr:     fmt.Errorf("invalid denom prefix, expected %s, got %s", types.DefaultDerivativeDenom, "ukava"),
+			giveDenom:   "umage-magevaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a",
+			wantAddress: mustValAddressFromBech32("magevaloper1ze7y9qwdddejmy7jlw4cymqqlt2wh05y6cpt5a"),
+			wantErr:     fmt.Errorf("invalid denom prefix, expected %s, got %s", types.DefaultDerivativeDenom, "umage"),
 		},
 		{
 			name:        "invalid validator address",
-			giveDenom:   "bkava-kavavaloper1ze7y9qw",
+			giveDenom:   "bmage-magevaloper1ze7y9qw",
 			wantAddress: sdk.ValAddress{},
 			wantErr:     fmt.Errorf("invalid denom validator address: decoding bech32 failed: invalid checksum"),
 		},

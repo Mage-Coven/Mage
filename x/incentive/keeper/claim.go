@@ -4,20 +4,20 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
-// ClaimUSDXMintingReward pays out funds from a claim to a receiver account.
+// ClaimFUSDMintingReward pays out funds from a claim to a receiver account.
 // Rewards are removed from a claim and paid out according to the multiplier, which reduces the reward amount in exchange for shorter vesting times.
-func (k Keeper) ClaimUSDXMintingReward(ctx sdk.Context, owner, receiver sdk.AccAddress, multiplierName string) error {
-	claim, found := k.GetUSDXMintingClaim(ctx, owner)
+func (k Keeper) ClaimFUSDMintingReward(ctx sdk.Context, owner, receiver sdk.AccAddress, multiplierName string) error {
+	claim, found := k.GetFUSDMintingClaim(ctx, owner)
 	if !found {
 		return sdkerrors.Wrapf(types.ErrClaimNotFound, "address: %s", owner)
 	}
 
-	multiplier, found := k.GetMultiplierByDenom(ctx, types.USDXMintingRewardDenom, multiplierName)
+	multiplier, found := k.GetMultiplierByDenom(ctx, types.FUSDMintingRewardDenom, multiplierName)
 	if !found {
-		return sdkerrors.Wrapf(types.ErrInvalidMultiplier, "denom '%s' has no multiplier '%s'", types.USDXMintingRewardDenom, multiplierName)
+		return sdkerrors.Wrapf(types.ErrInvalidMultiplier, "denom '%s' has no multiplier '%s'", types.FUSDMintingRewardDenom, multiplierName)
 	}
 
 	claimEnd := k.GetClaimEnd(ctx)
@@ -26,7 +26,7 @@ func (k Keeper) ClaimUSDXMintingReward(ctx sdk.Context, owner, receiver sdk.AccA
 		return sdkerrors.Wrapf(types.ErrClaimExpired, "block time %s > claim end time %s", ctx.BlockTime(), claimEnd)
 	}
 
-	claim, err := k.SynchronizeUSDXMintingClaim(ctx, claim)
+	claim, err := k.SynchronizeFUSDMintingClaim(ctx, claim)
 	if err != nil {
 		return err
 	}
@@ -43,7 +43,7 @@ func (k Keeper) ClaimUSDXMintingReward(ctx sdk.Context, owner, receiver sdk.AccA
 		return err
 	}
 
-	k.ZeroUSDXMintingClaim(ctx, claim)
+	k.ZeroFUSDMintingClaim(ctx, claim)
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(

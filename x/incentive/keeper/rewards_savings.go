@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/incentive/types"
-	savingstypes "github.com/kava-labs/kava/x/savings/types"
+	"github.com/mage-coven/mage/x/incentive/types"
+	savingstypes "github.com/mage-coven/mage/x/savings/types"
 )
 
 // AccumulateSavingsRewards calculates new rewards to distribute this block and updates the global indexes

@@ -17,10 +17,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/pricefeed/client/cli"
-	"github.com/kava-labs/kava/x/pricefeed/client/rest"
-	"github.com/kava-labs/kava/x/pricefeed/keeper"
-	"github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/x/pricefeed/client/cli"
+	"github.com/mage-coven/mage/x/pricefeed/client/rest"
+	"github.com/mage-coven/mage/x/pricefeed/keeper"
+	"github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 var (

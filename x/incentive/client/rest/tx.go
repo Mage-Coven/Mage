@@ -12,22 +12,22 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/rest"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 func registerTxRoutes(cliCtx client.Context, r *mux.Router) {
-	r.HandleFunc("/incentive/claim-cdp", postClaimHandlerFn(cliCtx, usdxMintingGenerator)).Methods("POST")
+	r.HandleFunc("/incentive/claim-cdp", postClaimHandlerFn(cliCtx, fusdMintingGenerator)).Methods("POST")
 	r.HandleFunc("/incentive/claim-hard", postClaimHandlerFn(cliCtx, hardGenerator)).Methods("POST")
 	r.HandleFunc("/incentive/claim-delegator", postClaimHandlerFn(cliCtx, delegatorGenerator)).Methods("POST")
 	r.HandleFunc("/incentive/claim-swap", postClaimHandlerFn(cliCtx, swapGenerator)).Methods("POST")
 	r.HandleFunc("/incentive/claim-earn", postClaimHandlerFn(cliCtx, earnGenerator)).Methods("POST")
 }
 
-func usdxMintingGenerator(req PostClaimReq) (sdk.Msg, error) {
+func fusdMintingGenerator(req PostClaimReq) (sdk.Msg, error) {
 	if len(req.DenomsToClaim) != 1 {
-		return nil, fmt.Errorf("must only claim %s denom for usdx minting rewards, got '%s", types.USDXMintingRewardDenom, req.DenomsToClaim)
+		return nil, fmt.Errorf("must only claim %s denom for fusd minting rewards, got '%s", types.FUSDMintingRewardDenom, req.DenomsToClaim)
 	}
-	msg := types.NewMsgClaimUSDXMintingReward(req.Sender.String(), req.DenomsToClaim[0].MultiplierName)
+	msg := types.NewMsgClaimFUSDMintingReward(req.Sender.String(), req.DenomsToClaim[0].MultiplierName)
 	return &msg, nil
 }
 

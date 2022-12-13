@@ -11,8 +11,8 @@ import (
 	tmtime "github.com/tendermint/tendermint/types/time"
 	evmtypes "github.com/tharsis/ethermint/x/evm/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/app/ante"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/app/ante"
 )
 
 func mustParseDecCoins(value string) sdk.DecCoins {
@@ -30,7 +30,7 @@ func TestEvmMinGasFilter(t *testing.T) {
 
 	ctx := tApp.NewContext(true, tmproto.Header{Height: 1, Time: tmtime.Now()})
 	tApp.GetEvmKeeper().SetParams(ctx, evmtypes.Params{
-		EvmDenom: "akava",
+		EvmDenom: "amage",
 	})
 
 	testCases := []struct {
@@ -44,29 +44,29 @@ func TestEvmMinGasFilter(t *testing.T) {
 			mustParseDecCoins(""),
 		},
 		{
-			"zero ukava gas price",
-			mustParseDecCoins("0ukava"),
-			mustParseDecCoins("0ukava"),
+			"zero umage gas price",
+			mustParseDecCoins("0umage"),
+			mustParseDecCoins("0umage"),
 		},
 		{
-			"non-zero ukava gas price",
-			mustParseDecCoins("0.001ukava"),
-			mustParseDecCoins("0.001ukava"),
+			"non-zero umage gas price",
+			mustParseDecCoins("0.001umage"),
+			mustParseDecCoins("0.001umage"),
 		},
 		{
-			"zero ukava gas price, min akava price",
-			mustParseDecCoins("0ukava;100000akava"),
-			mustParseDecCoins("0ukava"), // akava is removed
+			"zero umage gas price, min amage price",
+			mustParseDecCoins("0umage;100000amage"),
+			mustParseDecCoins("0umage"), // amage is removed
 		},
 		{
-			"zero ukava gas price, min akava price, other token",
-			mustParseDecCoins("0ukava;100000akava;0.001other"),
-			mustParseDecCoins("0ukava;0.001other"), // akava is removed
+			"zero umage gas price, min amage price, other token",
+			mustParseDecCoins("0umage;100000amage;0.001other"),
+			mustParseDecCoins("0umage;0.001other"), // amage is removed
 		},
 		{
-			"non-zero ukava gas price, min akava price",
-			mustParseDecCoins("0.25ukava;100000akava;0.001other"),
-			mustParseDecCoins("0.25ukava;0.001other"), // akava is removed
+			"non-zero umage gas price, min amage price",
+			mustParseDecCoins("0.25umage;100000amage;0.001other"),
+			mustParseDecCoins("0.25umage;0.001other"), // amage is removed
 		},
 	}
 

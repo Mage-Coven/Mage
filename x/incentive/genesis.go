@@ -6,8 +6,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/incentive/keeper"
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/keeper"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 const year = 365 * 24 * time.Hour
@@ -35,7 +35,7 @@ func InitGenesis(
 		panic(fmt.Sprintf("failed to validate %s genesis state: %s", types.ModuleName, err))
 	}
 
-	for _, rp := range gs.Params.USDXMintingRewardPeriods {
+	for _, rp := range gs.Params.FUSDMintingRewardPeriods {
 		if _, found := cdpKeeper.GetCollateral(ctx, rp.CollateralType); !found {
 			panic(fmt.Sprintf("incentive params contain collateral not found in cdp params: %s", rp.CollateralType))
 		}
@@ -66,22 +66,22 @@ func InitGenesis(
 
 	// Legacy claims and indexes below
 
-	// USDX Minting
-	for _, claim := range gs.USDXMintingClaims {
-		k.SetUSDXMintingClaim(ctx, claim)
+	// FUSD Minting
+	for _, claim := range gs.FUSDMintingClaims {
+		k.SetFUSDMintingClaim(ctx, claim)
 	}
-	for _, gat := range gs.USDXRewardState.AccumulationTimes {
+	for _, gat := range gs.FUSDRewardState.AccumulationTimes {
 		if err := ValidateAccumulationTime(gat.PreviousAccumulationTime, ctx.BlockTime()); err != nil {
 			panic(err.Error())
 		}
-		k.SetPreviousUSDXMintingAccrualTime(ctx, gat.CollateralType, gat.PreviousAccumulationTime)
+		k.SetPreviousFUSDMintingAccrualTime(ctx, gat.CollateralType, gat.PreviousAccumulationTime)
 	}
-	for _, mri := range gs.USDXRewardState.MultiRewardIndexes {
-		factor, found := mri.RewardIndexes.Get(types.USDXMintingRewardDenom)
+	for _, mri := range gs.FUSDRewardState.MultiRewardIndexes {
+		factor, found := mri.RewardIndexes.Get(types.FUSDMintingRewardDenom)
 		if !found || len(mri.RewardIndexes) != 1 {
-			panic(fmt.Sprintf("USDX Minting reward factors must only have denom %s", types.USDXMintingRewardDenom))
+			panic(fmt.Sprintf("FUSD Minting reward factors must only have denom %s", types.FUSDMintingRewardDenom))
 		}
-		k.SetUSDXMintingRewardFactor(ctx, mri.CollateralType, factor)
+		k.SetFUSDMintingRewardFactor(ctx, mri.CollateralType, factor)
 	}
 
 	// Hard Supply / Borrow
@@ -172,8 +172,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) types.GenesisState {
 	accrualTimes := k.Store.GetAllRewardAccrualTimes(ctx)
 	rewardIndexes := k.Store.GetRewardIndexes(ctx)
 
-	usdxClaims := k.GetAllUSDXMintingClaims(ctx)
-	usdxRewardState := getUSDXMintingGenesisRewardState(ctx, k)
+	fusdClaims := k.GetAllFUSDMintingClaims(ctx)
+	fusdRewardState := getFUSDMintingGenesisRewardState(ctx, k)
 
 	hardClaims := k.GetAllHardLiquidityProviderClaims(ctx)
 	hardSupplyRewardState := getHardSupplyGenesisRewardState(ctx, k)
@@ -194,28 +194,28 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) types.GenesisState {
 	return types.NewGenesisState(
 		params,
 		// Reward states
-		usdxRewardState, hardSupplyRewardState, hardBorrowRewardState, delegatorRewardState, swapRewardState, savingsRewardState, earnRewardState,
+		fusdRewardState, hardSupplyRewardState, hardBorrowRewardState, delegatorRewardState, swapRewardState, savingsRewardState, earnRewardState,
 		// Claims
-		claims, usdxClaims, hardClaims, delegatorClaims, swapClaims, savingsClaims, earnClaims,
+		claims, fusdClaims, hardClaims, delegatorClaims, swapClaims, savingsClaims, earnClaims,
 		accrualTimes,
 		rewardIndexes,
 	)
 }
 
-func getUSDXMintingGenesisRewardState(ctx sdk.Context, keeper keeper.Keeper) types.GenesisRewardState {
+func getFUSDMintingGenesisRewardState(ctx sdk.Context, keeper keeper.Keeper) types.GenesisRewardState {
 	var ats types.AccumulationTimes
-	keeper.IterateUSDXMintingAccrualTimes(ctx, func(ctype string, accTime time.Time) bool {
+	keeper.IterateFUSDMintingAccrualTimes(ctx, func(ctype string, accTime time.Time) bool {
 		ats = append(ats, types.NewAccumulationTime(ctype, accTime))
 		return false
 	})
 
 	var mris types.MultiRewardIndexes
-	keeper.IterateUSDXMintingRewardFactors(ctx, func(ctype string, factor sdk.Dec) bool {
+	keeper.IterateFUSDMintingRewardFactors(ctx, func(ctype string, factor sdk.Dec) bool {
 		mris = append(
 			mris,
 			types.NewMultiRewardIndex(
 				ctype,
-				types.RewardIndexes{types.NewRewardIndex(types.USDXMintingRewardDenom, factor)},
+				types.RewardIndexes{types.NewRewardIndex(types.FUSDMintingRewardDenom, factor)},
 			),
 		)
 		return false

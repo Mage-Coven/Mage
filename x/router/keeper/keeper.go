@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/kava-labs/kava/x/router/types"
+	"github.com/mage-coven/mage/x/router/types"
 )
 
 // Keeper is the keeper for the module

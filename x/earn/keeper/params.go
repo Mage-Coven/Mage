@@ -5,12 +5,12 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/types"
 )
 
 const (
-	bkavaDenom  = "bkava"
-	bkavaPrefix = bkavaDenom + "-"
+	bmageDenom  = "bmage"
+	bmagePrefix = bmageDenom + "-"
 )
 
 // GetParams returns the params from the store
@@ -47,15 +47,15 @@ func (k Keeper) getAllowedVaultRaw(
 }
 
 // GetAllowedVault returns the AllowedVault that corresponds to the
-// given denom. If the denom starts with "bkava-" where it will return the
-// "bkava" AllowedVault. Otherwise, it will return the exact match for the
+// given denom. If the denom starts with "bmage-" where it will return the
+// "bmage" AllowedVault. Otherwise, it will return the exact match for the
 // corresponding AllowedVault denom.
 func (k *Keeper) GetAllowedVault(
 	ctx sdk.Context,
 	vaultDenom string,
 ) (types.AllowedVault, bool) {
-	if strings.HasPrefix(vaultDenom, bkavaPrefix) {
-		return k.getAllowedVaultRaw(ctx, bkavaDenom)
+	if strings.HasPrefix(vaultDenom, bmagePrefix) {
+		return k.getAllowedVaultRaw(ctx, bmageDenom)
 	}
 
 	return k.getAllowedVaultRaw(ctx, vaultDenom)

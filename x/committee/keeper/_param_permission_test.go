@@ -11,11 +11,11 @@ import (
 	"github.com/stretchr/testify/suite"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/app"
-	bep3types "github.com/kava-labs/kava/x/bep3/types"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	"github.com/kava-labs/kava/x/committee/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/app"
+	bep3types "github.com/mage-coven/mage/x/bep3/types"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	"github.com/mage-coven/mage/x/committee/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 type PermissionTestSuite struct {
@@ -35,7 +35,7 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 			Denom:               "bnb",
 			Type:                "bnb-a",
 			LiquidationRatio:    d("2.0"),
-			DebtLimit:           c("usdx", 1000000000000),
+			DebtLimit:           c("fusd", 1000000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.05"),
 			AuctionSize:         i(100),
@@ -48,7 +48,7 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 			Denom:               "btc",
 			Type:                "btc-a",
 			LiquidationRatio:    d("1.5"),
-			DebtLimit:           c("usdx", 1000000000),
+			DebtLimit:           c("fusd", 1000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.10"),
 			AuctionSize:         i(1000),
@@ -60,11 +60,11 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 	}
 	testCPUpdatedDebtLimit := make(cdptypes.CollateralParams, len(testCPs))
 	copy(testCPUpdatedDebtLimit, testCPs)
-	testCPUpdatedDebtLimit[0].DebtLimit = c("usdx", 5000000)
+	testCPUpdatedDebtLimit[0].DebtLimit = c("fusd", 5000000)
 
 	// cdp DebtParam
 	testDP := cdptypes.DebtParam{
-		Denom:            "usdx",
+		Denom:            "fusd",
 		ReferenceAsset:   "usd",
 		ConversionFactor: i(6),
 		DebtFloor:        i(10000000),
@@ -78,7 +78,7 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 	testCDPParams.DebtParam = testDP
 	testCDPParams.GlobalDebtLimit = testCPs[0].DebtLimit.Add(testCPs[0].DebtLimit) // correct global debt limit to pass genesis validation
 
-	testDeputy, err := sdk.AccAddressFromBech32("kava1xy7hrjy9r0algz9w3gzm8u6mrpq97kwta747gj")
+	testDeputy, err := sdk.AccAddressFromBech32("mage1xy7hrjy9r0algz9w3gzm8u6mrpq97kwta747gj")
 	suite.Require().NoError(err)
 	// bep3 Asset Params
 	testAPs := bep3types.AssetParams{

@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // InitializeSwapRewardTests runs unit tests for the keeper.InitializeSwapReward method
@@ -92,7 +92,7 @@ func (suite *InitializeSwapRewardTests) TestClaimUpdatedWhenClaimExistsAndNoRewa
 		},
 	}
 
-	newPoolID := "btcb:usdx"
+	newPoolID := "btcb:fusd"
 
 	claim := types.SwapClaim{
 		BaseMultiClaim: types.BaseMultiClaim{
@@ -141,7 +141,7 @@ func (suite *InitializeSwapRewardTests) TestClaimUpdatedWhenClaimExistsAndReward
 		},
 	}
 
-	newPoolID := "btcb:usdx"
+	newPoolID := "btcb:fusd"
 	newIndexes := types.RewardIndexes{
 		{
 			CollateralType: "otherrewarddenom",

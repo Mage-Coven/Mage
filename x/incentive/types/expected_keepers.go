@@ -5,11 +5,11 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
-	savingstypes "github.com/kava-labs/kava/x/savings/types"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
+	savingstypes "github.com/mage-coven/mage/x/savings/types"
 )
 
 // ParamSubspace defines the expected Subspace interfacace
@@ -93,8 +93,8 @@ type AccountKeeper interface {
 	GetModuleAccount(ctx sdk.Context, name string) authtypes.ModuleAccountI
 }
 
-// KavamintKeeper defines the required methods needed by this modules keeper
-type KavamintKeeper interface {
+// MagemintKeeper defines the required methods needed by this modules keeper
+type MagemintKeeper interface {
 	GetStakingApy(ctx sdk.Context) sdk.Dec
 }
 

@@ -1,7 +1,7 @@
 ################################################################################
 ###                             Project Info                                 ###
 ################################################################################
-PROJECT_NAME := kava# unique namespace for project
+PROJECT_NAME := mage# unique namespace for project
 
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT := $(shell git rev-parse HEAD)
@@ -24,7 +24,7 @@ COSMOS_SDK_VERSION := $(shell go list -m github.com/cosmos/cosmos-sdk | sed 's:.
 
 .PHONY: print-version
 print-version:
-	@echo "kava $(VERSION)\ntendermint $(TENDERMINT_VERSION)\ncosmos $(COSMOS_SDK_VERSION)"
+	@echo "mage $(VERSION)\ntendermint $(TENDERMINT_VERSION)\ncosmos $(COSMOS_SDK_VERSION)"
 
 ################################################################################
 ###                             Project Settings                             ###
@@ -32,7 +32,7 @@ print-version:
 LEDGER_ENABLED ?= true
 DOCKER:=docker
 DOCKER_BUF := $(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace bufbuild/buf
-HTTPS_GIT := https://github.com/Kava-Labs/kava.git
+HTTPS_GIT := https://github.com/Mage-Coven/mage.git
 
 ################################################################################
 ###                             Machine Info                                 ###
@@ -129,8 +129,8 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=kava \
-		  -X github.com/cosmos/cosmos-sdk/version.AppName=kava \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=mage \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=mage \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION_NUMBER) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(GIT_COMMIT) \
 		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
@@ -175,16 +175,16 @@ all: install
 
 build: go.sum
 ifeq ($(OS), Windows_NT)
-	go build -mod=readonly $(BUILD_FLAGS) -o out/$(shell go env GOOS)/kava.exe ./cmd/kava
+	go build -mod=readonly $(BUILD_FLAGS) -o out/$(shell go env GOOS)/mage.exe ./cmd/mage
 else
-	go build -mod=readonly $(BUILD_FLAGS) -o out/$(shell go env GOOS)/kava ./cmd/kava
+	go build -mod=readonly $(BUILD_FLAGS) -o out/$(shell go env GOOS)/mage ./cmd/mage
 endif
 
 build-linux: go.sum
 	LEDGER_ENABLED=false GOOS=linux GOARCH=amd64 $(MAKE) build
 
 install: go.sum
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/kava
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/mage
 
 ########################################
 ### Tools & dependencies
@@ -206,7 +206,7 @@ go.sum: go.mod
 # Set to exclude riot links as they trigger false positives
 link-check:
 	@go get -u github.com/raviqqe/liche@f57a5d1c5be4856454cb26de155a65a4fd856ee3
-	liche -r . --exclude "^http://127.*|^https://riot.im/app*|^http://kava-testnet*|^https://testnet-dex*|^https://kava3.data.kava.io*|^https://ipfs.io*|^https://apps.apple.com*|^https://kava.quicksync.io*"
+	liche -r . --exclude "^http://127.*|^https://riot.im/app*|^http://mage-testnet*|^https://testnet-dex*|^https://mage3.data.mage.io*|^https://ipfs.io*|^https://apps.apple.com*|^https://mage.quicksync.io*"
 
 
 lint:
@@ -220,19 +220,19 @@ format:
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs misspell -w
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/tendermint
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/cosmos/cosmos-sdk
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/kava-labs/kava
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/mage-coven/mage
 .PHONY: format
 
 ###############################################################################
 ###                                Localnet                                 ###
 ###############################################################################
 
-build-docker-local-kava:
+build-docker-local-mage:
 	@$(MAKE) -C networks/local
 
 # Run a 4-node testnet locally
 localnet-start: build-linux localnet-stop
-	@if ! [ -f build/node0/kvd/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/kvd:Z kava/kavanode testnet --v 4 -o . --starting-ip-address 192.168.10.2 --keyring-backend=test ; fi
+	@if ! [ -f build/node0/mge/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/mge:Z mage/magenode testnet --v 4 -o . --starting-ip-address 192.168.10.2 --keyring-backend=test ; fi
 	docker-compose up -d
 
 localnet-stop:
@@ -241,7 +241,7 @@ localnet-stop:
 # Launch a new single validator chain
 start:
 	./contrib/devnet/init-new-chain.sh
-	kava start
+	mage start
 
 #proto-format:
 #@echo "Formatting Protobuf files"
@@ -279,7 +279,7 @@ test:
 
 # Run cli integration tests
 # `-p 4` to use 4 cores, `-tags cli_test` to tell go not to ignore the cli package
-# These tests use the `kvd` or `kvcli` binaries in the build dir, or in `$BUILDDIR` if that env var is set.
+# These tests use the `mge` or `kvcli` binaries in the build dir, or in `$BUILDDIR` if that env var is set.
 test-cli: build
 	@go test ./cli_test -tags cli_test -v -p 4
 
@@ -291,15 +291,15 @@ test-migrate:
 # This submits an AWS Batch job to run a lot of sims, each within a docker image. Results are uploaded to S3
 start-remote-sims:
 	# build the image used for running sims in, and tag it
-	docker build -f simulations/Dockerfile -t kava/kava-sim:master .
+	docker build -f simulations/Dockerfile -t mage/mage-sim:master .
 	# push that image to the hub
-	docker push kava/kava-sim:master
+	docker push mage/mage-sim:master
 	# submit an array job on AWS Batch, using 1000 seeds, spot instances
 	aws batch submit-job \
 		-—job-name "master-$(VERSION)" \
 		-—job-queue “simulation-1-queue-spot" \
 		-—array-properties size=1000 \
-		-—job-definition kava-sim-master \
+		-—job-definition mage-sim-master \
 		-—container-override environment=[{SIM_NAME=master-$(VERSION)}]
 
 .PHONY: all build-linux install clean build test test-cli test-all test-rest test-basic start-remote-sims

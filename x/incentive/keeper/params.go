@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // GetParams returns the params from the store
@@ -20,10 +20,10 @@ func (k Keeper) SetParams(ctx sdk.Context, params types.Params) {
 	k.paramSubspace.SetParamSet(ctx, &params)
 }
 
-// GetUSDXMintingRewardPeriod returns the reward period with the specified collateral type if it's found in the params
-func (k Keeper) GetUSDXMintingRewardPeriod(ctx sdk.Context, collateralType string) (types.RewardPeriod, bool) {
+// GetFUSDMintingRewardPeriod returns the reward period with the specified collateral type if it's found in the params
+func (k Keeper) GetFUSDMintingRewardPeriod(ctx sdk.Context, collateralType string) (types.RewardPeriod, bool) {
 	params := k.GetParams(ctx)
-	for _, rp := range params.USDXMintingRewardPeriods {
+	for _, rp := range params.FUSDMintingRewardPeriods {
 		if rp.CollateralType == collateralType {
 			return rp, true
 		}

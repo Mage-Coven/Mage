@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // InitializeClaimTests runs unit tests for the keeper.InitializeClaim method
@@ -142,7 +142,7 @@ func (suite *InitializeClaimTests) TestClaimUpdatedWhenClaimExistsAndRewardsExis
 		},
 	}
 
-	newCollateralType := "btcb:usdx"
+	newCollateralType := "btcb:fusd"
 	newIndexes := types.RewardIndexes{
 		{
 			CollateralType: "otherrewarddenom",

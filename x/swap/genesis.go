@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/swap/keeper"
-	"github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/x/swap/keeper"
+	"github.com/mage-coven/mage/x/swap/types"
 )
 
 // InitGenesis initializes story state from genesis file

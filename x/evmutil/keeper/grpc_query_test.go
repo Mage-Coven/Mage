@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/evmutil/keeper"
-	"github.com/kava-labs/kava/x/evmutil/testutil"
-	"github.com/kava-labs/kava/x/evmutil/types"
+	"github.com/mage-coven/mage/x/evmutil/keeper"
+	"github.com/mage-coven/mage/x/evmutil/testutil"
+	"github.com/mage-coven/mage/x/evmutil/types"
 )
 
 type GrpcQueryTestSuite struct {

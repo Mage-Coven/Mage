@@ -13,7 +13,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/version"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/types"
 )
 
 // GetTxCmd returns the transaction commands for this module
@@ -45,7 +45,7 @@ func getCmdDeposit() *cobra.Command {
 		Use:   "deposit [amount] [strategy]",
 		Short: "deposit coins to an earn vault",
 		Example: fmt.Sprintf(
-			`%s tx %s deposit 10000000ukava hard --from <key>`,
+			`%s tx %s deposit 10000000umage hard --from <key>`,
 			version.AppName, types.ModuleName,
 		),
 		Args: cobra.ExactArgs(2),
@@ -81,7 +81,7 @@ func getCmdWithdraw() *cobra.Command {
 		Use:   "withdraw [amount] [strategy]",
 		Short: "withdraw coins from an earn vault",
 		Example: fmt.Sprintf(
-			`%s tx %s withdraw 10000000ukava hard --from <key>`,
+			`%s tx %s withdraw 10000000umage hard --from <key>`,
 			version.AppName, types.ModuleName,
 		),
 		Args: cobra.ExactArgs(2),
@@ -126,15 +126,15 @@ $ %s tx gov submit-proposal community-pool-deposit <path/to/proposal.json> --fro
 Where proposal.json contains:
 {
   "title": "Community Pool Deposit",
-  "description": "Deposit some KAVA from community pool!",
+  "description": "Deposit some MAGE from community pool!",
   "amount": 
   	{
-			"denom": "ukava",
+			"denom": "umage",
 			"amount": "100000000000"
 	},
 	"deposit": [
 		{
-			"denom": "ukava",
+			"denom": "umage",
 			"amount": "1000000000"
 		}
 	]
@@ -184,15 +184,15 @@ $ %s tx gov submit-proposal community-pool-withdraw <path/to/proposal.json> --fr
 Where proposal.json contains:
 {
   "title": "Community Pool Withdraw",
-  "description": "Withdraw some KAVA from community pool!",
+  "description": "Withdraw some MAGE from community pool!",
   "amount": 
   	{
-			"denom": "ukava",
+			"denom": "umage",
 			"amount": "100000000000"
 	},
 	"deposit": [
 		{
-			"denom": "ukava",
+			"denom": "umage",
 			"amount": "1000000000"
 		}
 	]

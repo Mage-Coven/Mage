@@ -4,10 +4,10 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	communitytypes "github.com/kava-labs/kava/x/community/types"
-	"github.com/kava-labs/kava/x/earn/keeper"
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	communitytypes "github.com/mage-coven/mage/x/community/types"
+	"github.com/mage-coven/mage/x/earn/keeper"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -27,11 +27,11 @@ func TestProposalTestSuite(t *testing.T) {
 func (suite *proposalTestSuite) TestCommunityDepositProposal() {
 	ctx := suite.Ctx
 	macc := suite.App.GetAccountKeeper().GetModuleAccount(ctx, communitytypes.ModuleAccountName)
-	fundAmount := sdk.NewCoins(sdk.NewInt64Coin("ukava", 100000000))
-	depositAmount := sdk.NewCoin("ukava", sdk.NewInt(10000000))
+	fundAmount := sdk.NewCoins(sdk.NewInt64Coin("umage", 100000000))
+	depositAmount := sdk.NewCoin("umage", sdk.NewInt(10000000))
 	suite.Require().NoError(suite.App.FundModuleAccount(ctx, macc.GetName(), fundAmount))
 
-	suite.CreateVault("ukava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+	suite.CreateVault("umage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 	prop := types.NewCommunityPoolDepositProposal("test title",
 		"desc", depositAmount)
 	err := keeper.HandleCommunityPoolDepositProposal(ctx, suite.Keeper, prop)
@@ -47,12 +47,12 @@ func (suite *proposalTestSuite) TestCommunityDepositProposal() {
 func (suite *proposalTestSuite) TestCommunityWithdrawProposal() {
 	ctx := suite.Ctx
 	macc := suite.App.GetAccountKeeper().GetModuleAccount(ctx, communitytypes.ModuleAccountName)
-	fundAmount := sdk.NewCoins(sdk.NewInt64Coin("ukava", 100000000))
-	depositAmount := sdk.NewCoin("ukava", sdk.NewInt(10000000))
+	fundAmount := sdk.NewCoins(sdk.NewInt64Coin("umage", 100000000))
+	depositAmount := sdk.NewCoin("umage", sdk.NewInt(10000000))
 	suite.Require().NoError(suite.App.FundModuleAccount(ctx, macc.GetName(), fundAmount))
 
 	// TODO update to STRATEGY_TYPE_SAVINGS once implemented
-	suite.CreateVault("ukava", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
+	suite.CreateVault("umage", types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS}, false, nil)
 	deposit := types.NewCommunityPoolDepositProposal("test title",
 		"desc", depositAmount)
 	err := keeper.HandleCommunityPoolDepositProposal(ctx, suite.Keeper, deposit)

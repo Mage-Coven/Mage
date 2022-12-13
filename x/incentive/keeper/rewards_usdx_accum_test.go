@@ -7,43 +7,43 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
-type AccumulateUSDXRewardsTests struct {
-	usdxRewardsUnitTester
+type AccumulateFUSDRewardsTests struct {
+	fusdRewardsUnitTester
 }
 
-func (suite *AccumulateUSDXRewardsTests) storedTimeEquals(cType string, expected time.Time) {
-	storedTime, found := suite.keeper.GetPreviousUSDXMintingAccrualTime(suite.ctx, cType)
+func (suite *AccumulateFUSDRewardsTests) storedTimeEquals(cType string, expected time.Time) {
+	storedTime, found := suite.keeper.GetPreviousFUSDMintingAccrualTime(suite.ctx, cType)
 	suite.True(found)
 	suite.Equal(expected, storedTime)
 }
 
-func (suite *AccumulateUSDXRewardsTests) storedIndexesEqual(cType string, expected sdk.Dec) {
-	storedIndexes, found := suite.keeper.GetUSDXMintingRewardFactor(suite.ctx, cType)
+func (suite *AccumulateFUSDRewardsTests) storedIndexesEqual(cType string, expected sdk.Dec) {
+	storedIndexes, found := suite.keeper.GetFUSDMintingRewardFactor(suite.ctx, cType)
 	suite.True(found)
 	suite.Equal(expected, storedIndexes)
 }
 
-func TestAccumulateUSDXRewards(t *testing.T) {
-	suite.Run(t, new(AccumulateUSDXRewardsTests))
+func TestAccumulateFUSDRewards(t *testing.T) {
+	suite.Run(t, new(AccumulateFUSDRewardsTests))
 }
 
-func (suite *AccumulateUSDXRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased() {
+func (suite *AccumulateFUSDRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreased() {
 	cType := "bnb-a"
 
 	cdpKeeper := newFakeCDPKeeper().addTotalPrincipal(i(1e6)).addInterestFactor(d("1"))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, cdpKeeper, nil, nil, nil, nil, nil, nil, nil)
 
-	suite.storeGlobalUSDXIndexes(types.RewardIndexes{
+	suite.storeGlobalFUSDIndexes(types.RewardIndexes{
 		{
 			CollateralType: cType,
 			RewardFactor:   d("0.04"),
 		},
 	})
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
-	suite.keeper.SetPreviousUSDXMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
+	suite.keeper.SetPreviousFUSDMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
 
 	newAccrualTime := previousAccrualTime.Add(1 * time.Hour)
 	suite.ctx = suite.ctx.WithBlockTime(newAccrualTime)
@@ -53,10 +53,10 @@ func (suite *AccumulateUSDXRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 		cType,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		c("ukava", 1000),
+		c("umage", 1000),
 	)
 
-	suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+	suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 
 	// check time and factors
 
@@ -64,7 +64,7 @@ func (suite *AccumulateUSDXRewardsTests) TestStateUpdatedWhenBlockTimeHasIncreas
 	suite.storedIndexesEqual(cType, d("3.64"))
 }
 
-func (suite *AccumulateUSDXRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIncreased() {
+func (suite *AccumulateFUSDRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIncreased() {
 	cType := "bnb-a"
 
 	cdpKeeper := newFakeCDPKeeper().addTotalPrincipal(i(1e6)).addInterestFactor(d("1"))
@@ -76,9 +76,9 @@ func (suite *AccumulateUSDXRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 			RewardFactor:   d("0.04"),
 		},
 	}
-	suite.storeGlobalUSDXIndexes(previousIndexes)
+	suite.storeGlobalFUSDIndexes(previousIndexes)
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
-	suite.keeper.SetPreviousUSDXMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
+	suite.keeper.SetPreviousFUSDMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
 
 	suite.ctx = suite.ctx.WithBlockTime(previousAccrualTime)
 
@@ -87,10 +87,10 @@ func (suite *AccumulateUSDXRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 		cType,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		c("ukava", 2000),
+		c("umage", 2000),
 	)
 
-	suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+	suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 
 	// check time and factors
 
@@ -100,7 +100,7 @@ func (suite *AccumulateUSDXRewardsTests) TestStateUnchangedWhenBlockTimeHasNotIn
 	suite.storedIndexesEqual(cType, expected)
 }
 
-func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenSourceSharesAreZero() {
+func (suite *AccumulateFUSDRewardsTests) TestNoAccumulationWhenSourceSharesAreZero() {
 	cType := "bnb-a"
 
 	cdpKeeper := newFakeCDPKeeper() // zero total borrows
@@ -112,9 +112,9 @@ func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 			RewardFactor:   d("0.04"),
 		},
 	}
-	suite.storeGlobalUSDXIndexes(previousIndexes)
+	suite.storeGlobalFUSDIndexes(previousIndexes)
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
-	suite.keeper.SetPreviousUSDXMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
+	suite.keeper.SetPreviousFUSDMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
 
 	firstAccrualTime := previousAccrualTime.Add(7 * time.Second)
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
@@ -124,10 +124,10 @@ func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 		cType,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		c("ukava", 1000),
+		c("umage", 1000),
 	)
 
-	suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+	suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 
 	// check time and factors
 
@@ -137,7 +137,7 @@ func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenSourceSharesAreZe
 	suite.storedIndexesEqual(cType, expected)
 }
 
-func (suite *AccumulateUSDXRewardsTests) TestStateAddedWhenStateDoesNotExist() {
+func (suite *AccumulateFUSDRewardsTests) TestStateAddedWhenStateDoesNotExist() {
 	cType := "bnb-a"
 
 	cdpKeeper := newFakeCDPKeeper().addTotalPrincipal(i(1e6)).addInterestFactor(d("1"))
@@ -148,13 +148,13 @@ func (suite *AccumulateUSDXRewardsTests) TestStateAddedWhenStateDoesNotExist() {
 		cType,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		c("ukava", 1000),
+		c("umage", 1000),
 	)
 
 	firstAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
 
-	suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+	suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 
 	// After the first accumulation the current block time should be stored and the factor will be zero.
 	suite.storedTimeEquals(cType, firstAccrualTime)
@@ -163,14 +163,14 @@ func (suite *AccumulateUSDXRewardsTests) TestStateAddedWhenStateDoesNotExist() {
 	secondAccrualTime := firstAccrualTime.Add(10 * time.Second)
 	suite.ctx = suite.ctx.WithBlockTime(secondAccrualTime)
 
-	suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+	suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 
 	// After the second accumulation both current block time and indexes should be stored.
 	suite.storedTimeEquals(cType, secondAccrualTime)
 	suite.storedIndexesEqual(cType, d("0.01"))
 }
 
-func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenBeforeStartTime() {
+func (suite *AccumulateFUSDRewardsTests) TestNoAccumulationWhenBeforeStartTime() {
 	cType := "bnb-a"
 
 	cdpKeeper := newFakeCDPKeeper().addTotalPrincipal(i(1e6)).addInterestFactor(d("1"))
@@ -182,9 +182,9 @@ func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenBeforeStartTime()
 			RewardFactor:   d("0.04"),
 		},
 	}
-	suite.storeGlobalUSDXIndexes(previousIndexes)
+	suite.storeGlobalFUSDIndexes(previousIndexes)
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
-	suite.keeper.SetPreviousUSDXMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
+	suite.keeper.SetPreviousFUSDMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
 
 	firstAccrualTime := previousAccrualTime.Add(10 * time.Second)
 
@@ -193,12 +193,12 @@ func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenBeforeStartTime()
 		cType,
 		firstAccrualTime.Add(time.Nanosecond), // start time after accrual time
 		distantFuture,
-		c("ukava", 1000),
+		c("umage", 1000),
 	)
 
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
 
-	suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+	suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 
 	// The accrual time should be updated, but the indexes unchanged
 	suite.storedTimeEquals(cType, firstAccrualTime)
@@ -207,14 +207,14 @@ func (suite *AccumulateUSDXRewardsTests) TestNoAccumulationWhenBeforeStartTime()
 	suite.storedIndexesEqual(cType, expected)
 }
 
-func (suite *AccumulateUSDXRewardsTests) TestPanicWhenCurrentTimeLessThanPrevious() {
+func (suite *AccumulateFUSDRewardsTests) TestPanicWhenCurrentTimeLessThanPrevious() {
 	cType := "bnb-a"
 
 	cdpKeeper := newFakeCDPKeeper().addTotalPrincipal(i(1e6)).addInterestFactor(d("1"))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, cdpKeeper, nil, nil, nil, nil, nil, nil, nil)
 
 	previousAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
-	suite.keeper.SetPreviousUSDXMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
+	suite.keeper.SetPreviousFUSDMintingAccrualTime(suite.ctx, cType, previousAccrualTime)
 
 	firstAccrualTime := time.Time{}
 
@@ -223,12 +223,12 @@ func (suite *AccumulateUSDXRewardsTests) TestPanicWhenCurrentTimeLessThanPreviou
 		cType,
 		time.Time{}, // start time after accrual time
 		distantFuture,
-		c("ukava", 1000),
+		c("umage", 1000),
 	)
 
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
 
 	suite.Panics(func() {
-		suite.keeper.AccumulateUSDXMintingRewards(suite.ctx, period)
+		suite.keeper.AccumulateFUSDMintingRewards(suite.ctx, period)
 	})
 }

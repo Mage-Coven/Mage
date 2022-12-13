@@ -2,12 +2,12 @@ package types_test
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/kava-labs/kava/app"
+	"github.com/mage-coven/mage/app"
 )
 
 func init() {
-	kavaConfig := sdk.GetConfig()
-	app.SetBech32AddressPrefixes(kavaConfig)
-	app.SetBip44CoinType(kavaConfig)
-	kavaConfig.Seal()
+	mageConfig := sdk.GetConfig()
+	app.SetBech32AddressPrefixes(mageConfig)
+	app.SetBip44CoinType(mageConfig)
+	mageConfig.Seal()
 }

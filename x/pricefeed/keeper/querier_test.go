@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/pricefeed/keeper"
-	"github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/x/pricefeed/keeper"
+	"github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 func (suite *KeeperTestSuite) TestQuerierGetParams() {

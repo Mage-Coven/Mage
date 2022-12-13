@@ -6,8 +6,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/community/keeper"
-	"github.com/kava-labs/kava/x/community/types"
+	"github.com/mage-coven/mage/x/community/keeper"
+	"github.com/mage-coven/mage/x/community/types"
 )
 
 // InitGenesis initializes the community module account

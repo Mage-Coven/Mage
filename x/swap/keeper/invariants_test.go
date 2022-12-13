@@ -3,9 +3,9 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/kava-labs/kava/x/swap/keeper"
-	"github.com/kava-labs/kava/x/swap/testutil"
-	"github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/x/swap/keeper"
+	"github.com/mage-coven/mage/x/swap/testutil"
+	"github.com/mage-coven/mage/x/swap/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
@@ -25,44 +25,44 @@ func (suite *invariantTestSuite) SetupTest() {
 func (suite *invariantTestSuite) SetupValidState() {
 	suite.Keeper.SetPool(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e6)),
+			sdk.NewCoin("umage", sdk.NewInt(1e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e6)),
 		),
 		sdk.NewInt(3e6),
 	))
 	suite.AddCoinsToModule(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e6)),
+			sdk.NewCoin("umage", sdk.NewInt(1e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e6)),
 		),
 	)
 	suite.Keeper.SetDepositorShares(suite.Ctx, types.NewShareRecord(
 		sdk.AccAddress("depositor 1---------"), // TODO these addresses are padded to get to the required length of 20 bytes. What is a nicer setup?
-		types.PoolID("ukava", "usdx"),
+		types.PoolID("umage", "fusd"),
 		sdk.NewInt(2e6),
 	))
 	suite.Keeper.SetDepositorShares(suite.Ctx, types.NewShareRecord(
 		sdk.AccAddress("depositor 2---------"),
-		types.PoolID("ukava", "usdx"),
+		types.PoolID("umage", "fusd"),
 		sdk.NewInt(1e6),
 	))
 
 	suite.Keeper.SetPool(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
 			sdk.NewCoin("hard", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(2e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(2e6)),
 		),
 		sdk.NewInt(1e6),
 	))
 	suite.AddCoinsToModule(
 		sdk.NewCoins(
 			sdk.NewCoin("hard", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(2e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(2e6)),
 		),
 	)
 	suite.Keeper.SetDepositorShares(suite.Ctx, types.NewShareRecord(
 		sdk.AccAddress("depositor 1---------"),
-		types.PoolID("hard", "usdx"),
+		types.PoolID("hard", "fusd"),
 		sdk.NewInt(1e6),
 	))
 }
@@ -116,8 +116,8 @@ func (suite *invariantTestSuite) TestPoolRecordsInvariant() {
 	// broken with invalid pool record
 	suite.Keeper.SetPool_Raw(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e6)),
+			sdk.NewCoin("umage", sdk.NewInt(1e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e6)),
 		),
 		sdk.NewInt(-1e6),
 	))
@@ -139,7 +139,7 @@ func (suite *invariantTestSuite) TestShareRecordsInvariant() {
 	// broken with invalid share record
 	suite.Keeper.SetDepositorShares_Raw(suite.Ctx, types.NewShareRecord(
 		sdk.AccAddress("depositor 1---------"),
-		types.PoolID("ukava", "usdx"),
+		types.PoolID("umage", "fusd"),
 		sdk.NewInt(-1e6),
 	))
 	message, broken = suite.runInvariant("share-records", keeper.ShareRecordsInvariant)
@@ -160,8 +160,8 @@ func (suite *invariantTestSuite) TestPoolReservesInvariant() {
 	// broken when reserves are greater than module balance
 	suite.Keeper.SetPool(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(2e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(10e6)),
+			sdk.NewCoin("umage", sdk.NewInt(2e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(10e6)),
 		),
 		sdk.NewInt(5e6),
 	))
@@ -172,8 +172,8 @@ func (suite *invariantTestSuite) TestPoolReservesInvariant() {
 	// broken when reserves are less than the module balance
 	suite.Keeper.SetPool(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e5)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e5)),
+			sdk.NewCoin("umage", sdk.NewInt(1e5)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e5)),
 		),
 		sdk.NewInt(3e5),
 	))
@@ -195,8 +195,8 @@ func (suite *invariantTestSuite) TestPoolSharesInvariant() {
 	// broken when total shares are greater than depositor shares
 	suite.Keeper.SetPool(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e6)),
+			sdk.NewCoin("umage", sdk.NewInt(1e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e6)),
 		),
 		sdk.NewInt(5e6),
 	))
@@ -207,8 +207,8 @@ func (suite *invariantTestSuite) TestPoolSharesInvariant() {
 	// broken when total shares are less than the depositor shares
 	suite.Keeper.SetPool(suite.Ctx, types.NewPoolRecord(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e6)),
+			sdk.NewCoin("umage", sdk.NewInt(1e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e6)),
 		),
 		sdk.NewInt(1e5),
 	))
@@ -217,11 +217,11 @@ func (suite *invariantTestSuite) TestPoolSharesInvariant() {
 	suite.Equal(true, broken)
 
 	// broken when pool record is missing
-	suite.Keeper.DeletePool(suite.Ctx, types.PoolID("ukava", "usdx"))
+	suite.Keeper.DeletePool(suite.Ctx, types.PoolID("umage", "fusd"))
 	suite.RemoveCoinsFromModule(
 		sdk.NewCoins(
-			sdk.NewCoin("ukava", sdk.NewInt(1e6)),
-			sdk.NewCoin("usdx", sdk.NewInt(5e6)),
+			sdk.NewCoin("umage", sdk.NewInt(1e6)),
+			sdk.NewCoin("fusd", sdk.NewInt(5e6)),
 		),
 	)
 	message, broken = suite.runInvariant("pool-shares", keeper.PoolSharesInvariant)

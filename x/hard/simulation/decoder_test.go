@@ -11,7 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/hard/types"
+	"github.com/mage-coven/mage/x/hard/types"
 )
 
 func makeTestCodec() (cdc *codec.Codec) {

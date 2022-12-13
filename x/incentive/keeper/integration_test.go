@@ -6,12 +6,12 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/kava-labs/kava/app"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	committeetypes "github.com/kava-labs/kava/x/committee/types"
-	"github.com/kava-labs/kava/x/incentive/testutil"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
-	swaptypes "github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/app"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	committeetypes "github.com/mage-coven/mage/x/committee/types"
+	"github.com/mage-coven/mage/x/incentive/testutil"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
+	swaptypes "github.com/mage-coven/mage/x/swap/types"
 )
 
 // Avoid cluttering test cases with long function names
@@ -28,7 +28,7 @@ func dcs(coins ...sdk.DecCoin) sdk.DecCoins { return sdk.NewDecCoins(coins...) }
 func NewCDPGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 	cdpGenesis := cdptypes.GenesisState{
 		Params: cdptypes.Params{
-			GlobalDebtLimit:         sdk.NewInt64Coin("usdx", 2000000000000),
+			GlobalDebtLimit:         sdk.NewInt64Coin("fusd", 2000000000000),
 			SurplusAuctionThreshold: cdptypes.DefaultSurplusThreshold,
 			SurplusAuctionLot:       cdptypes.DefaultSurplusLot,
 			DebtAuctionThreshold:    cdptypes.DefaultDebtThreshold,
@@ -38,7 +38,7 @@ func NewCDPGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 					Denom:               "xrp",
 					Type:                "xrp-a",
 					LiquidationRatio:    sdk.MustNewDecFromStr("2.0"),
-					DebtLimit:           sdk.NewInt64Coin("usdx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("fusd", 500000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(7000000000),
@@ -50,7 +50,7 @@ func NewCDPGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 					Denom:               "btc",
 					Type:                "btc-a",
 					LiquidationRatio:    sdk.MustNewDecFromStr("1.5"),
-					DebtLimit:           sdk.NewInt64Coin("usdx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("fusd", 500000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000000782997609"), // %2.5 apr
 					LiquidationPenalty:  d("0.025"),
 					AuctionSize:         i(10000000),
@@ -62,7 +62,7 @@ func NewCDPGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 					Denom:               "bnb",
 					Type:                "bnb-a",
 					LiquidationRatio:    sdk.MustNewDecFromStr("1.5"),
-					DebtLimit:           sdk.NewInt64Coin("usdx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("fusd", 500000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(50000000000),
@@ -74,7 +74,7 @@ func NewCDPGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 					Denom:               "busd",
 					Type:                "busd-a",
 					LiquidationRatio:    d("1.01"),
-					DebtLimit:           sdk.NewInt64Coin("usdx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("fusd", 500000000000),
 					StabilityFee:        sdk.OneDec(), // %0 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(10000000000),
@@ -84,7 +84,7 @@ func NewCDPGenStateMulti(cdc codec.JSONCodec) app.GenesisState {
 				},
 			},
 			DebtParam: cdptypes.DebtParam{
-				Denom:            "usdx",
+				Denom:            "fusd",
 				ReferenceAsset:   "usd",
 				ConversionFactor: i(6),
 				DebtFloor:        i(10000000),
@@ -116,7 +116,7 @@ func NewPricefeedGenStateMultiFromTime(cdc codec.JSONCodec, t time.Time) app.Gen
 	pfGenesis := pricefeedtypes.GenesisState{
 		Params: pricefeedtypes.Params{
 			Markets: []pricefeedtypes.Market{
-				{MarketID: "kava:usd", BaseAsset: "kava", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "mage:usd", BaseAsset: "mage", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "btc:usd", BaseAsset: "btc", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "xrp:usd", BaseAsset: "xrp", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "bnb:usd", BaseAsset: "bnb", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
@@ -126,7 +126,7 @@ func NewPricefeedGenStateMultiFromTime(cdc codec.JSONCodec, t time.Time) app.Gen
 		},
 		PostedPrices: []pricefeedtypes.PostedPrice{
 			{
-				MarketID:      "kava:usd",
+				MarketID:      "mage:usd",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.MustNewDecFromStr("2.00"),
 				Expiry:        t.Add(expiry),
@@ -167,14 +167,14 @@ func NewPricefeedGenStateMultiFromTime(cdc codec.JSONCodec, t time.Time) app.Gen
 }
 
 func NewHardGenStateMulti(genTime time.Time) testutil.HardGenesisBuilder {
-	kavaMM := testutil.NewStandardMoneyMarket("ukava")
-	kavaMM.SpotMarketID = "kava:usd"
+	mageMM := testutil.NewStandardMoneyMarket("umage")
+	mageMM.SpotMarketID = "mage:usd"
 	btcMM := testutil.NewStandardMoneyMarket("btcb")
 	btcMM.SpotMarketID = "btc:usd"
 
 	builder := testutil.NewHardGenesisBuilder().WithGenesisTime(genTime).
-		WithInitializedMoneyMarket(testutil.NewStandardMoneyMarket("usdx")).
-		WithInitializedMoneyMarket(kavaMM).
+		WithInitializedMoneyMarket(testutil.NewStandardMoneyMarket("fusd")).
+		WithInitializedMoneyMarket(mageMM).
 		WithInitializedMoneyMarket(testutil.NewStandardMoneyMarket("bnb")).
 		WithInitializedMoneyMarket(btcMM).
 		WithInitializedMoneyMarket(testutil.NewStandardMoneyMarket("xrp")).
@@ -184,7 +184,7 @@ func NewHardGenStateMulti(genTime time.Time) testutil.HardGenesisBuilder {
 
 func NewStakingGenesisState(cdc codec.JSONCodec) app.GenesisState {
 	genState := stakingtypes.DefaultGenesisState()
-	genState.Params.BondDenom = "ukava"
+	genState.Params.BondDenom = "umage"
 	return app.GenesisState{
 		stakingtypes.ModuleName: cdc.MustMarshalJSON(genState),
 	}
@@ -225,7 +225,7 @@ func NewCommitteeGenesisState(cdc codec.Codec, committeeID uint64, members ...sd
 func NewSwapGenesisState(cdc codec.JSONCodec) app.GenesisState {
 	genesis := swaptypes.NewGenesisState(
 		swaptypes.NewParams(
-			swaptypes.NewAllowedPools(swaptypes.NewAllowedPool("busd", "ukava")),
+			swaptypes.NewAllowedPools(swaptypes.NewAllowedPool("busd", "umage")),
 			d("0.0"),
 		),
 		swaptypes.DefaultPoolRecords,

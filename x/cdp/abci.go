@@ -7,8 +7,8 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/cdp/keeper"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/x/cdp/keeper"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 // BeginBlocker compounds the debt in outstanding cdps and liquidates cdps that are below the required collateralization ratio

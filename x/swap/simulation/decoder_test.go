@@ -11,7 +11,7 @@ package simulation
 // 	"github.com/tendermint/tendermint/crypto"
 // 	"github.com/tendermint/tendermint/libs/kv"
 
-// 	"github.com/kava-labs/kava/x/swap/types"
+// 	"github.com/mage-coven/mage/x/swap/types"
 // )
 
 // func makeTestCodec() (cdc *codec.Codec) {
@@ -26,8 +26,8 @@ package simulation
 
 // 	depositor := sdk.AccAddress(crypto.AddressHash([]byte("DepositorAddress")))
 // 	reserves := sdk.NewCoins(
-// 		sdk.NewCoin("ukava", sdk.NewInt(100000000)),
-// 		sdk.NewCoin("usdx", sdk.NewInt(200000000)),
+// 		sdk.NewCoin("umage", sdk.NewInt(100000000)),
+// 		sdk.NewCoin("fusd", sdk.NewInt(200000000)),
 // 	)
 // 	shares := sdk.NewInt(123456)
 

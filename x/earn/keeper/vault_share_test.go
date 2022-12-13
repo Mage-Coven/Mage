@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 )
 
 type vaultShareTestSuite struct {
@@ -25,7 +25,7 @@ func TestVaultShareTestSuite(t *testing.T) {
 }
 
 func (suite *vaultShareTestSuite) TestConvertToShares() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	tests := []struct {
 		name          string

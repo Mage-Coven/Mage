@@ -37,7 +37,7 @@ func TestGenesisState_Validate(t *testing.T) {
 							"bnb-a",
 							time.Date(2020, 10, 15, 14, 0, 0, 0, time.UTC),
 							time.Date(2024, 10, 15, 14, 0, 0, 0, time.UTC),
-							sdk.NewCoin("ukava", sdk.NewInt(25000)),
+							sdk.NewCoin("umage", sdk.NewInt(25000)),
 						),
 					},
 					DefaultMultiRewardPeriods,
@@ -48,7 +48,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					DefaultMultiRewardPeriods,
 					MultipliersPerDenoms{
 						{
-							Denom: "ukava",
+							Denom: "umage",
 							Multipliers: Multipliers{
 								NewMultiplier("small", 1, sdk.MustNewDecFromStr("0.33")),
 								NewMultiplier("large", 12, sdk.MustNewDecFromStr("1.00")),
@@ -58,7 +58,7 @@ func TestGenesisState_Validate(t *testing.T) {
 					time.Date(2025, 10, 15, 14, 0, 0, 0, time.UTC),
 					DefaultTypedMultiRewardPeriods,
 				),
-				USDXRewardState: GenesisRewardState{
+				FUSDRewardState: GenesisRewardState{
 					AccumulationTimes: AccumulationTimes{{
 						CollateralType:           "bnb-a",
 						PreviousAccumulationTime: time.Date(2020, 10, 15, 14, 0, 0, 0, time.UTC),
@@ -70,14 +70,14 @@ func TestGenesisState_Validate(t *testing.T) {
 				},
 				Claims: Claims{
 					{
-						Type:   CLAIM_TYPE_USDX_MINTING,
-						Owner:  sdk.AccAddress(crypto.AddressHash([]byte("KavaTestUser1"))),
-						Reward: cs(c("ukava", 100000000)),
+						Type:   CLAIM_TYPE_FUSD_MINTING,
+						Owner:  sdk.AccAddress(crypto.AddressHash([]byte("MageTestUser1"))),
+						Reward: cs(c("umage", 100000000)),
 						RewardIndexes: []MultiRewardIndex{
 							{
 								CollateralType: "bnb-a",
 								RewardIndexes: RewardIndexes{
-									NewRewardIndex(USDXMintingRewardDenom, sdk.ZeroDec()),
+									NewRewardIndex(FUSDMintingRewardDenom, sdk.ZeroDec()),
 								},
 							},
 						},
@@ -92,7 +92,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "invalid genesis accumulation time",
 			genesis: GenesisState{
 				Params: DefaultParams(),
-				USDXRewardState: GenesisRewardState{
+				FUSDRewardState: GenesisRewardState{
 					AccumulationTimes: AccumulationTimes{{
 						CollateralType:           "",
 						PreviousAccumulationTime: time.Date(2020, 10, 15, 14, 0, 0, 0, time.UTC),
@@ -113,17 +113,17 @@ func TestGenesisState_Validate(t *testing.T) {
 			name: "invalid claim",
 			genesis: GenesisState{
 				Params:          DefaultParams(),
-				USDXRewardState: DefaultGenesisRewardState,
+				FUSDRewardState: DefaultGenesisRewardState,
 				Claims: Claims{
 					{
-						Type:   CLAIM_TYPE_USDX_MINTING,
+						Type:   CLAIM_TYPE_FUSD_MINTING,
 						Owner:  nil, // invalid address
-						Reward: cs(c("ukava", 100000000)),
+						Reward: cs(c("umage", 100000000)),
 						RewardIndexes: []MultiRewardIndex{
 							{
 								CollateralType: "bnb-a",
 								RewardIndexes: RewardIndexes{
-									NewRewardIndex(USDXMintingRewardDenom, sdk.ZeroDec()),
+									NewRewardIndex(FUSDMintingRewardDenom, sdk.ZeroDec()),
 								},
 							},
 						},
@@ -141,7 +141,7 @@ func TestGenesisState_Validate(t *testing.T) {
 				Params: DefaultParams(),
 				Claims: DefaultClaims,
 				AccrualTimes: AccrualTimes{
-					NewAccrualTime(CLAIM_TYPE_USDX_MINTING, "", time.Date(2020, 10, 15, 14, 0, 0, 0, time.UTC)),
+					NewAccrualTime(CLAIM_TYPE_FUSD_MINTING, "", time.Date(2020, 10, 15, 14, 0, 0, 0, time.UTC)),
 				},
 			},
 			errArgs: errArgs{
@@ -213,12 +213,12 @@ func TestAccrualTimes_Validate(t *testing.T) {
 			name: "normal",
 			gats: AccrualTimes{
 				{
-					ClaimType:                CLAIM_TYPE_USDX_MINTING,
+					ClaimType:                CLAIM_TYPE_FUSD_MINTING,
 					CollateralType:           "btcb",
 					PreviousAccumulationTime: normalAccumulationtime,
 				},
 				{
-					ClaimType:                CLAIM_TYPE_USDX_MINTING,
+					ClaimType:                CLAIM_TYPE_FUSD_MINTING,
 					CollateralType:           "bnb",
 					PreviousAccumulationTime: normalAccumulationtime,
 				},
@@ -234,7 +234,7 @@ func TestAccrualTimes_Validate(t *testing.T) {
 			name: "empty collateral type",
 			gats: AccrualTimes{
 				{
-					ClaimType:                CLAIM_TYPE_USDX_MINTING,
+					ClaimType:                CLAIM_TYPE_FUSD_MINTING,
 					PreviousAccumulationTime: normalAccumulationtime,
 				},
 			},

@@ -8,8 +8,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/community/keeper"
-	"github.com/kava-labs/kava/x/community/types"
+	"github.com/mage-coven/mage/x/community/keeper"
+	"github.com/mage-coven/mage/x/community/types"
 )
 
 type grpcQueryTestSuite struct {
@@ -46,8 +46,8 @@ func (suite *grpcQueryTestSuite) TestGrpcQueryBalance() {
 			name: "handles response with balance",
 			setup: func() {
 				expCoins = sdk.NewCoins(
-					sdk.NewCoin("ukava", sdk.NewInt(100)),
-					sdk.NewCoin("usdx", sdk.NewInt(1000)),
+					sdk.NewCoin("umage", sdk.NewInt(100)),
+					sdk.NewCoin("fusd", sdk.NewInt(1000)),
 				)
 				suite.App.FundModuleAccount(suite.Ctx, types.ModuleName, expCoins)
 			},

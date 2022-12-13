@@ -7,9 +7,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -34,7 +34,7 @@ func TestDepositTestSuite(t *testing.T) {
 }
 
 func (suite *depositTestSuite) TestDeposit_Balances() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 100)
 
@@ -57,7 +57,7 @@ func (suite *depositTestSuite) TestDeposit_Balances() {
 }
 
 func (suite *depositTestSuite) TestDeposit_Exceed() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 1001)
 
@@ -82,7 +82,7 @@ func (suite *depositTestSuite) TestDeposit_Exceed() {
 }
 
 func (suite *depositTestSuite) TestDeposit_Zero() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 0)
 
@@ -107,7 +107,7 @@ func (suite *depositTestSuite) TestDeposit_Zero() {
 }
 
 func (suite *depositTestSuite) TestDeposit_InvalidVault() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 1001)
 
@@ -132,7 +132,7 @@ func (suite *depositTestSuite) TestDeposit_InvalidVault() {
 }
 
 func (suite *depositTestSuite) TestDeposit_InvalidStrategy() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 1001)
 
@@ -146,7 +146,7 @@ func (suite *depositTestSuite) TestDeposit_InvalidStrategy() {
 }
 
 func (suite *depositTestSuite) TestDeposit_PrivateVault() {
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 100)
 
@@ -168,16 +168,16 @@ func (suite *depositTestSuite) TestDeposit_PrivateVault() {
 	suite.Require().NoError(err, "private vault should allow deposits from allowed addresses")
 }
 
-func (suite *depositTestSuite) TestDeposit_bKava() {
-	vaultDenom := "bkava"
-	coinDenom := testutil.TestBkavaDenoms[0]
+func (suite *depositTestSuite) TestDeposit_bMage() {
+	vaultDenom := "bmage"
+	coinDenom := testutil.TestBmageDenoms[0]
 
 	startBalance := sdk.NewInt64Coin(coinDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(coinDenom, 100)
 
 	acc1 := suite.CreateAccount(sdk.NewCoins(startBalance), 0)
 
-	// vault denom is only "bkava" which has it's own special handler
+	// vault denom is only "bmage" which has it's own special handler
 	suite.CreateVault(
 		vaultDenom,
 		types.StrategyTypes{types.STRATEGY_TYPE_SAVINGS},
@@ -188,6 +188,6 @@ func (suite *depositTestSuite) TestDeposit_bKava() {
 	err := suite.Keeper.Deposit(suite.Ctx, acc1.GetAddress(), depositAmount, types.STRATEGY_TYPE_SAVINGS)
 	suite.Require().NoError(
 		err,
-		"should be able to deposit bkava derivative denom in bkava vault",
+		"should be able to deposit bmage derivative denom in bmage vault",
 	)
 }

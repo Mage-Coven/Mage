@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 type msgServer struct {
@@ -21,7 +21,7 @@ func NewMsgServerImpl(keeper Keeper) types.MsgServer {
 
 var _ types.MsgServer = msgServer{}
 
-func (k msgServer) ClaimUSDXMintingReward(goCtx context.Context, msg *types.MsgClaimUSDXMintingReward) (*types.MsgClaimUSDXMintingRewardResponse, error) {
+func (k msgServer) ClaimFUSDMintingReward(goCtx context.Context, msg *types.MsgClaimFUSDMintingReward) (*types.MsgClaimFUSDMintingRewardResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	sender, err := sdk.AccAddressFromBech32(msg.Sender)
@@ -29,12 +29,12 @@ func (k msgServer) ClaimUSDXMintingReward(goCtx context.Context, msg *types.MsgC
 		return nil, err
 	}
 
-	err = k.keeper.ClaimUSDXMintingReward(ctx, sender, sender, msg.MultiplierName)
+	err = k.keeper.ClaimFUSDMintingReward(ctx, sender, sender, msg.MultiplierName)
 	if err != nil {
 		return nil, err
 	}
 
-	return &types.MsgClaimUSDXMintingRewardResponse{}, nil
+	return &types.MsgClaimFUSDMintingRewardResponse{}, nil
 }
 
 func (k msgServer) ClaimHardReward(goCtx context.Context, msg *types.MsgClaimHardReward) (*types.MsgClaimHardRewardResponse, error) {

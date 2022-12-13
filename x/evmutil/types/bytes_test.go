@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/kava-labs/kava/x/evmutil/types"
+	"github.com/mage-coven/mage/x/evmutil/types"
 	"github.com/stretchr/testify/require"
 )
 

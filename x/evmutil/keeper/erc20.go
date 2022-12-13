@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/kava-labs/kava/x/evmutil/types"
+	"github.com/mage-coven/mage/x/evmutil/types"
 )
 
 const (

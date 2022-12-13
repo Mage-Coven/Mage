@@ -10,7 +10,7 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	proposaltypes "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	kavadisttypes "github.com/kava-labs/kava/x/kavadist/types"
+	magedisttypes "github.com/mage-coven/mage/x/magedist/types"
 )
 
 var (
@@ -43,25 +43,25 @@ func init() {
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	// Proposals
 	cdc.RegisterInterface((*PubProposal)(nil), nil)
-	cdc.RegisterConcrete(CommitteeChangeProposal{}, "kava/CommitteeChangeProposal", nil)
-	cdc.RegisterConcrete(CommitteeDeleteProposal{}, "kava/CommitteeDeleteProposal", nil)
+	cdc.RegisterConcrete(CommitteeChangeProposal{}, "mage/CommitteeChangeProposal", nil)
+	cdc.RegisterConcrete(CommitteeDeleteProposal{}, "mage/CommitteeDeleteProposal", nil)
 
 	// Committees
 	cdc.RegisterInterface((*Committee)(nil), nil)
-	cdc.RegisterConcrete(BaseCommittee{}, "kava/BaseCommittee", nil)
-	cdc.RegisterConcrete(MemberCommittee{}, "kava/MemberCommittee", nil)
-	cdc.RegisterConcrete(TokenCommittee{}, "kava/TokenCommittee", nil)
+	cdc.RegisterConcrete(BaseCommittee{}, "mage/BaseCommittee", nil)
+	cdc.RegisterConcrete(MemberCommittee{}, "mage/MemberCommittee", nil)
+	cdc.RegisterConcrete(TokenCommittee{}, "mage/TokenCommittee", nil)
 
 	// Permissions
 	cdc.RegisterInterface((*Permission)(nil), nil)
-	cdc.RegisterConcrete(GodPermission{}, "kava/GodPermission", nil)
-	cdc.RegisterConcrete(TextPermission{}, "kava/TextPermission", nil)
-	cdc.RegisterConcrete(SoftwareUpgradePermission{}, "kava/SoftwareUpgradePermission", nil)
-	cdc.RegisterConcrete(ParamsChangePermission{}, "kava/ParamsChangePermission", nil)
+	cdc.RegisterConcrete(GodPermission{}, "mage/GodPermission", nil)
+	cdc.RegisterConcrete(TextPermission{}, "mage/TextPermission", nil)
+	cdc.RegisterConcrete(SoftwareUpgradePermission{}, "mage/SoftwareUpgradePermission", nil)
+	cdc.RegisterConcrete(ParamsChangePermission{}, "mage/ParamsChangePermission", nil)
 
 	// Msgs
-	cdc.RegisterConcrete(&MsgSubmitProposal{}, "kava/MsgSubmitProposal", nil)
-	cdc.RegisterConcrete(&MsgVote{}, "kava/MsgVote", nil)
+	cdc.RegisterConcrete(&MsgSubmitProposal{}, "mage/MsgSubmitProposal", nil)
+	cdc.RegisterConcrete(&MsgVote{}, "mage/MsgVote", nil)
 }
 
 // RegisterProposalTypeCodec allows external modules to register their own pubproposal types on the
@@ -79,7 +79,7 @@ func RegisterInterfaces(registry types.InterfaceRegistry) {
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 
 	registry.RegisterInterface(
-		"kava.committee.v1beta1.Committee",
+		"mage.committee.v1beta1.Committee",
 		(*Committee)(nil),
 		&BaseCommittee{},
 		&TokenCommittee{},
@@ -87,7 +87,7 @@ func RegisterInterfaces(registry types.InterfaceRegistry) {
 	)
 
 	registry.RegisterInterface(
-		"kava.committee.v1beta1.Permission",
+		"mage.committee.v1beta1.Permission",
 		(*Permission)(nil),
 		&GodPermission{},
 		&TextPermission{},
@@ -98,12 +98,12 @@ func RegisterInterfaces(registry types.InterfaceRegistry) {
 	// Need to register PubProposal here since we use this as alias for the x/gov Content interface for all the proposal implementations used in this module.
 	// Note that all proposals supported by x/committee needed to be registered here, including the proposals from x/gov.
 	registry.RegisterInterface(
-		"kava.committee.v1beta1.PubProposal",
+		"mage.committee.v1beta1.PubProposal",
 		(*PubProposal)(nil),
 		&Proposal{},
 		&distrtypes.CommunityPoolSpendProposal{},
 		&govtypes.TextProposal{},
-		&kavadisttypes.CommunityPoolMultiSpendProposal{},
+		&magedisttypes.CommunityPoolMultiSpendProposal{},
 		&proposaltypes.ParameterChangeProposal{},
 		&upgradetypes.SoftwareUpgradeProposal{},
 		&upgradetypes.CancelSoftwareUpgradeProposal{},

@@ -13,9 +13,9 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/router/client/cli"
-	"github.com/kava-labs/kava/x/router/keeper"
-	"github.com/kava-labs/kava/x/router/types"
+	"github.com/mage-coven/mage/x/router/client/cli"
+	"github.com/mage-coven/mage/x/router/keeper"
+	"github.com/mage-coven/mage/x/router/types"
 )
 
 var (

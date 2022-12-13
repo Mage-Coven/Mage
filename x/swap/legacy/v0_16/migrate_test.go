@@ -9,9 +9,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	app "github.com/kava-labs/kava/app"
-	v015swap "github.com/kava-labs/kava/x/swap/legacy/v0_15"
-	v016swap "github.com/kava-labs/kava/x/swap/types"
+	app "github.com/mage-coven/mage/app"
+	v015swap "github.com/mage-coven/mage/x/swap/legacy/v0_15"
+	v016swap "github.com/mage-coven/mage/x/swap/types"
 )
 
 type migrateTestSuite struct {
@@ -83,28 +83,28 @@ func (s *migrateTestSuite) TestMigrate_PoolRecords() {
 	s.v15genstate.PoolRecords = v015swap.PoolRecords{
 		{
 			PoolID:      "pool-1",
-			ReservesA:   sdk.NewCoin("usdx", sdk.NewInt(100)),
+			ReservesA:   sdk.NewCoin("fusd", sdk.NewInt(100)),
 			ReservesB:   sdk.NewCoin("xrpb", sdk.NewInt(200)),
 			TotalShares: sdk.NewInt(300),
 		},
 		{
 			PoolID:      "pool-2",
-			ReservesA:   sdk.NewCoin("usdx", sdk.NewInt(500)),
-			ReservesB:   sdk.NewCoin("ukava", sdk.NewInt(500)),
+			ReservesA:   sdk.NewCoin("fusd", sdk.NewInt(500)),
+			ReservesB:   sdk.NewCoin("umage", sdk.NewInt(500)),
 			TotalShares: sdk.NewInt(1000),
 		},
 	}
 	expected := v016swap.PoolRecords{
 		{
 			PoolID:      "pool-1",
-			ReservesA:   sdk.NewCoin("usdx", sdk.NewInt(100)),
+			ReservesA:   sdk.NewCoin("fusd", sdk.NewInt(100)),
 			ReservesB:   sdk.NewCoin("xrpb", sdk.NewInt(200)),
 			TotalShares: sdk.NewInt(300),
 		},
 		{
 			PoolID:      "pool-2",
-			ReservesA:   sdk.NewCoin("usdx", sdk.NewInt(500)),
-			ReservesB:   sdk.NewCoin("ukava", sdk.NewInt(500)),
+			ReservesA:   sdk.NewCoin("fusd", sdk.NewInt(500)),
+			ReservesB:   sdk.NewCoin("umage", sdk.NewInt(500)),
 			TotalShares: sdk.NewInt(1000),
 		},
 	}

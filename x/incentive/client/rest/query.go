@@ -12,7 +12,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/rest"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 func registerQueryRoutes(cliCtx client.Context, r *mux.Router) {
@@ -63,8 +63,8 @@ func queryRewardsHandlerFn(cliCtx client.Context) http.HandlerFunc {
 		switch strings.ToLower(rewardType) {
 		case "hard":
 			executeHardRewardsQuery(w, cliCtx, params)
-		case "usdx_minting":
-			executeUSDXMintingRewardsQuery(w, cliCtx, params)
+		case "fusd_minting":
+			executeFUSDMintingRewardsQuery(w, cliCtx, params)
 		case "delegator":
 			executeDelegatorRewardsQuery(w, cliCtx, params)
 		case "swap":
@@ -134,14 +134,14 @@ func executeHardRewardsQuery(w http.ResponseWriter, cliCtx client.Context, param
 	rest.PostProcessResponse(w, cliCtx, res)
 }
 
-func executeUSDXMintingRewardsQuery(w http.ResponseWriter, cliCtx client.Context, params types.QueryRewardsParams) {
+func executeFUSDMintingRewardsQuery(w http.ResponseWriter, cliCtx client.Context, params types.QueryRewardsParams) {
 	bz, err := cliCtx.LegacyAmino.MarshalJSON(params)
 	if err != nil {
 		rest.WriteErrorResponse(w, http.StatusBadRequest, fmt.Sprintf("failed to marshal query params: %s", err))
 		return
 	}
 
-	res, height, err := cliCtx.QueryWithData(fmt.Sprintf("custom/incentive/%s", types.QueryGetUSDXMintingRewards), bz)
+	res, height, err := cliCtx.QueryWithData(fmt.Sprintf("custom/incentive/%s", types.QueryGetFUSDMintingRewards), bz)
 	if err != nil {
 		rest.WriteErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
@@ -216,13 +216,13 @@ func executeAllRewardQueries(w http.ResponseWriter, cliCtx client.Context, param
 	var hardClaims types.HardLiquidityProviderClaims
 	cliCtx.LegacyAmino.MustUnmarshalJSON(hardRes, &hardClaims)
 
-	usdxMintingRes, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/incentive/%s", types.QueryGetUSDXMintingRewards), paramsBz)
+	fusdMintingRes, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/incentive/%s", types.QueryGetFUSDMintingRewards), paramsBz)
 	if err != nil {
 		rest.WriteErrorResponse(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	var usdxMintingClaims types.USDXMintingClaims
-	cliCtx.LegacyAmino.MustUnmarshalJSON(usdxMintingRes, &usdxMintingClaims)
+	var fusdMintingClaims types.FUSDMintingClaims
+	cliCtx.LegacyAmino.MustUnmarshalJSON(fusdMintingRes, &fusdMintingClaims)
 
 	delegatorRes, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/incentive/%s", types.QueryGetDelegatorRewards), paramsBz)
 	if err != nil {
@@ -252,7 +252,7 @@ func executeAllRewardQueries(w http.ResponseWriter, cliCtx client.Context, param
 
 	type rewardResult struct {
 		HardClaims        types.HardLiquidityProviderClaims `json:"hard_claims" yaml:"hard_claims"`
-		UsdxMintingClaims types.USDXMintingClaims           `json:"usdx_minting_claims" yaml:"usdx_minting_claims"`
+		UsdxMintingClaims types.FUSDMintingClaims           `json:"fusd_minting_claims" yaml:"fusd_minting_claims"`
 		DelegatorClaims   types.DelegatorClaims             `json:"delegator_claims" yaml:"delegator_claims"`
 		SwapClaims        types.SwapClaims                  `json:"swap_claims" yaml:"swap_claims"`
 		EarnClaims        types.EarnClaims                  `json:"earn_claims" yaml:"earn_claims"`
@@ -260,7 +260,7 @@ func executeAllRewardQueries(w http.ResponseWriter, cliCtx client.Context, param
 
 	res := rewardResult{
 		HardClaims:        hardClaims,
-		UsdxMintingClaims: usdxMintingClaims,
+		UsdxMintingClaims: fusdMintingClaims,
 		DelegatorClaims:   delegatorClaims,
 		SwapClaims:        swapClaims,
 		EarnClaims:        earnClaims,

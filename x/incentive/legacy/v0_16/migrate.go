@@ -1,8 +1,8 @@
 package v0_16
 
 import (
-	v015incentive "github.com/kava-labs/kava/x/incentive/legacy/v0_15"
-	v016incentive "github.com/kava-labs/kava/x/incentive/types"
+	v015incentive "github.com/mage-coven/mage/x/incentive/legacy/v0_15"
+	v016incentive "github.com/mage-coven/mage/x/incentive/types"
 )
 
 func migrateMultiRewardPerids(oldPeriods v015incentive.MultiRewardPeriods) v016incentive.MultiRewardPeriods {
@@ -54,7 +54,7 @@ func migrateMultipliersPerDenom(oldMpds v015incentive.MultipliersPerDenom) []v01
 
 func migrateParams(params v015incentive.Params) v016incentive.Params {
 	return v016incentive.Params{
-		USDXMintingRewardPeriods: migrateRewardPeriods(params.USDXMintingRewardPeriods),
+		FUSDMintingRewardPeriods: migrateRewardPeriods(params.FUSDMintingRewardPeriods),
 		HardSupplyRewardPeriods:  migrateMultiRewardPerids(params.HardSupplyRewardPeriods),
 		HardBorrowRewardPeriods:  migrateMultiRewardPerids(params.HardBorrowRewardPeriods),
 		DelegatorRewardPeriods:   migrateMultiRewardPerids(params.DelegatorRewardPeriods),
@@ -100,10 +100,10 @@ func migrateRewadIndexes(oldRewardIndexes v015incentive.RewardIndexes) v016incen
 	return rewardIndexes
 }
 
-func migrateUSDXMintingClaims(oldClaims v015incentive.USDXMintingClaims) v016incentive.USDXMintingClaims {
-	claims := make(v016incentive.USDXMintingClaims, len(oldClaims))
+func migrateFUSDMintingClaims(oldClaims v015incentive.FUSDMintingClaims) v016incentive.FUSDMintingClaims {
+	claims := make(v016incentive.FUSDMintingClaims, len(oldClaims))
 	for i, oldClaim := range oldClaims {
-		claims[i] = v016incentive.USDXMintingClaim{
+		claims[i] = v016incentive.FUSDMintingClaim{
 			BaseClaim: v016incentive.BaseClaim{
 				Owner:  oldClaim.BaseClaim.Owner,
 				Reward: oldClaim.BaseClaim.Reward,
@@ -161,12 +161,12 @@ func migrateSwapClaims(oldClaims v015incentive.SwapClaims) v016incentive.SwapCla
 func Migrate(oldState v015incentive.GenesisState) *v016incentive.GenesisState {
 	return &v016incentive.GenesisState{
 		Params:                      migrateParams(oldState.Params),
-		USDXRewardState:             migrateRewardState(oldState.USDXRewardState),
+		FUSDRewardState:             migrateRewardState(oldState.FUSDRewardState),
 		HardSupplyRewardState:       migrateRewardState(oldState.HardSupplyRewardState),
 		HardBorrowRewardState:       migrateRewardState(oldState.HardBorrowRewardState),
 		DelegatorRewardState:        migrateRewardState(oldState.DelegatorRewardState),
 		SwapRewardState:             migrateRewardState(oldState.SwapRewardState),
-		USDXMintingClaims:           migrateUSDXMintingClaims(oldState.USDXMintingClaims),
+		FUSDMintingClaims:           migrateFUSDMintingClaims(oldState.FUSDMintingClaims),
 		HardLiquidityProviderClaims: migrateHardLiquidityProviderClaims(oldState.HardLiquidityProviderClaims),
 		DelegatorClaims:             migrateDelegatorClaims(oldState.DelegatorClaims),
 		SwapClaims:                  migrateSwapClaims(oldState.SwapClaims),

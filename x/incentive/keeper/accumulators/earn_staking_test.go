@@ -5,10 +5,10 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/kava-labs/kava/app"
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/incentive/testutil"
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/app"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/incentive/testutil"
+	"github.com/mage-coven/mage/x/incentive/types"
 	"github.com/stretchr/testify/suite"
 	abci "github.com/tendermint/tendermint/abci/types"
 )
@@ -41,21 +41,21 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) SetupTest() {
 
 	// Setup app with test state
 	authBuilder := app.NewAuthBankGenesisBuilder().
-		WithSimpleAccount(addrs[0], cs(c("ukava", 1e12))).
-		WithSimpleAccount(addrs[1], cs(c("ukava", 1e12))).
-		WithSimpleAccount(addrs[2], cs(c("ukava", 1e12))).
-		WithSimpleAccount(addrs[3], cs(c("ukava", 1e12)))
+		WithSimpleAccount(addrs[0], cs(c("umage", 1e12))).
+		WithSimpleAccount(addrs[1], cs(c("umage", 1e12))).
+		WithSimpleAccount(addrs[2], cs(c("umage", 1e12))).
+		WithSimpleAccount(addrs[3], cs(c("umage", 1e12)))
 
 	incentiveBuilder := testutil.NewIncentiveGenesisBuilder().
 		WithGenesisTime(suite.GenesisTime).
-		WithSimpleRewardPeriod(types.CLAIM_TYPE_EARN, "bkava", cs())
+		WithSimpleRewardPeriod(types.CLAIM_TYPE_EARN, "bmage", cs())
 
 	savingsBuilder := testutil.NewSavingsGenesisBuilder().
-		WithSupportedDenoms("bkava")
+		WithSupportedDenoms("bmage")
 
 	earnBuilder := testutil.NewEarnGenesisBuilder().
 		WithAllowedVaults(earntypes.AllowedVault{
-			Denom:             "bkava",
+			Denom:             "bmage",
 			Strategies:        earntypes.StrategyTypes{earntypes.STRATEGY_TYPE_SAVINGS},
 			IsPrivateVault:    false,
 			AllowedDepositors: nil,
@@ -63,7 +63,7 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) SetupTest() {
 
 	stakingBuilder := testutil.NewStakingGenesisBuilder()
 
-	kavamintBuilder := testutil.NewKavamintGenesisBuilder().
+	magemintBuilder := testutil.NewMagemintGenesisBuilder().
 		WithStakingRewardsApy(sdk.MustNewDecFromStr("0.2")).
 		WithPreviousBlockTime(suite.GenesisTime)
 
@@ -73,15 +73,15 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) SetupTest() {
 		savingsBuilder,
 		earnBuilder,
 		stakingBuilder,
-		kavamintBuilder,
+		magemintBuilder,
 	)
 }
 
 func (suite *EarnAccumulatorStakingRewardsTestSuite) TestStakingRewardsDistributed() {
 	// derivative 1: 8 total staked, 7 to earn, 1 not in earn
 	// derivative 2: 2 total staked, 1 to earn, 1 not in earn
-	userMintAmount0 := c("ukava", 8e9)
-	userMintAmount1 := c("ukava", 2e9)
+	userMintAmount0 := c("umage", 8e9)
+	userMintAmount1 := c("umage", 2e9)
 
 	userDepositAmount0 := i(7e9)
 	userDepositAmount1 := i(1e9)
@@ -114,7 +114,7 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) TestStakingRewardsDistribut
 			CollateralType: vaultDenom1,
 			RewardIndexes: types.RewardIndexes{
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   initialVault1RewardFactor,
 				},
 			},
@@ -123,7 +123,7 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) TestStakingRewardsDistribut
 			CollateralType: vaultDenom2,
 			RewardIndexes: types.RewardIndexes{
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   initialVault2RewardFactor,
 				},
 			},
@@ -134,7 +134,7 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) TestStakingRewardsDistribut
 
 	suite.keeper.Store.SetRewardAccrualTime(suite.Ctx, types.CLAIM_TYPE_EARN, vaultDenom1, suite.Ctx.BlockTime())
 	suite.keeper.Store.SetRewardAccrualTime(suite.Ctx, types.CLAIM_TYPE_EARN, vaultDenom2, suite.Ctx.BlockTime())
-	suite.App.GetKavamintKeeper().SetPreviousBlockTime(suite.Ctx, suite.Ctx.BlockTime())
+	suite.App.GetMagemintKeeper().SetPreviousBlockTime(suite.Ctx, suite.Ctx.BlockTime())
 
 	val := suite.GetAbciValidator(suite.valAddrs[0])
 
@@ -166,26 +166,26 @@ func (suite *EarnAccumulatorStakingRewardsTestSuite) TestStakingRewardsDistribut
 	// types.RewardIndexes.Quo() uses Dec.Quo() which uses bankers rounding.
 	// So we need to use Dec.Quo() to also round vs Dec.QuoInt() which truncates
 	expectedIndexes1 := validatorRewards[suite.valAddrs[0].String()].
-		AmountOf("ukava").
+		AmountOf("umage").
 		ToDec().
 		Quo(userDepositAmount0.ToDec())
 
 	expectedIndexes2 := validatorRewards[suite.valAddrs[1].String()].
-		AmountOf("ukava").
+		AmountOf("umage").
 		ToDec().
 		Quo(userDepositAmount1.ToDec())
 
 	// Only contains staking rewards
 	suite.StoredIndexesEqual(types.CLAIM_TYPE_EARN, vaultDenom1, types.RewardIndexes{
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor:   initialVault1RewardFactor.Add(expectedIndexes1),
 		},
 	})
 
 	suite.StoredIndexesEqual(types.CLAIM_TYPE_EARN, vaultDenom2, types.RewardIndexes{
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor:   initialVault2RewardFactor.Add(expectedIndexes2),
 		},
 	})

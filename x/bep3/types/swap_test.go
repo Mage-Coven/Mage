@@ -9,8 +9,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/bep3/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/bep3/types"
 )
 
 type AtomicSwapTestSuite struct {

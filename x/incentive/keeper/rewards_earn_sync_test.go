@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/incentive/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // SynchronizeEarnRewardTests runs unit tests for the keeper.SynchronizeEarnReward method
@@ -319,11 +319,11 @@ func (suite *SynchronizeEarnRewardTests) TestClaimUpdatedWhenGlobalIndexesIncrea
 }
 
 func (suite *SynchronizeEarnRewardTests) TestGetSyncedClaim_ClaimUnchangedWhenNoGlobalIndexes() {
-	vaultDenom_1 := "usdx"
+	vaultDenom_1 := "fusd"
 	owner := arbitraryAddress()
 
 	earnKeeper := newFakeEarnKeeper().
-		addDeposit(owner, earntypes.NewVaultShare("usdx", d("1000000000")))
+		addDeposit(owner, earntypes.NewVaultShare("fusd", d("1000000000")))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, nil, nil, nil, earnKeeper)
 
 	claim := types.EarnClaim{
@@ -352,8 +352,8 @@ func (suite *SynchronizeEarnRewardTests) TestGetSyncedClaim_ClaimUnchangedWhenNo
 }
 
 func (suite *SynchronizeEarnRewardTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIndexAndHasNoSourceShares() {
-	vaultDenom_1 := "usdx"
-	vaultDenom_2 := "ukava"
+	vaultDenom_1 := "fusd"
+	vaultDenom_2 := "umage"
 	owner := arbitraryAddress()
 
 	// owner has no shares in any vault
@@ -410,8 +410,8 @@ func (suite *SynchronizeEarnRewardTests) TestGetSyncedClaim_ClaimUpdatedWhenMiss
 }
 
 func (suite *SynchronizeEarnRewardTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIndexButHasSourceShares() {
-	VaultDenom_1 := "usdx"
-	VaultDenom_2 := "ukava"
+	VaultDenom_1 := "fusd"
+	VaultDenom_2 := "umage"
 	owner := arbitraryAddress()
 
 	earnKeeper := newFakeEarnKeeper().

@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	"github.com/kava-labs/kava/x/incentive/types"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // SynchronizeHardSupplyRewardTests runs unit tests for the keeper.SynchronizeHardSupplyReward method

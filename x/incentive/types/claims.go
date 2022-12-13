@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	USDXMintingClaimType           = "usdx_minting"
+	FUSDMintingClaimType           = "fusd_minting"
 	HardLiquidityProviderClaimType = "hard_liquidity_provider"
 	DelegatorClaimType             = "delegator_claim"
 	SwapClaimType                  = "swap"
@@ -66,7 +66,7 @@ func (ct ClaimType) Validate() error {
 		CLAIM_TYPE_EARN,
 		CLAIM_TYPE_SAVINGS,
 		CLAIM_TYPE_SWAP,
-		CLAIM_TYPE_USDX_MINTING:
+		CLAIM_TYPE_FUSD_MINTING:
 		return nil
 	default:
 		return fmt.Errorf("invalid claim type: %v", ct)
@@ -109,9 +109,9 @@ func (c Claim) Validate() error {
 	return nil
 }
 
-// NewUSDXMintingClaim returns a new USDXMintingClaim
-func NewUSDXMintingClaim(owner sdk.AccAddress, reward sdk.Coin, rewardIndexes RewardIndexes) USDXMintingClaim {
-	return USDXMintingClaim{
+// NewFUSDMintingClaim returns a new FUSDMintingClaim
+func NewFUSDMintingClaim(owner sdk.AccAddress, reward sdk.Coin, rewardIndexes RewardIndexes) FUSDMintingClaim {
+	return FUSDMintingClaim{
 		BaseClaim: BaseClaim{
 			Owner:  owner,
 			Reward: reward,
@@ -121,16 +121,16 @@ func NewUSDXMintingClaim(owner sdk.AccAddress, reward sdk.Coin, rewardIndexes Re
 }
 
 // GetType returns the claim's type
-func (c USDXMintingClaim) GetType() string { return USDXMintingClaimType }
+func (c FUSDMintingClaim) GetType() string { return FUSDMintingClaimType }
 
 // GetReward returns the claim's reward coin
-func (c USDXMintingClaim) GetReward() sdk.Coin { return c.Reward }
+func (c FUSDMintingClaim) GetReward() sdk.Coin { return c.Reward }
 
 // GetOwner returns the claim's owner
-func (c USDXMintingClaim) GetOwner() sdk.AccAddress { return c.Owner }
+func (c FUSDMintingClaim) GetOwner() sdk.AccAddress { return c.Owner }
 
 // Validate performs a basic check of a Claim fields
-func (c USDXMintingClaim) Validate() error {
+func (c FUSDMintingClaim) Validate() error {
 	if err := c.RewardIndexes.Validate(); err != nil {
 		return err
 	}
@@ -139,7 +139,7 @@ func (c USDXMintingClaim) Validate() error {
 }
 
 // HasRewardIndex check if a claim has a reward index for the input collateral type
-func (c USDXMintingClaim) HasRewardIndex(collateralType string) (int64, bool) {
+func (c FUSDMintingClaim) HasRewardIndex(collateralType string) (int64, bool) {
 	for index, ri := range c.RewardIndexes {
 		if ri.CollateralType == collateralType {
 			return int64(index), true
@@ -148,12 +148,12 @@ func (c USDXMintingClaim) HasRewardIndex(collateralType string) (int64, bool) {
 	return 0, false
 }
 
-// USDXMintingClaims slice of USDXMintingClaim
-type USDXMintingClaims []USDXMintingClaim
+// FUSDMintingClaims slice of FUSDMintingClaim
+type FUSDMintingClaims []FUSDMintingClaim
 
 // Validate checks if all the claims are valid and there are no duplicated
 // entries.
-func (cs USDXMintingClaims) Validate() error {
+func (cs FUSDMintingClaims) Validate() error {
 	for _, c := range cs {
 		if err := c.Validate(); err != nil {
 			return err

@@ -88,69 +88,69 @@ import (
 	feemarketkeeper "github.com/tharsis/ethermint/x/feemarket/keeper"
 	feemarkettypes "github.com/tharsis/ethermint/x/feemarket/types"
 
-	"github.com/kava-labs/kava/app/ante"
-	kavaparams "github.com/kava-labs/kava/app/params"
-	"github.com/kava-labs/kava/x/auction"
-	auctionkeeper "github.com/kava-labs/kava/x/auction/keeper"
-	auctiontypes "github.com/kava-labs/kava/x/auction/types"
-	"github.com/kava-labs/kava/x/bep3"
-	bep3keeper "github.com/kava-labs/kava/x/bep3/keeper"
-	bep3types "github.com/kava-labs/kava/x/bep3/types"
-	"github.com/kava-labs/kava/x/cdp"
-	cdpkeeper "github.com/kava-labs/kava/x/cdp/keeper"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	"github.com/kava-labs/kava/x/committee"
-	committeeclient "github.com/kava-labs/kava/x/committee/client"
-	committeekeeper "github.com/kava-labs/kava/x/committee/keeper"
-	committeetypes "github.com/kava-labs/kava/x/committee/types"
-	"github.com/kava-labs/kava/x/community"
-	communityclient "github.com/kava-labs/kava/x/community/client"
-	communitykeeper "github.com/kava-labs/kava/x/community/keeper"
-	communitytypes "github.com/kava-labs/kava/x/community/types"
-	earn "github.com/kava-labs/kava/x/earn"
-	earnclient "github.com/kava-labs/kava/x/earn/client"
-	earnkeeper "github.com/kava-labs/kava/x/earn/keeper"
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	evmutil "github.com/kava-labs/kava/x/evmutil"
-	evmutilkeeper "github.com/kava-labs/kava/x/evmutil/keeper"
-	evmutiltypes "github.com/kava-labs/kava/x/evmutil/types"
-	"github.com/kava-labs/kava/x/hard"
-	hardkeeper "github.com/kava-labs/kava/x/hard/keeper"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	"github.com/kava-labs/kava/x/incentive"
-	incentivekeeper "github.com/kava-labs/kava/x/incentive/keeper"
-	incentivetypes "github.com/kava-labs/kava/x/incentive/types"
-	issuance "github.com/kava-labs/kava/x/issuance"
-	issuancekeeper "github.com/kava-labs/kava/x/issuance/keeper"
-	issuancetypes "github.com/kava-labs/kava/x/issuance/types"
-	"github.com/kava-labs/kava/x/kavadist"
-	kavadistclient "github.com/kava-labs/kava/x/kavadist/client"
-	kavadistkeeper "github.com/kava-labs/kava/x/kavadist/keeper"
-	kavadisttypes "github.com/kava-labs/kava/x/kavadist/types"
-	"github.com/kava-labs/kava/x/kavamint"
-	kavamintkeeper "github.com/kava-labs/kava/x/kavamint/keeper"
-	kavaminttypes "github.com/kava-labs/kava/x/kavamint/types"
-	"github.com/kava-labs/kava/x/liquid"
-	liquidkeeper "github.com/kava-labs/kava/x/liquid/keeper"
-	liquidtypes "github.com/kava-labs/kava/x/liquid/types"
-	pricefeed "github.com/kava-labs/kava/x/pricefeed"
-	pricefeedkeeper "github.com/kava-labs/kava/x/pricefeed/keeper"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
-	"github.com/kava-labs/kava/x/router"
-	routerkeeper "github.com/kava-labs/kava/x/router/keeper"
-	routertypes "github.com/kava-labs/kava/x/router/types"
-	savings "github.com/kava-labs/kava/x/savings"
-	savingskeeper "github.com/kava-labs/kava/x/savings/keeper"
-	savingstypes "github.com/kava-labs/kava/x/savings/types"
-	"github.com/kava-labs/kava/x/swap"
-	swapkeeper "github.com/kava-labs/kava/x/swap/keeper"
-	swaptypes "github.com/kava-labs/kava/x/swap/types"
-	validatorvesting "github.com/kava-labs/kava/x/validator-vesting"
-	validatorvestingtypes "github.com/kava-labs/kava/x/validator-vesting/types"
+	"github.com/mage-coven/mage/app/ante"
+	mageparams "github.com/mage-coven/mage/app/params"
+	"github.com/mage-coven/mage/x/auction"
+	auctionkeeper "github.com/mage-coven/mage/x/auction/keeper"
+	auctiontypes "github.com/mage-coven/mage/x/auction/types"
+	"github.com/mage-coven/mage/x/bep3"
+	bep3keeper "github.com/mage-coven/mage/x/bep3/keeper"
+	bep3types "github.com/mage-coven/mage/x/bep3/types"
+	"github.com/mage-coven/mage/x/cdp"
+	cdpkeeper "github.com/mage-coven/mage/x/cdp/keeper"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	"github.com/mage-coven/mage/x/committee"
+	committeeclient "github.com/mage-coven/mage/x/committee/client"
+	committeekeeper "github.com/mage-coven/mage/x/committee/keeper"
+	committeetypes "github.com/mage-coven/mage/x/committee/types"
+	"github.com/mage-coven/mage/x/community"
+	communityclient "github.com/mage-coven/mage/x/community/client"
+	communitykeeper "github.com/mage-coven/mage/x/community/keeper"
+	communitytypes "github.com/mage-coven/mage/x/community/types"
+	earn "github.com/mage-coven/mage/x/earn"
+	earnclient "github.com/mage-coven/mage/x/earn/client"
+	earnkeeper "github.com/mage-coven/mage/x/earn/keeper"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	evmutil "github.com/mage-coven/mage/x/evmutil"
+	evmutilkeeper "github.com/mage-coven/mage/x/evmutil/keeper"
+	evmutiltypes "github.com/mage-coven/mage/x/evmutil/types"
+	"github.com/mage-coven/mage/x/hard"
+	hardkeeper "github.com/mage-coven/mage/x/hard/keeper"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	"github.com/mage-coven/mage/x/incentive"
+	incentivekeeper "github.com/mage-coven/mage/x/incentive/keeper"
+	incentivetypes "github.com/mage-coven/mage/x/incentive/types"
+	issuance "github.com/mage-coven/mage/x/issuance"
+	issuancekeeper "github.com/mage-coven/mage/x/issuance/keeper"
+	issuancetypes "github.com/mage-coven/mage/x/issuance/types"
+	"github.com/mage-coven/mage/x/magedist"
+	magedistclient "github.com/mage-coven/mage/x/magedist/client"
+	magedistkeeper "github.com/mage-coven/mage/x/magedist/keeper"
+	magedisttypes "github.com/mage-coven/mage/x/magedist/types"
+	"github.com/mage-coven/mage/x/magemint"
+	magemintkeeper "github.com/mage-coven/mage/x/magemint/keeper"
+	mageminttypes "github.com/mage-coven/mage/x/magemint/types"
+	"github.com/mage-coven/mage/x/liquid"
+	liquidkeeper "github.com/mage-coven/mage/x/liquid/keeper"
+	liquidtypes "github.com/mage-coven/mage/x/liquid/types"
+	pricefeed "github.com/mage-coven/mage/x/pricefeed"
+	pricefeedkeeper "github.com/mage-coven/mage/x/pricefeed/keeper"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
+	"github.com/mage-coven/mage/x/router"
+	routerkeeper "github.com/mage-coven/mage/x/router/keeper"
+	routertypes "github.com/mage-coven/mage/x/router/types"
+	savings "github.com/mage-coven/mage/x/savings"
+	savingskeeper "github.com/mage-coven/mage/x/savings/keeper"
+	savingstypes "github.com/mage-coven/mage/x/savings/types"
+	"github.com/mage-coven/mage/x/swap"
+	swapkeeper "github.com/mage-coven/mage/x/swap/keeper"
+	swaptypes "github.com/mage-coven/mage/x/swap/types"
+	validatorvesting "github.com/mage-coven/mage/x/validator-vesting"
+	validatorvestingtypes "github.com/mage-coven/mage/x/validator-vesting/types"
 )
 
 const (
-	appName = "kava"
+	appName = "mage"
 )
 
 var (
@@ -173,7 +173,7 @@ var (
 			upgradeclient.CancelProposalHandler,
 			ibcclientclient.UpdateClientProposalHandler,
 			ibcclientclient.UpgradeProposalHandler,
-			kavadistclient.ProposalHandler,
+			magedistclient.ProposalHandler,
 			committeeclient.ProposalHandler,
 			earnclient.DepositProposalHandler,
 			earnclient.WithdrawProposalHandler,
@@ -191,7 +191,7 @@ var (
 		vesting.AppModuleBasic{},
 		evm.AppModuleBasic{},
 		feemarket.AppModuleBasic{},
-		kavadist.AppModuleBasic{},
+		magedist.AppModuleBasic{},
 		auction.AppModuleBasic{},
 		issuance.AppModuleBasic{},
 		bep3.AppModuleBasic{},
@@ -207,7 +207,7 @@ var (
 		liquid.AppModuleBasic{},
 		earn.AppModuleBasic{},
 		router.AppModuleBasic{},
-		kavamint.AppModuleBasic{},
+		magemint.AppModuleBasic{},
 		community.AppModuleBasic{},
 	)
 
@@ -223,7 +223,7 @@ var (
 		ibctransfertypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
 		evmtypes.ModuleName:             {authtypes.Minter, authtypes.Burner}, // used for secure addition and subtraction of balance using module account
 		evmutiltypes.ModuleName:         {authtypes.Minter, authtypes.Burner},
-		kavadisttypes.KavaDistMacc:      {authtypes.Minter},
+		magedisttypes.MageDistMacc:      {authtypes.Minter},
 		auctiontypes.ModuleName:         nil,
 		issuancetypes.ModuleAccountName: {authtypes.Minter, authtypes.Burner},
 		bep3types.ModuleName:            {authtypes.Burner, authtypes.Minter},
@@ -234,8 +234,8 @@ var (
 		savingstypes.ModuleAccountName:  nil,
 		liquidtypes.ModuleAccountName:   {authtypes.Minter, authtypes.Burner},
 		earntypes.ModuleAccountName:     nil,
-		kavadisttypes.FundModuleAccount: nil,
-		kavaminttypes.ModuleAccountName: {authtypes.Minter},
+		magedisttypes.FundModuleAccount: nil,
+		mageminttypes.ModuleAccountName: {authtypes.Minter},
 		communitytypes.ModuleName:       nil,
 	}
 )
@@ -261,7 +261,7 @@ var DefaultOptions = Options{
 	EVMMaxGasWanted: ethermintconfig.DefaultMaxTxGasWanted,
 }
 
-// App is the Kava ABCI application.
+// App is the Mage ABCI application.
 type App struct {
 	*baseapp.BaseApp
 
@@ -293,7 +293,7 @@ type App struct {
 	upgradeKeeper    upgradekeeper.Keeper
 	evidenceKeeper   evidencekeeper.Keeper
 	transferKeeper   ibctransferkeeper.Keeper
-	kavadistKeeper   kavadistkeeper.Keeper
+	magedistKeeper   magedistkeeper.Keeper
 	auctionKeeper    auctionkeeper.Keeper
 	issuanceKeeper   issuancekeeper.Keeper
 	bep3Keeper       bep3keeper.Keeper
@@ -307,7 +307,7 @@ type App struct {
 	liquidKeeper     liquidkeeper.Keeper
 	earnKeeper       earnkeeper.Keeper
 	routerKeeper     routerkeeper.Keeper
-	kavamintKeeper   kavamintkeeper.Keeper
+	magemintKeeper   magemintkeeper.Keeper
 	communityKeeper  communitykeeper.Keeper
 
 	// make scoped keepers public for test purposes
@@ -330,7 +330,7 @@ func init() {
 		stdlog.Printf("Failed to get home dir %v", err)
 	}
 
-	DefaultNodeHome = filepath.Join(userHomeDir, ".kava")
+	DefaultNodeHome = filepath.Join(userHomeDir, ".mage")
 }
 
 // NewApp returns a reference to an initialized App.
@@ -339,7 +339,7 @@ func NewApp(
 	db dbm.DB,
 	homePath string,
 	traceStore io.Writer,
-	encodingConfig kavaparams.EncodingConfig,
+	encodingConfig mageparams.EncodingConfig,
 	options Options,
 	baseAppOptions ...func(*baseapp.BaseApp),
 ) *App {
@@ -358,11 +358,11 @@ func NewApp(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey,
 		upgradetypes.StoreKey, evidencetypes.StoreKey, ibctransfertypes.StoreKey,
 		evmtypes.StoreKey, feemarkettypes.StoreKey, authzkeeper.StoreKey,
-		capabilitytypes.StoreKey, kavadisttypes.StoreKey, auctiontypes.StoreKey,
+		capabilitytypes.StoreKey, magedisttypes.StoreKey, auctiontypes.StoreKey,
 		issuancetypes.StoreKey, bep3types.StoreKey, pricefeedtypes.StoreKey,
 		swaptypes.StoreKey, cdptypes.StoreKey, hardtypes.StoreKey,
 		committeetypes.StoreKey, incentivetypes.StoreKey, evmutiltypes.StoreKey,
-		savingstypes.StoreKey, earntypes.StoreKey, kavaminttypes.StoreKey,
+		savingstypes.StoreKey, earntypes.StoreKey, mageminttypes.StoreKey,
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey, evmtypes.TransientKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -391,7 +391,7 @@ func NewApp(
 	slashingSubspace := app.paramsKeeper.Subspace(slashingtypes.ModuleName)
 	govSubspace := app.paramsKeeper.Subspace(govtypes.ModuleName).WithKeyTable(govtypes.ParamKeyTable())
 	crisisSubspace := app.paramsKeeper.Subspace(crisistypes.ModuleName)
-	kavadistSubspace := app.paramsKeeper.Subspace(kavadisttypes.ModuleName)
+	magedistSubspace := app.paramsKeeper.Subspace(magedisttypes.ModuleName)
 	auctionSubspace := app.paramsKeeper.Subspace(auctiontypes.ModuleName)
 	issuanceSubspace := app.paramsKeeper.Subspace(issuancetypes.ModuleName)
 	bep3Subspace := app.paramsKeeper.Subspace(bep3types.ModuleName)
@@ -407,7 +407,7 @@ func NewApp(
 	evmSubspace := app.paramsKeeper.Subspace(evmtypes.ModuleName)
 	evmutilSubspace := app.paramsKeeper.Subspace(evmutiltypes.ModuleName)
 	earnSubspace := app.paramsKeeper.Subspace(earntypes.ModuleName)
-	kavamintSubspace := app.paramsKeeper.Subspace(kavaminttypes.ModuleName)
+	magemintSubspace := app.paramsKeeper.Subspace(mageminttypes.ModuleName)
 
 	bApp.SetParamStore(
 		app.paramsKeeper.Subspace(baseapp.Paramspace).WithKeyTable(paramskeeper.ConsensusParamsKeyTable()),
@@ -616,20 +616,20 @@ func NewApp(
 		app.bankKeeper,
 		hardKeeper,
 	)
-	app.kavadistKeeper = kavadistkeeper.NewKeeper(
+	app.magedistKeeper = magedistkeeper.NewKeeper(
 		appCodec,
-		keys[kavadisttypes.StoreKey],
-		kavadistSubspace,
+		keys[magedisttypes.StoreKey],
+		magedistSubspace,
 		app.bankKeeper,
 		app.accountKeeper,
 		app.communityKeeper,
 		app.loadBlockedMaccAddrs(),
 	)
 
-	app.kavamintKeeper = kavamintkeeper.NewKeeper(
+	app.magemintKeeper = magemintkeeper.NewKeeper(
 		appCodec,
-		keys[kavaminttypes.StoreKey],
-		kavamintSubspace,
+		keys[mageminttypes.StoreKey],
+		magemintSubspace,
 		app.stakingKeeper,
 		app.accountKeeper,
 		app.bankKeeper,
@@ -650,7 +650,7 @@ func NewApp(
 		&savingsKeeper,
 		&app.liquidKeeper,
 		&earnKeeper,
-		app.kavamintKeeper,
+		app.magemintKeeper,
 		app.distrKeeper,
 		app.pricefeedKeeper,
 	)
@@ -698,7 +698,7 @@ func NewApp(
 		AddRoute(upgradetypes.RouterKey, upgrade.NewSoftwareUpgradeProposalHandler(app.upgradeKeeper)).
 		AddRoute(ibcclienttypes.RouterKey, ibcclient.NewClientProposalHandler(app.ibcKeeper.ClientKeeper)).
 		AddRoute(distrtypes.RouterKey, distr.NewCommunityPoolSpendProposalHandler(app.distrKeeper)).
-		AddRoute(kavadisttypes.RouterKey, kavadist.NewCommunityPoolMultiSpendProposalHandler(app.kavadistKeeper)).
+		AddRoute(magedisttypes.RouterKey, magedist.NewCommunityPoolMultiSpendProposalHandler(app.magedistKeeper)).
 		AddRoute(earntypes.RouterKey, earn.NewCommunityPoolProposalHandler(app.earnKeeper)).
 		AddRoute(communitytypes.RouterKey, community.NewCommunityPoolProposalHandler(app.communityKeeper)).
 		AddRoute(committeetypes.RouterKey, committee.NewProposalHandler(app.committeeKeeper))
@@ -740,7 +740,7 @@ func NewApp(
 		transferModule,
 		vesting.NewAppModule(app.accountKeeper, app.bankKeeper),
 		authzmodule.NewAppModule(appCodec, app.authzKeeper, app.accountKeeper, app.bankKeeper, app.interfaceRegistry),
-		kavadist.NewAppModule(app.kavadistKeeper, app.accountKeeper),
+		magedist.NewAppModule(app.magedistKeeper, app.accountKeeper),
 		auction.NewAppModule(app.auctionKeeper, app.accountKeeper, app.bankKeeper),
 		issuance.NewAppModule(app.issuanceKeeper, app.accountKeeper, app.bankKeeper),
 		bep3.NewAppModule(app.bep3Keeper, app.accountKeeper, app.bankKeeper),
@@ -756,7 +756,7 @@ func NewApp(
 		liquid.NewAppModule(app.liquidKeeper),
 		earn.NewAppModule(app.earnKeeper, app.accountKeeper, app.bankKeeper),
 		router.NewAppModule(app.routerKeeper),
-		kavamint.NewAppModule(appCodec, app.kavamintKeeper, app.accountKeeper),
+		magemint.NewAppModule(appCodec, app.magemintKeeper, app.accountKeeper),
 		community.NewAppModule(app.communityKeeper, app.accountKeeper),
 	)
 
@@ -769,8 +769,8 @@ func NewApp(
 		// Committee begin blocker changes module params by enacting proposals.
 		// Run before to ensure params are updated together before state changes.
 		committeetypes.ModuleName,
-		// Kavamint must be registered before distribution module in order to generate block staking rewards.
-		kavaminttypes.ModuleName,
+		// Magemint must be registered before distribution module in order to generate block staking rewards.
+		mageminttypes.ModuleName,
 		distrtypes.ModuleName,
 		// During begin block slashing happens after distr.BeginBlocker so that
 		// there is nothing left over in the validator fee pool, so as to keep the
@@ -780,7 +780,7 @@ func NewApp(
 		stakingtypes.ModuleName,
 		feemarkettypes.ModuleName,
 		evmtypes.ModuleName,
-		kavadisttypes.ModuleName,
+		magedisttypes.ModuleName,
 		communitytypes.ModuleName,
 		// Auction begin blocker will close out expired auctions and pay debt back to cdp.
 		// It should be run before cdp begin blocker which cancels out debt with stable and starts more auctions.
@@ -833,7 +833,7 @@ func NewApp(
 		committeetypes.ModuleName,
 		upgradetypes.ModuleName,
 		evidencetypes.ModuleName,
-		kavadisttypes.ModuleName,
+		magedisttypes.ModuleName,
 		swaptypes.ModuleName,
 		vestingtypes.ModuleName,
 		ibchost.ModuleName,
@@ -849,7 +849,7 @@ func NewApp(
 		liquidtypes.ModuleName,
 		earntypes.ModuleName,
 		routertypes.ModuleName,
-		kavaminttypes.ModuleName,
+		mageminttypes.ModuleName,
 		communitytypes.ModuleName,
 	)
 
@@ -862,14 +862,14 @@ func NewApp(
 		stakingtypes.ModuleName,
 		slashingtypes.ModuleName, // iterates over validators, run after staking
 		govtypes.ModuleName,
-		kavaminttypes.ModuleName,
+		mageminttypes.ModuleName,
 		ibchost.ModuleName,
 		evidencetypes.ModuleName,
 		authz.ModuleName,
 		ibctransfertypes.ModuleName,
 		evmtypes.ModuleName,
 		feemarkettypes.ModuleName,
-		kavadisttypes.ModuleName,
+		magedisttypes.ModuleName,
 		auctiontypes.ModuleName,
 		issuancetypes.ModuleName,
 		savingstypes.ModuleName,
@@ -988,7 +988,7 @@ func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.Res
 		panic(err)
 	}
 
-	// Store current module versions in kava-10 to setup future in-place upgrades.
+	// Store current module versions in mage-10 to setup future in-place upgrades.
 	// During in-place migrations, the old module versions in the store will be referenced to determine which migrations to run.
 	app.upgradeKeeper.SetModuleVersionMap(ctx, app.mm.GetVersionMap())
 
@@ -1054,14 +1054,14 @@ func (app *App) RegisterTendermintService(clientCtx client.Context) {
 func (app *App) loadBlockedMaccAddrs() map[string]bool {
 	modAccAddrs := app.ModuleAccountAddrs()
 	allowedMaccs := map[string]bool{
-		// kavadist
-		app.accountKeeper.GetModuleAddress(kavadisttypes.ModuleName).String(): true,
+		// magedist
+		app.accountKeeper.GetModuleAddress(magedisttypes.ModuleName).String(): true,
 		// earn
 		app.accountKeeper.GetModuleAddress(earntypes.ModuleName).String(): true,
 		// liquid
 		app.accountKeeper.GetModuleAddress(liquidtypes.ModuleName).String(): true,
-		// kavadist fund
-		app.accountKeeper.GetModuleAddress(kavadisttypes.FundModuleAccount).String(): true,
+		// magedist fund
+		app.accountKeeper.GetModuleAddress(magedisttypes.FundModuleAccount).String(): true,
 		// community
 		app.accountKeeper.GetModuleAddress(communitytypes.ModuleAccountName).String(): true,
 	}

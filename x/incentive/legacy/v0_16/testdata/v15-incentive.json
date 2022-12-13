@@ -1,11 +1,11 @@
 {
   "params": {
-    "usdx_minting_reward_periods": [
+    "fusd_minting_reward_periods": [
       {
         "active": true,
         "rewards_per_second": {
           "amount": "122354",
-          "denom": "ukava"
+          "denom": "umage"
         },
         "collateral_type": "bnb-a",
         "start": "2021-07-20T14:00:00Z",
@@ -15,7 +15,7 @@
         "active": true,
         "rewards_per_second": {
           "amount": "23809",
-          "denom": "ukava"
+          "denom": "umage"
         },
         "collateral_type": "hard-a",
         "start": "2021-07-20T14:00:00Z",
@@ -77,7 +77,7 @@
     "delegator_reward_periods": [
       {
         "active": true,
-        "collateral_type": "ukava",
+        "collateral_type": "umage",
         "start": "2020-01-01T00:00:00Z",
         "end": "2024-01-01T00:00:00Z",
         "rewards_per_second": [
@@ -95,7 +95,7 @@
     "swap_reward_periods": [
       {
         "active": true,
-        "collateral_type": "ukava:usdx",
+        "collateral_type": "umage:fusd",
         "start": "2021-07-14T00:00:00Z",
         "end": "2024-01-01T00:00:00Z",
         "rewards_per_second": [
@@ -105,13 +105,13 @@
           },
           {
             "amount": "31688",
-            "denom": "ukava"
+            "denom": "umage"
           }
         ]
       },
       {
         "active": true,
-        "collateral_type": "swp:usdx",
+        "collateral_type": "swp:fusd",
         "start": "2021-07-14T00:00:00Z",
         "end": "2024-01-01T00:00:00Z",
         "rewards_per_second": [
@@ -121,7 +121,7 @@
           },
           {
             "amount": "31688",
-            "denom": "ukava"
+            "denom": "umage"
           }
         ]
       }
@@ -163,13 +163,13 @@
   "delegator_reward_state": {
     "accumulation_times": [
       {
-        "collateral_type": "ukava",
+        "collateral_type": "umage",
         "previous_accumulation_time": "2021-11-05T21:13:12.85608847Z"
       }
     ],
     "multi_reward_indexes": [
       {
-        "collateral_type": "ukava",
+        "collateral_type": "umage",
         "reward_indexes": [
           {
             "collateral_type": "hard",
@@ -243,7 +243,7 @@
     ],
     "multi_reward_indexes": [
       {
-        "collateral_type": "btcb:usdx",
+        "collateral_type": "btcb:fusd",
         "reward_indexes": [
           {
             "collateral_type": "swp",
@@ -253,7 +253,7 @@
       }
     ]
   },
-  "usdx_reward_state": {
+  "fusd_reward_state": {
     "accumulation_times": [
       {
         "collateral_type": "bnb-a",
@@ -265,7 +265,7 @@
         "collateral_type": "bnb-a",
         "reward_indexes": [
           {
-            "collateral_type": "ukava",
+            "collateral_type": "umage",
             "reward_factor": "0.043949244534927716"
           }
         ]
@@ -275,12 +275,12 @@
   "delegator_claims": [
     {
       "base_claim": {
-        "owner": "kava1qqqvdyv8w0xdu7gjdtt598q78gtgqyukct4yz2",
+        "owner": "mage1qqqvdyv8w0xdu7gjdtt598q78gtgqyukct4yz2",
         "reward": []
       },
       "reward_indexes": [
         {
-          "collateral_type": "ukava",
+          "collateral_type": "umage",
           "reward_indexes": [
             {
               "collateral_type": "hard",
@@ -298,7 +298,7 @@
   "hard_liquidity_provider_claims": [
     {
       "base_claim": {
-        "owner": "kava1qqqvdyv8w0xdu7gjdtt598q78gtgqyukct4yz2",
+        "owner": "mage1qqqvdyv8w0xdu7gjdtt598q78gtgqyukct4yz2",
         "reward": [
           {
             "amount": "1747514",
@@ -340,7 +340,7 @@
     },
     {
       "base_claim": {
-        "owner": "kava1w2uj6rpejrma47vjx4rcghh3fndhmrvs6pmxph",
+        "owner": "mage1w2uj6rpejrma47vjx4rcghh3fndhmrvs6pmxph",
         "reward": [
           {
             "amount": "1747514",
@@ -352,13 +352,13 @@
       "supply_reward_indexes": []
     }
   ],
-  "usdx_minting_claims": [
+  "fusd_minting_claims": [
     {
       "base_claim": {
-        "owner": "kava1qptt5vu26cmxpmv0hf2tnnmf293x266pjcsjar",
+        "owner": "mage1qptt5vu26cmxpmv0hf2tnnmf293x266pjcsjar",
         "reward": {
           "amount": "550",
-          "denom": "ukava"
+          "denom": "umage"
         }
       },
       "reward_indexes": [
@@ -376,7 +376,7 @@
   "swap_claims": [
     {
       "base_claim": {
-        "owner": "kava1qzease8mre5adak7wcc2twh6ryh9evnxpr6caj",
+        "owner": "mage1qzease8mre5adak7wcc2twh6ryh9evnxpr6caj",
         "reward": [
           {
             "amount": "1960368",
@@ -386,7 +386,7 @@
       },
       "reward_indexes": [
         {
-          "collateral_type": "busd:usdx",
+          "collateral_type": "busd:fusd",
           "reward_indexes": [
             {
               "collateral_type": "swp",

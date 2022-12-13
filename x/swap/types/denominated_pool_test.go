@@ -4,21 +4,21 @@ import (
 	"fmt"
 	"testing"
 
-	types "github.com/kava-labs/kava/x/swap/types"
+	types "github.com/mage-coven/mage/x/swap/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-// create a new ukava coin from int64
-func ukava(amount int64) sdk.Coin {
-	return sdk.NewCoin("ukava", sdk.NewInt(amount))
+// create a new umage coin from int64
+func umage(amount int64) sdk.Coin {
+	return sdk.NewCoin("umage", sdk.NewInt(amount))
 }
 
-// create a new usdx coin from int64
-func usdx(amount int64) sdk.Coin {
-	return sdk.NewCoin("usdx", sdk.NewInt(amount))
+// create a new fusd coin from int64
+func fusd(amount int64) sdk.Coin {
+	return sdk.NewCoin("fusd", sdk.NewInt(amount))
 }
 
 // create a new hard coin from int64
@@ -32,10 +32,10 @@ func TestDenominatedPool_NewDenominatedPool_Validation(t *testing.T) {
 		reservesB   sdk.Coin
 		expectedErr string
 	}{
-		{ukava(0), usdx(1e6), "reserves must have two denominations: invalid pool"},
-		{ukava(1e6), usdx(0), "reserves must have two denominations: invalid pool"},
-		{usdx(0), ukava(1e6), "reserves must have two denominations: invalid pool"},
-		{usdx(0), ukava(1e6), "reserves must have two denominations: invalid pool"},
+		{umage(0), fusd(1e6), "reserves must have two denominations: invalid pool"},
+		{umage(1e6), fusd(0), "reserves must have two denominations: invalid pool"},
+		{fusd(0), umage(1e6), "reserves must have two denominations: invalid pool"},
+		{fusd(0), umage(1e6), "reserves must have two denominations: invalid pool"},
 	}
 
 	for _, tc := range testCases {
@@ -54,10 +54,10 @@ func TestDenominatedPool_NewDenominatedPoolWithExistingShares_Validation(t *test
 		totalShares sdk.Int
 		expectedErr string
 	}{
-		{ukava(0), usdx(1e6), i(1), "reserves must have two denominations: invalid pool"},
-		{usdx(0), ukava(1e6), i(1), "reserves must have two denominations: invalid pool"},
-		{ukava(1e6), usdx(1e6), i(0), "total shares must be greater than zero: invalid pool"},
-		{usdx(1e6), ukava(1e6), i(-1), "total shares must be greater than zero: invalid pool"},
+		{umage(0), fusd(1e6), i(1), "reserves must have two denominations: invalid pool"},
+		{fusd(0), umage(1e6), i(1), "reserves must have two denominations: invalid pool"},
+		{umage(1e6), fusd(1e6), i(0), "total shares must be greater than zero: invalid pool"},
+		{fusd(1e6), umage(1e6), i(-1), "total shares must be greater than zero: invalid pool"},
 	}
 
 	for _, tc := range testCases {
@@ -70,7 +70,7 @@ func TestDenominatedPool_NewDenominatedPoolWithExistingShares_Validation(t *test
 }
 
 func TestDenominatedPool_InitialState(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(1e6), usdx(5e6))
+	reserves := sdk.NewCoins(umage(1e6), fusd(5e6))
 	totalShares := i(2236067)
 
 	pool, err := types.NewDenominatedPool(reserves)
@@ -81,7 +81,7 @@ func TestDenominatedPool_InitialState(t *testing.T) {
 }
 
 func TestDenominatedPool_InitialState_ExistingShares(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(1e6), usdx(5e6))
+	reserves := sdk.NewCoins(umage(1e6), fusd(5e6))
 	totalShares := i(2e6)
 
 	pool, err := types.NewDenominatedPoolWithExistingShares(reserves, totalShares)
@@ -92,20 +92,20 @@ func TestDenominatedPool_InitialState_ExistingShares(t *testing.T) {
 }
 
 func TestDenominatedPool_ShareValue(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(10e6), usdx(50e6))
+	reserves := sdk.NewCoins(umage(10e6), fusd(50e6))
 
 	pool, err := types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
 
 	assert.Equal(t, reserves, pool.ShareValue(pool.TotalShares()))
 
-	halfReserves := sdk.NewCoins(ukava(4999999), usdx(24999998))
+	halfReserves := sdk.NewCoins(umage(4999999), fusd(24999998))
 	assert.Equal(t, halfReserves, pool.ShareValue(pool.TotalShares().Quo(i(2))))
 }
 
 func TestDenominatedPool_AddLiquidity(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(10e6), usdx(50e6))
-	desired := sdk.NewCoins(ukava(1e6), usdx(1e6))
+	reserves := sdk.NewCoins(umage(10e6), fusd(50e6))
+	desired := sdk.NewCoins(umage(1e6), fusd(1e6))
 
 	pool, err := types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
@@ -120,7 +120,7 @@ func TestDenominatedPool_AddLiquidity(t *testing.T) {
 }
 
 func TestDenominatedPool_RemoveLiquidity(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(10e6), usdx(50e6))
+	reserves := sdk.NewCoins(umage(10e6), fusd(50e6))
 
 	pool, err := types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
@@ -134,49 +134,49 @@ func TestDenominatedPool_RemoveLiquidity(t *testing.T) {
 }
 
 func TestDenominatedPool_SwapWithExactInput(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(10e6), usdx(50e6))
+	reserves := sdk.NewCoins(umage(10e6), fusd(50e6))
 
 	pool, err := types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
 
-	output, fee := pool.SwapWithExactInput(ukava(1e6), d("0.003"))
+	output, fee := pool.SwapWithExactInput(umage(1e6), d("0.003"))
 
-	assert.Equal(t, usdx(4533054), output)
-	assert.Equal(t, ukava(3000), fee)
-	assert.Equal(t, sdk.NewCoins(ukava(11e6), usdx(45466946)), pool.Reserves())
+	assert.Equal(t, fusd(4533054), output)
+	assert.Equal(t, umage(3000), fee)
+	assert.Equal(t, sdk.NewCoins(umage(11e6), fusd(45466946)), pool.Reserves())
 
 	pool, err = types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
 
-	output, fee = pool.SwapWithExactInput(usdx(5e6), d("0.003"))
+	output, fee = pool.SwapWithExactInput(fusd(5e6), d("0.003"))
 
-	assert.Equal(t, ukava(906610), output)
-	assert.Equal(t, usdx(15000), fee)
-	assert.Equal(t, sdk.NewCoins(ukava(9093390), usdx(55e6)), pool.Reserves())
+	assert.Equal(t, umage(906610), output)
+	assert.Equal(t, fusd(15000), fee)
+	assert.Equal(t, sdk.NewCoins(umage(9093390), fusd(55e6)), pool.Reserves())
 
 	assert.Panics(t, func() { pool.SwapWithExactInput(hard(1e6), d("0.003")) }, "SwapWithExactInput did not panic on invalid denomination")
 }
 
 func TestDenominatedPool_SwapWithExactOuput(t *testing.T) {
-	reserves := sdk.NewCoins(ukava(10e6), usdx(50e6))
+	reserves := sdk.NewCoins(umage(10e6), fusd(50e6))
 
 	pool, err := types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
 
-	input, fee := pool.SwapWithExactOutput(ukava(1e6), d("0.003"))
+	input, fee := pool.SwapWithExactOutput(umage(1e6), d("0.003"))
 
-	assert.Equal(t, usdx(5572273), input)
-	assert.Equal(t, usdx(16717), fee)
-	assert.Equal(t, sdk.NewCoins(ukava(9e6), usdx(55572273)), pool.Reserves())
+	assert.Equal(t, fusd(5572273), input)
+	assert.Equal(t, fusd(16717), fee)
+	assert.Equal(t, sdk.NewCoins(umage(9e6), fusd(55572273)), pool.Reserves())
 
 	pool, err = types.NewDenominatedPool(reserves)
 	require.NoError(t, err)
 
-	input, fee = pool.SwapWithExactOutput(usdx(5e6), d("0.003"))
+	input, fee = pool.SwapWithExactOutput(fusd(5e6), d("0.003"))
 
-	assert.Equal(t, ukava(1114456), input)
-	assert.Equal(t, ukava(3344), fee)
-	assert.Equal(t, sdk.NewCoins(ukava(11114456), usdx(45e6)), pool.Reserves())
+	assert.Equal(t, umage(1114456), input)
+	assert.Equal(t, umage(3344), fee)
+	assert.Equal(t, sdk.NewCoins(umage(11114456), fusd(45e6)), pool.Reserves())
 
 	assert.Panics(t, func() { pool.SwapWithExactOutput(hard(1e6), d("0.003")) }, "SwapWithExactOutput did not panic on invalid denomination")
 }

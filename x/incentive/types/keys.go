@@ -23,9 +23,9 @@ const (
 
 // Key Prefixes
 var (
-	USDXMintingClaimKeyPrefix                     = []byte{0x01} // prefix for keys that store USDX minting claims
-	USDXMintingRewardFactorKeyPrefix              = []byte{0x02} // prefix for key that stores USDX minting reward factors
-	PreviousUSDXMintingRewardAccrualTimeKeyPrefix = []byte{0x03} // prefix for key that stores the blocktime
+	FUSDMintingClaimKeyPrefix                     = []byte{0x01} // prefix for keys that store FUSD minting claims
+	FUSDMintingRewardFactorKeyPrefix              = []byte{0x02} // prefix for key that stores FUSD minting reward factors
+	PreviousFUSDMintingRewardAccrualTimeKeyPrefix = []byte{0x03} // prefix for key that stores the blocktime
 	HardLiquidityClaimKeyPrefix                   = []byte{0x04} // prefix for keys that store Hard liquidity claims
 	HardSupplyRewardIndexesKeyPrefix              = []byte{0x05} // prefix for key that stores Hard supply reward indexes
 	PreviousHardSupplyRewardAccrualTimeKeyPrefix  = []byte{0x06} // prefix for key that stores the previous time Hard supply rewards accrued

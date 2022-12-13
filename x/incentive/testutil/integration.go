@@ -18,26 +18,26 @@ import (
 	abcitypes "github.com/tendermint/tendermint/abci/types"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	cdpkeeper "github.com/kava-labs/kava/x/cdp/keeper"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	committeekeeper "github.com/kava-labs/kava/x/committee/keeper"
-	committeetypes "github.com/kava-labs/kava/x/committee/types"
-	earnkeeper "github.com/kava-labs/kava/x/earn/keeper"
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	hardkeeper "github.com/kava-labs/kava/x/hard/keeper"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	incentivekeeper "github.com/kava-labs/kava/x/incentive/keeper"
-	"github.com/kava-labs/kava/x/incentive/types"
-	liquidkeeper "github.com/kava-labs/kava/x/liquid/keeper"
-	liquidtypes "github.com/kava-labs/kava/x/liquid/types"
-	routerkeeper "github.com/kava-labs/kava/x/router/keeper"
-	routertypes "github.com/kava-labs/kava/x/router/types"
-	swapkeeper "github.com/kava-labs/kava/x/swap/keeper"
-	swaptypes "github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/app"
+	cdpkeeper "github.com/mage-coven/mage/x/cdp/keeper"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	committeekeeper "github.com/mage-coven/mage/x/committee/keeper"
+	committeetypes "github.com/mage-coven/mage/x/committee/types"
+	earnkeeper "github.com/mage-coven/mage/x/earn/keeper"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	hardkeeper "github.com/mage-coven/mage/x/hard/keeper"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	incentivekeeper "github.com/mage-coven/mage/x/incentive/keeper"
+	"github.com/mage-coven/mage/x/incentive/types"
+	liquidkeeper "github.com/mage-coven/mage/x/liquid/keeper"
+	liquidtypes "github.com/mage-coven/mage/x/liquid/types"
+	routerkeeper "github.com/mage-coven/mage/x/router/keeper"
+	routertypes "github.com/mage-coven/mage/x/router/types"
+	swapkeeper "github.com/mage-coven/mage/x/swap/keeper"
+	swaptypes "github.com/mage-coven/mage/x/swap/types"
 )
 
-var testChainID = "kavatest_1-1"
+var testChainID = "magetest_1-1"
 
 type IntegrationTester struct {
 	suite.Suite
@@ -147,8 +147,8 @@ func (suite *IntegrationTester) DeliverIncentiveMsg(msg sdk.Msg) error {
 		_, err = msgServer.ClaimHardReward(sdk.WrapSDKContext(suite.Ctx), msg)
 	case *types.MsgClaimSwapReward:
 		_, err = msgServer.ClaimSwapReward(sdk.WrapSDKContext(suite.Ctx), msg)
-	case *types.MsgClaimUSDXMintingReward:
-		_, err = msgServer.ClaimUSDXMintingReward(sdk.WrapSDKContext(suite.Ctx), msg)
+	case *types.MsgClaimFUSDMintingReward:
+		_, err = msgServer.ClaimFUSDMintingReward(sdk.WrapSDKContext(suite.Ctx), msg)
 	case *types.MsgClaimDelegatorReward:
 		_, err = msgServer.ClaimDelegatorReward(sdk.WrapSDKContext(suite.Ctx), msg)
 	case *types.MsgClaimEarnReward:
@@ -173,7 +173,7 @@ func (suite *IntegrationTester) MintLiquidAnyValAddr(
 	_, found := suite.App.GetStakingKeeper().GetValidator(suite.Ctx, validator)
 	if !found {
 		// Create validator
-		if err := suite.DeliverMsgCreateValidator(validator, sdk.NewCoin("ukava", sdk.NewInt(1e9))); err != nil {
+		if err := suite.DeliverMsgCreateValidator(validator, sdk.NewCoin("umage", sdk.NewInt(1e9))); err != nil {
 			return sdk.Coin{}, err
 		}
 
@@ -425,8 +425,8 @@ func (suite *IntegrationTester) HardRewardEquals(owner sdk.AccAddress, expected 
 	suite.Equalf(expected, claim.Reward, "expected delegator claim reward to be %s, but got %s", expected, claim.Reward)
 }
 
-func (suite *IntegrationTester) USDXRewardEquals(owner sdk.AccAddress, expected sdk.Coin) {
-	claim, found := suite.App.GetIncentiveKeeper().GetUSDXMintingClaim(suite.Ctx, owner)
+func (suite *IntegrationTester) FUSDRewardEquals(owner sdk.AccAddress, expected sdk.Coin) {
+	claim, found := suite.App.GetIncentiveKeeper().GetFUSDMintingClaim(suite.Ctx, owner)
 	suite.Require().Truef(found, "expected delegator claim to be found for %s", owner)
 	suite.Equalf(expected, claim.Reward, "expected delegator claim reward to be %s, but got %s", expected, claim.Reward)
 }
@@ -621,10 +621,10 @@ func (suite *IntegrationTester) GetBeginBlockClaimedStakingRewards(
 		//
 		// Event: withdraw_rewards
 		// - amount:
-		// - validator: kavavaloper1em2mlkrkx0qsa6327tgvl3g0fh8a95hjnqvrwh
+		// - validator: magevaloper1em2mlkrkx0qsa6327tgvl3g0fh8a95hjnqvrwh
 		// Event: withdraw_rewards
-		// - amount: 523909ukava
-		// - validator: kavavaloper1nmgpgr8l4t8pw9zqx9cltuymvz85wmw9sy8kjy
+		// - amount: 523909umage
+		// - validator: magevaloper1nmgpgr8l4t8pw9zqx9cltuymvz85wmw9sy8kjy
 		attrsMap := attrsToMap(event.Attributes)
 
 		validator, found := attrsMap[distributiontypes.AttributeKeyValidator]

@@ -14,8 +14,8 @@ import (
 // RegisterLegacyAminoCodec registers all the necessary types and interfaces for the module.
 func RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgFundCommunityPool{}, "community/MsgFundCommunityPool", nil)
-	cdc.RegisterConcrete(&CommunityPoolLendDepositProposal{}, "kava/CommunityPoolLendDepositProposal", nil)
-	cdc.RegisterConcrete(&CommunityPoolLendWithdrawProposal{}, "kava/CommunityPoolLendWithdrawProposal", nil)
+	cdc.RegisterConcrete(&CommunityPoolLendDepositProposal{}, "mage/CommunityPoolLendDepositProposal", nil)
+	cdc.RegisterConcrete(&CommunityPoolLendWithdrawProposal{}, "mage/CommunityPoolLendWithdrawProposal", nil)
 }
 
 // RegisterInterfaces registers proto messages under their interfaces for unmarshalling,

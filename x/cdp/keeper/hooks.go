@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/x/cdp/types"
 )
 
 // Implements StakingHooks interface

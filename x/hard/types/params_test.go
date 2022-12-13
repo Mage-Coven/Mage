@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/hard/types"
+	"github.com/mage-coven/mage/x/hard/types"
 )
 
 type ParamTestSuite struct {

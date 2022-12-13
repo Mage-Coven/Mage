@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/migrate"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/migrate"
 	"github.com/stretchr/testify/require"
 )
 

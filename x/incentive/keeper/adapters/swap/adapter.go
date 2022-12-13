@@ -3,7 +3,7 @@ package swap
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 var _ types.SourceAdapter = SourceAdapter{}

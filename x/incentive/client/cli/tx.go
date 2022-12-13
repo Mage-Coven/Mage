@@ -11,7 +11,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/cosmos/cosmos-sdk/version"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 const (
@@ -47,8 +47,8 @@ func GetTxCmd() *cobra.Command {
 func getCmdClaimCdp() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:     "claim-cdp [multiplier]",
-		Short:   "claim USDX minting rewards using a given multiplier",
-		Long:    `Claim sender's outstanding USDX minting rewards using a given multiplier.`,
+		Short:   "claim FUSD minting rewards using a given multiplier",
+		Long:    `Claim sender's outstanding FUSD minting rewards using a given multiplier.`,
 		Example: fmt.Sprintf(`  $ %s tx %s claim-cdp large`, version.AppName, types.ModuleName),
 		Args:    cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -60,7 +60,7 @@ func getCmdClaimCdp() *cobra.Command {
 			sender := cliCtx.GetFromAddress()
 			multiplier := args[0]
 
-			msg := types.NewMsgClaimUSDXMintingReward(sender.String(), multiplier)
+			msg := types.NewMsgClaimFUSDMintingReward(sender.String(), multiplier)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -79,8 +79,8 @@ func getCmdClaimHard() *cobra.Command {
 		Short: "claim sender's Hard module rewards using given multipliers",
 		Long:  `Claim sender's outstanding Hard rewards for deposit/borrow using given multipliers`,
 		Example: strings.Join([]string{
-			fmt.Sprintf(`  $ %s tx %s claim-hard --%s hard=large --%s ukava=small`, version.AppName, types.ModuleName, multiplierFlag, multiplierFlag),
-			fmt.Sprintf(`  $ %s tx %s claim-hard --%s hard=large,ukava=small`, version.AppName, types.ModuleName, multiplierFlag),
+			fmt.Sprintf(`  $ %s tx %s claim-hard --%s hard=large --%s umage=small`, version.AppName, types.ModuleName, multiplierFlag, multiplierFlag),
+			fmt.Sprintf(`  $ %s tx %s claim-hard --%s hard=large,umage=small`, version.AppName, types.ModuleName, multiplierFlag),
 		}, "\n"),
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -149,8 +149,8 @@ func getCmdClaimSwap() *cobra.Command {
 		Short: "claim sender's swap rewards using given multipliers",
 		Long:  `Claim sender's outstanding swap rewards using given multipliers`,
 		Example: strings.Join([]string{
-			fmt.Sprintf(`  $ %s tx %s claim-swap --%s swp=large --%s ukava=small`, version.AppName, types.ModuleName, multiplierFlag, multiplierFlag),
-			fmt.Sprintf(`  $ %s tx %s claim-swap --%s swp=large,ukava=small`, version.AppName, types.ModuleName, multiplierFlag),
+			fmt.Sprintf(`  $ %s tx %s claim-swap --%s swp=large --%s umage=small`, version.AppName, types.ModuleName, multiplierFlag, multiplierFlag),
+			fmt.Sprintf(`  $ %s tx %s claim-swap --%s swp=large,umage=small`, version.AppName, types.ModuleName, multiplierFlag),
 		}, "\n"),
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -184,8 +184,8 @@ func getCmdClaimSavings() *cobra.Command {
 		Short: "claim sender's savings rewards using given multipliers",
 		Long:  `Claim sender's outstanding savings rewards using given multipliers`,
 		Example: strings.Join([]string{
-			fmt.Sprintf(`  $ %s tx %s claim-savings --%s swp=large --%s ukava=small`, version.AppName, types.ModuleName, multiplierFlag, multiplierFlag),
-			fmt.Sprintf(`  $ %s tx %s claim-savings --%s swp=large,ukava=small`, version.AppName, types.ModuleName, multiplierFlag),
+			fmt.Sprintf(`  $ %s tx %s claim-savings --%s swp=large --%s umage=small`, version.AppName, types.ModuleName, multiplierFlag, multiplierFlag),
+			fmt.Sprintf(`  $ %s tx %s claim-savings --%s swp=large,umage=small`, version.AppName, types.ModuleName, multiplierFlag),
 		}, "\n"),
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
@@ -218,7 +218,7 @@ func getCmdClaimEarn() *cobra.Command {
 		Use:     "claim-earn",
 		Short:   "claim sender's earn rewards using given multipliers",
 		Long:    `Claim sender's outstanding earn rewards using given multipliers`,
-		Example: fmt.Sprintf(`  $ %s tx %s claim-earn --%s ukava=large`, version.AppName, types.ModuleName, multiplierFlag),
+		Example: fmt.Sprintf(`  $ %s tx %s claim-earn --%s umage=large`, version.AppName, types.ModuleName, multiplierFlag),
 		Args:    cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx, err := client.GetClientTxContext(cmd)

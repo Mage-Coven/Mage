@@ -62,36 +62,36 @@ func TestKvCLIKeysAddRecover(t *testing.T) {
 
 	exitSuccess, _, _ = f.KeysAddRecover("test-recover", "dentist task convince chimney quality leave banana trade firm crawl eternal easily")
 	require.True(t, exitSuccess)
-	require.Equal(t, "kava1rsjxn2e4dfl3a2qzuzzjvvgjmmate383g9q4cz", f.KeyAddress("test-recover").String())
+	require.Equal(t, "mage1rsjxn2e4dfl3a2qzuzzjvvgjmmate383g9q4cz", f.KeyAddress("test-recover").String())
 
 	// test old bip44 coin type
 	exitSuccess, _, _ = f.KeysAddRecover("test-recover-legacy", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", "--legacy-hd-path")
 	require.True(t, exitSuccess)
-	require.Equal(t, "kava1qcfdf69js922qrdr4yaww3ax7gjml6pd39p8lj", f.KeyAddress("test-recover-legacy").String())
+	require.Equal(t, "mage1qcfdf69js922qrdr4yaww3ax7gjml6pd39p8lj", f.KeyAddress("test-recover-legacy").String())
 
 	// Cleanup testing directories
 	f.Cleanup()
 }
 
-func TestKavaCLIKeysAddRecoverHDPath(t *testing.T) {
+func TestMageCLIKeysAddRecoverHDPath(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
 	f.KeysAddRecoverHDPath("test-recoverHD1", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", 0, 0)
-	require.Equal(t, "kava1rsjxn2e4dfl3a2qzuzzjvvgjmmate383g9q4cz", f.KeyAddress("test-recoverHD1").String())
+	require.Equal(t, "mage1rsjxn2e4dfl3a2qzuzzjvvgjmmate383g9q4cz", f.KeyAddress("test-recoverHD1").String())
 
 	f.KeysAddRecoverHDPath("test-recoverH2", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", 1, 5)
-	require.Equal(t, "kava1qpj6nstqn0n5gzcsaezspuhulje6msjq5t8cq5", f.KeyAddress("test-recoverH2").String())
+	require.Equal(t, "mage1qpj6nstqn0n5gzcsaezspuhulje6msjq5t8cq5", f.KeyAddress("test-recoverH2").String())
 
 	f.KeysAddRecoverHDPath("test-recoverH3", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", 1, 17)
-	require.Equal(t, "kava1vayfpstgapt7dmv7074kc3ll8xpf0rlzvh4k08", f.KeyAddress("test-recoverH3").String())
+	require.Equal(t, "mage1vayfpstgapt7dmv7074kc3ll8xpf0rlzvh4k08", f.KeyAddress("test-recoverH3").String())
 
 	f.KeysAddRecoverHDPath("test-recoverH4", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", 2, 17)
-	require.Equal(t, "kava1xvsfnksmhr887skcfrm4pe3va54tkmrtw7wyer", f.KeyAddress("test-recoverH4").String())
+	require.Equal(t, "mage1xvsfnksmhr887skcfrm4pe3va54tkmrtw7wyer", f.KeyAddress("test-recoverH4").String())
 
 	// test old bip44 coin type
 	f.KeysAddRecoverHDPath("test-recoverH5", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", 2, 17, "--legacy-hd-path")
-	require.Equal(t, "kava1v9plmhvyhgxk3th9ydacm7j4z357s3nhhmy0tv", f.KeyAddress("test-recoverH5").String())
+	require.Equal(t, "mage1v9plmhvyhgxk3th9ydacm7j4z357s3nhhmy0tv", f.KeyAddress("test-recoverH5").String())
 
 	exitSuccess, _, _ := f.KeysAddRecover("test-recover-fail", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", "--legacy-hd-path --hd-path 44'/459'/0'/0/0")
 	require.False(t, exitSuccess)
@@ -99,11 +99,11 @@ func TestKavaCLIKeysAddRecoverHDPath(t *testing.T) {
 	// test -hd-path flag
 	exitSuccess, _, _ = f.KeysAddRecover("test-recoverH6", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", "--hd-path 44'/459'/0'/0/0")
 	require.True(t, exitSuccess)
-	require.Equal(t, "kava1rsjxn2e4dfl3a2qzuzzjvvgjmmate383g9q4cz", f.KeyAddress("test-recoverH6").String())
+	require.Equal(t, "mage1rsjxn2e4dfl3a2qzuzzjvvgjmmate383g9q4cz", f.KeyAddress("test-recoverH6").String())
 
 	exitSuccess, _, _ = f.KeysAddRecover("test-recoverH7", "dentist task convince chimney quality leave banana trade firm crawl eternal easily", "--hd-path 44'/459'/2'/0/17")
 	require.True(t, exitSuccess)
-	require.Equal(t, "kava1xvsfnksmhr887skcfrm4pe3va54tkmrtw7wyer", f.KeyAddress("test-recoverH7").String())
+	require.Equal(t, "mage1xvsfnksmhr887skcfrm4pe3va54tkmrtw7wyer", f.KeyAddress("test-recoverH7").String())
 
 	// Cleanup testing directories
 	f.Cleanup()
@@ -113,7 +113,7 @@ func TestKvCLIMinimumFees(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server with minimum fees
+	// start mge server with minimum fees
 	minGasPrice, _ := sdk.NewDecFromStr("0.000006")
 	fees := fmt.Sprintf(
 		"--minimum-gas-prices=%s,%s",
@@ -151,7 +151,7 @@ func TestKvCLIGasPrices(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server with minimum fees
+	// start mge server with minimum fees
 	minGasPrice, _ := sdk.NewDecFromStr("0.000006")
 	proc := f.GDStart(fmt.Sprintf("--minimum-gas-prices=%s", sdk.NewDecCoinFromDec(feeDenom, minGasPrice)))
 	defer proc.Stop(false)
@@ -185,7 +185,7 @@ func TestKvCLIFeesDeduction(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server with minimum fees
+	// start mge server with minimum fees
 	minGasPrice, _ := sdk.NewDecFromStr("0.000006")
 	proc := f.GDStart(fmt.Sprintf("--minimum-gas-prices=%s", sdk.NewDecCoinFromDec(feeDenom, minGasPrice)))
 	defer proc.Stop(false)
@@ -238,7 +238,7 @@ func TestKvCLISend(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -307,7 +307,7 @@ func TestKvCLISendMultiplePerBlock(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -343,7 +343,7 @@ func TestKvCLIGasAuto(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -402,7 +402,7 @@ func TestKvCLICreateValidator(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -492,7 +492,7 @@ func TestKvCLIQueryRewards(t *testing.T) {
 	genDoc.AppState, err = f.cdc.MarshalJSON(genesisState)
 	require.NoError(t, genDoc.SaveAs(genFile))
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -507,7 +507,7 @@ func TestKvCLIQuerySupply(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -524,7 +524,7 @@ func TestKvCLISubmitProposal(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -820,7 +820,7 @@ func TestKvCLIQueryTxPagination(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -874,7 +874,7 @@ func TestKvCLIValidateSignatures(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -923,7 +923,7 @@ func TestKvCLISendGenerateSignAndBroadcast(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -1007,7 +1007,7 @@ func TestKvCLIMultisignInsufficientCosigners(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server with minimum fees
+	// start mge server with minimum fees
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -1060,7 +1060,7 @@ func TestKvCLIEncode(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -1096,7 +1096,7 @@ func TestKvCLIMultisignSortSignatures(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server with minimum fees
+	// start mge server with minimum fees
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -1162,7 +1162,7 @@ func TestKvCLIMultisign(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server with minimum fees
+	// start mge server with minimum fees
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -1360,7 +1360,7 @@ func TestSlashingGetParams(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 
@@ -1380,7 +1380,7 @@ func TestValidateGenesis(t *testing.T) {
 	t.Parallel()
 	f := InitFixtures(t)
 
-	// start kvd server
+	// start mge server
 	proc := f.GDStart()
 	defer proc.Stop(false)
 

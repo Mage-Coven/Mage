@@ -3,9 +3,9 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/earn/types/mocks"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/types/mocks"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/mock"
@@ -30,8 +30,8 @@ func (suite *hookTestSuite) TestHooks_DepositAndWithdraw() {
 	earnHooks := mocks.NewEarnHooks(suite.T())
 	suite.Keeper.SetHooks(earnHooks)
 
-	vault1Denom := "usdx"
-	vault2Denom := "ukava"
+	vault1Denom := "fusd"
+	vault2Denom := "umage"
 	acc1deposit1Amount := sdk.NewInt64Coin(vault1Denom, 100)
 	acc1deposit2Amount := sdk.NewInt64Coin(vault2Denom, 200)
 
@@ -473,7 +473,7 @@ func (suite *hookTestSuite) TestHooks_DepositAndWithdraw() {
 func (suite *hookTestSuite) TestHooks_NoPanicsOnNilHooks() {
 	suite.Keeper.ClearHooks()
 
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 100)
 	withdrawAmount := sdk.NewInt64Coin(vaultDenom, 100)
@@ -500,7 +500,7 @@ func (suite *hookTestSuite) TestHooks_HookOrdering() {
 	earnHooks := &mocks.EarnHooks{}
 	suite.Keeper.SetHooks(earnHooks)
 
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 	startBalance := sdk.NewInt64Coin(vaultDenom, 1000)
 	depositAmount := sdk.NewInt64Coin(vaultDenom, 100)
 

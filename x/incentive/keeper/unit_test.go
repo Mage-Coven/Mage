@@ -10,19 +10,19 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/libs/log"
 	db "github.com/tendermint/tm-db"
 
-	"github.com/kava-labs/kava/app"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
-	earntypes "github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/app"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
 	tmprototypes "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	"github.com/kava-labs/kava/x/incentive/keeper"
-	"github.com/kava-labs/kava/x/incentive/types"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	"github.com/mage-coven/mage/x/incentive/keeper"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // NewTestContext sets up a basic context with an in-memory db
@@ -159,7 +159,7 @@ type TestKeeperBuilder struct {
 	earnKeeper    types.EarnKeeper
 
 	// Keepers used for APY queries
-	kavamintKeeper  types.KavamintKeeper
+	magemintKeeper  types.MagemintKeeper
 	distrKeeper     types.DistrKeeper
 	pricefeedKeeper types.PricefeedKeeper
 }
@@ -209,8 +209,8 @@ func (tk *TestKeeperBuilder) WithStakingKeeper(k types.StakingKeeper) *TestKeepe
 	return tk
 }
 
-func (tk *TestKeeperBuilder) WithKavamintKeeper(k types.KavamintKeeper) *TestKeeperBuilder {
-	tk.kavamintKeeper = k
+func (tk *TestKeeperBuilder) WithMagemintKeeper(k types.MagemintKeeper) *TestKeeperBuilder {
+	tk.magemintKeeper = k
 	return tk
 }
 
@@ -229,7 +229,7 @@ func (tk *TestKeeperBuilder) Build() keeper.Keeper {
 		tk.cdc, tk.key, tk.paramSubspace,
 		tk.bankKeeper, tk.cdpKeeper, tk.hardKeeper, tk.accountKeeper,
 		tk.stakingKeeper, tk.swapKeeper, tk.savingsKeeper, tk.liquidKeeper,
-		tk.earnKeeper, tk.kavamintKeeper, tk.distrKeeper, tk.pricefeedKeeper,
+		tk.earnKeeper, tk.magemintKeeper, tk.distrKeeper, tk.pricefeedKeeper,
 	)
 }
 
@@ -565,7 +565,7 @@ func (k *fakeLiquidKeeper) addDerivative(
 }
 
 func (k *fakeLiquidKeeper) IsDerivativeDenom(ctx sdk.Context, denom string) bool {
-	return strings.HasPrefix(denom, "bkava-")
+	return strings.HasPrefix(denom, "bmage-")
 }
 
 func (k *fakeLiquidKeeper) GetAllDerivativeDenoms(ctx sdk.Context) (denoms []string) {
@@ -582,16 +582,16 @@ func (k *fakeLiquidKeeper) GetTotalDerivativeValue(ctx sdk.Context) (sdk.Coin, e
 		totalSupply = totalSupply.Add(supply)
 	}
 
-	return sdk.NewCoin("ukava", totalSupply), nil
+	return sdk.NewCoin("umage", totalSupply), nil
 }
 
 func (k *fakeLiquidKeeper) GetDerivativeValue(ctx sdk.Context, denom string) (sdk.Coin, error) {
 	supply, found := k.derivatives[denom]
 	if !found {
-		return sdk.NewCoin("ukava", sdk.ZeroInt()), nil
+		return sdk.NewCoin("umage", sdk.ZeroInt()), nil
 	}
 
-	return sdk.NewCoin("ukava", supply), nil
+	return sdk.NewCoin("umage", supply), nil
 }
 
 func (k *fakeLiquidKeeper) CollectStakingRewardsByDenom(
@@ -601,7 +601,7 @@ func (k *fakeLiquidKeeper) CollectStakingRewardsByDenom(
 ) (sdk.Coins, error) {
 	amt := k.getRewardAmount(ctx, derivativeDenom)
 
-	return sdk.NewCoins(sdk.NewCoin("ukava", amt)), nil
+	return sdk.NewCoins(sdk.NewCoin("umage", amt)), nil
 }
 
 func (k *fakeLiquidKeeper) getRewardAmount(
@@ -647,28 +647,28 @@ func (k *fakeDistrKeeper) GetCommunityTax(ctx sdk.Context) (percent sdk.Dec) {
 	return k.communityTax
 }
 
-type fakeKavamintKeeper struct {
+type fakeMagemintKeeper struct {
 	stakingApy         sdk.Dec
 	communityInflation sdk.Dec
 }
 
-var _ types.KavamintKeeper = newFakeKavamintKeeper()
+var _ types.MagemintKeeper = newFakeMagemintKeeper()
 
-func newFakeKavamintKeeper() *fakeKavamintKeeper {
-	return &fakeKavamintKeeper{}
+func newFakeMagemintKeeper() *fakeMagemintKeeper {
+	return &fakeMagemintKeeper{}
 }
 
-func (k *fakeKavamintKeeper) setStakingApy(apy sdk.Dec) *fakeKavamintKeeper {
+func (k *fakeMagemintKeeper) setStakingApy(apy sdk.Dec) *fakeMagemintKeeper {
 	k.stakingApy = apy
 	return k
 }
 
-func (k *fakeKavamintKeeper) setCommunityInflation(inflation sdk.Dec) *fakeKavamintKeeper {
+func (k *fakeMagemintKeeper) setCommunityInflation(inflation sdk.Dec) *fakeMagemintKeeper {
 	k.communityInflation = inflation
 	return k
 }
 
-func (k *fakeKavamintKeeper) GetStakingApy(ctx sdk.Context) (apy sdk.Dec) {
+func (k *fakeMagemintKeeper) GetStakingApy(ctx sdk.Context) (apy sdk.Dec) {
 	return k.stakingApy
 }
 
@@ -776,7 +776,7 @@ var nonEmptyMultiRewardIndexes = types.MultiRewardIndexes{
 				RewardFactor:   d("0.02"),
 			},
 			{
-				CollateralType: "ukava",
+				CollateralType: "umage",
 				RewardFactor:   d("0.04"),
 			},
 		},
@@ -789,7 +789,7 @@ var nonEmptyMultiRewardIndexes = types.MultiRewardIndexes{
 				RewardFactor:   d("0.2"),
 			},
 			{
-				CollateralType: "ukava",
+				CollateralType: "umage",
 				RewardFactor:   d("0.4"),
 			},
 		},
@@ -841,7 +841,7 @@ func appendUniqueMultiRewardIndex(indexes types.MultiRewardIndexes) types.MultiR
 				RewardFactor:   d("0.02"),
 			},
 			{
-				CollateralType: "ukava",
+				CollateralType: "umage",
 				RewardFactor:   d("0.04"),
 			},
 		},

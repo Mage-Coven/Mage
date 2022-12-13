@@ -7,12 +7,12 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 var (
 	CollateralDenoms    = []string{}
-	RewardDenom         = "ukava"
+	RewardDenom         = "umage"
 	MaxTotalAssetReward = sdk.NewInt(1000000000)
 )
 

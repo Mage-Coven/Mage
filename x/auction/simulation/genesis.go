@@ -13,8 +13,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 	"github.com/cosmos/cosmos-sdk/x/supply"
 
-	"github.com/kava-labs/kava/x/auction/types"
-	cdptypes "github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/x/auction/types"
+	cdptypes "github.com/mage-coven/mage/x/cdp/types"
 )
 
 const (
@@ -76,10 +76,10 @@ func RandomizedGenState(simState *module.SimulationState) {
 	auctions := types.GenesisAuctions{
 		types.NewDebtAuction(
 			cdptypes.LiquidatorMacc, // using cdp account rather than generic test one to avoid having to set permissions on the supply keeper
-			sdk.NewInt64Coin("usdx", 100),
-			sdk.NewInt64Coin("ukava", 1000000000000),
+			sdk.NewInt64Coin("fusd", 100),
+			sdk.NewInt64Coin("umage", 1000000000000),
 			simState.GenTimestamp.Add(time.Hour*5),
-			sdk.NewInt64Coin("debt", 100), // same as usdx
+			sdk.NewInt64Coin("debt", 100), // same as fusd
 		),
 	}
 	startingID := auctionGenesis.NextAuctionID
@@ -113,7 +113,7 @@ func RandomizedGenState(simState *module.SimulationState) {
 	if !found {
 		panic("bidder not found")
 	}
-	bidderCoins := sdk.NewCoins(sdk.NewInt64Coin("usdx", 10000000000))
+	bidderCoins := sdk.NewCoins(sdk.NewInt64Coin("fusd", 10000000000))
 	if err := bidder.SetCoins(bidder.GetCoins().Add(bidderCoins...)); err != nil {
 		panic(err)
 	}
@@ -129,7 +129,7 @@ func RandomizedGenState(simState *module.SimulationState) {
 	simState.GenState[supply.ModuleName] = simState.Cdc.MustMarshalJSON(supplyGenesis)
 
 	// TODO liquidator mod account doesn't need to be initialized for this example
-	// - it just mints kava, doesn't need a starting balance
+	// - it just mints mage, doesn't need a starting balance
 	// - and supply.GetModuleAccount creates one if it doesn't exist
 
 	// Note: this line prints out the auction genesis state, not just the auction parameters. Some sdk modules print out just the parameters.

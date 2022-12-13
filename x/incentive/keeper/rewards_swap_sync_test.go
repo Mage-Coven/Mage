@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // SynchronizeSwapRewardTests runs unit tests for the keeper.SynchronizeSwapReward method
@@ -318,7 +318,7 @@ func (suite *SynchronizeSwapRewardTests) TestClaimUpdatedWhenGlobalIndexesIncrea
 }
 
 func (suite *SynchronizeSwapRewardTests) TestGetSyncedClaim_ClaimUnchangedWhenNoGlobalIndexes() {
-	poolID_1 := "btcb:usdx"
+	poolID_1 := "btcb:fusd"
 	owner := arbitraryAddress()
 
 	swapKeeper := newFakeSwapKeeper().
@@ -351,8 +351,8 @@ func (suite *SynchronizeSwapRewardTests) TestGetSyncedClaim_ClaimUnchangedWhenNo
 }
 
 func (suite *SynchronizeSwapRewardTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIndexAndHasNoSourceShares() {
-	poolID_1 := "btcb:usdx"
-	poolID_2 := "ukava:usdx"
+	poolID_1 := "btcb:fusd"
+	poolID_2 := "umage:fusd"
 	owner := arbitraryAddress()
 
 	// owner has no shares in any pool
@@ -409,8 +409,8 @@ func (suite *SynchronizeSwapRewardTests) TestGetSyncedClaim_ClaimUpdatedWhenMiss
 }
 
 func (suite *SynchronizeSwapRewardTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIndexButHasSourceShares() {
-	poolID_1 := "btcb:usdx"
-	poolID_2 := "ukava:usdx"
+	poolID_1 := "btcb:fusd"
+	poolID_2 := "umage:fusd"
 	owner := arbitraryAddress()
 
 	swapKeeper := newFakeSwapKeeper().

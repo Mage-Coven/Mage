@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/kava-labs/kava/x/community/types"
+	"github.com/mage-coven/mage/x/community/types"
 )
 
 func TestLendProposals_ValidateBasic(t *testing.T) {
@@ -26,7 +26,7 @@ func TestLendProposals_ValidateBasic(t *testing.T) {
 			proposal: proposalData{
 				Title:       "I'm a lend proposal",
 				Description: "I interact with lend",
-				Amount:      sdk.NewCoins(sdk.NewInt64Coin("ukava", 1e10)),
+				Amount:      sdk.NewCoins(sdk.NewInt64Coin("umage", 1e10)),
 			},
 			expectedErr: "",
 		},
@@ -60,7 +60,7 @@ func TestLendProposals_ValidateBasic(t *testing.T) {
 			proposal: proposalData{
 				Title:       "Error profoundly",
 				Description: "My coins are zero",
-				Amount:      sdk.NewCoins(sdk.NewCoin("ukava", sdk.ZeroInt())),
+				Amount:      sdk.NewCoins(sdk.NewCoin("umage", sdk.ZeroInt())),
 			},
 			expectedErr: "invalid coins",
 		},
@@ -113,12 +113,12 @@ func TestCommunityPoolLendDepositProposal_Stringer(t *testing.T) {
 	proposal := types.NewCommunityPoolLendDepositProposal(
 		"Title",
 		"Description",
-		sdk.NewCoins(sdk.NewInt64Coin("ukava", 42)),
+		sdk.NewCoins(sdk.NewInt64Coin("umage", 42)),
 	)
 	require.Equal(t, `Community Pool Lend Deposit Proposal:
   Title:       Title
   Description: Description
-  Amount:      42ukava
+  Amount:      42umage
 `, proposal.String())
 }
 
@@ -126,11 +126,11 @@ func TestCommunityPoolLendWithdrawProposal_Stringer(t *testing.T) {
 	proposal := types.NewCommunityPoolLendWithdrawProposal(
 		"Title",
 		"Description",
-		sdk.NewCoins(sdk.NewInt64Coin("ukava", 42)),
+		sdk.NewCoins(sdk.NewInt64Coin("umage", 42)),
 	)
 	require.Equal(t, `Community Pool Lend Withdraw Proposal:
   Title:       Title
   Description: Description
-  Amount:      42ukava
+  Amount:      42umage
 `, proposal.String())
 }

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/kava-labs/kava/x/swap/types"
+	"github.com/mage-coven/mage/x/swap/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
@@ -19,8 +19,8 @@ import (
 
 func TestParams_UnmarshalJSON(t *testing.T) {
 	pools := types.NewAllowedPools(
-		types.NewAllowedPool("hard", "ukava"),
-		types.NewAllowedPool("hard", "usdx"),
+		types.NewAllowedPool("hard", "umage"),
+		types.NewAllowedPool("hard", "fusd"),
 	)
 	poolData, err := json.Marshal(pools)
 	require.NoError(t, err)
@@ -45,8 +45,8 @@ func TestParams_UnmarshalJSON(t *testing.T) {
 
 func TestParams_MarshalYAML(t *testing.T) {
 	pools := types.NewAllowedPools(
-		types.NewAllowedPool("hard", "ukava"),
-		types.NewAllowedPool("hard", "usdx"),
+		types.NewAllowedPool("hard", "umage"),
+		types.NewAllowedPool("hard", "fusd"),
 	)
 	fee, err := sdk.NewDecFromStr("0.5")
 	require.NoError(t, err)
@@ -134,9 +134,9 @@ func TestParams_Validation(t *testing.T) {
 			name: "duplicate pools",
 			key:  types.KeyAllowedPools,
 			testFn: func(params *types.Params) {
-				params.AllowedPools = types.NewAllowedPools(types.NewAllowedPool("ukava", "ukava"))
+				params.AllowedPools = types.NewAllowedPools(types.NewAllowedPool("umage", "umage"))
 			},
-			expectedErr: "pool cannot have two tokens of the same type, received 'ukava' and 'ukava'",
+			expectedErr: "pool cannot have two tokens of the same type, received 'umage' and 'umage'",
 		},
 		{
 			name: "nil swap fee",
@@ -212,8 +212,8 @@ func TestParams_Validation(t *testing.T) {
 func TestParams_String(t *testing.T) {
 	params := types.NewParams(
 		types.NewAllowedPools(
-			types.NewAllowedPool("hard", "ukava"),
-			types.NewAllowedPool("ukava", "usdx"),
+			types.NewAllowedPool("hard", "umage"),
+			types.NewAllowedPool("umage", "fusd"),
 		),
 		sdk.MustNewDecFromStr("0.5"),
 	)
@@ -221,8 +221,8 @@ func TestParams_String(t *testing.T) {
 	require.NoError(t, params.Validate())
 
 	output := params.String()
-	assert.Contains(t, output, types.PoolID("hard", "ukava"))
-	assert.Contains(t, output, types.PoolID("ukava", "usdx"))
+	assert.Contains(t, output, types.PoolID("hard", "umage"))
+	assert.Contains(t, output, types.PoolID("umage", "fusd"))
 	assert.Contains(t, output, "0.5")
 }
 
@@ -234,38 +234,38 @@ func TestAllowedPool_Validation(t *testing.T) {
 	}{
 		{
 			name:        "blank token a",
-			allowedPool: types.NewAllowedPool("", "ukava"),
+			allowedPool: types.NewAllowedPool("", "umage"),
 			expectedErr: "invalid denom: ",
 		},
 		{
 			name:        "blank token b",
-			allowedPool: types.NewAllowedPool("ukava", ""),
+			allowedPool: types.NewAllowedPool("umage", ""),
 			expectedErr: "invalid denom: ",
 		},
 		{
 			name:        "invalid token a",
-			allowedPool: types.NewAllowedPool("1ukava", "ukava"),
-			expectedErr: "invalid denom: 1ukava",
+			allowedPool: types.NewAllowedPool("1umage", "umage"),
+			expectedErr: "invalid denom: 1umage",
 		},
 		{
 			name:        "invalid token b",
-			allowedPool: types.NewAllowedPool("ukava", "1ukava"),
-			expectedErr: "invalid denom: 1ukava",
+			allowedPool: types.NewAllowedPool("umage", "1umage"),
+			expectedErr: "invalid denom: 1umage",
 		},
 		{
 			name:        "matching tokens",
-			allowedPool: types.NewAllowedPool("ukava", "ukava"),
-			expectedErr: "pool cannot have two tokens of the same type, received 'ukava' and 'ukava'",
+			allowedPool: types.NewAllowedPool("umage", "umage"),
+			expectedErr: "pool cannot have two tokens of the same type, received 'umage' and 'umage'",
 		},
 		{
 			name:        "invalid token order",
-			allowedPool: types.NewAllowedPool("usdx", "ukava"),
-			expectedErr: "invalid token order: 'ukava' must come before 'usdx'",
+			allowedPool: types.NewAllowedPool("fusd", "umage"),
+			expectedErr: "invalid token order: 'umage' must come before 'fusd'",
 		},
 		{
 			name:        "invalid token order due to capitalization",
-			allowedPool: types.NewAllowedPool("ukava", "UKAVA"),
-			expectedErr: "invalid token order: 'UKAVA' must come before 'ukava'",
+			allowedPool: types.NewAllowedPool("umage", "UMAGE"),
+			expectedErr: "invalid token order: 'UMAGE' must come before 'umage'",
 		},
 	}
 
@@ -278,7 +278,7 @@ func TestAllowedPool_Validation(t *testing.T) {
 }
 
 func TestAllowedPool_TokenMatch_CaseSensitive(t *testing.T) {
-	allowedPool := types.NewAllowedPool("UKAVA", "ukava")
+	allowedPool := types.NewAllowedPool("UMAGE", "umage")
 	err := allowedPool.Validate()
 	assert.NoError(t, err)
 
@@ -292,13 +292,13 @@ func TestAllowedPool_TokenMatch_CaseSensitive(t *testing.T) {
 }
 
 func TestAllowedPool_String(t *testing.T) {
-	allowedPool := types.NewAllowedPool("hard", "ukava")
+	allowedPool := types.NewAllowedPool("hard", "umage")
 	require.NoError(t, allowedPool.Validate())
 
 	output := `AllowedPool:
-  Name: hard:ukava
+  Name: hard:umage
 	Token A: hard
-	Token B: ukava
+	Token B: umage
 `
 	assert.Equal(t, output, allowedPool.String())
 }
@@ -325,8 +325,8 @@ func TestAllowedPool_Name(t *testing.T) {
 			name:   "a001:a002",
 		},
 		{
-			tokens: "hard ukava",
-			name:   "hard:ukava",
+			tokens: "hard umage",
+			name:   "hard:umage",
 		},
 		{
 			tokens: "bnb hard",
@@ -360,20 +360,20 @@ func TestAllowedPools_Validate(t *testing.T) {
 		{
 			name: "duplicate pool",
 			allowedPools: types.NewAllowedPools(
-				types.NewAllowedPool("hard", "ukava"),
-				types.NewAllowedPool("hard", "ukava"),
+				types.NewAllowedPool("hard", "umage"),
+				types.NewAllowedPool("hard", "umage"),
 			),
-			expectedErr: "duplicate pool: hard:ukava",
+			expectedErr: "duplicate pool: hard:umage",
 		},
 		{
 			name: "duplicate pools",
 			allowedPools: types.NewAllowedPools(
-				types.NewAllowedPool("hard", "ukava"),
-				types.NewAllowedPool("bnb", "usdx"),
+				types.NewAllowedPool("hard", "umage"),
+				types.NewAllowedPool("bnb", "fusd"),
 				types.NewAllowedPool("btcb", "xrpb"),
-				types.NewAllowedPool("bnb", "usdx"),
+				types.NewAllowedPool("bnb", "fusd"),
 			),
-			expectedErr: "duplicate pool: bnb:usdx",
+			expectedErr: "duplicate pool: bnb:fusd",
 		},
 	}
 

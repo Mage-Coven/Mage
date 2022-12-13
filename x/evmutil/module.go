@@ -16,9 +16,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/kava-labs/kava/x/evmutil/client/cli"
-	"github.com/kava-labs/kava/x/evmutil/keeper"
-	"github.com/kava-labs/kava/x/evmutil/types"
+	"github.com/mage-coven/mage/x/evmutil/client/cli"
+	"github.com/mage-coven/mage/x/evmutil/keeper"
+	"github.com/mage-coven/mage/x/evmutil/types"
 )
 
 // ConsensusVersion defines the current module consensus version.

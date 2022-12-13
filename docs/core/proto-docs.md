@@ -4,569 +4,569 @@
 
 ## Table of Contents
 
-- [kava/auction/v1beta1/auction.proto](#kava/auction/v1beta1/auction.proto)
-    - [BaseAuction](#kava.auction.v1beta1.BaseAuction)
-    - [CollateralAuction](#kava.auction.v1beta1.CollateralAuction)
-    - [DebtAuction](#kava.auction.v1beta1.DebtAuction)
-    - [SurplusAuction](#kava.auction.v1beta1.SurplusAuction)
-    - [WeightedAddresses](#kava.auction.v1beta1.WeightedAddresses)
-  
-- [kava/auction/v1beta1/genesis.proto](#kava/auction/v1beta1/genesis.proto)
-    - [GenesisState](#kava.auction.v1beta1.GenesisState)
-    - [Params](#kava.auction.v1beta1.Params)
-  
-- [kava/auction/v1beta1/query.proto](#kava/auction/v1beta1/query.proto)
-    - [QueryAuctionRequest](#kava.auction.v1beta1.QueryAuctionRequest)
-    - [QueryAuctionResponse](#kava.auction.v1beta1.QueryAuctionResponse)
-    - [QueryAuctionsRequest](#kava.auction.v1beta1.QueryAuctionsRequest)
-    - [QueryAuctionsResponse](#kava.auction.v1beta1.QueryAuctionsResponse)
-    - [QueryNextAuctionIDRequest](#kava.auction.v1beta1.QueryNextAuctionIDRequest)
-    - [QueryNextAuctionIDResponse](#kava.auction.v1beta1.QueryNextAuctionIDResponse)
-    - [QueryParamsRequest](#kava.auction.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.auction.v1beta1.QueryParamsResponse)
-  
-    - [Query](#kava.auction.v1beta1.Query)
-  
-- [kava/auction/v1beta1/tx.proto](#kava/auction/v1beta1/tx.proto)
-    - [MsgPlaceBid](#kava.auction.v1beta1.MsgPlaceBid)
-    - [MsgPlaceBidResponse](#kava.auction.v1beta1.MsgPlaceBidResponse)
-  
-    - [Msg](#kava.auction.v1beta1.Msg)
-  
-- [kava/bep3/v1beta1/bep3.proto](#kava/bep3/v1beta1/bep3.proto)
-    - [AssetParam](#kava.bep3.v1beta1.AssetParam)
-    - [AssetSupply](#kava.bep3.v1beta1.AssetSupply)
-    - [AtomicSwap](#kava.bep3.v1beta1.AtomicSwap)
-    - [Params](#kava.bep3.v1beta1.Params)
-    - [SupplyLimit](#kava.bep3.v1beta1.SupplyLimit)
-  
-    - [SwapDirection](#kava.bep3.v1beta1.SwapDirection)
-    - [SwapStatus](#kava.bep3.v1beta1.SwapStatus)
-  
-- [kava/bep3/v1beta1/genesis.proto](#kava/bep3/v1beta1/genesis.proto)
-    - [GenesisState](#kava.bep3.v1beta1.GenesisState)
-  
-- [kava/bep3/v1beta1/query.proto](#kava/bep3/v1beta1/query.proto)
-    - [AssetSupplyResponse](#kava.bep3.v1beta1.AssetSupplyResponse)
-    - [AtomicSwapResponse](#kava.bep3.v1beta1.AtomicSwapResponse)
-    - [QueryAssetSuppliesRequest](#kava.bep3.v1beta1.QueryAssetSuppliesRequest)
-    - [QueryAssetSuppliesResponse](#kava.bep3.v1beta1.QueryAssetSuppliesResponse)
-    - [QueryAssetSupplyRequest](#kava.bep3.v1beta1.QueryAssetSupplyRequest)
-    - [QueryAssetSupplyResponse](#kava.bep3.v1beta1.QueryAssetSupplyResponse)
-    - [QueryAtomicSwapRequest](#kava.bep3.v1beta1.QueryAtomicSwapRequest)
-    - [QueryAtomicSwapResponse](#kava.bep3.v1beta1.QueryAtomicSwapResponse)
-    - [QueryAtomicSwapsRequest](#kava.bep3.v1beta1.QueryAtomicSwapsRequest)
-    - [QueryAtomicSwapsResponse](#kava.bep3.v1beta1.QueryAtomicSwapsResponse)
-    - [QueryParamsRequest](#kava.bep3.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.bep3.v1beta1.QueryParamsResponse)
-  
-    - [Query](#kava.bep3.v1beta1.Query)
-  
-- [kava/bep3/v1beta1/tx.proto](#kava/bep3/v1beta1/tx.proto)
-    - [MsgClaimAtomicSwap](#kava.bep3.v1beta1.MsgClaimAtomicSwap)
-    - [MsgClaimAtomicSwapResponse](#kava.bep3.v1beta1.MsgClaimAtomicSwapResponse)
-    - [MsgCreateAtomicSwap](#kava.bep3.v1beta1.MsgCreateAtomicSwap)
-    - [MsgCreateAtomicSwapResponse](#kava.bep3.v1beta1.MsgCreateAtomicSwapResponse)
-    - [MsgRefundAtomicSwap](#kava.bep3.v1beta1.MsgRefundAtomicSwap)
-    - [MsgRefundAtomicSwapResponse](#kava.bep3.v1beta1.MsgRefundAtomicSwapResponse)
-  
-    - [Msg](#kava.bep3.v1beta1.Msg)
-  
-- [kava/cdp/v1beta1/cdp.proto](#kava/cdp/v1beta1/cdp.proto)
-    - [CDP](#kava.cdp.v1beta1.CDP)
-    - [Deposit](#kava.cdp.v1beta1.Deposit)
-    - [OwnerCDPIndex](#kava.cdp.v1beta1.OwnerCDPIndex)
-    - [TotalCollateral](#kava.cdp.v1beta1.TotalCollateral)
-    - [TotalPrincipal](#kava.cdp.v1beta1.TotalPrincipal)
-  
-- [kava/cdp/v1beta1/genesis.proto](#kava/cdp/v1beta1/genesis.proto)
-    - [CollateralParam](#kava.cdp.v1beta1.CollateralParam)
-    - [DebtParam](#kava.cdp.v1beta1.DebtParam)
-    - [GenesisAccumulationTime](#kava.cdp.v1beta1.GenesisAccumulationTime)
-    - [GenesisState](#kava.cdp.v1beta1.GenesisState)
-    - [GenesisTotalPrincipal](#kava.cdp.v1beta1.GenesisTotalPrincipal)
-    - [Params](#kava.cdp.v1beta1.Params)
-  
-- [kava/cdp/v1beta1/query.proto](#kava/cdp/v1beta1/query.proto)
-    - [CDPResponse](#kava.cdp.v1beta1.CDPResponse)
-    - [QueryAccountsRequest](#kava.cdp.v1beta1.QueryAccountsRequest)
-    - [QueryAccountsResponse](#kava.cdp.v1beta1.QueryAccountsResponse)
-    - [QueryCdpRequest](#kava.cdp.v1beta1.QueryCdpRequest)
-    - [QueryCdpResponse](#kava.cdp.v1beta1.QueryCdpResponse)
-    - [QueryCdpsRequest](#kava.cdp.v1beta1.QueryCdpsRequest)
-    - [QueryCdpsResponse](#kava.cdp.v1beta1.QueryCdpsResponse)
-    - [QueryDepositsRequest](#kava.cdp.v1beta1.QueryDepositsRequest)
-    - [QueryDepositsResponse](#kava.cdp.v1beta1.QueryDepositsResponse)
-    - [QueryParamsRequest](#kava.cdp.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.cdp.v1beta1.QueryParamsResponse)
-    - [QueryTotalCollateralRequest](#kava.cdp.v1beta1.QueryTotalCollateralRequest)
-    - [QueryTotalCollateralResponse](#kava.cdp.v1beta1.QueryTotalCollateralResponse)
-    - [QueryTotalPrincipalRequest](#kava.cdp.v1beta1.QueryTotalPrincipalRequest)
-    - [QueryTotalPrincipalResponse](#kava.cdp.v1beta1.QueryTotalPrincipalResponse)
-  
-    - [Query](#kava.cdp.v1beta1.Query)
-  
-- [kava/cdp/v1beta1/tx.proto](#kava/cdp/v1beta1/tx.proto)
-    - [MsgCreateCDP](#kava.cdp.v1beta1.MsgCreateCDP)
-    - [MsgCreateCDPResponse](#kava.cdp.v1beta1.MsgCreateCDPResponse)
-    - [MsgDeposit](#kava.cdp.v1beta1.MsgDeposit)
-    - [MsgDepositResponse](#kava.cdp.v1beta1.MsgDepositResponse)
-    - [MsgDrawDebt](#kava.cdp.v1beta1.MsgDrawDebt)
-    - [MsgDrawDebtResponse](#kava.cdp.v1beta1.MsgDrawDebtResponse)
-    - [MsgLiquidate](#kava.cdp.v1beta1.MsgLiquidate)
-    - [MsgLiquidateResponse](#kava.cdp.v1beta1.MsgLiquidateResponse)
-    - [MsgRepayDebt](#kava.cdp.v1beta1.MsgRepayDebt)
-    - [MsgRepayDebtResponse](#kava.cdp.v1beta1.MsgRepayDebtResponse)
-    - [MsgWithdraw](#kava.cdp.v1beta1.MsgWithdraw)
-    - [MsgWithdrawResponse](#kava.cdp.v1beta1.MsgWithdrawResponse)
-  
-    - [Msg](#kava.cdp.v1beta1.Msg)
-  
-- [kava/committee/v1beta1/committee.proto](#kava/committee/v1beta1/committee.proto)
-    - [BaseCommittee](#kava.committee.v1beta1.BaseCommittee)
-    - [MemberCommittee](#kava.committee.v1beta1.MemberCommittee)
-    - [TokenCommittee](#kava.committee.v1beta1.TokenCommittee)
-  
-    - [TallyOption](#kava.committee.v1beta1.TallyOption)
-  
-- [kava/committee/v1beta1/genesis.proto](#kava/committee/v1beta1/genesis.proto)
-    - [GenesisState](#kava.committee.v1beta1.GenesisState)
-    - [Proposal](#kava.committee.v1beta1.Proposal)
-    - [Vote](#kava.committee.v1beta1.Vote)
-  
-    - [VoteType](#kava.committee.v1beta1.VoteType)
-  
-- [kava/committee/v1beta1/permissions.proto](#kava/committee/v1beta1/permissions.proto)
-    - [AllowedParamsChange](#kava.committee.v1beta1.AllowedParamsChange)
-    - [GodPermission](#kava.committee.v1beta1.GodPermission)
-    - [ParamsChangePermission](#kava.committee.v1beta1.ParamsChangePermission)
-    - [SoftwareUpgradePermission](#kava.committee.v1beta1.SoftwareUpgradePermission)
-    - [SubparamRequirement](#kava.committee.v1beta1.SubparamRequirement)
-    - [TextPermission](#kava.committee.v1beta1.TextPermission)
-  
-- [kava/committee/v1beta1/proposal.proto](#kava/committee/v1beta1/proposal.proto)
-    - [CommitteeChangeProposal](#kava.committee.v1beta1.CommitteeChangeProposal)
-    - [CommitteeDeleteProposal](#kava.committee.v1beta1.CommitteeDeleteProposal)
-  
-- [kava/committee/v1beta1/query.proto](#kava/committee/v1beta1/query.proto)
-    - [QueryCommitteeRequest](#kava.committee.v1beta1.QueryCommitteeRequest)
-    - [QueryCommitteeResponse](#kava.committee.v1beta1.QueryCommitteeResponse)
-    - [QueryCommitteesRequest](#kava.committee.v1beta1.QueryCommitteesRequest)
-    - [QueryCommitteesResponse](#kava.committee.v1beta1.QueryCommitteesResponse)
-    - [QueryNextProposalIDRequest](#kava.committee.v1beta1.QueryNextProposalIDRequest)
-    - [QueryNextProposalIDResponse](#kava.committee.v1beta1.QueryNextProposalIDResponse)
-    - [QueryProposalRequest](#kava.committee.v1beta1.QueryProposalRequest)
-    - [QueryProposalResponse](#kava.committee.v1beta1.QueryProposalResponse)
-    - [QueryProposalsRequest](#kava.committee.v1beta1.QueryProposalsRequest)
-    - [QueryProposalsResponse](#kava.committee.v1beta1.QueryProposalsResponse)
-    - [QueryRawParamsRequest](#kava.committee.v1beta1.QueryRawParamsRequest)
-    - [QueryRawParamsResponse](#kava.committee.v1beta1.QueryRawParamsResponse)
-    - [QueryTallyRequest](#kava.committee.v1beta1.QueryTallyRequest)
-    - [QueryTallyResponse](#kava.committee.v1beta1.QueryTallyResponse)
-    - [QueryVoteRequest](#kava.committee.v1beta1.QueryVoteRequest)
-    - [QueryVoteResponse](#kava.committee.v1beta1.QueryVoteResponse)
-    - [QueryVotesRequest](#kava.committee.v1beta1.QueryVotesRequest)
-    - [QueryVotesResponse](#kava.committee.v1beta1.QueryVotesResponse)
-  
-    - [Query](#kava.committee.v1beta1.Query)
-  
-- [kava/committee/v1beta1/tx.proto](#kava/committee/v1beta1/tx.proto)
-    - [MsgSubmitProposal](#kava.committee.v1beta1.MsgSubmitProposal)
-    - [MsgSubmitProposalResponse](#kava.committee.v1beta1.MsgSubmitProposalResponse)
-    - [MsgVote](#kava.committee.v1beta1.MsgVote)
-    - [MsgVoteResponse](#kava.committee.v1beta1.MsgVoteResponse)
-  
-    - [Msg](#kava.committee.v1beta1.Msg)
-  
-- [kava/community/v1beta1/proposal.proto](#kava/community/v1beta1/proposal.proto)
-    - [CommunityPoolLendDepositProposal](#kava.community.v1beta1.CommunityPoolLendDepositProposal)
-    - [CommunityPoolLendWithdrawProposal](#kava.community.v1beta1.CommunityPoolLendWithdrawProposal)
-  
-- [kava/community/v1beta1/query.proto](#kava/community/v1beta1/query.proto)
-    - [QueryBalanceRequest](#kava.community.v1beta1.QueryBalanceRequest)
-    - [QueryBalanceResponse](#kava.community.v1beta1.QueryBalanceResponse)
-  
-    - [Query](#kava.community.v1beta1.Query)
-  
-- [kava/community/v1beta1/tx.proto](#kava/community/v1beta1/tx.proto)
-    - [MsgFundCommunityPool](#kava.community.v1beta1.MsgFundCommunityPool)
-    - [MsgFundCommunityPoolResponse](#kava.community.v1beta1.MsgFundCommunityPoolResponse)
-  
-    - [Msg](#kava.community.v1beta1.Msg)
-  
-- [kava/earn/v1beta1/strategy.proto](#kava/earn/v1beta1/strategy.proto)
-    - [StrategyType](#kava.earn.v1beta1.StrategyType)
-  
-- [kava/earn/v1beta1/vault.proto](#kava/earn/v1beta1/vault.proto)
-    - [AllowedVault](#kava.earn.v1beta1.AllowedVault)
-    - [VaultRecord](#kava.earn.v1beta1.VaultRecord)
-    - [VaultShare](#kava.earn.v1beta1.VaultShare)
-    - [VaultShareRecord](#kava.earn.v1beta1.VaultShareRecord)
-  
-- [kava/earn/v1beta1/params.proto](#kava/earn/v1beta1/params.proto)
-    - [Params](#kava.earn.v1beta1.Params)
-  
-- [kava/earn/v1beta1/genesis.proto](#kava/earn/v1beta1/genesis.proto)
-    - [GenesisState](#kava.earn.v1beta1.GenesisState)
-  
-- [kava/earn/v1beta1/proposal.proto](#kava/earn/v1beta1/proposal.proto)
-    - [CommunityPoolDepositProposal](#kava.earn.v1beta1.CommunityPoolDepositProposal)
-    - [CommunityPoolDepositProposalJSON](#kava.earn.v1beta1.CommunityPoolDepositProposalJSON)
-    - [CommunityPoolWithdrawProposal](#kava.earn.v1beta1.CommunityPoolWithdrawProposal)
-    - [CommunityPoolWithdrawProposalJSON](#kava.earn.v1beta1.CommunityPoolWithdrawProposalJSON)
-  
-- [kava/earn/v1beta1/query.proto](#kava/earn/v1beta1/query.proto)
-    - [DepositResponse](#kava.earn.v1beta1.DepositResponse)
-    - [QueryDepositsRequest](#kava.earn.v1beta1.QueryDepositsRequest)
-    - [QueryDepositsResponse](#kava.earn.v1beta1.QueryDepositsResponse)
-    - [QueryParamsRequest](#kava.earn.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.earn.v1beta1.QueryParamsResponse)
-    - [QueryTotalSupplyRequest](#kava.earn.v1beta1.QueryTotalSupplyRequest)
-    - [QueryTotalSupplyResponse](#kava.earn.v1beta1.QueryTotalSupplyResponse)
-    - [QueryVaultRequest](#kava.earn.v1beta1.QueryVaultRequest)
-    - [QueryVaultResponse](#kava.earn.v1beta1.QueryVaultResponse)
-    - [QueryVaultsRequest](#kava.earn.v1beta1.QueryVaultsRequest)
-    - [QueryVaultsResponse](#kava.earn.v1beta1.QueryVaultsResponse)
-    - [VaultResponse](#kava.earn.v1beta1.VaultResponse)
-  
-    - [Query](#kava.earn.v1beta1.Query)
-  
-- [kava/earn/v1beta1/tx.proto](#kava/earn/v1beta1/tx.proto)
-    - [MsgDeposit](#kava.earn.v1beta1.MsgDeposit)
-    - [MsgDepositResponse](#kava.earn.v1beta1.MsgDepositResponse)
-    - [MsgWithdraw](#kava.earn.v1beta1.MsgWithdraw)
-    - [MsgWithdrawResponse](#kava.earn.v1beta1.MsgWithdrawResponse)
-  
-    - [Msg](#kava.earn.v1beta1.Msg)
-  
-- [kava/evmutil/v1beta1/conversion_pair.proto](#kava/evmutil/v1beta1/conversion_pair.proto)
-    - [ConversionPair](#kava.evmutil.v1beta1.ConversionPair)
-  
-- [kava/evmutil/v1beta1/genesis.proto](#kava/evmutil/v1beta1/genesis.proto)
-    - [Account](#kava.evmutil.v1beta1.Account)
-    - [GenesisState](#kava.evmutil.v1beta1.GenesisState)
-    - [Params](#kava.evmutil.v1beta1.Params)
-  
-- [kava/evmutil/v1beta1/query.proto](#kava/evmutil/v1beta1/query.proto)
-    - [QueryParamsRequest](#kava.evmutil.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.evmutil.v1beta1.QueryParamsResponse)
-  
-    - [Query](#kava.evmutil.v1beta1.Query)
-  
-- [kava/evmutil/v1beta1/tx.proto](#kava/evmutil/v1beta1/tx.proto)
-    - [MsgConvertCoinToERC20](#kava.evmutil.v1beta1.MsgConvertCoinToERC20)
-    - [MsgConvertCoinToERC20Response](#kava.evmutil.v1beta1.MsgConvertCoinToERC20Response)
-    - [MsgConvertERC20ToCoin](#kava.evmutil.v1beta1.MsgConvertERC20ToCoin)
-    - [MsgConvertERC20ToCoinResponse](#kava.evmutil.v1beta1.MsgConvertERC20ToCoinResponse)
-  
-    - [Msg](#kava.evmutil.v1beta1.Msg)
-  
-- [kava/hard/v1beta1/hard.proto](#kava/hard/v1beta1/hard.proto)
-    - [Borrow](#kava.hard.v1beta1.Borrow)
-    - [BorrowInterestFactor](#kava.hard.v1beta1.BorrowInterestFactor)
-    - [BorrowLimit](#kava.hard.v1beta1.BorrowLimit)
-    - [CoinsProto](#kava.hard.v1beta1.CoinsProto)
-    - [Deposit](#kava.hard.v1beta1.Deposit)
-    - [InterestRateModel](#kava.hard.v1beta1.InterestRateModel)
-    - [MoneyMarket](#kava.hard.v1beta1.MoneyMarket)
-    - [Params](#kava.hard.v1beta1.Params)
-    - [SupplyInterestFactor](#kava.hard.v1beta1.SupplyInterestFactor)
-  
-- [kava/hard/v1beta1/genesis.proto](#kava/hard/v1beta1/genesis.proto)
-    - [GenesisAccumulationTime](#kava.hard.v1beta1.GenesisAccumulationTime)
-    - [GenesisState](#kava.hard.v1beta1.GenesisState)
-  
-- [kava/hard/v1beta1/query.proto](#kava/hard/v1beta1/query.proto)
-    - [BorrowInterestFactorResponse](#kava.hard.v1beta1.BorrowInterestFactorResponse)
-    - [BorrowResponse](#kava.hard.v1beta1.BorrowResponse)
-    - [DepositResponse](#kava.hard.v1beta1.DepositResponse)
-    - [InterestFactor](#kava.hard.v1beta1.InterestFactor)
-    - [MoneyMarketInterestRate](#kava.hard.v1beta1.MoneyMarketInterestRate)
-    - [QueryAccountsRequest](#kava.hard.v1beta1.QueryAccountsRequest)
-    - [QueryAccountsResponse](#kava.hard.v1beta1.QueryAccountsResponse)
-    - [QueryBorrowsRequest](#kava.hard.v1beta1.QueryBorrowsRequest)
-    - [QueryBorrowsResponse](#kava.hard.v1beta1.QueryBorrowsResponse)
-    - [QueryDepositsRequest](#kava.hard.v1beta1.QueryDepositsRequest)
-    - [QueryDepositsResponse](#kava.hard.v1beta1.QueryDepositsResponse)
-    - [QueryInterestFactorsRequest](#kava.hard.v1beta1.QueryInterestFactorsRequest)
-    - [QueryInterestFactorsResponse](#kava.hard.v1beta1.QueryInterestFactorsResponse)
-    - [QueryInterestRateRequest](#kava.hard.v1beta1.QueryInterestRateRequest)
-    - [QueryInterestRateResponse](#kava.hard.v1beta1.QueryInterestRateResponse)
-    - [QueryParamsRequest](#kava.hard.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.hard.v1beta1.QueryParamsResponse)
-    - [QueryReservesRequest](#kava.hard.v1beta1.QueryReservesRequest)
-    - [QueryReservesResponse](#kava.hard.v1beta1.QueryReservesResponse)
-    - [QueryTotalBorrowedRequest](#kava.hard.v1beta1.QueryTotalBorrowedRequest)
-    - [QueryTotalBorrowedResponse](#kava.hard.v1beta1.QueryTotalBorrowedResponse)
-    - [QueryTotalDepositedRequest](#kava.hard.v1beta1.QueryTotalDepositedRequest)
-    - [QueryTotalDepositedResponse](#kava.hard.v1beta1.QueryTotalDepositedResponse)
-    - [QueryUnsyncedBorrowsRequest](#kava.hard.v1beta1.QueryUnsyncedBorrowsRequest)
-    - [QueryUnsyncedBorrowsResponse](#kava.hard.v1beta1.QueryUnsyncedBorrowsResponse)
-    - [QueryUnsyncedDepositsRequest](#kava.hard.v1beta1.QueryUnsyncedDepositsRequest)
-    - [QueryUnsyncedDepositsResponse](#kava.hard.v1beta1.QueryUnsyncedDepositsResponse)
-    - [SupplyInterestFactorResponse](#kava.hard.v1beta1.SupplyInterestFactorResponse)
-  
-    - [Query](#kava.hard.v1beta1.Query)
-  
-- [kava/hard/v1beta1/tx.proto](#kava/hard/v1beta1/tx.proto)
-    - [MsgBorrow](#kava.hard.v1beta1.MsgBorrow)
-    - [MsgBorrowResponse](#kava.hard.v1beta1.MsgBorrowResponse)
-    - [MsgDeposit](#kava.hard.v1beta1.MsgDeposit)
-    - [MsgDepositResponse](#kava.hard.v1beta1.MsgDepositResponse)
-    - [MsgLiquidate](#kava.hard.v1beta1.MsgLiquidate)
-    - [MsgLiquidateResponse](#kava.hard.v1beta1.MsgLiquidateResponse)
-    - [MsgRepay](#kava.hard.v1beta1.MsgRepay)
-    - [MsgRepayResponse](#kava.hard.v1beta1.MsgRepayResponse)
-    - [MsgWithdraw](#kava.hard.v1beta1.MsgWithdraw)
-    - [MsgWithdrawResponse](#kava.hard.v1beta1.MsgWithdrawResponse)
-  
-    - [Msg](#kava.hard.v1beta1.Msg)
-  
-- [kava/incentive/v1beta1/claims.proto](#kava/incentive/v1beta1/claims.proto)
-    - [BaseClaim](#kava.incentive.v1beta1.BaseClaim)
-    - [BaseMultiClaim](#kava.incentive.v1beta1.BaseMultiClaim)
-    - [Claim](#kava.incentive.v1beta1.Claim)
-    - [DelegatorClaim](#kava.incentive.v1beta1.DelegatorClaim)
-    - [EarnClaim](#kava.incentive.v1beta1.EarnClaim)
-    - [HardLiquidityProviderClaim](#kava.incentive.v1beta1.HardLiquidityProviderClaim)
-    - [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex)
-    - [MultiRewardIndexesProto](#kava.incentive.v1beta1.MultiRewardIndexesProto)
-    - [RewardIndex](#kava.incentive.v1beta1.RewardIndex)
-    - [RewardIndexesProto](#kava.incentive.v1beta1.RewardIndexesProto)
-    - [SavingsClaim](#kava.incentive.v1beta1.SavingsClaim)
-    - [SwapClaim](#kava.incentive.v1beta1.SwapClaim)
-    - [TypedRewardIndexes](#kava.incentive.v1beta1.TypedRewardIndexes)
-    - [USDXMintingClaim](#kava.incentive.v1beta1.USDXMintingClaim)
-  
-    - [ClaimType](#kava.incentive.v1beta1.ClaimType)
-  
-- [kava/incentive/v1beta1/params.proto](#kava/incentive/v1beta1/params.proto)
-    - [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod)
-    - [Multiplier](#kava.incentive.v1beta1.Multiplier)
-    - [MultipliersPerDenom](#kava.incentive.v1beta1.MultipliersPerDenom)
-    - [Params](#kava.incentive.v1beta1.Params)
-    - [RewardPeriod](#kava.incentive.v1beta1.RewardPeriod)
-    - [TypedMultiRewardPeriod](#kava.incentive.v1beta1.TypedMultiRewardPeriod)
-  
-- [kava/incentive/v1beta1/genesis.proto](#kava/incentive/v1beta1/genesis.proto)
-    - [AccrualTime](#kava.incentive.v1beta1.AccrualTime)
-    - [AccumulationTime](#kava.incentive.v1beta1.AccumulationTime)
-    - [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState)
-    - [GenesisState](#kava.incentive.v1beta1.GenesisState)
-  
-- [kava/incentive/v1beta1/tx.proto](#kava/incentive/v1beta1/tx.proto)
-    - [MsgClaimDelegatorReward](#kava.incentive.v1beta1.MsgClaimDelegatorReward)
-    - [MsgClaimDelegatorRewardResponse](#kava.incentive.v1beta1.MsgClaimDelegatorRewardResponse)
-    - [MsgClaimEarnReward](#kava.incentive.v1beta1.MsgClaimEarnReward)
-    - [MsgClaimEarnRewardResponse](#kava.incentive.v1beta1.MsgClaimEarnRewardResponse)
-    - [MsgClaimHardReward](#kava.incentive.v1beta1.MsgClaimHardReward)
-    - [MsgClaimHardRewardResponse](#kava.incentive.v1beta1.MsgClaimHardRewardResponse)
-    - [MsgClaimSavingsReward](#kava.incentive.v1beta1.MsgClaimSavingsReward)
-    - [MsgClaimSavingsRewardResponse](#kava.incentive.v1beta1.MsgClaimSavingsRewardResponse)
-    - [MsgClaimSwapReward](#kava.incentive.v1beta1.MsgClaimSwapReward)
-    - [MsgClaimSwapRewardResponse](#kava.incentive.v1beta1.MsgClaimSwapRewardResponse)
-    - [MsgClaimUSDXMintingReward](#kava.incentive.v1beta1.MsgClaimUSDXMintingReward)
-    - [MsgClaimUSDXMintingRewardResponse](#kava.incentive.v1beta1.MsgClaimUSDXMintingRewardResponse)
-    - [Selection](#kava.incentive.v1beta1.Selection)
-  
-    - [Msg](#kava.incentive.v1beta1.Msg)
-  
-- [kava/issuance/v1beta1/genesis.proto](#kava/issuance/v1beta1/genesis.proto)
-    - [Asset](#kava.issuance.v1beta1.Asset)
-    - [AssetSupply](#kava.issuance.v1beta1.AssetSupply)
-    - [GenesisState](#kava.issuance.v1beta1.GenesisState)
-    - [Params](#kava.issuance.v1beta1.Params)
-    - [RateLimit](#kava.issuance.v1beta1.RateLimit)
-  
-- [kava/issuance/v1beta1/query.proto](#kava/issuance/v1beta1/query.proto)
-    - [QueryParamsRequest](#kava.issuance.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.issuance.v1beta1.QueryParamsResponse)
-  
-    - [Query](#kava.issuance.v1beta1.Query)
-  
-- [kava/issuance/v1beta1/tx.proto](#kava/issuance/v1beta1/tx.proto)
-    - [MsgBlockAddress](#kava.issuance.v1beta1.MsgBlockAddress)
-    - [MsgBlockAddressResponse](#kava.issuance.v1beta1.MsgBlockAddressResponse)
-    - [MsgIssueTokens](#kava.issuance.v1beta1.MsgIssueTokens)
-    - [MsgIssueTokensResponse](#kava.issuance.v1beta1.MsgIssueTokensResponse)
-    - [MsgRedeemTokens](#kava.issuance.v1beta1.MsgRedeemTokens)
-    - [MsgRedeemTokensResponse](#kava.issuance.v1beta1.MsgRedeemTokensResponse)
-    - [MsgSetPauseStatus](#kava.issuance.v1beta1.MsgSetPauseStatus)
-    - [MsgSetPauseStatusResponse](#kava.issuance.v1beta1.MsgSetPauseStatusResponse)
-    - [MsgUnblockAddress](#kava.issuance.v1beta1.MsgUnblockAddress)
-    - [MsgUnblockAddressResponse](#kava.issuance.v1beta1.MsgUnblockAddressResponse)
-  
-    - [Msg](#kava.issuance.v1beta1.Msg)
-  
-- [kava/kavadist/v1beta1/params.proto](#kava/kavadist/v1beta1/params.proto)
-    - [CoreReward](#kava.kavadist.v1beta1.CoreReward)
-    - [InfrastructureParams](#kava.kavadist.v1beta1.InfrastructureParams)
-    - [Params](#kava.kavadist.v1beta1.Params)
-    - [PartnerReward](#kava.kavadist.v1beta1.PartnerReward)
-    - [Period](#kava.kavadist.v1beta1.Period)
-  
-- [kava/kavadist/v1beta1/genesis.proto](#kava/kavadist/v1beta1/genesis.proto)
-    - [GenesisState](#kava.kavadist.v1beta1.GenesisState)
-  
-- [kava/kavadist/v1beta1/proposal.proto](#kava/kavadist/v1beta1/proposal.proto)
-    - [CommunityPoolMultiSpendProposal](#kava.kavadist.v1beta1.CommunityPoolMultiSpendProposal)
-    - [CommunityPoolMultiSpendProposalJSON](#kava.kavadist.v1beta1.CommunityPoolMultiSpendProposalJSON)
-    - [MultiSpendRecipient](#kava.kavadist.v1beta1.MultiSpendRecipient)
-  
-- [kava/kavadist/v1beta1/query.proto](#kava/kavadist/v1beta1/query.proto)
-    - [QueryBalanceRequest](#kava.kavadist.v1beta1.QueryBalanceRequest)
-    - [QueryBalanceResponse](#kava.kavadist.v1beta1.QueryBalanceResponse)
-    - [QueryParamsRequest](#kava.kavadist.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.kavadist.v1beta1.QueryParamsResponse)
-  
-    - [Query](#kava.kavadist.v1beta1.Query)
-  
-- [kava/kavamint/v1beta1/kavamint.proto](#kava/kavamint/v1beta1/kavamint.proto)
-    - [Params](#kava.kavamint.v1beta1.Params)
-  
-- [kava/kavamint/v1beta1/genesis.proto](#kava/kavamint/v1beta1/genesis.proto)
-    - [GenesisState](#kava.kavamint.v1beta1.GenesisState)
-  
-- [kava/kavamint/v1beta1/query.proto](#kava/kavamint/v1beta1/query.proto)
-    - [QueryInflationRequest](#kava.kavamint.v1beta1.QueryInflationRequest)
-    - [QueryInflationResponse](#kava.kavamint.v1beta1.QueryInflationResponse)
-    - [QueryParamsRequest](#kava.kavamint.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.kavamint.v1beta1.QueryParamsResponse)
-  
-    - [Query](#kava.kavamint.v1beta1.Query)
-  
-- [kava/liquid/v1beta1/query.proto](#kava/liquid/v1beta1/query.proto)
-    - [QueryDelegatedBalanceRequest](#kava.liquid.v1beta1.QueryDelegatedBalanceRequest)
-    - [QueryDelegatedBalanceResponse](#kava.liquid.v1beta1.QueryDelegatedBalanceResponse)
-    - [QueryTotalSupplyRequest](#kava.liquid.v1beta1.QueryTotalSupplyRequest)
-    - [QueryTotalSupplyResponse](#kava.liquid.v1beta1.QueryTotalSupplyResponse)
-  
-    - [Query](#kava.liquid.v1beta1.Query)
-  
-- [kava/liquid/v1beta1/tx.proto](#kava/liquid/v1beta1/tx.proto)
-    - [MsgBurnDerivative](#kava.liquid.v1beta1.MsgBurnDerivative)
-    - [MsgBurnDerivativeResponse](#kava.liquid.v1beta1.MsgBurnDerivativeResponse)
-    - [MsgMintDerivative](#kava.liquid.v1beta1.MsgMintDerivative)
-    - [MsgMintDerivativeResponse](#kava.liquid.v1beta1.MsgMintDerivativeResponse)
-  
-    - [Msg](#kava.liquid.v1beta1.Msg)
-  
-- [kava/pricefeed/v1beta1/store.proto](#kava/pricefeed/v1beta1/store.proto)
-    - [CurrentPrice](#kava.pricefeed.v1beta1.CurrentPrice)
-    - [Market](#kava.pricefeed.v1beta1.Market)
-    - [Params](#kava.pricefeed.v1beta1.Params)
-    - [PostedPrice](#kava.pricefeed.v1beta1.PostedPrice)
-  
-- [kava/pricefeed/v1beta1/genesis.proto](#kava/pricefeed/v1beta1/genesis.proto)
-    - [GenesisState](#kava.pricefeed.v1beta1.GenesisState)
-  
-- [kava/pricefeed/v1beta1/query.proto](#kava/pricefeed/v1beta1/query.proto)
-    - [CurrentPriceResponse](#kava.pricefeed.v1beta1.CurrentPriceResponse)
-    - [MarketResponse](#kava.pricefeed.v1beta1.MarketResponse)
-    - [PostedPriceResponse](#kava.pricefeed.v1beta1.PostedPriceResponse)
-    - [QueryMarketsRequest](#kava.pricefeed.v1beta1.QueryMarketsRequest)
-    - [QueryMarketsResponse](#kava.pricefeed.v1beta1.QueryMarketsResponse)
-    - [QueryOraclesRequest](#kava.pricefeed.v1beta1.QueryOraclesRequest)
-    - [QueryOraclesResponse](#kava.pricefeed.v1beta1.QueryOraclesResponse)
-    - [QueryParamsRequest](#kava.pricefeed.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.pricefeed.v1beta1.QueryParamsResponse)
-    - [QueryPriceRequest](#kava.pricefeed.v1beta1.QueryPriceRequest)
-    - [QueryPriceResponse](#kava.pricefeed.v1beta1.QueryPriceResponse)
-    - [QueryPricesRequest](#kava.pricefeed.v1beta1.QueryPricesRequest)
-    - [QueryPricesResponse](#kava.pricefeed.v1beta1.QueryPricesResponse)
-    - [QueryRawPricesRequest](#kava.pricefeed.v1beta1.QueryRawPricesRequest)
-    - [QueryRawPricesResponse](#kava.pricefeed.v1beta1.QueryRawPricesResponse)
-  
-    - [Query](#kava.pricefeed.v1beta1.Query)
-  
-- [kava/pricefeed/v1beta1/tx.proto](#kava/pricefeed/v1beta1/tx.proto)
-    - [MsgPostPrice](#kava.pricefeed.v1beta1.MsgPostPrice)
-    - [MsgPostPriceResponse](#kava.pricefeed.v1beta1.MsgPostPriceResponse)
-  
-    - [Msg](#kava.pricefeed.v1beta1.Msg)
-  
-- [kava/router/v1beta1/tx.proto](#kava/router/v1beta1/tx.proto)
-    - [MsgDelegateMintDeposit](#kava.router.v1beta1.MsgDelegateMintDeposit)
-    - [MsgDelegateMintDepositResponse](#kava.router.v1beta1.MsgDelegateMintDepositResponse)
-    - [MsgMintDeposit](#kava.router.v1beta1.MsgMintDeposit)
-    - [MsgMintDepositResponse](#kava.router.v1beta1.MsgMintDepositResponse)
-    - [MsgWithdrawBurn](#kava.router.v1beta1.MsgWithdrawBurn)
-    - [MsgWithdrawBurnResponse](#kava.router.v1beta1.MsgWithdrawBurnResponse)
-    - [MsgWithdrawBurnUndelegate](#kava.router.v1beta1.MsgWithdrawBurnUndelegate)
-    - [MsgWithdrawBurnUndelegateResponse](#kava.router.v1beta1.MsgWithdrawBurnUndelegateResponse)
-  
-    - [Msg](#kava.router.v1beta1.Msg)
-  
-- [kava/savings/v1beta1/store.proto](#kava/savings/v1beta1/store.proto)
-    - [Deposit](#kava.savings.v1beta1.Deposit)
-    - [Params](#kava.savings.v1beta1.Params)
-  
-- [kava/savings/v1beta1/genesis.proto](#kava/savings/v1beta1/genesis.proto)
-    - [GenesisState](#kava.savings.v1beta1.GenesisState)
-  
-- [kava/savings/v1beta1/query.proto](#kava/savings/v1beta1/query.proto)
-    - [QueryDepositsRequest](#kava.savings.v1beta1.QueryDepositsRequest)
-    - [QueryDepositsResponse](#kava.savings.v1beta1.QueryDepositsResponse)
-    - [QueryParamsRequest](#kava.savings.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.savings.v1beta1.QueryParamsResponse)
-    - [QueryTotalSupplyRequest](#kava.savings.v1beta1.QueryTotalSupplyRequest)
-    - [QueryTotalSupplyResponse](#kava.savings.v1beta1.QueryTotalSupplyResponse)
-  
-    - [Query](#kava.savings.v1beta1.Query)
-  
-- [kava/savings/v1beta1/tx.proto](#kava/savings/v1beta1/tx.proto)
-    - [MsgDeposit](#kava.savings.v1beta1.MsgDeposit)
-    - [MsgDepositResponse](#kava.savings.v1beta1.MsgDepositResponse)
-    - [MsgWithdraw](#kava.savings.v1beta1.MsgWithdraw)
-    - [MsgWithdrawResponse](#kava.savings.v1beta1.MsgWithdrawResponse)
-  
-    - [Msg](#kava.savings.v1beta1.Msg)
-  
-- [kava/swap/v1beta1/swap.proto](#kava/swap/v1beta1/swap.proto)
-    - [AllowedPool](#kava.swap.v1beta1.AllowedPool)
-    - [Params](#kava.swap.v1beta1.Params)
-    - [PoolRecord](#kava.swap.v1beta1.PoolRecord)
-    - [ShareRecord](#kava.swap.v1beta1.ShareRecord)
-  
-- [kava/swap/v1beta1/genesis.proto](#kava/swap/v1beta1/genesis.proto)
-    - [GenesisState](#kava.swap.v1beta1.GenesisState)
-  
-- [kava/swap/v1beta1/query.proto](#kava/swap/v1beta1/query.proto)
-    - [DepositResponse](#kava.swap.v1beta1.DepositResponse)
-    - [PoolResponse](#kava.swap.v1beta1.PoolResponse)
-    - [QueryDepositsRequest](#kava.swap.v1beta1.QueryDepositsRequest)
-    - [QueryDepositsResponse](#kava.swap.v1beta1.QueryDepositsResponse)
-    - [QueryParamsRequest](#kava.swap.v1beta1.QueryParamsRequest)
-    - [QueryParamsResponse](#kava.swap.v1beta1.QueryParamsResponse)
-    - [QueryPoolsRequest](#kava.swap.v1beta1.QueryPoolsRequest)
-    - [QueryPoolsResponse](#kava.swap.v1beta1.QueryPoolsResponse)
-  
-    - [Query](#kava.swap.v1beta1.Query)
-  
-- [kava/swap/v1beta1/tx.proto](#kava/swap/v1beta1/tx.proto)
-    - [MsgDeposit](#kava.swap.v1beta1.MsgDeposit)
-    - [MsgDepositResponse](#kava.swap.v1beta1.MsgDepositResponse)
-    - [MsgSwapExactForTokens](#kava.swap.v1beta1.MsgSwapExactForTokens)
-    - [MsgSwapExactForTokensResponse](#kava.swap.v1beta1.MsgSwapExactForTokensResponse)
-    - [MsgSwapForExactTokens](#kava.swap.v1beta1.MsgSwapForExactTokens)
-    - [MsgSwapForExactTokensResponse](#kava.swap.v1beta1.MsgSwapForExactTokensResponse)
-    - [MsgWithdraw](#kava.swap.v1beta1.MsgWithdraw)
-    - [MsgWithdrawResponse](#kava.swap.v1beta1.MsgWithdrawResponse)
-  
-    - [Msg](#kava.swap.v1beta1.Msg)
+- [mage/auction/v1beta1/auction.proto](#mage/auction/v1beta1/auction.proto)
+    - [BaseAuction](#mage.auction.v1beta1.BaseAuction)
+    - [CollateralAuction](#mage.auction.v1beta1.CollateralAuction)
+    - [DebtAuction](#mage.auction.v1beta1.DebtAuction)
+    - [SurplusAuction](#mage.auction.v1beta1.SurplusAuction)
+    - [WeightedAddresses](#mage.auction.v1beta1.WeightedAddresses)
+  
+- [mage/auction/v1beta1/genesis.proto](#mage/auction/v1beta1/genesis.proto)
+    - [GenesisState](#mage.auction.v1beta1.GenesisState)
+    - [Params](#mage.auction.v1beta1.Params)
+  
+- [mage/auction/v1beta1/query.proto](#mage/auction/v1beta1/query.proto)
+    - [QueryAuctionRequest](#mage.auction.v1beta1.QueryAuctionRequest)
+    - [QueryAuctionResponse](#mage.auction.v1beta1.QueryAuctionResponse)
+    - [QueryAuctionsRequest](#mage.auction.v1beta1.QueryAuctionsRequest)
+    - [QueryAuctionsResponse](#mage.auction.v1beta1.QueryAuctionsResponse)
+    - [QueryNextAuctionIDRequest](#mage.auction.v1beta1.QueryNextAuctionIDRequest)
+    - [QueryNextAuctionIDResponse](#mage.auction.v1beta1.QueryNextAuctionIDResponse)
+    - [QueryParamsRequest](#mage.auction.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.auction.v1beta1.QueryParamsResponse)
+  
+    - [Query](#mage.auction.v1beta1.Query)
+  
+- [mage/auction/v1beta1/tx.proto](#mage/auction/v1beta1/tx.proto)
+    - [MsgPlaceBid](#mage.auction.v1beta1.MsgPlaceBid)
+    - [MsgPlaceBidResponse](#mage.auction.v1beta1.MsgPlaceBidResponse)
+  
+    - [Msg](#mage.auction.v1beta1.Msg)
+  
+- [mage/bep3/v1beta1/bep3.proto](#mage/bep3/v1beta1/bep3.proto)
+    - [AssetParam](#mage.bep3.v1beta1.AssetParam)
+    - [AssetSupply](#mage.bep3.v1beta1.AssetSupply)
+    - [AtomicSwap](#mage.bep3.v1beta1.AtomicSwap)
+    - [Params](#mage.bep3.v1beta1.Params)
+    - [SupplyLimit](#mage.bep3.v1beta1.SupplyLimit)
+  
+    - [SwapDirection](#mage.bep3.v1beta1.SwapDirection)
+    - [SwapStatus](#mage.bep3.v1beta1.SwapStatus)
+  
+- [mage/bep3/v1beta1/genesis.proto](#mage/bep3/v1beta1/genesis.proto)
+    - [GenesisState](#mage.bep3.v1beta1.GenesisState)
+  
+- [mage/bep3/v1beta1/query.proto](#mage/bep3/v1beta1/query.proto)
+    - [AssetSupplyResponse](#mage.bep3.v1beta1.AssetSupplyResponse)
+    - [AtomicSwapResponse](#mage.bep3.v1beta1.AtomicSwapResponse)
+    - [QueryAssetSuppliesRequest](#mage.bep3.v1beta1.QueryAssetSuppliesRequest)
+    - [QueryAssetSuppliesResponse](#mage.bep3.v1beta1.QueryAssetSuppliesResponse)
+    - [QueryAssetSupplyRequest](#mage.bep3.v1beta1.QueryAssetSupplyRequest)
+    - [QueryAssetSupplyResponse](#mage.bep3.v1beta1.QueryAssetSupplyResponse)
+    - [QueryAtomicSwapRequest](#mage.bep3.v1beta1.QueryAtomicSwapRequest)
+    - [QueryAtomicSwapResponse](#mage.bep3.v1beta1.QueryAtomicSwapResponse)
+    - [QueryAtomicSwapsRequest](#mage.bep3.v1beta1.QueryAtomicSwapsRequest)
+    - [QueryAtomicSwapsResponse](#mage.bep3.v1beta1.QueryAtomicSwapsResponse)
+    - [QueryParamsRequest](#mage.bep3.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.bep3.v1beta1.QueryParamsResponse)
+  
+    - [Query](#mage.bep3.v1beta1.Query)
+  
+- [mage/bep3/v1beta1/tx.proto](#mage/bep3/v1beta1/tx.proto)
+    - [MsgClaimAtomicSwap](#mage.bep3.v1beta1.MsgClaimAtomicSwap)
+    - [MsgClaimAtomicSwapResponse](#mage.bep3.v1beta1.MsgClaimAtomicSwapResponse)
+    - [MsgCreateAtomicSwap](#mage.bep3.v1beta1.MsgCreateAtomicSwap)
+    - [MsgCreateAtomicSwapResponse](#mage.bep3.v1beta1.MsgCreateAtomicSwapResponse)
+    - [MsgRefundAtomicSwap](#mage.bep3.v1beta1.MsgRefundAtomicSwap)
+    - [MsgRefundAtomicSwapResponse](#mage.bep3.v1beta1.MsgRefundAtomicSwapResponse)
+  
+    - [Msg](#mage.bep3.v1beta1.Msg)
+  
+- [mage/cdp/v1beta1/cdp.proto](#mage/cdp/v1beta1/cdp.proto)
+    - [CDP](#mage.cdp.v1beta1.CDP)
+    - [Deposit](#mage.cdp.v1beta1.Deposit)
+    - [OwnerCDPIndex](#mage.cdp.v1beta1.OwnerCDPIndex)
+    - [TotalCollateral](#mage.cdp.v1beta1.TotalCollateral)
+    - [TotalPrincipal](#mage.cdp.v1beta1.TotalPrincipal)
+  
+- [mage/cdp/v1beta1/genesis.proto](#mage/cdp/v1beta1/genesis.proto)
+    - [CollateralParam](#mage.cdp.v1beta1.CollateralParam)
+    - [DebtParam](#mage.cdp.v1beta1.DebtParam)
+    - [GenesisAccumulationTime](#mage.cdp.v1beta1.GenesisAccumulationTime)
+    - [GenesisState](#mage.cdp.v1beta1.GenesisState)
+    - [GenesisTotalPrincipal](#mage.cdp.v1beta1.GenesisTotalPrincipal)
+    - [Params](#mage.cdp.v1beta1.Params)
+  
+- [mage/cdp/v1beta1/query.proto](#mage/cdp/v1beta1/query.proto)
+    - [CDPResponse](#mage.cdp.v1beta1.CDPResponse)
+    - [QueryAccountsRequest](#mage.cdp.v1beta1.QueryAccountsRequest)
+    - [QueryAccountsResponse](#mage.cdp.v1beta1.QueryAccountsResponse)
+    - [QueryCdpRequest](#mage.cdp.v1beta1.QueryCdpRequest)
+    - [QueryCdpResponse](#mage.cdp.v1beta1.QueryCdpResponse)
+    - [QueryCdpsRequest](#mage.cdp.v1beta1.QueryCdpsRequest)
+    - [QueryCdpsResponse](#mage.cdp.v1beta1.QueryCdpsResponse)
+    - [QueryDepositsRequest](#mage.cdp.v1beta1.QueryDepositsRequest)
+    - [QueryDepositsResponse](#mage.cdp.v1beta1.QueryDepositsResponse)
+    - [QueryParamsRequest](#mage.cdp.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.cdp.v1beta1.QueryParamsResponse)
+    - [QueryTotalCollateralRequest](#mage.cdp.v1beta1.QueryTotalCollateralRequest)
+    - [QueryTotalCollateralResponse](#mage.cdp.v1beta1.QueryTotalCollateralResponse)
+    - [QueryTotalPrincipalRequest](#mage.cdp.v1beta1.QueryTotalPrincipalRequest)
+    - [QueryTotalPrincipalResponse](#mage.cdp.v1beta1.QueryTotalPrincipalResponse)
+  
+    - [Query](#mage.cdp.v1beta1.Query)
+  
+- [mage/cdp/v1beta1/tx.proto](#mage/cdp/v1beta1/tx.proto)
+    - [MsgCreateCDP](#mage.cdp.v1beta1.MsgCreateCDP)
+    - [MsgCreateCDPResponse](#mage.cdp.v1beta1.MsgCreateCDPResponse)
+    - [MsgDeposit](#mage.cdp.v1beta1.MsgDeposit)
+    - [MsgDepositResponse](#mage.cdp.v1beta1.MsgDepositResponse)
+    - [MsgDrawDebt](#mage.cdp.v1beta1.MsgDrawDebt)
+    - [MsgDrawDebtResponse](#mage.cdp.v1beta1.MsgDrawDebtResponse)
+    - [MsgLiquidate](#mage.cdp.v1beta1.MsgLiquidate)
+    - [MsgLiquidateResponse](#mage.cdp.v1beta1.MsgLiquidateResponse)
+    - [MsgRepayDebt](#mage.cdp.v1beta1.MsgRepayDebt)
+    - [MsgRepayDebtResponse](#mage.cdp.v1beta1.MsgRepayDebtResponse)
+    - [MsgWithdraw](#mage.cdp.v1beta1.MsgWithdraw)
+    - [MsgWithdrawResponse](#mage.cdp.v1beta1.MsgWithdrawResponse)
+  
+    - [Msg](#mage.cdp.v1beta1.Msg)
+  
+- [mage/committee/v1beta1/committee.proto](#mage/committee/v1beta1/committee.proto)
+    - [BaseCommittee](#mage.committee.v1beta1.BaseCommittee)
+    - [MemberCommittee](#mage.committee.v1beta1.MemberCommittee)
+    - [TokenCommittee](#mage.committee.v1beta1.TokenCommittee)
+  
+    - [TallyOption](#mage.committee.v1beta1.TallyOption)
+  
+- [mage/committee/v1beta1/genesis.proto](#mage/committee/v1beta1/genesis.proto)
+    - [GenesisState](#mage.committee.v1beta1.GenesisState)
+    - [Proposal](#mage.committee.v1beta1.Proposal)
+    - [Vote](#mage.committee.v1beta1.Vote)
+  
+    - [VoteType](#mage.committee.v1beta1.VoteType)
+  
+- [mage/committee/v1beta1/permissions.proto](#mage/committee/v1beta1/permissions.proto)
+    - [AllowedParamsChange](#mage.committee.v1beta1.AllowedParamsChange)
+    - [GodPermission](#mage.committee.v1beta1.GodPermission)
+    - [ParamsChangePermission](#mage.committee.v1beta1.ParamsChangePermission)
+    - [SoftwareUpgradePermission](#mage.committee.v1beta1.SoftwareUpgradePermission)
+    - [SubparamRequirement](#mage.committee.v1beta1.SubparamRequirement)
+    - [TextPermission](#mage.committee.v1beta1.TextPermission)
+  
+- [mage/committee/v1beta1/proposal.proto](#mage/committee/v1beta1/proposal.proto)
+    - [CommitteeChangeProposal](#mage.committee.v1beta1.CommitteeChangeProposal)
+    - [CommitteeDeleteProposal](#mage.committee.v1beta1.CommitteeDeleteProposal)
+  
+- [mage/committee/v1beta1/query.proto](#mage/committee/v1beta1/query.proto)
+    - [QueryCommitteeRequest](#mage.committee.v1beta1.QueryCommitteeRequest)
+    - [QueryCommitteeResponse](#mage.committee.v1beta1.QueryCommitteeResponse)
+    - [QueryCommitteesRequest](#mage.committee.v1beta1.QueryCommitteesRequest)
+    - [QueryCommitteesResponse](#mage.committee.v1beta1.QueryCommitteesResponse)
+    - [QueryNextProposalIDRequest](#mage.committee.v1beta1.QueryNextProposalIDRequest)
+    - [QueryNextProposalIDResponse](#mage.committee.v1beta1.QueryNextProposalIDResponse)
+    - [QueryProposalRequest](#mage.committee.v1beta1.QueryProposalRequest)
+    - [QueryProposalResponse](#mage.committee.v1beta1.QueryProposalResponse)
+    - [QueryProposalsRequest](#mage.committee.v1beta1.QueryProposalsRequest)
+    - [QueryProposalsResponse](#mage.committee.v1beta1.QueryProposalsResponse)
+    - [QueryRawParamsRequest](#mage.committee.v1beta1.QueryRawParamsRequest)
+    - [QueryRawParamsResponse](#mage.committee.v1beta1.QueryRawParamsResponse)
+    - [QueryTallyRequest](#mage.committee.v1beta1.QueryTallyRequest)
+    - [QueryTallyResponse](#mage.committee.v1beta1.QueryTallyResponse)
+    - [QueryVoteRequest](#mage.committee.v1beta1.QueryVoteRequest)
+    - [QueryVoteResponse](#mage.committee.v1beta1.QueryVoteResponse)
+    - [QueryVotesRequest](#mage.committee.v1beta1.QueryVotesRequest)
+    - [QueryVotesResponse](#mage.committee.v1beta1.QueryVotesResponse)
+  
+    - [Query](#mage.committee.v1beta1.Query)
+  
+- [mage/committee/v1beta1/tx.proto](#mage/committee/v1beta1/tx.proto)
+    - [MsgSubmitProposal](#mage.committee.v1beta1.MsgSubmitProposal)
+    - [MsgSubmitProposalResponse](#mage.committee.v1beta1.MsgSubmitProposalResponse)
+    - [MsgVote](#mage.committee.v1beta1.MsgVote)
+    - [MsgVoteResponse](#mage.committee.v1beta1.MsgVoteResponse)
+  
+    - [Msg](#mage.committee.v1beta1.Msg)
+  
+- [mage/community/v1beta1/proposal.proto](#mage/community/v1beta1/proposal.proto)
+    - [CommunityPoolLendDepositProposal](#mage.community.v1beta1.CommunityPoolLendDepositProposal)
+    - [CommunityPoolLendWithdrawProposal](#mage.community.v1beta1.CommunityPoolLendWithdrawProposal)
+  
+- [mage/community/v1beta1/query.proto](#mage/community/v1beta1/query.proto)
+    - [QueryBalanceRequest](#mage.community.v1beta1.QueryBalanceRequest)
+    - [QueryBalanceResponse](#mage.community.v1beta1.QueryBalanceResponse)
+  
+    - [Query](#mage.community.v1beta1.Query)
+  
+- [mage/community/v1beta1/tx.proto](#mage/community/v1beta1/tx.proto)
+    - [MsgFundCommunityPool](#mage.community.v1beta1.MsgFundCommunityPool)
+    - [MsgFundCommunityPoolResponse](#mage.community.v1beta1.MsgFundCommunityPoolResponse)
+  
+    - [Msg](#mage.community.v1beta1.Msg)
+  
+- [mage/earn/v1beta1/strategy.proto](#mage/earn/v1beta1/strategy.proto)
+    - [StrategyType](#mage.earn.v1beta1.StrategyType)
+  
+- [mage/earn/v1beta1/vault.proto](#mage/earn/v1beta1/vault.proto)
+    - [AllowedVault](#mage.earn.v1beta1.AllowedVault)
+    - [VaultRecord](#mage.earn.v1beta1.VaultRecord)
+    - [VaultShare](#mage.earn.v1beta1.VaultShare)
+    - [VaultShareRecord](#mage.earn.v1beta1.VaultShareRecord)
+  
+- [mage/earn/v1beta1/params.proto](#mage/earn/v1beta1/params.proto)
+    - [Params](#mage.earn.v1beta1.Params)
+  
+- [mage/earn/v1beta1/genesis.proto](#mage/earn/v1beta1/genesis.proto)
+    - [GenesisState](#mage.earn.v1beta1.GenesisState)
+  
+- [mage/earn/v1beta1/proposal.proto](#mage/earn/v1beta1/proposal.proto)
+    - [CommunityPoolDepositProposal](#mage.earn.v1beta1.CommunityPoolDepositProposal)
+    - [CommunityPoolDepositProposalJSON](#mage.earn.v1beta1.CommunityPoolDepositProposalJSON)
+    - [CommunityPoolWithdrawProposal](#mage.earn.v1beta1.CommunityPoolWithdrawProposal)
+    - [CommunityPoolWithdrawProposalJSON](#mage.earn.v1beta1.CommunityPoolWithdrawProposalJSON)
+  
+- [mage/earn/v1beta1/query.proto](#mage/earn/v1beta1/query.proto)
+    - [DepositResponse](#mage.earn.v1beta1.DepositResponse)
+    - [QueryDepositsRequest](#mage.earn.v1beta1.QueryDepositsRequest)
+    - [QueryDepositsResponse](#mage.earn.v1beta1.QueryDepositsResponse)
+    - [QueryParamsRequest](#mage.earn.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.earn.v1beta1.QueryParamsResponse)
+    - [QueryTotalSupplyRequest](#mage.earn.v1beta1.QueryTotalSupplyRequest)
+    - [QueryTotalSupplyResponse](#mage.earn.v1beta1.QueryTotalSupplyResponse)
+    - [QueryVaultRequest](#mage.earn.v1beta1.QueryVaultRequest)
+    - [QueryVaultResponse](#mage.earn.v1beta1.QueryVaultResponse)
+    - [QueryVaultsRequest](#mage.earn.v1beta1.QueryVaultsRequest)
+    - [QueryVaultsResponse](#mage.earn.v1beta1.QueryVaultsResponse)
+    - [VaultResponse](#mage.earn.v1beta1.VaultResponse)
+  
+    - [Query](#mage.earn.v1beta1.Query)
+  
+- [mage/earn/v1beta1/tx.proto](#mage/earn/v1beta1/tx.proto)
+    - [MsgDeposit](#mage.earn.v1beta1.MsgDeposit)
+    - [MsgDepositResponse](#mage.earn.v1beta1.MsgDepositResponse)
+    - [MsgWithdraw](#mage.earn.v1beta1.MsgWithdraw)
+    - [MsgWithdrawResponse](#mage.earn.v1beta1.MsgWithdrawResponse)
+  
+    - [Msg](#mage.earn.v1beta1.Msg)
+  
+- [mage/evmutil/v1beta1/conversion_pair.proto](#mage/evmutil/v1beta1/conversion_pair.proto)
+    - [ConversionPair](#mage.evmutil.v1beta1.ConversionPair)
+  
+- [mage/evmutil/v1beta1/genesis.proto](#mage/evmutil/v1beta1/genesis.proto)
+    - [Account](#mage.evmutil.v1beta1.Account)
+    - [GenesisState](#mage.evmutil.v1beta1.GenesisState)
+    - [Params](#mage.evmutil.v1beta1.Params)
+  
+- [mage/evmutil/v1beta1/query.proto](#mage/evmutil/v1beta1/query.proto)
+    - [QueryParamsRequest](#mage.evmutil.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.evmutil.v1beta1.QueryParamsResponse)
+  
+    - [Query](#mage.evmutil.v1beta1.Query)
+  
+- [mage/evmutil/v1beta1/tx.proto](#mage/evmutil/v1beta1/tx.proto)
+    - [MsgConvertCoinToERC20](#mage.evmutil.v1beta1.MsgConvertCoinToERC20)
+    - [MsgConvertCoinToERC20Response](#mage.evmutil.v1beta1.MsgConvertCoinToERC20Response)
+    - [MsgConvertERC20ToCoin](#mage.evmutil.v1beta1.MsgConvertERC20ToCoin)
+    - [MsgConvertERC20ToCoinResponse](#mage.evmutil.v1beta1.MsgConvertERC20ToCoinResponse)
+  
+    - [Msg](#mage.evmutil.v1beta1.Msg)
+  
+- [mage/hard/v1beta1/hard.proto](#mage/hard/v1beta1/hard.proto)
+    - [Borrow](#mage.hard.v1beta1.Borrow)
+    - [BorrowInterestFactor](#mage.hard.v1beta1.BorrowInterestFactor)
+    - [BorrowLimit](#mage.hard.v1beta1.BorrowLimit)
+    - [CoinsProto](#mage.hard.v1beta1.CoinsProto)
+    - [Deposit](#mage.hard.v1beta1.Deposit)
+    - [InterestRateModel](#mage.hard.v1beta1.InterestRateModel)
+    - [MoneyMarket](#mage.hard.v1beta1.MoneyMarket)
+    - [Params](#mage.hard.v1beta1.Params)
+    - [SupplyInterestFactor](#mage.hard.v1beta1.SupplyInterestFactor)
+  
+- [mage/hard/v1beta1/genesis.proto](#mage/hard/v1beta1/genesis.proto)
+    - [GenesisAccumulationTime](#mage.hard.v1beta1.GenesisAccumulationTime)
+    - [GenesisState](#mage.hard.v1beta1.GenesisState)
+  
+- [mage/hard/v1beta1/query.proto](#mage/hard/v1beta1/query.proto)
+    - [BorrowInterestFactorResponse](#mage.hard.v1beta1.BorrowInterestFactorResponse)
+    - [BorrowResponse](#mage.hard.v1beta1.BorrowResponse)
+    - [DepositResponse](#mage.hard.v1beta1.DepositResponse)
+    - [InterestFactor](#mage.hard.v1beta1.InterestFactor)
+    - [MoneyMarketInterestRate](#mage.hard.v1beta1.MoneyMarketInterestRate)
+    - [QueryAccountsRequest](#mage.hard.v1beta1.QueryAccountsRequest)
+    - [QueryAccountsResponse](#mage.hard.v1beta1.QueryAccountsResponse)
+    - [QueryBorrowsRequest](#mage.hard.v1beta1.QueryBorrowsRequest)
+    - [QueryBorrowsResponse](#mage.hard.v1beta1.QueryBorrowsResponse)
+    - [QueryDepositsRequest](#mage.hard.v1beta1.QueryDepositsRequest)
+    - [QueryDepositsResponse](#mage.hard.v1beta1.QueryDepositsResponse)
+    - [QueryInterestFactorsRequest](#mage.hard.v1beta1.QueryInterestFactorsRequest)
+    - [QueryInterestFactorsResponse](#mage.hard.v1beta1.QueryInterestFactorsResponse)
+    - [QueryInterestRateRequest](#mage.hard.v1beta1.QueryInterestRateRequest)
+    - [QueryInterestRateResponse](#mage.hard.v1beta1.QueryInterestRateResponse)
+    - [QueryParamsRequest](#mage.hard.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.hard.v1beta1.QueryParamsResponse)
+    - [QueryReservesRequest](#mage.hard.v1beta1.QueryReservesRequest)
+    - [QueryReservesResponse](#mage.hard.v1beta1.QueryReservesResponse)
+    - [QueryTotalBorrowedRequest](#mage.hard.v1beta1.QueryTotalBorrowedRequest)
+    - [QueryTotalBorrowedResponse](#mage.hard.v1beta1.QueryTotalBorrowedResponse)
+    - [QueryTotalDepositedRequest](#mage.hard.v1beta1.QueryTotalDepositedRequest)
+    - [QueryTotalDepositedResponse](#mage.hard.v1beta1.QueryTotalDepositedResponse)
+    - [QueryUnsyncedBorrowsRequest](#mage.hard.v1beta1.QueryUnsyncedBorrowsRequest)
+    - [QueryUnsyncedBorrowsResponse](#mage.hard.v1beta1.QueryUnsyncedBorrowsResponse)
+    - [QueryUnsyncedDepositsRequest](#mage.hard.v1beta1.QueryUnsyncedDepositsRequest)
+    - [QueryUnsyncedDepositsResponse](#mage.hard.v1beta1.QueryUnsyncedDepositsResponse)
+    - [SupplyInterestFactorResponse](#mage.hard.v1beta1.SupplyInterestFactorResponse)
+  
+    - [Query](#mage.hard.v1beta1.Query)
+  
+- [mage/hard/v1beta1/tx.proto](#mage/hard/v1beta1/tx.proto)
+    - [MsgBorrow](#mage.hard.v1beta1.MsgBorrow)
+    - [MsgBorrowResponse](#mage.hard.v1beta1.MsgBorrowResponse)
+    - [MsgDeposit](#mage.hard.v1beta1.MsgDeposit)
+    - [MsgDepositResponse](#mage.hard.v1beta1.MsgDepositResponse)
+    - [MsgLiquidate](#mage.hard.v1beta1.MsgLiquidate)
+    - [MsgLiquidateResponse](#mage.hard.v1beta1.MsgLiquidateResponse)
+    - [MsgRepay](#mage.hard.v1beta1.MsgRepay)
+    - [MsgRepayResponse](#mage.hard.v1beta1.MsgRepayResponse)
+    - [MsgWithdraw](#mage.hard.v1beta1.MsgWithdraw)
+    - [MsgWithdrawResponse](#mage.hard.v1beta1.MsgWithdrawResponse)
+  
+    - [Msg](#mage.hard.v1beta1.Msg)
+  
+- [mage/incentive/v1beta1/claims.proto](#mage/incentive/v1beta1/claims.proto)
+    - [BaseClaim](#mage.incentive.v1beta1.BaseClaim)
+    - [BaseMultiClaim](#mage.incentive.v1beta1.BaseMultiClaim)
+    - [Claim](#mage.incentive.v1beta1.Claim)
+    - [DelegatorClaim](#mage.incentive.v1beta1.DelegatorClaim)
+    - [EarnClaim](#mage.incentive.v1beta1.EarnClaim)
+    - [HardLiquidityProviderClaim](#mage.incentive.v1beta1.HardLiquidityProviderClaim)
+    - [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex)
+    - [MultiRewardIndexesProto](#mage.incentive.v1beta1.MultiRewardIndexesProto)
+    - [RewardIndex](#mage.incentive.v1beta1.RewardIndex)
+    - [RewardIndexesProto](#mage.incentive.v1beta1.RewardIndexesProto)
+    - [SavingsClaim](#mage.incentive.v1beta1.SavingsClaim)
+    - [SwapClaim](#mage.incentive.v1beta1.SwapClaim)
+    - [TypedRewardIndexes](#mage.incentive.v1beta1.TypedRewardIndexes)
+    - [FUSDMintingClaim](#mage.incentive.v1beta1.FUSDMintingClaim)
+  
+    - [ClaimType](#mage.incentive.v1beta1.ClaimType)
+  
+- [mage/incentive/v1beta1/params.proto](#mage/incentive/v1beta1/params.proto)
+    - [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod)
+    - [Multiplier](#mage.incentive.v1beta1.Multiplier)
+    - [MultipliersPerDenom](#mage.incentive.v1beta1.MultipliersPerDenom)
+    - [Params](#mage.incentive.v1beta1.Params)
+    - [RewardPeriod](#mage.incentive.v1beta1.RewardPeriod)
+    - [TypedMultiRewardPeriod](#mage.incentive.v1beta1.TypedMultiRewardPeriod)
+  
+- [mage/incentive/v1beta1/genesis.proto](#mage/incentive/v1beta1/genesis.proto)
+    - [AccrualTime](#mage.incentive.v1beta1.AccrualTime)
+    - [AccumulationTime](#mage.incentive.v1beta1.AccumulationTime)
+    - [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState)
+    - [GenesisState](#mage.incentive.v1beta1.GenesisState)
+  
+- [mage/incentive/v1beta1/tx.proto](#mage/incentive/v1beta1/tx.proto)
+    - [MsgClaimDelegatorReward](#mage.incentive.v1beta1.MsgClaimDelegatorReward)
+    - [MsgClaimDelegatorRewardResponse](#mage.incentive.v1beta1.MsgClaimDelegatorRewardResponse)
+    - [MsgClaimEarnReward](#mage.incentive.v1beta1.MsgClaimEarnReward)
+    - [MsgClaimEarnRewardResponse](#mage.incentive.v1beta1.MsgClaimEarnRewardResponse)
+    - [MsgClaimHardReward](#mage.incentive.v1beta1.MsgClaimHardReward)
+    - [MsgClaimHardRewardResponse](#mage.incentive.v1beta1.MsgClaimHardRewardResponse)
+    - [MsgClaimSavingsReward](#mage.incentive.v1beta1.MsgClaimSavingsReward)
+    - [MsgClaimSavingsRewardResponse](#mage.incentive.v1beta1.MsgClaimSavingsRewardResponse)
+    - [MsgClaimSwapReward](#mage.incentive.v1beta1.MsgClaimSwapReward)
+    - [MsgClaimSwapRewardResponse](#mage.incentive.v1beta1.MsgClaimSwapRewardResponse)
+    - [MsgClaimFUSDMintingReward](#mage.incentive.v1beta1.MsgClaimFUSDMintingReward)
+    - [MsgClaimFUSDMintingRewardResponse](#mage.incentive.v1beta1.MsgClaimFUSDMintingRewardResponse)
+    - [Selection](#mage.incentive.v1beta1.Selection)
+  
+    - [Msg](#mage.incentive.v1beta1.Msg)
+  
+- [mage/issuance/v1beta1/genesis.proto](#mage/issuance/v1beta1/genesis.proto)
+    - [Asset](#mage.issuance.v1beta1.Asset)
+    - [AssetSupply](#mage.issuance.v1beta1.AssetSupply)
+    - [GenesisState](#mage.issuance.v1beta1.GenesisState)
+    - [Params](#mage.issuance.v1beta1.Params)
+    - [RateLimit](#mage.issuance.v1beta1.RateLimit)
+  
+- [mage/issuance/v1beta1/query.proto](#mage/issuance/v1beta1/query.proto)
+    - [QueryParamsRequest](#mage.issuance.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.issuance.v1beta1.QueryParamsResponse)
+  
+    - [Query](#mage.issuance.v1beta1.Query)
+  
+- [mage/issuance/v1beta1/tx.proto](#mage/issuance/v1beta1/tx.proto)
+    - [MsgBlockAddress](#mage.issuance.v1beta1.MsgBlockAddress)
+    - [MsgBlockAddressResponse](#mage.issuance.v1beta1.MsgBlockAddressResponse)
+    - [MsgIssueTokens](#mage.issuance.v1beta1.MsgIssueTokens)
+    - [MsgIssueTokensResponse](#mage.issuance.v1beta1.MsgIssueTokensResponse)
+    - [MsgRedeemTokens](#mage.issuance.v1beta1.MsgRedeemTokens)
+    - [MsgRedeemTokensResponse](#mage.issuance.v1beta1.MsgRedeemTokensResponse)
+    - [MsgSetPauseStatus](#mage.issuance.v1beta1.MsgSetPauseStatus)
+    - [MsgSetPauseStatusResponse](#mage.issuance.v1beta1.MsgSetPauseStatusResponse)
+    - [MsgUnblockAddress](#mage.issuance.v1beta1.MsgUnblockAddress)
+    - [MsgUnblockAddressResponse](#mage.issuance.v1beta1.MsgUnblockAddressResponse)
+  
+    - [Msg](#mage.issuance.v1beta1.Msg)
+  
+- [mage/magedist/v1beta1/params.proto](#mage/magedist/v1beta1/params.proto)
+    - [CoreReward](#mage.magedist.v1beta1.CoreReward)
+    - [InfrastructureParams](#mage.magedist.v1beta1.InfrastructureParams)
+    - [Params](#mage.magedist.v1beta1.Params)
+    - [PartnerReward](#mage.magedist.v1beta1.PartnerReward)
+    - [Period](#mage.magedist.v1beta1.Period)
+  
+- [mage/magedist/v1beta1/genesis.proto](#mage/magedist/v1beta1/genesis.proto)
+    - [GenesisState](#mage.magedist.v1beta1.GenesisState)
+  
+- [mage/magedist/v1beta1/proposal.proto](#mage/magedist/v1beta1/proposal.proto)
+    - [CommunityPoolMultiSpendProposal](#mage.magedist.v1beta1.CommunityPoolMultiSpendProposal)
+    - [CommunityPoolMultiSpendProposalJSON](#mage.magedist.v1beta1.CommunityPoolMultiSpendProposalJSON)
+    - [MultiSpendRecipient](#mage.magedist.v1beta1.MultiSpendRecipient)
+  
+- [mage/magedist/v1beta1/query.proto](#mage/magedist/v1beta1/query.proto)
+    - [QueryBalanceRequest](#mage.magedist.v1beta1.QueryBalanceRequest)
+    - [QueryBalanceResponse](#mage.magedist.v1beta1.QueryBalanceResponse)
+    - [QueryParamsRequest](#mage.magedist.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.magedist.v1beta1.QueryParamsResponse)
+  
+    - [Query](#mage.magedist.v1beta1.Query)
+  
+- [mage/magemint/v1beta1/magemint.proto](#mage/magemint/v1beta1/magemint.proto)
+    - [Params](#mage.magemint.v1beta1.Params)
+  
+- [mage/magemint/v1beta1/genesis.proto](#mage/magemint/v1beta1/genesis.proto)
+    - [GenesisState](#mage.magemint.v1beta1.GenesisState)
+  
+- [mage/magemint/v1beta1/query.proto](#mage/magemint/v1beta1/query.proto)
+    - [QueryInflationRequest](#mage.magemint.v1beta1.QueryInflationRequest)
+    - [QueryInflationResponse](#mage.magemint.v1beta1.QueryInflationResponse)
+    - [QueryParamsRequest](#mage.magemint.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.magemint.v1beta1.QueryParamsResponse)
+  
+    - [Query](#mage.magemint.v1beta1.Query)
+  
+- [mage/liquid/v1beta1/query.proto](#mage/liquid/v1beta1/query.proto)
+    - [QueryDelegatedBalanceRequest](#mage.liquid.v1beta1.QueryDelegatedBalanceRequest)
+    - [QueryDelegatedBalanceResponse](#mage.liquid.v1beta1.QueryDelegatedBalanceResponse)
+    - [QueryTotalSupplyRequest](#mage.liquid.v1beta1.QueryTotalSupplyRequest)
+    - [QueryTotalSupplyResponse](#mage.liquid.v1beta1.QueryTotalSupplyResponse)
+  
+    - [Query](#mage.liquid.v1beta1.Query)
+  
+- [mage/liquid/v1beta1/tx.proto](#mage/liquid/v1beta1/tx.proto)
+    - [MsgBurnDerivative](#mage.liquid.v1beta1.MsgBurnDerivative)
+    - [MsgBurnDerivativeResponse](#mage.liquid.v1beta1.MsgBurnDerivativeResponse)
+    - [MsgMintDerivative](#mage.liquid.v1beta1.MsgMintDerivative)
+    - [MsgMintDerivativeResponse](#mage.liquid.v1beta1.MsgMintDerivativeResponse)
+  
+    - [Msg](#mage.liquid.v1beta1.Msg)
+  
+- [mage/pricefeed/v1beta1/store.proto](#mage/pricefeed/v1beta1/store.proto)
+    - [CurrentPrice](#mage.pricefeed.v1beta1.CurrentPrice)
+    - [Market](#mage.pricefeed.v1beta1.Market)
+    - [Params](#mage.pricefeed.v1beta1.Params)
+    - [PostedPrice](#mage.pricefeed.v1beta1.PostedPrice)
+  
+- [mage/pricefeed/v1beta1/genesis.proto](#mage/pricefeed/v1beta1/genesis.proto)
+    - [GenesisState](#mage.pricefeed.v1beta1.GenesisState)
+  
+- [mage/pricefeed/v1beta1/query.proto](#mage/pricefeed/v1beta1/query.proto)
+    - [CurrentPriceResponse](#mage.pricefeed.v1beta1.CurrentPriceResponse)
+    - [MarketResponse](#mage.pricefeed.v1beta1.MarketResponse)
+    - [PostedPriceResponse](#mage.pricefeed.v1beta1.PostedPriceResponse)
+    - [QueryMarketsRequest](#mage.pricefeed.v1beta1.QueryMarketsRequest)
+    - [QueryMarketsResponse](#mage.pricefeed.v1beta1.QueryMarketsResponse)
+    - [QueryOraclesRequest](#mage.pricefeed.v1beta1.QueryOraclesRequest)
+    - [QueryOraclesResponse](#mage.pricefeed.v1beta1.QueryOraclesResponse)
+    - [QueryParamsRequest](#mage.pricefeed.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.pricefeed.v1beta1.QueryParamsResponse)
+    - [QueryPriceRequest](#mage.pricefeed.v1beta1.QueryPriceRequest)
+    - [QueryPriceResponse](#mage.pricefeed.v1beta1.QueryPriceResponse)
+    - [QueryPricesRequest](#mage.pricefeed.v1beta1.QueryPricesRequest)
+    - [QueryPricesResponse](#mage.pricefeed.v1beta1.QueryPricesResponse)
+    - [QueryRawPricesRequest](#mage.pricefeed.v1beta1.QueryRawPricesRequest)
+    - [QueryRawPricesResponse](#mage.pricefeed.v1beta1.QueryRawPricesResponse)
+  
+    - [Query](#mage.pricefeed.v1beta1.Query)
+  
+- [mage/pricefeed/v1beta1/tx.proto](#mage/pricefeed/v1beta1/tx.proto)
+    - [MsgPostPrice](#mage.pricefeed.v1beta1.MsgPostPrice)
+    - [MsgPostPriceResponse](#mage.pricefeed.v1beta1.MsgPostPriceResponse)
+  
+    - [Msg](#mage.pricefeed.v1beta1.Msg)
+  
+- [mage/router/v1beta1/tx.proto](#mage/router/v1beta1/tx.proto)
+    - [MsgDelegateMintDeposit](#mage.router.v1beta1.MsgDelegateMintDeposit)
+    - [MsgDelegateMintDepositResponse](#mage.router.v1beta1.MsgDelegateMintDepositResponse)
+    - [MsgMintDeposit](#mage.router.v1beta1.MsgMintDeposit)
+    - [MsgMintDepositResponse](#mage.router.v1beta1.MsgMintDepositResponse)
+    - [MsgWithdrawBurn](#mage.router.v1beta1.MsgWithdrawBurn)
+    - [MsgWithdrawBurnResponse](#mage.router.v1beta1.MsgWithdrawBurnResponse)
+    - [MsgWithdrawBurnUndelegate](#mage.router.v1beta1.MsgWithdrawBurnUndelegate)
+    - [MsgWithdrawBurnUndelegateResponse](#mage.router.v1beta1.MsgWithdrawBurnUndelegateResponse)
+  
+    - [Msg](#mage.router.v1beta1.Msg)
+  
+- [mage/savings/v1beta1/store.proto](#mage/savings/v1beta1/store.proto)
+    - [Deposit](#mage.savings.v1beta1.Deposit)
+    - [Params](#mage.savings.v1beta1.Params)
+  
+- [mage/savings/v1beta1/genesis.proto](#mage/savings/v1beta1/genesis.proto)
+    - [GenesisState](#mage.savings.v1beta1.GenesisState)
+  
+- [mage/savings/v1beta1/query.proto](#mage/savings/v1beta1/query.proto)
+    - [QueryDepositsRequest](#mage.savings.v1beta1.QueryDepositsRequest)
+    - [QueryDepositsResponse](#mage.savings.v1beta1.QueryDepositsResponse)
+    - [QueryParamsRequest](#mage.savings.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.savings.v1beta1.QueryParamsResponse)
+    - [QueryTotalSupplyRequest](#mage.savings.v1beta1.QueryTotalSupplyRequest)
+    - [QueryTotalSupplyResponse](#mage.savings.v1beta1.QueryTotalSupplyResponse)
+  
+    - [Query](#mage.savings.v1beta1.Query)
+  
+- [mage/savings/v1beta1/tx.proto](#mage/savings/v1beta1/tx.proto)
+    - [MsgDeposit](#mage.savings.v1beta1.MsgDeposit)
+    - [MsgDepositResponse](#mage.savings.v1beta1.MsgDepositResponse)
+    - [MsgWithdraw](#mage.savings.v1beta1.MsgWithdraw)
+    - [MsgWithdrawResponse](#mage.savings.v1beta1.MsgWithdrawResponse)
+  
+    - [Msg](#mage.savings.v1beta1.Msg)
+  
+- [mage/swap/v1beta1/swap.proto](#mage/swap/v1beta1/swap.proto)
+    - [AllowedPool](#mage.swap.v1beta1.AllowedPool)
+    - [Params](#mage.swap.v1beta1.Params)
+    - [PoolRecord](#mage.swap.v1beta1.PoolRecord)
+    - [ShareRecord](#mage.swap.v1beta1.ShareRecord)
+  
+- [mage/swap/v1beta1/genesis.proto](#mage/swap/v1beta1/genesis.proto)
+    - [GenesisState](#mage.swap.v1beta1.GenesisState)
+  
+- [mage/swap/v1beta1/query.proto](#mage/swap/v1beta1/query.proto)
+    - [DepositResponse](#mage.swap.v1beta1.DepositResponse)
+    - [PoolResponse](#mage.swap.v1beta1.PoolResponse)
+    - [QueryDepositsRequest](#mage.swap.v1beta1.QueryDepositsRequest)
+    - [QueryDepositsResponse](#mage.swap.v1beta1.QueryDepositsResponse)
+    - [QueryParamsRequest](#mage.swap.v1beta1.QueryParamsRequest)
+    - [QueryParamsResponse](#mage.swap.v1beta1.QueryParamsResponse)
+    - [QueryPoolsRequest](#mage.swap.v1beta1.QueryPoolsRequest)
+    - [QueryPoolsResponse](#mage.swap.v1beta1.QueryPoolsResponse)
+  
+    - [Query](#mage.swap.v1beta1.Query)
+  
+- [mage/swap/v1beta1/tx.proto](#mage/swap/v1beta1/tx.proto)
+    - [MsgDeposit](#mage.swap.v1beta1.MsgDeposit)
+    - [MsgDepositResponse](#mage.swap.v1beta1.MsgDepositResponse)
+    - [MsgSwapExactForTokens](#mage.swap.v1beta1.MsgSwapExactForTokens)
+    - [MsgSwapExactForTokensResponse](#mage.swap.v1beta1.MsgSwapExactForTokensResponse)
+    - [MsgSwapForExactTokens](#mage.swap.v1beta1.MsgSwapForExactTokens)
+    - [MsgSwapForExactTokensResponse](#mage.swap.v1beta1.MsgSwapForExactTokensResponse)
+    - [MsgWithdraw](#mage.swap.v1beta1.MsgWithdraw)
+    - [MsgWithdrawResponse](#mage.swap.v1beta1.MsgWithdrawResponse)
+  
+    - [Msg](#mage.swap.v1beta1.Msg)
   
 - [Scalar Value Types](#scalar-value-types)
 
 
 
-<a name="kava/auction/v1beta1/auction.proto"></a>
+<a name="mage/auction/v1beta1/auction.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/auction/v1beta1/auction.proto
+## mage/auction/v1beta1/auction.proto
 
 
 
-<a name="kava.auction.v1beta1.BaseAuction"></a>
+<a name="mage.auction.v1beta1.BaseAuction"></a>
 
 ### BaseAuction
 BaseAuction defines common attributes of all auctions
@@ -588,7 +588,7 @@ BaseAuction defines common attributes of all auctions
 
 
 
-<a name="kava.auction.v1beta1.CollateralAuction"></a>
+<a name="mage.auction.v1beta1.CollateralAuction"></a>
 
 ### CollateralAuction
 CollateralAuction is a two phase auction.
@@ -600,17 +600,17 @@ Collateral auctions are normally used to sell off collateral seized from CDPs.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_auction` | [BaseAuction](#kava.auction.v1beta1.BaseAuction) |  |  |
+| `base_auction` | [BaseAuction](#mage.auction.v1beta1.BaseAuction) |  |  |
 | `corresponding_debt` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  |  |
 | `max_bid` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  |  |
-| `lot_returns` | [WeightedAddresses](#kava.auction.v1beta1.WeightedAddresses) |  |  |
+| `lot_returns` | [WeightedAddresses](#mage.auction.v1beta1.WeightedAddresses) |  |  |
 
 
 
 
 
 
-<a name="kava.auction.v1beta1.DebtAuction"></a>
+<a name="mage.auction.v1beta1.DebtAuction"></a>
 
 ### DebtAuction
 DebtAuction is a reverse auction that mints what it pays out.
@@ -620,7 +620,7 @@ collateral.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_auction` | [BaseAuction](#kava.auction.v1beta1.BaseAuction) |  |  |
+| `base_auction` | [BaseAuction](#mage.auction.v1beta1.BaseAuction) |  |  |
 | `corresponding_debt` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  |  |
 
 
@@ -628,7 +628,7 @@ collateral.
 
 
 
-<a name="kava.auction.v1beta1.SurplusAuction"></a>
+<a name="mage.auction.v1beta1.SurplusAuction"></a>
 
 ### SurplusAuction
 SurplusAuction is a forward auction that burns what it receives from bids.
@@ -637,14 +637,14 @@ It is normally used to sell off excess pegged asset acquired by the CDP system.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_auction` | [BaseAuction](#kava.auction.v1beta1.BaseAuction) |  |  |
+| `base_auction` | [BaseAuction](#mage.auction.v1beta1.BaseAuction) |  |  |
 
 
 
 
 
 
-<a name="kava.auction.v1beta1.WeightedAddresses"></a>
+<a name="mage.auction.v1beta1.WeightedAddresses"></a>
 
 ### WeightedAddresses
 WeightedAddresses is a type for storing some addresses and associated weights.
@@ -669,14 +669,14 @@ WeightedAddresses is a type for storing some addresses and associated weights.
 
 
 
-<a name="kava/auction/v1beta1/genesis.proto"></a>
+<a name="mage/auction/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/auction/v1beta1/genesis.proto
+## mage/auction/v1beta1/genesis.proto
 
 
 
-<a name="kava.auction.v1beta1.GenesisState"></a>
+<a name="mage.auction.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the auction module's genesis state.
@@ -685,7 +685,7 @@ GenesisState defines the auction module's genesis state.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `next_auction_id` | [uint64](#uint64) |  |  |
-| `params` | [Params](#kava.auction.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.auction.v1beta1.Params) |  |  |
 | `auctions` | [google.protobuf.Any](#google.protobuf.Any) | repeated | Genesis auctions |
 
 
@@ -693,7 +693,7 @@ GenesisState defines the auction module's genesis state.
 
 
 
-<a name="kava.auction.v1beta1.Params"></a>
+<a name="mage.auction.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the issuance module.
@@ -722,14 +722,14 @@ Params defines the parameters for the issuance module.
 
 
 
-<a name="kava/auction/v1beta1/query.proto"></a>
+<a name="mage/auction/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/auction/v1beta1/query.proto
+## mage/auction/v1beta1/query.proto
 
 
 
-<a name="kava.auction.v1beta1.QueryAuctionRequest"></a>
+<a name="mage.auction.v1beta1.QueryAuctionRequest"></a>
 
 ### QueryAuctionRequest
 QueryAuctionRequest is the request type for the Query/Auction RPC method.
@@ -744,7 +744,7 @@ QueryAuctionRequest is the request type for the Query/Auction RPC method.
 
 
 
-<a name="kava.auction.v1beta1.QueryAuctionResponse"></a>
+<a name="mage.auction.v1beta1.QueryAuctionResponse"></a>
 
 ### QueryAuctionResponse
 QueryAuctionResponse is the response type for the Query/Auction RPC method.
@@ -759,7 +759,7 @@ QueryAuctionResponse is the response type for the Query/Auction RPC method.
 
 
 
-<a name="kava.auction.v1beta1.QueryAuctionsRequest"></a>
+<a name="mage.auction.v1beta1.QueryAuctionsRequest"></a>
 
 ### QueryAuctionsRequest
 QueryAuctionsRequest is the request type for the Query/Auctions RPC method.
@@ -778,7 +778,7 @@ QueryAuctionsRequest is the request type for the Query/Auctions RPC method.
 
 
 
-<a name="kava.auction.v1beta1.QueryAuctionsResponse"></a>
+<a name="mage.auction.v1beta1.QueryAuctionsResponse"></a>
 
 ### QueryAuctionsResponse
 QueryAuctionsResponse is the response type for the Query/Auctions RPC method.
@@ -794,7 +794,7 @@ QueryAuctionsResponse is the response type for the Query/Auctions RPC method.
 
 
 
-<a name="kava.auction.v1beta1.QueryNextAuctionIDRequest"></a>
+<a name="mage.auction.v1beta1.QueryNextAuctionIDRequest"></a>
 
 ### QueryNextAuctionIDRequest
 QueryNextAuctionIDRequest defines the request type for querying x/auction next auction ID.
@@ -804,7 +804,7 @@ QueryNextAuctionIDRequest defines the request type for querying x/auction next a
 
 
 
-<a name="kava.auction.v1beta1.QueryNextAuctionIDResponse"></a>
+<a name="mage.auction.v1beta1.QueryNextAuctionIDResponse"></a>
 
 ### QueryNextAuctionIDResponse
 QueryNextAuctionIDResponse defines the response type for querying x/auction next auction ID.
@@ -819,7 +819,7 @@ QueryNextAuctionIDResponse defines the response type for querying x/auction next
 
 
 
-<a name="kava.auction.v1beta1.QueryParamsRequest"></a>
+<a name="mage.auction.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/auction parameters.
@@ -829,7 +829,7 @@ QueryParamsRequest defines the request type for querying x/auction parameters.
 
 
 
-<a name="kava.auction.v1beta1.QueryParamsResponse"></a>
+<a name="mage.auction.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/auction parameters.
@@ -837,7 +837,7 @@ QueryParamsResponse defines the response type for querying x/auction parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.auction.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.auction.v1beta1.Params) |  |  |
 
 
 
@@ -850,30 +850,30 @@ QueryParamsResponse defines the response type for querying x/auction parameters.
  <!-- end HasExtensions -->
 
 
-<a name="kava.auction.v1beta1.Query"></a>
+<a name="mage.auction.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for auction module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.auction.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.auction.v1beta1.QueryParamsResponse) | Params queries all parameters of the auction module. | GET|/kava/auction/v1beta1/params|
-| `Auction` | [QueryAuctionRequest](#kava.auction.v1beta1.QueryAuctionRequest) | [QueryAuctionResponse](#kava.auction.v1beta1.QueryAuctionResponse) | Auction queries an individual Auction by auction ID | GET|/kava/auction/v1beta1/auctions/{auction_id}|
-| `Auctions` | [QueryAuctionsRequest](#kava.auction.v1beta1.QueryAuctionsRequest) | [QueryAuctionsResponse](#kava.auction.v1beta1.QueryAuctionsResponse) | Auctions queries auctions filtered by asset denom, owner address, phase, and auction type | GET|/kava/auction/v1beta1/auctions|
-| `NextAuctionID` | [QueryNextAuctionIDRequest](#kava.auction.v1beta1.QueryNextAuctionIDRequest) | [QueryNextAuctionIDResponse](#kava.auction.v1beta1.QueryNextAuctionIDResponse) | NextAuctionID queries the next auction ID | GET|/kava/auction/v1beta1/next-auction-id|
+| `Params` | [QueryParamsRequest](#mage.auction.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.auction.v1beta1.QueryParamsResponse) | Params queries all parameters of the auction module. | GET|/mage/auction/v1beta1/params|
+| `Auction` | [QueryAuctionRequest](#mage.auction.v1beta1.QueryAuctionRequest) | [QueryAuctionResponse](#mage.auction.v1beta1.QueryAuctionResponse) | Auction queries an individual Auction by auction ID | GET|/mage/auction/v1beta1/auctions/{auction_id}|
+| `Auctions` | [QueryAuctionsRequest](#mage.auction.v1beta1.QueryAuctionsRequest) | [QueryAuctionsResponse](#mage.auction.v1beta1.QueryAuctionsResponse) | Auctions queries auctions filtered by asset denom, owner address, phase, and auction type | GET|/mage/auction/v1beta1/auctions|
+| `NextAuctionID` | [QueryNextAuctionIDRequest](#mage.auction.v1beta1.QueryNextAuctionIDRequest) | [QueryNextAuctionIDResponse](#mage.auction.v1beta1.QueryNextAuctionIDResponse) | NextAuctionID queries the next auction ID | GET|/mage/auction/v1beta1/next-auction-id|
 
  <!-- end services -->
 
 
 
-<a name="kava/auction/v1beta1/tx.proto"></a>
+<a name="mage/auction/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/auction/v1beta1/tx.proto
+## mage/auction/v1beta1/tx.proto
 
 
 
-<a name="kava.auction.v1beta1.MsgPlaceBid"></a>
+<a name="mage.auction.v1beta1.MsgPlaceBid"></a>
 
 ### MsgPlaceBid
 MsgPlaceBid represents a message used by bidders to place bids on auctions
@@ -890,7 +890,7 @@ MsgPlaceBid represents a message used by bidders to place bids on auctions
 
 
 
-<a name="kava.auction.v1beta1.MsgPlaceBidResponse"></a>
+<a name="mage.auction.v1beta1.MsgPlaceBidResponse"></a>
 
 ### MsgPlaceBidResponse
 MsgPlaceBidResponse defines the Msg/PlaceBid response type.
@@ -906,27 +906,27 @@ MsgPlaceBidResponse defines the Msg/PlaceBid response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.auction.v1beta1.Msg"></a>
+<a name="mage.auction.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the auction Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `PlaceBid` | [MsgPlaceBid](#kava.auction.v1beta1.MsgPlaceBid) | [MsgPlaceBidResponse](#kava.auction.v1beta1.MsgPlaceBidResponse) | PlaceBid message type used by bidders to place bids on auctions | |
+| `PlaceBid` | [MsgPlaceBid](#mage.auction.v1beta1.MsgPlaceBid) | [MsgPlaceBidResponse](#mage.auction.v1beta1.MsgPlaceBidResponse) | PlaceBid message type used by bidders to place bids on auctions | |
 
  <!-- end services -->
 
 
 
-<a name="kava/bep3/v1beta1/bep3.proto"></a>
+<a name="mage/bep3/v1beta1/bep3.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/bep3/v1beta1/bep3.proto
+## mage/bep3/v1beta1/bep3.proto
 
 
 
-<a name="kava.bep3.v1beta1.AssetParam"></a>
+<a name="mage.bep3.v1beta1.AssetParam"></a>
 
 ### AssetParam
 AssetParam defines parameters for each bep3 asset.
@@ -936,9 +936,9 @@ AssetParam defines parameters for each bep3 asset.
 | ----- | ---- | ----- | ----------- |
 | `denom` | [string](#string) |  | denom represents the denominatin for this asset |
 | `coin_id` | [int64](#int64) |  | coin_id represents the registered coin type to use (https://github.com/satoshilabs/slips/blob/master/slip-0044.md) |
-| `supply_limit` | [SupplyLimit](#kava.bep3.v1beta1.SupplyLimit) |  | supply_limit defines the maximum supply allowed for the asset - a total or time based rate limit |
+| `supply_limit` | [SupplyLimit](#mage.bep3.v1beta1.SupplyLimit) |  | supply_limit defines the maximum supply allowed for the asset - a total or time based rate limit |
 | `active` | [bool](#bool) |  | active specifies if the asset is live or paused |
-| `deputy_address` | [bytes](#bytes) |  | deputy_address the kava address of the deputy |
+| `deputy_address` | [bytes](#bytes) |  | deputy_address the mage address of the deputy |
 | `fixed_fee` | [string](#string) |  | fixed_fee defines the fee for incoming swaps |
 | `min_swap_amount` | [string](#string) |  | min_swap_amount defines the minimum amount able to be swapped in a single message |
 | `max_swap_amount` | [string](#string) |  | max_swap_amount defines the maximum amount able to be swapped in a single message |
@@ -950,7 +950,7 @@ AssetParam defines parameters for each bep3 asset.
 
 
 
-<a name="kava.bep3.v1beta1.AssetSupply"></a>
+<a name="mage.bep3.v1beta1.AssetSupply"></a>
 
 ### AssetSupply
 AssetSupply defines information about an asset's supply.
@@ -969,7 +969,7 @@ AssetSupply defines information about an asset's supply.
 
 
 
-<a name="kava.bep3.v1beta1.AtomicSwap"></a>
+<a name="mage.bep3.v1beta1.AtomicSwap"></a>
 
 ### AtomicSwap
 AtomicSwap defines an atomic swap between chains for the pricefeed module.
@@ -981,21 +981,21 @@ AtomicSwap defines an atomic swap between chains for the pricefeed module.
 | `random_number_hash` | [bytes](#bytes) |  | random_number_hash represents the hash of the random number |
 | `expire_height` | [uint64](#uint64) |  | expire_height represents the height when the swap expires |
 | `timestamp` | [int64](#int64) |  | timestamp represents the timestamp of the swap |
-| `sender` | [bytes](#bytes) |  | sender is the kava chain sender of the swap |
-| `recipient` | [bytes](#bytes) |  | recipient is the kava chain recipient of the swap |
+| `sender` | [bytes](#bytes) |  | sender is the mage chain sender of the swap |
+| `recipient` | [bytes](#bytes) |  | recipient is the mage chain recipient of the swap |
 | `sender_other_chain` | [string](#string) |  | sender_other_chain is the sender on the other chain |
 | `recipient_other_chain` | [string](#string) |  | recipient_other_chain is the recipient on the other chain |
 | `closed_block` | [int64](#int64) |  | closed_block is the block when the swap is closed |
-| `status` | [SwapStatus](#kava.bep3.v1beta1.SwapStatus) |  | status represents the current status of the swap |
+| `status` | [SwapStatus](#mage.bep3.v1beta1.SwapStatus) |  | status represents the current status of the swap |
 | `cross_chain` | [bool](#bool) |  | cross_chain identifies whether the atomic swap is cross chain |
-| `direction` | [SwapDirection](#kava.bep3.v1beta1.SwapDirection) |  | direction identifies if the swap is incoming or outgoing |
+| `direction` | [SwapDirection](#mage.bep3.v1beta1.SwapDirection) |  | direction identifies if the swap is incoming or outgoing |
 
 
 
 
 
 
-<a name="kava.bep3.v1beta1.Params"></a>
+<a name="mage.bep3.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the bep3 module.
@@ -1003,14 +1003,14 @@ Params defines the parameters for the bep3 module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `asset_params` | [AssetParam](#kava.bep3.v1beta1.AssetParam) | repeated | asset_params define the parameters for each bep3 asset |
+| `asset_params` | [AssetParam](#mage.bep3.v1beta1.AssetParam) | repeated | asset_params define the parameters for each bep3 asset |
 
 
 
 
 
 
-<a name="kava.bep3.v1beta1.SupplyLimit"></a>
+<a name="mage.bep3.v1beta1.SupplyLimit"></a>
 
 ### SupplyLimit
 SupplyLimit define the absolute and time-based limits for an assets's supply.
@@ -1030,7 +1030,7 @@ SupplyLimit define the absolute and time-based limits for an assets's supply.
  <!-- end messages -->
 
 
-<a name="kava.bep3.v1beta1.SwapDirection"></a>
+<a name="mage.bep3.v1beta1.SwapDirection"></a>
 
 ### SwapDirection
 SwapDirection is the direction of an AtomicSwap
@@ -1038,12 +1038,12 @@ SwapDirection is the direction of an AtomicSwap
 | Name | Number | Description |
 | ---- | ------ | ----------- |
 | SWAP_DIRECTION_UNSPECIFIED | 0 | SWAP_DIRECTION_UNSPECIFIED represents unspecified or invalid swap direcation |
-| SWAP_DIRECTION_INCOMING | 1 | SWAP_DIRECTION_INCOMING represents is incoming swap (to the kava chain) |
-| SWAP_DIRECTION_OUTGOING | 2 | SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the kava chain) |
+| SWAP_DIRECTION_INCOMING | 1 | SWAP_DIRECTION_INCOMING represents is incoming swap (to the mage chain) |
+| SWAP_DIRECTION_OUTGOING | 2 | SWAP_DIRECTION_OUTGOING represents an outgoing swap (from the mage chain) |
 
 
 
-<a name="kava.bep3.v1beta1.SwapStatus"></a>
+<a name="mage.bep3.v1beta1.SwapStatus"></a>
 
 ### SwapStatus
 SwapStatus is the status of an AtomicSwap
@@ -1064,14 +1064,14 @@ SwapStatus is the status of an AtomicSwap
 
 
 
-<a name="kava/bep3/v1beta1/genesis.proto"></a>
+<a name="mage/bep3/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/bep3/v1beta1/genesis.proto
+## mage/bep3/v1beta1/genesis.proto
 
 
 
-<a name="kava.bep3.v1beta1.GenesisState"></a>
+<a name="mage.bep3.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the pricefeed module's genesis state.
@@ -1079,9 +1079,9 @@ GenesisState defines the pricefeed module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.bep3.v1beta1.Params) |  | params defines all the paramaters of the module. |
-| `atomic_swaps` | [AtomicSwap](#kava.bep3.v1beta1.AtomicSwap) | repeated | atomic_swaps represents the state of stored atomic swaps |
-| `supplies` | [AssetSupply](#kava.bep3.v1beta1.AssetSupply) | repeated | supplies represents the supply information of each atomic swap |
+| `params` | [Params](#mage.bep3.v1beta1.Params) |  | params defines all the paramaters of the module. |
+| `atomic_swaps` | [AtomicSwap](#mage.bep3.v1beta1.AtomicSwap) | repeated | atomic_swaps represents the state of stored atomic swaps |
+| `supplies` | [AssetSupply](#mage.bep3.v1beta1.AssetSupply) | repeated | supplies represents the supply information of each atomic swap |
 | `previous_block_time` | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | previous_block_time represents the time of the previous block |
 
 
@@ -1098,14 +1098,14 @@ GenesisState defines the pricefeed module's genesis state.
 
 
 
-<a name="kava/bep3/v1beta1/query.proto"></a>
+<a name="mage/bep3/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/bep3/v1beta1/query.proto
+## mage/bep3/v1beta1/query.proto
 
 
 
-<a name="kava.bep3.v1beta1.AssetSupplyResponse"></a>
+<a name="mage.bep3.v1beta1.AssetSupplyResponse"></a>
 
 ### AssetSupplyResponse
 AssetSupplyResponse defines information about an asset's supply.
@@ -1124,7 +1124,7 @@ AssetSupplyResponse defines information about an asset's supply.
 
 
 
-<a name="kava.bep3.v1beta1.AtomicSwapResponse"></a>
+<a name="mage.bep3.v1beta1.AtomicSwapResponse"></a>
 
 ### AtomicSwapResponse
 AtomicSwapResponse represents the returned atomic swap properties
@@ -1137,21 +1137,21 @@ AtomicSwapResponse represents the returned atomic swap properties
 | `random_number_hash` | [string](#string) |  | random_number_hash represents the hash of the random number |
 | `expire_height` | [uint64](#uint64) |  | expire_height represents the height when the swap expires |
 | `timestamp` | [int64](#int64) |  | timestamp represents the timestamp of the swap |
-| `sender` | [string](#string) |  | sender is the kava chain sender of the swap |
-| `recipient` | [string](#string) |  | recipient is the kava chain recipient of the swap |
+| `sender` | [string](#string) |  | sender is the mage chain sender of the swap |
+| `recipient` | [string](#string) |  | recipient is the mage chain recipient of the swap |
 | `sender_other_chain` | [string](#string) |  | sender_other_chain is the sender on the other chain |
 | `recipient_other_chain` | [string](#string) |  | recipient_other_chain is the recipient on the other chain |
 | `closed_block` | [int64](#int64) |  | closed_block is the block when the swap is closed |
-| `status` | [SwapStatus](#kava.bep3.v1beta1.SwapStatus) |  | status represents the current status of the swap |
+| `status` | [SwapStatus](#mage.bep3.v1beta1.SwapStatus) |  | status represents the current status of the swap |
 | `cross_chain` | [bool](#bool) |  | cross_chain identifies whether the atomic swap is cross chain |
-| `direction` | [SwapDirection](#kava.bep3.v1beta1.SwapDirection) |  | direction identifies if the swap is incoming or outgoing |
+| `direction` | [SwapDirection](#mage.bep3.v1beta1.SwapDirection) |  | direction identifies if the swap is incoming or outgoing |
 
 
 
 
 
 
-<a name="kava.bep3.v1beta1.QueryAssetSuppliesRequest"></a>
+<a name="mage.bep3.v1beta1.QueryAssetSuppliesRequest"></a>
 
 ### QueryAssetSuppliesRequest
 QueryAssetSuppliesRequest is the request type for the Query/AssetSupplies RPC method.
@@ -1161,7 +1161,7 @@ QueryAssetSuppliesRequest is the request type for the Query/AssetSupplies RPC me
 
 
 
-<a name="kava.bep3.v1beta1.QueryAssetSuppliesResponse"></a>
+<a name="mage.bep3.v1beta1.QueryAssetSuppliesResponse"></a>
 
 ### QueryAssetSuppliesResponse
 QueryAssetSuppliesResponse is the response type for the Query/AssetSupplies RPC method.
@@ -1169,14 +1169,14 @@ QueryAssetSuppliesResponse is the response type for the Query/AssetSupplies RPC 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `asset_supplies` | [AssetSupplyResponse](#kava.bep3.v1beta1.AssetSupplyResponse) | repeated | asset_supplies represents the supplies of returned assets |
+| `asset_supplies` | [AssetSupplyResponse](#mage.bep3.v1beta1.AssetSupplyResponse) | repeated | asset_supplies represents the supplies of returned assets |
 
 
 
 
 
 
-<a name="kava.bep3.v1beta1.QueryAssetSupplyRequest"></a>
+<a name="mage.bep3.v1beta1.QueryAssetSupplyRequest"></a>
 
 ### QueryAssetSupplyRequest
 QueryAssetSupplyRequest is the request type for the Query/AssetSupply RPC method.
@@ -1191,7 +1191,7 @@ QueryAssetSupplyRequest is the request type for the Query/AssetSupply RPC method
 
 
 
-<a name="kava.bep3.v1beta1.QueryAssetSupplyResponse"></a>
+<a name="mage.bep3.v1beta1.QueryAssetSupplyResponse"></a>
 
 ### QueryAssetSupplyResponse
 QueryAssetSupplyResponse is the response type for the Query/AssetSupply RPC method.
@@ -1199,14 +1199,14 @@ QueryAssetSupplyResponse is the response type for the Query/AssetSupply RPC meth
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `asset_supply` | [AssetSupplyResponse](#kava.bep3.v1beta1.AssetSupplyResponse) |  | asset_supply represents the supply of the asset |
+| `asset_supply` | [AssetSupplyResponse](#mage.bep3.v1beta1.AssetSupplyResponse) |  | asset_supply represents the supply of the asset |
 
 
 
 
 
 
-<a name="kava.bep3.v1beta1.QueryAtomicSwapRequest"></a>
+<a name="mage.bep3.v1beta1.QueryAtomicSwapRequest"></a>
 
 ### QueryAtomicSwapRequest
 QueryAtomicSwapRequest is the request type for the Query/AtomicSwap RPC method.
@@ -1221,7 +1221,7 @@ QueryAtomicSwapRequest is the request type for the Query/AtomicSwap RPC method.
 
 
 
-<a name="kava.bep3.v1beta1.QueryAtomicSwapResponse"></a>
+<a name="mage.bep3.v1beta1.QueryAtomicSwapResponse"></a>
 
 ### QueryAtomicSwapResponse
 QueryAtomicSwapResponse is the response type for the Query/AtomicSwap RPC method.
@@ -1229,14 +1229,14 @@ QueryAtomicSwapResponse is the response type for the Query/AtomicSwap RPC method
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `atomic_swap` | [AtomicSwapResponse](#kava.bep3.v1beta1.AtomicSwapResponse) |  |  |
+| `atomic_swap` | [AtomicSwapResponse](#mage.bep3.v1beta1.AtomicSwapResponse) |  |  |
 
 
 
 
 
 
-<a name="kava.bep3.v1beta1.QueryAtomicSwapsRequest"></a>
+<a name="mage.bep3.v1beta1.QueryAtomicSwapsRequest"></a>
 
 ### QueryAtomicSwapsRequest
 QueryAtomicSwapsRequest is the request type for the Query/AtomicSwaps RPC method.
@@ -1246,8 +1246,8 @@ QueryAtomicSwapsRequest is the request type for the Query/AtomicSwaps RPC method
 | ----- | ---- | ----- | ----------- |
 | `involve` | [string](#string) |  | involve filters by address |
 | `expiration` | [uint64](#uint64) |  | expiration filters by expiration block height |
-| `status` | [SwapStatus](#kava.bep3.v1beta1.SwapStatus) |  | status filters by swap status |
-| `direction` | [SwapDirection](#kava.bep3.v1beta1.SwapDirection) |  | direction fitlers by swap direction |
+| `status` | [SwapStatus](#mage.bep3.v1beta1.SwapStatus) |  | status filters by swap status |
+| `direction` | [SwapDirection](#mage.bep3.v1beta1.SwapDirection) |  | direction fitlers by swap direction |
 | `pagination` | [cosmos.base.query.v1beta1.PageRequest](#cosmos.base.query.v1beta1.PageRequest) |  |  |
 
 
@@ -1255,7 +1255,7 @@ QueryAtomicSwapsRequest is the request type for the Query/AtomicSwaps RPC method
 
 
 
-<a name="kava.bep3.v1beta1.QueryAtomicSwapsResponse"></a>
+<a name="mage.bep3.v1beta1.QueryAtomicSwapsResponse"></a>
 
 ### QueryAtomicSwapsResponse
 QueryAtomicSwapsResponse is the response type for the Query/AtomicSwaps RPC method.
@@ -1263,7 +1263,7 @@ QueryAtomicSwapsResponse is the response type for the Query/AtomicSwaps RPC meth
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `atomic_swaps` | [AtomicSwapResponse](#kava.bep3.v1beta1.AtomicSwapResponse) | repeated | atomic_swap represents the returned atomic swaps for the request |
+| `atomic_swaps` | [AtomicSwapResponse](#mage.bep3.v1beta1.AtomicSwapResponse) | repeated | atomic_swap represents the returned atomic swaps for the request |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -1271,7 +1271,7 @@ QueryAtomicSwapsResponse is the response type for the Query/AtomicSwaps RPC meth
 
 
 
-<a name="kava.bep3.v1beta1.QueryParamsRequest"></a>
+<a name="mage.bep3.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/bep3 parameters.
@@ -1281,7 +1281,7 @@ QueryParamsRequest defines the request type for querying x/bep3 parameters.
 
 
 
-<a name="kava.bep3.v1beta1.QueryParamsResponse"></a>
+<a name="mage.bep3.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/bep3 parameters.
@@ -1289,7 +1289,7 @@ QueryParamsResponse defines the response type for querying x/bep3 parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.bep3.v1beta1.Params) |  | params represents the parameters of the module |
+| `params` | [Params](#mage.bep3.v1beta1.Params) |  | params represents the parameters of the module |
 
 
 
@@ -1302,31 +1302,31 @@ QueryParamsResponse defines the response type for querying x/bep3 parameters.
  <!-- end HasExtensions -->
 
 
-<a name="kava.bep3.v1beta1.Query"></a>
+<a name="mage.bep3.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for bep3 module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.bep3.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.bep3.v1beta1.QueryParamsResponse) | Params queries module params | GET|/kava/bep3/v1beta1/params|
-| `AssetSupply` | [QueryAssetSupplyRequest](#kava.bep3.v1beta1.QueryAssetSupplyRequest) | [QueryAssetSupplyResponse](#kava.bep3.v1beta1.QueryAssetSupplyResponse) | AssetSupply queries info about an asset's supply | GET|/kava/bep3/v1beta1/assetsupply/{denom}|
-| `AssetSupplies` | [QueryAssetSuppliesRequest](#kava.bep3.v1beta1.QueryAssetSuppliesRequest) | [QueryAssetSuppliesResponse](#kava.bep3.v1beta1.QueryAssetSuppliesResponse) | AssetSupplies queries a list of asset supplies | GET|/kava/bep3/v1beta1/assetsupplies|
-| `AtomicSwap` | [QueryAtomicSwapRequest](#kava.bep3.v1beta1.QueryAtomicSwapRequest) | [QueryAtomicSwapResponse](#kava.bep3.v1beta1.QueryAtomicSwapResponse) | AtomicSwap queries info about an atomic swap | GET|/kava/bep3/v1beta1/atomicswap/{swap_id}|
-| `AtomicSwaps` | [QueryAtomicSwapsRequest](#kava.bep3.v1beta1.QueryAtomicSwapsRequest) | [QueryAtomicSwapsResponse](#kava.bep3.v1beta1.QueryAtomicSwapsResponse) | AtomicSwaps queries a list of atomic swaps | GET|/kava/bep3/v1beta1/atomicswaps|
+| `Params` | [QueryParamsRequest](#mage.bep3.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.bep3.v1beta1.QueryParamsResponse) | Params queries module params | GET|/mage/bep3/v1beta1/params|
+| `AssetSupply` | [QueryAssetSupplyRequest](#mage.bep3.v1beta1.QueryAssetSupplyRequest) | [QueryAssetSupplyResponse](#mage.bep3.v1beta1.QueryAssetSupplyResponse) | AssetSupply queries info about an asset's supply | GET|/mage/bep3/v1beta1/assetsupply/{denom}|
+| `AssetSupplies` | [QueryAssetSuppliesRequest](#mage.bep3.v1beta1.QueryAssetSuppliesRequest) | [QueryAssetSuppliesResponse](#mage.bep3.v1beta1.QueryAssetSuppliesResponse) | AssetSupplies queries a list of asset supplies | GET|/mage/bep3/v1beta1/assetsupplies|
+| `AtomicSwap` | [QueryAtomicSwapRequest](#mage.bep3.v1beta1.QueryAtomicSwapRequest) | [QueryAtomicSwapResponse](#mage.bep3.v1beta1.QueryAtomicSwapResponse) | AtomicSwap queries info about an atomic swap | GET|/mage/bep3/v1beta1/atomicswap/{swap_id}|
+| `AtomicSwaps` | [QueryAtomicSwapsRequest](#mage.bep3.v1beta1.QueryAtomicSwapsRequest) | [QueryAtomicSwapsResponse](#mage.bep3.v1beta1.QueryAtomicSwapsResponse) | AtomicSwaps queries a list of atomic swaps | GET|/mage/bep3/v1beta1/atomicswaps|
 
  <!-- end services -->
 
 
 
-<a name="kava/bep3/v1beta1/tx.proto"></a>
+<a name="mage/bep3/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/bep3/v1beta1/tx.proto
+## mage/bep3/v1beta1/tx.proto
 
 
 
-<a name="kava.bep3.v1beta1.MsgClaimAtomicSwap"></a>
+<a name="mage.bep3.v1beta1.MsgClaimAtomicSwap"></a>
 
 ### MsgClaimAtomicSwap
 MsgClaimAtomicSwap defines the Msg/ClaimAtomicSwap request type.
@@ -1343,7 +1343,7 @@ MsgClaimAtomicSwap defines the Msg/ClaimAtomicSwap request type.
 
 
 
-<a name="kava.bep3.v1beta1.MsgClaimAtomicSwapResponse"></a>
+<a name="mage.bep3.v1beta1.MsgClaimAtomicSwapResponse"></a>
 
 ### MsgClaimAtomicSwapResponse
 MsgClaimAtomicSwapResponse defines the Msg/ClaimAtomicSwap response type.
@@ -1353,7 +1353,7 @@ MsgClaimAtomicSwapResponse defines the Msg/ClaimAtomicSwap response type.
 
 
 
-<a name="kava.bep3.v1beta1.MsgCreateAtomicSwap"></a>
+<a name="mage.bep3.v1beta1.MsgCreateAtomicSwap"></a>
 
 ### MsgCreateAtomicSwap
 MsgCreateAtomicSwap defines the Msg/CreateAtomicSwap request type.
@@ -1375,7 +1375,7 @@ MsgCreateAtomicSwap defines the Msg/CreateAtomicSwap request type.
 
 
 
-<a name="kava.bep3.v1beta1.MsgCreateAtomicSwapResponse"></a>
+<a name="mage.bep3.v1beta1.MsgCreateAtomicSwapResponse"></a>
 
 ### MsgCreateAtomicSwapResponse
 MsgCreateAtomicSwapResponse defines the Msg/CreateAtomicSwap response type.
@@ -1385,7 +1385,7 @@ MsgCreateAtomicSwapResponse defines the Msg/CreateAtomicSwap response type.
 
 
 
-<a name="kava.bep3.v1beta1.MsgRefundAtomicSwap"></a>
+<a name="mage.bep3.v1beta1.MsgRefundAtomicSwap"></a>
 
 ### MsgRefundAtomicSwap
 MsgRefundAtomicSwap defines the Msg/RefundAtomicSwap request type.
@@ -1401,7 +1401,7 @@ MsgRefundAtomicSwap defines the Msg/RefundAtomicSwap request type.
 
 
 
-<a name="kava.bep3.v1beta1.MsgRefundAtomicSwapResponse"></a>
+<a name="mage.bep3.v1beta1.MsgRefundAtomicSwapResponse"></a>
 
 ### MsgRefundAtomicSwapResponse
 MsgRefundAtomicSwapResponse defines the Msg/RefundAtomicSwap response type.
@@ -1417,29 +1417,29 @@ MsgRefundAtomicSwapResponse defines the Msg/RefundAtomicSwap response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.bep3.v1beta1.Msg"></a>
+<a name="mage.bep3.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the bep3 Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `CreateAtomicSwap` | [MsgCreateAtomicSwap](#kava.bep3.v1beta1.MsgCreateAtomicSwap) | [MsgCreateAtomicSwapResponse](#kava.bep3.v1beta1.MsgCreateAtomicSwapResponse) | CreateAtomicSwap defines a method for creating an atomic swap | |
-| `ClaimAtomicSwap` | [MsgClaimAtomicSwap](#kava.bep3.v1beta1.MsgClaimAtomicSwap) | [MsgClaimAtomicSwapResponse](#kava.bep3.v1beta1.MsgClaimAtomicSwapResponse) | ClaimAtomicSwap defines a method for claiming an atomic swap | |
-| `RefundAtomicSwap` | [MsgRefundAtomicSwap](#kava.bep3.v1beta1.MsgRefundAtomicSwap) | [MsgRefundAtomicSwapResponse](#kava.bep3.v1beta1.MsgRefundAtomicSwapResponse) | RefundAtomicSwap defines a method for refunding an atomic swap | |
+| `CreateAtomicSwap` | [MsgCreateAtomicSwap](#mage.bep3.v1beta1.MsgCreateAtomicSwap) | [MsgCreateAtomicSwapResponse](#mage.bep3.v1beta1.MsgCreateAtomicSwapResponse) | CreateAtomicSwap defines a method for creating an atomic swap | |
+| `ClaimAtomicSwap` | [MsgClaimAtomicSwap](#mage.bep3.v1beta1.MsgClaimAtomicSwap) | [MsgClaimAtomicSwapResponse](#mage.bep3.v1beta1.MsgClaimAtomicSwapResponse) | ClaimAtomicSwap defines a method for claiming an atomic swap | |
+| `RefundAtomicSwap` | [MsgRefundAtomicSwap](#mage.bep3.v1beta1.MsgRefundAtomicSwap) | [MsgRefundAtomicSwapResponse](#mage.bep3.v1beta1.MsgRefundAtomicSwapResponse) | RefundAtomicSwap defines a method for refunding an atomic swap | |
 
  <!-- end services -->
 
 
 
-<a name="kava/cdp/v1beta1/cdp.proto"></a>
+<a name="mage/cdp/v1beta1/cdp.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/cdp/v1beta1/cdp.proto
+## mage/cdp/v1beta1/cdp.proto
 
 
 
-<a name="kava.cdp.v1beta1.CDP"></a>
+<a name="mage.cdp.v1beta1.CDP"></a>
 
 ### CDP
 CDP defines the state of a single collateralized debt position.
@@ -1461,7 +1461,7 @@ CDP defines the state of a single collateralized debt position.
 
 
 
-<a name="kava.cdp.v1beta1.Deposit"></a>
+<a name="mage.cdp.v1beta1.Deposit"></a>
 
 ### Deposit
 Deposit defines an amount of coins deposited by an account to a cdp
@@ -1478,7 +1478,7 @@ Deposit defines an amount of coins deposited by an account to a cdp
 
 
 
-<a name="kava.cdp.v1beta1.OwnerCDPIndex"></a>
+<a name="mage.cdp.v1beta1.OwnerCDPIndex"></a>
 
 ### OwnerCDPIndex
 OwnerCDPIndex defines the cdp ids for a single cdp owner
@@ -1493,7 +1493,7 @@ OwnerCDPIndex defines the cdp ids for a single cdp owner
 
 
 
-<a name="kava.cdp.v1beta1.TotalCollateral"></a>
+<a name="mage.cdp.v1beta1.TotalCollateral"></a>
 
 ### TotalCollateral
 TotalCollateral defines the total collateral of a given collateral type
@@ -1509,7 +1509,7 @@ TotalCollateral defines the total collateral of a given collateral type
 
 
 
-<a name="kava.cdp.v1beta1.TotalPrincipal"></a>
+<a name="mage.cdp.v1beta1.TotalPrincipal"></a>
 
 ### TotalPrincipal
 TotalPrincipal defines the total principal of a given collateral type
@@ -1534,14 +1534,14 @@ TotalPrincipal defines the total principal of a given collateral type
 
 
 
-<a name="kava/cdp/v1beta1/genesis.proto"></a>
+<a name="mage/cdp/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/cdp/v1beta1/genesis.proto
+## mage/cdp/v1beta1/genesis.proto
 
 
 
-<a name="kava.cdp.v1beta1.CollateralParam"></a>
+<a name="mage.cdp.v1beta1.CollateralParam"></a>
 
 ### CollateralParam
 CollateralParam defines governance parameters for each collateral type within the cdp module
@@ -1567,7 +1567,7 @@ CollateralParam defines governance parameters for each collateral type within th
 
 
 
-<a name="kava.cdp.v1beta1.DebtParam"></a>
+<a name="mage.cdp.v1beta1.DebtParam"></a>
 
 ### DebtParam
 DebtParam defines governance params for debt assets
@@ -1585,7 +1585,7 @@ DebtParam defines governance params for debt assets
 
 
 
-<a name="kava.cdp.v1beta1.GenesisAccumulationTime"></a>
+<a name="mage.cdp.v1beta1.GenesisAccumulationTime"></a>
 
 ### GenesisAccumulationTime
 GenesisAccumulationTime defines the previous distribution time and its corresponding denom
@@ -1602,7 +1602,7 @@ GenesisAccumulationTime defines the previous distribution time and its correspon
 
 
 
-<a name="kava.cdp.v1beta1.GenesisState"></a>
+<a name="mage.cdp.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the cdp module's genesis state.
@@ -1610,21 +1610,21 @@ GenesisState defines the cdp module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.cdp.v1beta1.Params) |  | params defines all the paramaters of the module. |
-| `cdps` | [CDP](#kava.cdp.v1beta1.CDP) | repeated |  |
-| `deposits` | [Deposit](#kava.cdp.v1beta1.Deposit) | repeated |  |
+| `params` | [Params](#mage.cdp.v1beta1.Params) |  | params defines all the paramaters of the module. |
+| `cdps` | [CDP](#mage.cdp.v1beta1.CDP) | repeated |  |
+| `deposits` | [Deposit](#mage.cdp.v1beta1.Deposit) | repeated |  |
 | `starting_cdp_id` | [uint64](#uint64) |  |  |
 | `debt_denom` | [string](#string) |  |  |
 | `gov_denom` | [string](#string) |  |  |
-| `previous_accumulation_times` | [GenesisAccumulationTime](#kava.cdp.v1beta1.GenesisAccumulationTime) | repeated |  |
-| `total_principals` | [GenesisTotalPrincipal](#kava.cdp.v1beta1.GenesisTotalPrincipal) | repeated |  |
+| `previous_accumulation_times` | [GenesisAccumulationTime](#mage.cdp.v1beta1.GenesisAccumulationTime) | repeated |  |
+| `total_principals` | [GenesisTotalPrincipal](#mage.cdp.v1beta1.GenesisTotalPrincipal) | repeated |  |
 
 
 
 
 
 
-<a name="kava.cdp.v1beta1.GenesisTotalPrincipal"></a>
+<a name="mage.cdp.v1beta1.GenesisTotalPrincipal"></a>
 
 ### GenesisTotalPrincipal
 GenesisTotalPrincipal defines the total principal and its corresponding collateral type
@@ -1640,7 +1640,7 @@ GenesisTotalPrincipal defines the total principal and its corresponding collater
 
 
 
-<a name="kava.cdp.v1beta1.Params"></a>
+<a name="mage.cdp.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the cdp module.
@@ -1648,8 +1648,8 @@ Params defines the parameters for the cdp module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `collateral_params` | [CollateralParam](#kava.cdp.v1beta1.CollateralParam) | repeated |  |
-| `debt_param` | [DebtParam](#kava.cdp.v1beta1.DebtParam) |  |  |
+| `collateral_params` | [CollateralParam](#mage.cdp.v1beta1.CollateralParam) | repeated |  |
+| `debt_param` | [DebtParam](#mage.cdp.v1beta1.DebtParam) |  |  |
 | `global_debt_limit` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  |  |
 | `surplus_auction_threshold` | [string](#string) |  |  |
 | `surplus_auction_lot` | [string](#string) |  |  |
@@ -1671,14 +1671,14 @@ Params defines the parameters for the cdp module.
 
 
 
-<a name="kava/cdp/v1beta1/query.proto"></a>
+<a name="mage/cdp/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/cdp/v1beta1/query.proto
+## mage/cdp/v1beta1/query.proto
 
 
 
-<a name="kava.cdp.v1beta1.CDPResponse"></a>
+<a name="mage.cdp.v1beta1.CDPResponse"></a>
 
 ### CDPResponse
 CDPResponse defines the state of a single collateralized debt position.
@@ -1702,7 +1702,7 @@ CDPResponse defines the state of a single collateralized debt position.
 
 
 
-<a name="kava.cdp.v1beta1.QueryAccountsRequest"></a>
+<a name="mage.cdp.v1beta1.QueryAccountsRequest"></a>
 
 ### QueryAccountsRequest
 QueryAccountsRequest defines the request type for the Query/Accounts RPC method.
@@ -1712,7 +1712,7 @@ QueryAccountsRequest defines the request type for the Query/Accounts RPC method.
 
 
 
-<a name="kava.cdp.v1beta1.QueryAccountsResponse"></a>
+<a name="mage.cdp.v1beta1.QueryAccountsResponse"></a>
 
 ### QueryAccountsResponse
 QueryAccountsResponse defines the response type for the Query/Accounts RPC method.
@@ -1727,7 +1727,7 @@ QueryAccountsResponse defines the response type for the Query/Accounts RPC metho
 
 
 
-<a name="kava.cdp.v1beta1.QueryCdpRequest"></a>
+<a name="mage.cdp.v1beta1.QueryCdpRequest"></a>
 
 ### QueryCdpRequest
 QueryCdpRequest defines the request type for the Query/Cdp RPC method.
@@ -1743,7 +1743,7 @@ QueryCdpRequest defines the request type for the Query/Cdp RPC method.
 
 
 
-<a name="kava.cdp.v1beta1.QueryCdpResponse"></a>
+<a name="mage.cdp.v1beta1.QueryCdpResponse"></a>
 
 ### QueryCdpResponse
 QueryCdpResponse defines the response type for the Query/Cdp RPC method.
@@ -1751,14 +1751,14 @@ QueryCdpResponse defines the response type for the Query/Cdp RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `cdp` | [CDPResponse](#kava.cdp.v1beta1.CDPResponse) |  |  |
+| `cdp` | [CDPResponse](#mage.cdp.v1beta1.CDPResponse) |  |  |
 
 
 
 
 
 
-<a name="kava.cdp.v1beta1.QueryCdpsRequest"></a>
+<a name="mage.cdp.v1beta1.QueryCdpsRequest"></a>
 
 ### QueryCdpsRequest
 QueryCdpsRequest is the params for a filtered CDP query, the request type for the Query/Cdps RPC method.
@@ -1777,7 +1777,7 @@ QueryCdpsRequest is the params for a filtered CDP query, the request type for th
 
 
 
-<a name="kava.cdp.v1beta1.QueryCdpsResponse"></a>
+<a name="mage.cdp.v1beta1.QueryCdpsResponse"></a>
 
 ### QueryCdpsResponse
 QueryCdpsResponse defines the response type for the Query/Cdps RPC method.
@@ -1785,7 +1785,7 @@ QueryCdpsResponse defines the response type for the Query/Cdps RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `cdps` | [CDPResponse](#kava.cdp.v1beta1.CDPResponse) | repeated |  |
+| `cdps` | [CDPResponse](#mage.cdp.v1beta1.CDPResponse) | repeated |  |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -1793,7 +1793,7 @@ QueryCdpsResponse defines the response type for the Query/Cdps RPC method.
 
 
 
-<a name="kava.cdp.v1beta1.QueryDepositsRequest"></a>
+<a name="mage.cdp.v1beta1.QueryDepositsRequest"></a>
 
 ### QueryDepositsRequest
 QueryDepositsRequest defines the request type for the Query/Deposits RPC method.
@@ -1809,7 +1809,7 @@ QueryDepositsRequest defines the request type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.cdp.v1beta1.QueryDepositsResponse"></a>
+<a name="mage.cdp.v1beta1.QueryDepositsResponse"></a>
 
 ### QueryDepositsResponse
 QueryDepositsResponse defines the response type for the Query/Deposits RPC method.
@@ -1817,14 +1817,14 @@ QueryDepositsResponse defines the response type for the Query/Deposits RPC metho
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `deposits` | [Deposit](#kava.cdp.v1beta1.Deposit) | repeated |  |
+| `deposits` | [Deposit](#mage.cdp.v1beta1.Deposit) | repeated |  |
 
 
 
 
 
 
-<a name="kava.cdp.v1beta1.QueryParamsRequest"></a>
+<a name="mage.cdp.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for the Query/Params RPC method.
@@ -1834,7 +1834,7 @@ QueryParamsRequest defines the request type for the Query/Params RPC method.
 
 
 
-<a name="kava.cdp.v1beta1.QueryParamsResponse"></a>
+<a name="mage.cdp.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for the Query/Params RPC method.
@@ -1842,14 +1842,14 @@ QueryParamsResponse defines the response type for the Query/Params RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.cdp.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.cdp.v1beta1.Params) |  |  |
 
 
 
 
 
 
-<a name="kava.cdp.v1beta1.QueryTotalCollateralRequest"></a>
+<a name="mage.cdp.v1beta1.QueryTotalCollateralRequest"></a>
 
 ### QueryTotalCollateralRequest
 QueryTotalCollateralRequest defines the request type for the Query/TotalCollateral RPC method.
@@ -1864,7 +1864,7 @@ QueryTotalCollateralRequest defines the request type for the Query/TotalCollater
 
 
 
-<a name="kava.cdp.v1beta1.QueryTotalCollateralResponse"></a>
+<a name="mage.cdp.v1beta1.QueryTotalCollateralResponse"></a>
 
 ### QueryTotalCollateralResponse
 QueryTotalCollateralResponse defines the response type for the Query/TotalCollateral RPC method.
@@ -1872,14 +1872,14 @@ QueryTotalCollateralResponse defines the response type for the Query/TotalCollat
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `total_collateral` | [TotalCollateral](#kava.cdp.v1beta1.TotalCollateral) | repeated |  |
+| `total_collateral` | [TotalCollateral](#mage.cdp.v1beta1.TotalCollateral) | repeated |  |
 
 
 
 
 
 
-<a name="kava.cdp.v1beta1.QueryTotalPrincipalRequest"></a>
+<a name="mage.cdp.v1beta1.QueryTotalPrincipalRequest"></a>
 
 ### QueryTotalPrincipalRequest
 QueryTotalPrincipalRequest defines the request type for the Query/TotalPrincipal RPC method.
@@ -1894,7 +1894,7 @@ QueryTotalPrincipalRequest defines the request type for the Query/TotalPrincipal
 
 
 
-<a name="kava.cdp.v1beta1.QueryTotalPrincipalResponse"></a>
+<a name="mage.cdp.v1beta1.QueryTotalPrincipalResponse"></a>
 
 ### QueryTotalPrincipalResponse
 QueryTotalPrincipalResponse defines the response type for the Query/TotalPrincipal RPC method.
@@ -1902,7 +1902,7 @@ QueryTotalPrincipalResponse defines the response type for the Query/TotalPrincip
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `total_principal` | [TotalPrincipal](#kava.cdp.v1beta1.TotalPrincipal) | repeated |  |
+| `total_principal` | [TotalPrincipal](#mage.cdp.v1beta1.TotalPrincipal) | repeated |  |
 
 
 
@@ -1915,33 +1915,33 @@ QueryTotalPrincipalResponse defines the response type for the Query/TotalPrincip
  <!-- end HasExtensions -->
 
 
-<a name="kava.cdp.v1beta1.Query"></a>
+<a name="mage.cdp.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for cdp module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.cdp.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.cdp.v1beta1.QueryParamsResponse) | Params queries all parameters of the cdp module. | GET|/kava/cdp/v1beta1/params|
-| `Accounts` | [QueryAccountsRequest](#kava.cdp.v1beta1.QueryAccountsRequest) | [QueryAccountsResponse](#kava.cdp.v1beta1.QueryAccountsResponse) | Accounts queries the CDP module accounts. | GET|/kava/cdp/v1beta1/accounts|
-| `TotalPrincipal` | [QueryTotalPrincipalRequest](#kava.cdp.v1beta1.QueryTotalPrincipalRequest) | [QueryTotalPrincipalResponse](#kava.cdp.v1beta1.QueryTotalPrincipalResponse) | TotalPrincipal queries the total principal of a given collateral type. | GET|/kava/cdp/v1beta1/totalPrincipal|
-| `TotalCollateral` | [QueryTotalCollateralRequest](#kava.cdp.v1beta1.QueryTotalCollateralRequest) | [QueryTotalCollateralResponse](#kava.cdp.v1beta1.QueryTotalCollateralResponse) | TotalCollateral queries the total collateral of a given collateral type. | GET|/kava/cdp/v1beta1/totalCollateral|
-| `Cdps` | [QueryCdpsRequest](#kava.cdp.v1beta1.QueryCdpsRequest) | [QueryCdpsResponse](#kava.cdp.v1beta1.QueryCdpsResponse) | Cdps queries all active CDPs. | GET|/kava/cdp/v1beta1/cdps|
-| `Cdp` | [QueryCdpRequest](#kava.cdp.v1beta1.QueryCdpRequest) | [QueryCdpResponse](#kava.cdp.v1beta1.QueryCdpResponse) | Cdp queries a CDP with the input owner address and collateral type. | GET|/kava/cdp/v1beta1/cdps/{owner}/{collateral_type}|
-| `Deposits` | [QueryDepositsRequest](#kava.cdp.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#kava.cdp.v1beta1.QueryDepositsResponse) | Deposits queries deposits associated with the CDP owned by an address for a collateral type. | GET|/kava/cdp/v1beta1/cdps/deposits/{owner}/{collateral_type}|
+| `Params` | [QueryParamsRequest](#mage.cdp.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.cdp.v1beta1.QueryParamsResponse) | Params queries all parameters of the cdp module. | GET|/mage/cdp/v1beta1/params|
+| `Accounts` | [QueryAccountsRequest](#mage.cdp.v1beta1.QueryAccountsRequest) | [QueryAccountsResponse](#mage.cdp.v1beta1.QueryAccountsResponse) | Accounts queries the CDP module accounts. | GET|/mage/cdp/v1beta1/accounts|
+| `TotalPrincipal` | [QueryTotalPrincipalRequest](#mage.cdp.v1beta1.QueryTotalPrincipalRequest) | [QueryTotalPrincipalResponse](#mage.cdp.v1beta1.QueryTotalPrincipalResponse) | TotalPrincipal queries the total principal of a given collateral type. | GET|/mage/cdp/v1beta1/totalPrincipal|
+| `TotalCollateral` | [QueryTotalCollateralRequest](#mage.cdp.v1beta1.QueryTotalCollateralRequest) | [QueryTotalCollateralResponse](#mage.cdp.v1beta1.QueryTotalCollateralResponse) | TotalCollateral queries the total collateral of a given collateral type. | GET|/mage/cdp/v1beta1/totalCollateral|
+| `Cdps` | [QueryCdpsRequest](#mage.cdp.v1beta1.QueryCdpsRequest) | [QueryCdpsResponse](#mage.cdp.v1beta1.QueryCdpsResponse) | Cdps queries all active CDPs. | GET|/mage/cdp/v1beta1/cdps|
+| `Cdp` | [QueryCdpRequest](#mage.cdp.v1beta1.QueryCdpRequest) | [QueryCdpResponse](#mage.cdp.v1beta1.QueryCdpResponse) | Cdp queries a CDP with the input owner address and collateral type. | GET|/mage/cdp/v1beta1/cdps/{owner}/{collateral_type}|
+| `Deposits` | [QueryDepositsRequest](#mage.cdp.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#mage.cdp.v1beta1.QueryDepositsResponse) | Deposits queries deposits associated with the CDP owned by an address for a collateral type. | GET|/mage/cdp/v1beta1/cdps/deposits/{owner}/{collateral_type}|
 
  <!-- end services -->
 
 
 
-<a name="kava/cdp/v1beta1/tx.proto"></a>
+<a name="mage/cdp/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/cdp/v1beta1/tx.proto
+## mage/cdp/v1beta1/tx.proto
 
 
 
-<a name="kava.cdp.v1beta1.MsgCreateCDP"></a>
+<a name="mage.cdp.v1beta1.MsgCreateCDP"></a>
 
 ### MsgCreateCDP
 MsgCreateCDP defines a message to create a new CDP.
@@ -1959,7 +1959,7 @@ MsgCreateCDP defines a message to create a new CDP.
 
 
 
-<a name="kava.cdp.v1beta1.MsgCreateCDPResponse"></a>
+<a name="mage.cdp.v1beta1.MsgCreateCDPResponse"></a>
 
 ### MsgCreateCDPResponse
 MsgCreateCDPResponse defines the Msg/CreateCDP response type.
@@ -1974,7 +1974,7 @@ MsgCreateCDPResponse defines the Msg/CreateCDP response type.
 
 
 
-<a name="kava.cdp.v1beta1.MsgDeposit"></a>
+<a name="mage.cdp.v1beta1.MsgDeposit"></a>
 
 ### MsgDeposit
 MsgDeposit defines a message to deposit to a CDP.
@@ -1992,7 +1992,7 @@ MsgDeposit defines a message to deposit to a CDP.
 
 
 
-<a name="kava.cdp.v1beta1.MsgDepositResponse"></a>
+<a name="mage.cdp.v1beta1.MsgDepositResponse"></a>
 
 ### MsgDepositResponse
 MsgDepositResponse defines the Msg/Deposit response type.
@@ -2002,7 +2002,7 @@ MsgDepositResponse defines the Msg/Deposit response type.
 
 
 
-<a name="kava.cdp.v1beta1.MsgDrawDebt"></a>
+<a name="mage.cdp.v1beta1.MsgDrawDebt"></a>
 
 ### MsgDrawDebt
 MsgDrawDebt defines a message to draw debt from a CDP.
@@ -2019,7 +2019,7 @@ MsgDrawDebt defines a message to draw debt from a CDP.
 
 
 
-<a name="kava.cdp.v1beta1.MsgDrawDebtResponse"></a>
+<a name="mage.cdp.v1beta1.MsgDrawDebtResponse"></a>
 
 ### MsgDrawDebtResponse
 MsgDrawDebtResponse defines the Msg/DrawDebt response type.
@@ -2029,7 +2029,7 @@ MsgDrawDebtResponse defines the Msg/DrawDebt response type.
 
 
 
-<a name="kava.cdp.v1beta1.MsgLiquidate"></a>
+<a name="mage.cdp.v1beta1.MsgLiquidate"></a>
 
 ### MsgLiquidate
 MsgLiquidate defines a message to attempt to liquidate a CDP whos
@@ -2047,7 +2047,7 @@ collateralization ratio is under its liquidation ratio.
 
 
 
-<a name="kava.cdp.v1beta1.MsgLiquidateResponse"></a>
+<a name="mage.cdp.v1beta1.MsgLiquidateResponse"></a>
 
 ### MsgLiquidateResponse
 MsgLiquidateResponse defines the Msg/Liquidate response type.
@@ -2057,7 +2057,7 @@ MsgLiquidateResponse defines the Msg/Liquidate response type.
 
 
 
-<a name="kava.cdp.v1beta1.MsgRepayDebt"></a>
+<a name="mage.cdp.v1beta1.MsgRepayDebt"></a>
 
 ### MsgRepayDebt
 MsgRepayDebt defines a message to repay debt from a CDP.
@@ -2074,7 +2074,7 @@ MsgRepayDebt defines a message to repay debt from a CDP.
 
 
 
-<a name="kava.cdp.v1beta1.MsgRepayDebtResponse"></a>
+<a name="mage.cdp.v1beta1.MsgRepayDebtResponse"></a>
 
 ### MsgRepayDebtResponse
 MsgRepayDebtResponse defines the Msg/RepayDebt response type.
@@ -2084,7 +2084,7 @@ MsgRepayDebtResponse defines the Msg/RepayDebt response type.
 
 
 
-<a name="kava.cdp.v1beta1.MsgWithdraw"></a>
+<a name="mage.cdp.v1beta1.MsgWithdraw"></a>
 
 ### MsgWithdraw
 MsgWithdraw defines a message to withdraw collateral from a CDP.
@@ -2102,7 +2102,7 @@ MsgWithdraw defines a message to withdraw collateral from a CDP.
 
 
 
-<a name="kava.cdp.v1beta1.MsgWithdrawResponse"></a>
+<a name="mage.cdp.v1beta1.MsgWithdrawResponse"></a>
 
 ### MsgWithdrawResponse
 MsgWithdrawResponse defines the Msg/Withdraw response type.
@@ -2118,32 +2118,32 @@ MsgWithdrawResponse defines the Msg/Withdraw response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.cdp.v1beta1.Msg"></a>
+<a name="mage.cdp.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the cdp Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `CreateCDP` | [MsgCreateCDP](#kava.cdp.v1beta1.MsgCreateCDP) | [MsgCreateCDPResponse](#kava.cdp.v1beta1.MsgCreateCDPResponse) | CreateCDP defines a method to create a new CDP. | |
-| `Deposit` | [MsgDeposit](#kava.cdp.v1beta1.MsgDeposit) | [MsgDepositResponse](#kava.cdp.v1beta1.MsgDepositResponse) | Deposit defines a method to deposit to a CDP. | |
-| `Withdraw` | [MsgWithdraw](#kava.cdp.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#kava.cdp.v1beta1.MsgWithdrawResponse) | Withdraw defines a method to withdraw collateral from a CDP. | |
-| `DrawDebt` | [MsgDrawDebt](#kava.cdp.v1beta1.MsgDrawDebt) | [MsgDrawDebtResponse](#kava.cdp.v1beta1.MsgDrawDebtResponse) | DrawDebt defines a method to draw debt from a CDP. | |
-| `RepayDebt` | [MsgRepayDebt](#kava.cdp.v1beta1.MsgRepayDebt) | [MsgRepayDebtResponse](#kava.cdp.v1beta1.MsgRepayDebtResponse) | RepayDebt defines a method to repay debt from a CDP. | |
-| `Liquidate` | [MsgLiquidate](#kava.cdp.v1beta1.MsgLiquidate) | [MsgLiquidateResponse](#kava.cdp.v1beta1.MsgLiquidateResponse) | Liquidate defines a method to attempt to liquidate a CDP whos collateralization ratio is under its liquidation ratio. | |
+| `CreateCDP` | [MsgCreateCDP](#mage.cdp.v1beta1.MsgCreateCDP) | [MsgCreateCDPResponse](#mage.cdp.v1beta1.MsgCreateCDPResponse) | CreateCDP defines a method to create a new CDP. | |
+| `Deposit` | [MsgDeposit](#mage.cdp.v1beta1.MsgDeposit) | [MsgDepositResponse](#mage.cdp.v1beta1.MsgDepositResponse) | Deposit defines a method to deposit to a CDP. | |
+| `Withdraw` | [MsgWithdraw](#mage.cdp.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#mage.cdp.v1beta1.MsgWithdrawResponse) | Withdraw defines a method to withdraw collateral from a CDP. | |
+| `DrawDebt` | [MsgDrawDebt](#mage.cdp.v1beta1.MsgDrawDebt) | [MsgDrawDebtResponse](#mage.cdp.v1beta1.MsgDrawDebtResponse) | DrawDebt defines a method to draw debt from a CDP. | |
+| `RepayDebt` | [MsgRepayDebt](#mage.cdp.v1beta1.MsgRepayDebt) | [MsgRepayDebtResponse](#mage.cdp.v1beta1.MsgRepayDebtResponse) | RepayDebt defines a method to repay debt from a CDP. | |
+| `Liquidate` | [MsgLiquidate](#mage.cdp.v1beta1.MsgLiquidate) | [MsgLiquidateResponse](#mage.cdp.v1beta1.MsgLiquidateResponse) | Liquidate defines a method to attempt to liquidate a CDP whos collateralization ratio is under its liquidation ratio. | |
 
  <!-- end services -->
 
 
 
-<a name="kava/committee/v1beta1/committee.proto"></a>
+<a name="mage/committee/v1beta1/committee.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/committee/v1beta1/committee.proto
+## mage/committee/v1beta1/committee.proto
 
 
 
-<a name="kava.committee.v1beta1.BaseCommittee"></a>
+<a name="mage.committee.v1beta1.BaseCommittee"></a>
 
 ### BaseCommittee
 BaseCommittee is a common type shared by all Committees
@@ -2157,14 +2157,14 @@ BaseCommittee is a common type shared by all Committees
 | `permissions` | [google.protobuf.Any](#google.protobuf.Any) | repeated |  |
 | `vote_threshold` | [string](#string) |  | Smallest percentage that must vote for a proposal to pass |
 | `proposal_duration` | [google.protobuf.Duration](#google.protobuf.Duration) |  | The length of time a proposal remains active for. Proposals will close earlier if they get enough votes. |
-| `tally_option` | [TallyOption](#kava.committee.v1beta1.TallyOption) |  |  |
+| `tally_option` | [TallyOption](#mage.committee.v1beta1.TallyOption) |  |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.MemberCommittee"></a>
+<a name="mage.committee.v1beta1.MemberCommittee"></a>
 
 ### MemberCommittee
 MemberCommittee is an alias of BaseCommittee
@@ -2172,14 +2172,14 @@ MemberCommittee is an alias of BaseCommittee
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_committee` | [BaseCommittee](#kava.committee.v1beta1.BaseCommittee) |  |  |
+| `base_committee` | [BaseCommittee](#mage.committee.v1beta1.BaseCommittee) |  |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.TokenCommittee"></a>
+<a name="mage.committee.v1beta1.TokenCommittee"></a>
 
 ### TokenCommittee
 TokenCommittee supports voting on proposals by token holders
@@ -2187,7 +2187,7 @@ TokenCommittee supports voting on proposals by token holders
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_committee` | [BaseCommittee](#kava.committee.v1beta1.BaseCommittee) |  |  |
+| `base_committee` | [BaseCommittee](#mage.committee.v1beta1.BaseCommittee) |  |  |
 | `quorum` | [string](#string) |  |  |
 | `tally_denom` | [string](#string) |  |  |
 
@@ -2198,7 +2198,7 @@ TokenCommittee supports voting on proposals by token holders
  <!-- end messages -->
 
 
-<a name="kava.committee.v1beta1.TallyOption"></a>
+<a name="mage.committee.v1beta1.TallyOption"></a>
 
 ### TallyOption
 TallyOption enumerates the valid types of a tally.
@@ -2218,14 +2218,14 @@ TallyOption enumerates the valid types of a tally.
 
 
 
-<a name="kava/committee/v1beta1/genesis.proto"></a>
+<a name="mage/committee/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/committee/v1beta1/genesis.proto
+## mage/committee/v1beta1/genesis.proto
 
 
 
-<a name="kava.committee.v1beta1.GenesisState"></a>
+<a name="mage.committee.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the committee module's genesis state.
@@ -2235,15 +2235,15 @@ GenesisState defines the committee module's genesis state.
 | ----- | ---- | ----- | ----------- |
 | `next_proposal_id` | [uint64](#uint64) |  |  |
 | `committees` | [google.protobuf.Any](#google.protobuf.Any) | repeated |  |
-| `proposals` | [Proposal](#kava.committee.v1beta1.Proposal) | repeated |  |
-| `votes` | [Vote](#kava.committee.v1beta1.Vote) | repeated |  |
+| `proposals` | [Proposal](#mage.committee.v1beta1.Proposal) | repeated |  |
+| `votes` | [Vote](#mage.committee.v1beta1.Vote) | repeated |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.Proposal"></a>
+<a name="mage.committee.v1beta1.Proposal"></a>
 
 ### Proposal
 Proposal is an internal record of a governance proposal submitted to a committee.
@@ -2261,7 +2261,7 @@ Proposal is an internal record of a governance proposal submitted to a committee
 
 
 
-<a name="kava.committee.v1beta1.Vote"></a>
+<a name="mage.committee.v1beta1.Vote"></a>
 
 ### Vote
 Vote is an internal record of a single governance vote.
@@ -2271,7 +2271,7 @@ Vote is an internal record of a single governance vote.
 | ----- | ---- | ----- | ----------- |
 | `proposal_id` | [uint64](#uint64) |  |  |
 | `voter` | [bytes](#bytes) |  |  |
-| `vote_type` | [VoteType](#kava.committee.v1beta1.VoteType) |  |  |
+| `vote_type` | [VoteType](#mage.committee.v1beta1.VoteType) |  |  |
 
 
 
@@ -2280,7 +2280,7 @@ Vote is an internal record of a single governance vote.
  <!-- end messages -->
 
 
-<a name="kava.committee.v1beta1.VoteType"></a>
+<a name="mage.committee.v1beta1.VoteType"></a>
 
 ### VoteType
 VoteType enumerates the valid types of a vote.
@@ -2301,14 +2301,14 @@ VoteType enumerates the valid types of a vote.
 
 
 
-<a name="kava/committee/v1beta1/permissions.proto"></a>
+<a name="mage/committee/v1beta1/permissions.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/committee/v1beta1/permissions.proto
+## mage/committee/v1beta1/permissions.proto
 
 
 
-<a name="kava.committee.v1beta1.AllowedParamsChange"></a>
+<a name="mage.committee.v1beta1.AllowedParamsChange"></a>
 
 ### AllowedParamsChange
 AllowedParamsChange contains data on the allowed parameter changes for subspace, key, and sub params requirements.
@@ -2319,14 +2319,14 @@ AllowedParamsChange contains data on the allowed parameter changes for subspace,
 | `subspace` | [string](#string) |  |  |
 | `key` | [string](#string) |  |  |
 | `single_subparam_allowed_attrs` | [string](#string) | repeated | Requirements for when the subparam value is a single record. This contains list of allowed attribute keys that can be changed on the subparam record. |
-| `multi_subparams_requirements` | [SubparamRequirement](#kava.committee.v1beta1.SubparamRequirement) | repeated | Requirements for when the subparam value is a list of records. The requirements contains requirements for each record in the list. |
+| `multi_subparams_requirements` | [SubparamRequirement](#mage.committee.v1beta1.SubparamRequirement) | repeated | Requirements for when the subparam value is a list of records. The requirements contains requirements for each record in the list. |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.GodPermission"></a>
+<a name="mage.committee.v1beta1.GodPermission"></a>
 
 ### GodPermission
 GodPermission allows any governance proposal. It is used mainly for testing.
@@ -2336,7 +2336,7 @@ GodPermission allows any governance proposal. It is used mainly for testing.
 
 
 
-<a name="kava.committee.v1beta1.ParamsChangePermission"></a>
+<a name="mage.committee.v1beta1.ParamsChangePermission"></a>
 
 ### ParamsChangePermission
 ParamsChangePermission allows any parameter or sub parameter change proposal.
@@ -2344,14 +2344,14 @@ ParamsChangePermission allows any parameter or sub parameter change proposal.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `allowed_params_changes` | [AllowedParamsChange](#kava.committee.v1beta1.AllowedParamsChange) | repeated |  |
+| `allowed_params_changes` | [AllowedParamsChange](#mage.committee.v1beta1.AllowedParamsChange) | repeated |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.SoftwareUpgradePermission"></a>
+<a name="mage.committee.v1beta1.SoftwareUpgradePermission"></a>
 
 ### SoftwareUpgradePermission
 SoftwareUpgradePermission permission type for software upgrade proposals
@@ -2361,7 +2361,7 @@ SoftwareUpgradePermission permission type for software upgrade proposals
 
 
 
-<a name="kava.committee.v1beta1.SubparamRequirement"></a>
+<a name="mage.committee.v1beta1.SubparamRequirement"></a>
 
 ### SubparamRequirement
 SubparamRequirement contains requirements for a single record in a subparam value list
@@ -2378,7 +2378,7 @@ SubparamRequirement contains requirements for a single record in a subparam valu
 
 
 
-<a name="kava.committee.v1beta1.TextPermission"></a>
+<a name="mage.committee.v1beta1.TextPermission"></a>
 
 ### TextPermission
 TextPermission allows any text governance proposal.
@@ -2397,14 +2397,14 @@ TextPermission allows any text governance proposal.
 
 
 
-<a name="kava/committee/v1beta1/proposal.proto"></a>
+<a name="mage/committee/v1beta1/proposal.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/committee/v1beta1/proposal.proto
+## mage/committee/v1beta1/proposal.proto
 
 
 
-<a name="kava.committee.v1beta1.CommitteeChangeProposal"></a>
+<a name="mage.committee.v1beta1.CommitteeChangeProposal"></a>
 
 ### CommitteeChangeProposal
 CommitteeChangeProposal is a gov proposal for creating a new committee or modifying an existing one.
@@ -2421,7 +2421,7 @@ CommitteeChangeProposal is a gov proposal for creating a new committee or modify
 
 
 
-<a name="kava.committee.v1beta1.CommitteeDeleteProposal"></a>
+<a name="mage.committee.v1beta1.CommitteeDeleteProposal"></a>
 
 ### CommitteeDeleteProposal
 CommitteeDeleteProposal is a gov proposal for removing a committee.
@@ -2447,14 +2447,14 @@ CommitteeDeleteProposal is a gov proposal for removing a committee.
 
 
 
-<a name="kava/committee/v1beta1/query.proto"></a>
+<a name="mage/committee/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/committee/v1beta1/query.proto
+## mage/committee/v1beta1/query.proto
 
 
 
-<a name="kava.committee.v1beta1.QueryCommitteeRequest"></a>
+<a name="mage.committee.v1beta1.QueryCommitteeRequest"></a>
 
 ### QueryCommitteeRequest
 QueryCommitteeRequest defines the request type for querying x/committee committee.
@@ -2469,7 +2469,7 @@ QueryCommitteeRequest defines the request type for querying x/committee committe
 
 
 
-<a name="kava.committee.v1beta1.QueryCommitteeResponse"></a>
+<a name="mage.committee.v1beta1.QueryCommitteeResponse"></a>
 
 ### QueryCommitteeResponse
 QueryCommitteeResponse defines the response type for querying x/committee committee.
@@ -2484,7 +2484,7 @@ QueryCommitteeResponse defines the response type for querying x/committee commit
 
 
 
-<a name="kava.committee.v1beta1.QueryCommitteesRequest"></a>
+<a name="mage.committee.v1beta1.QueryCommitteesRequest"></a>
 
 ### QueryCommitteesRequest
 QueryCommitteesRequest defines the request type for querying x/committee committees.
@@ -2494,7 +2494,7 @@ QueryCommitteesRequest defines the request type for querying x/committee committ
 
 
 
-<a name="kava.committee.v1beta1.QueryCommitteesResponse"></a>
+<a name="mage.committee.v1beta1.QueryCommitteesResponse"></a>
 
 ### QueryCommitteesResponse
 QueryCommitteesResponse defines the response type for querying x/committee committees.
@@ -2509,7 +2509,7 @@ QueryCommitteesResponse defines the response type for querying x/committee commi
 
 
 
-<a name="kava.committee.v1beta1.QueryNextProposalIDRequest"></a>
+<a name="mage.committee.v1beta1.QueryNextProposalIDRequest"></a>
 
 ### QueryNextProposalIDRequest
 QueryNextProposalIDRequest defines the request type for querying x/committee NextProposalID.
@@ -2519,7 +2519,7 @@ QueryNextProposalIDRequest defines the request type for querying x/committee Nex
 
 
 
-<a name="kava.committee.v1beta1.QueryNextProposalIDResponse"></a>
+<a name="mage.committee.v1beta1.QueryNextProposalIDResponse"></a>
 
 ### QueryNextProposalIDResponse
 QueryNextProposalIDRequest defines the response type for querying x/committee NextProposalID.
@@ -2534,7 +2534,7 @@ QueryNextProposalIDRequest defines the response type for querying x/committee Ne
 
 
 
-<a name="kava.committee.v1beta1.QueryProposalRequest"></a>
+<a name="mage.committee.v1beta1.QueryProposalRequest"></a>
 
 ### QueryProposalRequest
 QueryProposalRequest defines the request type for querying x/committee proposal.
@@ -2549,7 +2549,7 @@ QueryProposalRequest defines the request type for querying x/committee proposal.
 
 
 
-<a name="kava.committee.v1beta1.QueryProposalResponse"></a>
+<a name="mage.committee.v1beta1.QueryProposalResponse"></a>
 
 ### QueryProposalResponse
 QueryProposalResponse defines the response type for querying x/committee proposal.
@@ -2567,7 +2567,7 @@ QueryProposalResponse defines the response type for querying x/committee proposa
 
 
 
-<a name="kava.committee.v1beta1.QueryProposalsRequest"></a>
+<a name="mage.committee.v1beta1.QueryProposalsRequest"></a>
 
 ### QueryProposalsRequest
 QueryProposalsRequest defines the request type for querying x/committee proposals.
@@ -2582,7 +2582,7 @@ QueryProposalsRequest defines the request type for querying x/committee proposal
 
 
 
-<a name="kava.committee.v1beta1.QueryProposalsResponse"></a>
+<a name="mage.committee.v1beta1.QueryProposalsResponse"></a>
 
 ### QueryProposalsResponse
 QueryProposalsResponse defines the response type for querying x/committee proposals.
@@ -2590,14 +2590,14 @@ QueryProposalsResponse defines the response type for querying x/committee propos
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `proposals` | [QueryProposalResponse](#kava.committee.v1beta1.QueryProposalResponse) | repeated |  |
+| `proposals` | [QueryProposalResponse](#mage.committee.v1beta1.QueryProposalResponse) | repeated |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.QueryRawParamsRequest"></a>
+<a name="mage.committee.v1beta1.QueryRawParamsRequest"></a>
 
 ### QueryRawParamsRequest
 QueryRawParamsRequest defines the request type for querying x/committee raw params.
@@ -2613,7 +2613,7 @@ QueryRawParamsRequest defines the request type for querying x/committee raw para
 
 
 
-<a name="kava.committee.v1beta1.QueryRawParamsResponse"></a>
+<a name="mage.committee.v1beta1.QueryRawParamsResponse"></a>
 
 ### QueryRawParamsResponse
 QueryRawParamsResponse defines the response type for querying x/committee raw params.
@@ -2628,7 +2628,7 @@ QueryRawParamsResponse defines the response type for querying x/committee raw pa
 
 
 
-<a name="kava.committee.v1beta1.QueryTallyRequest"></a>
+<a name="mage.committee.v1beta1.QueryTallyRequest"></a>
 
 ### QueryTallyRequest
 QueryTallyRequest defines the request type for querying x/committee tally.
@@ -2643,7 +2643,7 @@ QueryTallyRequest defines the request type for querying x/committee tally.
 
 
 
-<a name="kava.committee.v1beta1.QueryTallyResponse"></a>
+<a name="mage.committee.v1beta1.QueryTallyResponse"></a>
 
 ### QueryTallyResponse
 QueryTallyResponse defines the response type for querying x/committee tally.
@@ -2664,7 +2664,7 @@ QueryTallyResponse defines the response type for querying x/committee tally.
 
 
 
-<a name="kava.committee.v1beta1.QueryVoteRequest"></a>
+<a name="mage.committee.v1beta1.QueryVoteRequest"></a>
 
 ### QueryVoteRequest
 QueryVoteRequest defines the request type for querying x/committee vote.
@@ -2680,7 +2680,7 @@ QueryVoteRequest defines the request type for querying x/committee vote.
 
 
 
-<a name="kava.committee.v1beta1.QueryVoteResponse"></a>
+<a name="mage.committee.v1beta1.QueryVoteResponse"></a>
 
 ### QueryVoteResponse
 QueryVoteResponse defines the response type for querying x/committee vote.
@@ -2690,14 +2690,14 @@ QueryVoteResponse defines the response type for querying x/committee vote.
 | ----- | ---- | ----- | ----------- |
 | `proposal_id` | [uint64](#uint64) |  |  |
 | `voter` | [string](#string) |  |  |
-| `vote_type` | [VoteType](#kava.committee.v1beta1.VoteType) |  |  |
+| `vote_type` | [VoteType](#mage.committee.v1beta1.VoteType) |  |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.QueryVotesRequest"></a>
+<a name="mage.committee.v1beta1.QueryVotesRequest"></a>
 
 ### QueryVotesRequest
 QueryVotesRequest defines the request type for querying x/committee votes.
@@ -2713,7 +2713,7 @@ QueryVotesRequest defines the request type for querying x/committee votes.
 
 
 
-<a name="kava.committee.v1beta1.QueryVotesResponse"></a>
+<a name="mage.committee.v1beta1.QueryVotesResponse"></a>
 
 ### QueryVotesResponse
 QueryVotesResponse defines the response type for querying x/committee votes.
@@ -2721,7 +2721,7 @@ QueryVotesResponse defines the response type for querying x/committee votes.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `votes` | [QueryVoteResponse](#kava.committee.v1beta1.QueryVoteResponse) | repeated | votes defined the queried votes. |
+| `votes` | [QueryVoteResponse](#mage.committee.v1beta1.QueryVoteResponse) | repeated | votes defined the queried votes. |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  | pagination defines the pagination in the response. |
 
 
@@ -2735,35 +2735,35 @@ QueryVotesResponse defines the response type for querying x/committee votes.
  <!-- end HasExtensions -->
 
 
-<a name="kava.committee.v1beta1.Query"></a>
+<a name="mage.committee.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for committee module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Committees` | [QueryCommitteesRequest](#kava.committee.v1beta1.QueryCommitteesRequest) | [QueryCommitteesResponse](#kava.committee.v1beta1.QueryCommitteesResponse) | Committees queries all committess of the committee module. | GET|/kava/committee/v1beta1/committees|
-| `Committee` | [QueryCommitteeRequest](#kava.committee.v1beta1.QueryCommitteeRequest) | [QueryCommitteeResponse](#kava.committee.v1beta1.QueryCommitteeResponse) | Committee queries a committee based on committee ID. | GET|/kava/committee/v1beta1/committees/{committee_id}|
-| `Proposals` | [QueryProposalsRequest](#kava.committee.v1beta1.QueryProposalsRequest) | [QueryProposalsResponse](#kava.committee.v1beta1.QueryProposalsResponse) | Proposals queries proposals based on committee ID. | GET|/kava/committee/v1beta1/proposals|
-| `Proposal` | [QueryProposalRequest](#kava.committee.v1beta1.QueryProposalRequest) | [QueryProposalResponse](#kava.committee.v1beta1.QueryProposalResponse) | Deposits queries a proposal based on proposal ID. | GET|/kava/committee/v1beta1/proposals/{proposal_id}|
-| `NextProposalID` | [QueryNextProposalIDRequest](#kava.committee.v1beta1.QueryNextProposalIDRequest) | [QueryNextProposalIDResponse](#kava.committee.v1beta1.QueryNextProposalIDResponse) | NextProposalID queries the next proposal ID of the committee module. | GET|/kava/committee/v1beta1/next-proposal-id|
-| `Votes` | [QueryVotesRequest](#kava.committee.v1beta1.QueryVotesRequest) | [QueryVotesResponse](#kava.committee.v1beta1.QueryVotesResponse) | Votes queries all votes for a single proposal ID. | GET|/kava/committee/v1beta1/proposals/{proposal_id}/votes|
-| `Vote` | [QueryVoteRequest](#kava.committee.v1beta1.QueryVoteRequest) | [QueryVoteResponse](#kava.committee.v1beta1.QueryVoteResponse) | Vote queries the vote of a single voter for a single proposal ID. | GET|/kava/committee/v1beta1/proposals/{proposal_id}/votes/{voter}|
-| `Tally` | [QueryTallyRequest](#kava.committee.v1beta1.QueryTallyRequest) | [QueryTallyResponse](#kava.committee.v1beta1.QueryTallyResponse) | Tally queries the tally of a single proposal ID. | GET|/kava/committee/v1beta1/proposals/{proposal_id}/tally|
-| `RawParams` | [QueryRawParamsRequest](#kava.committee.v1beta1.QueryRawParamsRequest) | [QueryRawParamsResponse](#kava.committee.v1beta1.QueryRawParamsResponse) | RawParams queries the raw params data of any subspace and key. | GET|/kava/committee/v1beta1/raw-params|
+| `Committees` | [QueryCommitteesRequest](#mage.committee.v1beta1.QueryCommitteesRequest) | [QueryCommitteesResponse](#mage.committee.v1beta1.QueryCommitteesResponse) | Committees queries all committess of the committee module. | GET|/mage/committee/v1beta1/committees|
+| `Committee` | [QueryCommitteeRequest](#mage.committee.v1beta1.QueryCommitteeRequest) | [QueryCommitteeResponse](#mage.committee.v1beta1.QueryCommitteeResponse) | Committee queries a committee based on committee ID. | GET|/mage/committee/v1beta1/committees/{committee_id}|
+| `Proposals` | [QueryProposalsRequest](#mage.committee.v1beta1.QueryProposalsRequest) | [QueryProposalsResponse](#mage.committee.v1beta1.QueryProposalsResponse) | Proposals queries proposals based on committee ID. | GET|/mage/committee/v1beta1/proposals|
+| `Proposal` | [QueryProposalRequest](#mage.committee.v1beta1.QueryProposalRequest) | [QueryProposalResponse](#mage.committee.v1beta1.QueryProposalResponse) | Deposits queries a proposal based on proposal ID. | GET|/mage/committee/v1beta1/proposals/{proposal_id}|
+| `NextProposalID` | [QueryNextProposalIDRequest](#mage.committee.v1beta1.QueryNextProposalIDRequest) | [QueryNextProposalIDResponse](#mage.committee.v1beta1.QueryNextProposalIDResponse) | NextProposalID queries the next proposal ID of the committee module. | GET|/mage/committee/v1beta1/next-proposal-id|
+| `Votes` | [QueryVotesRequest](#mage.committee.v1beta1.QueryVotesRequest) | [QueryVotesResponse](#mage.committee.v1beta1.QueryVotesResponse) | Votes queries all votes for a single proposal ID. | GET|/mage/committee/v1beta1/proposals/{proposal_id}/votes|
+| `Vote` | [QueryVoteRequest](#mage.committee.v1beta1.QueryVoteRequest) | [QueryVoteResponse](#mage.committee.v1beta1.QueryVoteResponse) | Vote queries the vote of a single voter for a single proposal ID. | GET|/mage/committee/v1beta1/proposals/{proposal_id}/votes/{voter}|
+| `Tally` | [QueryTallyRequest](#mage.committee.v1beta1.QueryTallyRequest) | [QueryTallyResponse](#mage.committee.v1beta1.QueryTallyResponse) | Tally queries the tally of a single proposal ID. | GET|/mage/committee/v1beta1/proposals/{proposal_id}/tally|
+| `RawParams` | [QueryRawParamsRequest](#mage.committee.v1beta1.QueryRawParamsRequest) | [QueryRawParamsResponse](#mage.committee.v1beta1.QueryRawParamsResponse) | RawParams queries the raw params data of any subspace and key. | GET|/mage/committee/v1beta1/raw-params|
 
  <!-- end services -->
 
 
 
-<a name="kava/committee/v1beta1/tx.proto"></a>
+<a name="mage/committee/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/committee/v1beta1/tx.proto
+## mage/committee/v1beta1/tx.proto
 
 
 
-<a name="kava.committee.v1beta1.MsgSubmitProposal"></a>
+<a name="mage.committee.v1beta1.MsgSubmitProposal"></a>
 
 ### MsgSubmitProposal
 MsgSubmitProposal is used by committee members to create a new proposal that they can vote on.
@@ -2780,7 +2780,7 @@ MsgSubmitProposal is used by committee members to create a new proposal that the
 
 
 
-<a name="kava.committee.v1beta1.MsgSubmitProposalResponse"></a>
+<a name="mage.committee.v1beta1.MsgSubmitProposalResponse"></a>
 
 ### MsgSubmitProposalResponse
 MsgSubmitProposalResponse defines the SubmitProposal response type
@@ -2795,7 +2795,7 @@ MsgSubmitProposalResponse defines the SubmitProposal response type
 
 
 
-<a name="kava.committee.v1beta1.MsgVote"></a>
+<a name="mage.committee.v1beta1.MsgVote"></a>
 
 ### MsgVote
 MsgVote is submitted by committee members to vote on proposals.
@@ -2805,14 +2805,14 @@ MsgVote is submitted by committee members to vote on proposals.
 | ----- | ---- | ----- | ----------- |
 | `proposal_id` | [uint64](#uint64) |  |  |
 | `voter` | [string](#string) |  |  |
-| `vote_type` | [VoteType](#kava.committee.v1beta1.VoteType) |  |  |
+| `vote_type` | [VoteType](#mage.committee.v1beta1.VoteType) |  |  |
 
 
 
 
 
 
-<a name="kava.committee.v1beta1.MsgVoteResponse"></a>
+<a name="mage.committee.v1beta1.MsgVoteResponse"></a>
 
 ### MsgVoteResponse
 MsgVoteResponse defines the Vote response type
@@ -2828,28 +2828,28 @@ MsgVoteResponse defines the Vote response type
  <!-- end HasExtensions -->
 
 
-<a name="kava.committee.v1beta1.Msg"></a>
+<a name="mage.committee.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the committee Msg service
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `SubmitProposal` | [MsgSubmitProposal](#kava.committee.v1beta1.MsgSubmitProposal) | [MsgSubmitProposalResponse](#kava.committee.v1beta1.MsgSubmitProposalResponse) | SubmitProposal defines a method for submitting a committee proposal | |
-| `Vote` | [MsgVote](#kava.committee.v1beta1.MsgVote) | [MsgVoteResponse](#kava.committee.v1beta1.MsgVoteResponse) | Vote defines a method for voting on a proposal | |
+| `SubmitProposal` | [MsgSubmitProposal](#mage.committee.v1beta1.MsgSubmitProposal) | [MsgSubmitProposalResponse](#mage.committee.v1beta1.MsgSubmitProposalResponse) | SubmitProposal defines a method for submitting a committee proposal | |
+| `Vote` | [MsgVote](#mage.committee.v1beta1.MsgVote) | [MsgVoteResponse](#mage.committee.v1beta1.MsgVoteResponse) | Vote defines a method for voting on a proposal | |
 
  <!-- end services -->
 
 
 
-<a name="kava/community/v1beta1/proposal.proto"></a>
+<a name="mage/community/v1beta1/proposal.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/community/v1beta1/proposal.proto
+## mage/community/v1beta1/proposal.proto
 
 
 
-<a name="kava.community.v1beta1.CommunityPoolLendDepositProposal"></a>
+<a name="mage.community.v1beta1.CommunityPoolLendDepositProposal"></a>
 
 ### CommunityPoolLendDepositProposal
 CommunityPoolLendDepositProposal deposits from the community pool into lend
@@ -2866,7 +2866,7 @@ CommunityPoolLendDepositProposal deposits from the community pool into lend
 
 
 
-<a name="kava.community.v1beta1.CommunityPoolLendWithdrawProposal"></a>
+<a name="mage.community.v1beta1.CommunityPoolLendWithdrawProposal"></a>
 
 ### CommunityPoolLendWithdrawProposal
 CommunityPoolLendWithdrawProposal withdraws a lend position back to the community pool
@@ -2892,14 +2892,14 @@ CommunityPoolLendWithdrawProposal withdraws a lend position back to the communit
 
 
 
-<a name="kava/community/v1beta1/query.proto"></a>
+<a name="mage/community/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/community/v1beta1/query.proto
+## mage/community/v1beta1/query.proto
 
 
 
-<a name="kava.community.v1beta1.QueryBalanceRequest"></a>
+<a name="mage.community.v1beta1.QueryBalanceRequest"></a>
 
 ### QueryBalanceRequest
 QueryBalanceRequest defines the request type for querying x/community balance.
@@ -2909,7 +2909,7 @@ QueryBalanceRequest defines the request type for querying x/community balance.
 
 
 
-<a name="kava.community.v1beta1.QueryBalanceResponse"></a>
+<a name="mage.community.v1beta1.QueryBalanceResponse"></a>
 
 ### QueryBalanceResponse
 QueryBalanceResponse defines the response type for querying x/community balance.
@@ -2930,27 +2930,27 @@ QueryBalanceResponse defines the response type for querying x/community balance.
  <!-- end HasExtensions -->
 
 
-<a name="kava.community.v1beta1.Query"></a>
+<a name="mage.community.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for x/community.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Balance` | [QueryBalanceRequest](#kava.community.v1beta1.QueryBalanceRequest) | [QueryBalanceResponse](#kava.community.v1beta1.QueryBalanceResponse) | Balance queries the balance of all coins of x/community module. | GET|/kava/community/v1beta1/balance|
+| `Balance` | [QueryBalanceRequest](#mage.community.v1beta1.QueryBalanceRequest) | [QueryBalanceResponse](#mage.community.v1beta1.QueryBalanceResponse) | Balance queries the balance of all coins of x/community module. | GET|/mage/community/v1beta1/balance|
 
  <!-- end services -->
 
 
 
-<a name="kava/community/v1beta1/tx.proto"></a>
+<a name="mage/community/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/community/v1beta1/tx.proto
+## mage/community/v1beta1/tx.proto
 
 
 
-<a name="kava.community.v1beta1.MsgFundCommunityPool"></a>
+<a name="mage.community.v1beta1.MsgFundCommunityPool"></a>
 
 ### MsgFundCommunityPool
 MsgFundCommunityPool allows an account to directly fund the community module account.
@@ -2966,7 +2966,7 @@ MsgFundCommunityPool allows an account to directly fund the community module acc
 
 
 
-<a name="kava.community.v1beta1.MsgFundCommunityPoolResponse"></a>
+<a name="mage.community.v1beta1.MsgFundCommunityPoolResponse"></a>
 
 ### MsgFundCommunityPoolResponse
 MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type.
@@ -2982,29 +2982,29 @@ MsgFundCommunityPoolResponse defines the Msg/FundCommunityPool response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.community.v1beta1.Msg"></a>
+<a name="mage.community.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the community Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `FundCommunityPool` | [MsgFundCommunityPool](#kava.community.v1beta1.MsgFundCommunityPool) | [MsgFundCommunityPoolResponse](#kava.community.v1beta1.MsgFundCommunityPoolResponse) | FundCommunityPool defines a method to allow an account to directly fund the community module account. | |
+| `FundCommunityPool` | [MsgFundCommunityPool](#mage.community.v1beta1.MsgFundCommunityPool) | [MsgFundCommunityPoolResponse](#mage.community.v1beta1.MsgFundCommunityPoolResponse) | FundCommunityPool defines a method to allow an account to directly fund the community module account. | |
 
  <!-- end services -->
 
 
 
-<a name="kava/earn/v1beta1/strategy.proto"></a>
+<a name="mage/earn/v1beta1/strategy.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/strategy.proto
+## mage/earn/v1beta1/strategy.proto
 
 
  <!-- end messages -->
 
 
-<a name="kava.earn.v1beta1.StrategyType"></a>
+<a name="mage.earn.v1beta1.StrategyType"></a>
 
 ### StrategyType
 StrategyType is the type of strategy that a vault uses to optimize yields.
@@ -3024,14 +3024,14 @@ StrategyType is the type of strategy that a vault uses to optimize yields.
 
 
 
-<a name="kava/earn/v1beta1/vault.proto"></a>
+<a name="mage/earn/v1beta1/vault.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/vault.proto
+## mage/earn/v1beta1/vault.proto
 
 
 
-<a name="kava.earn.v1beta1.AllowedVault"></a>
+<a name="mage.earn.v1beta1.AllowedVault"></a>
 
 ### AllowedVault
 AllowedVault is a vault that is allowed to be created. These can be
@@ -3041,7 +3041,7 @@ modified via parameter governance.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `denom` | [string](#string) |  | Denom is the only supported denomination of the vault for deposits and withdrawals. |
-| `strategies` | [StrategyType](#kava.earn.v1beta1.StrategyType) | repeated | VaultStrategy is the strategy used for this vault. |
+| `strategies` | [StrategyType](#mage.earn.v1beta1.StrategyType) | repeated | VaultStrategy is the strategy used for this vault. |
 | `is_private_vault` | [bool](#bool) |  | IsPrivateVault is true if the vault only allows depositors contained in AllowedDepositors. |
 | `allowed_depositors` | [bytes](#bytes) | repeated | AllowedDepositors is a list of addresses that are allowed to deposit to this vault if IsPrivateVault is true. Addresses not contained in this list are not allowed to deposit into this vault. If IsPrivateVault is false, this should be empty and ignored. |
 
@@ -3050,7 +3050,7 @@ modified via parameter governance.
 
 
 
-<a name="kava.earn.v1beta1.VaultRecord"></a>
+<a name="mage.earn.v1beta1.VaultRecord"></a>
 
 ### VaultRecord
 VaultRecord is the state of a vault.
@@ -3058,14 +3058,14 @@ VaultRecord is the state of a vault.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `total_shares` | [VaultShare](#kava.earn.v1beta1.VaultShare) |  | TotalShares is the total distributed number of shares in the vault. |
+| `total_shares` | [VaultShare](#mage.earn.v1beta1.VaultShare) |  | TotalShares is the total distributed number of shares in the vault. |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.VaultShare"></a>
+<a name="mage.earn.v1beta1.VaultShare"></a>
 
 ### VaultShare
 VaultShare defines shares of a vault owned by a depositor.
@@ -3081,7 +3081,7 @@ VaultShare defines shares of a vault owned by a depositor.
 
 
 
-<a name="kava.earn.v1beta1.VaultShareRecord"></a>
+<a name="mage.earn.v1beta1.VaultShareRecord"></a>
 
 ### VaultShareRecord
 VaultShareRecord defines the vault shares owned by a depositor.
@@ -3090,7 +3090,7 @@ VaultShareRecord defines the vault shares owned by a depositor.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `depositor` | [bytes](#bytes) |  | Depositor represents the owner of the shares |
-| `shares` | [VaultShare](#kava.earn.v1beta1.VaultShare) | repeated | Shares represent the vault shares owned by the depositor. |
+| `shares` | [VaultShare](#mage.earn.v1beta1.VaultShare) | repeated | Shares represent the vault shares owned by the depositor. |
 
 
 
@@ -3106,14 +3106,14 @@ VaultShareRecord defines the vault shares owned by a depositor.
 
 
 
-<a name="kava/earn/v1beta1/params.proto"></a>
+<a name="mage/earn/v1beta1/params.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/params.proto
+## mage/earn/v1beta1/params.proto
 
 
 
-<a name="kava.earn.v1beta1.Params"></a>
+<a name="mage.earn.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters of the earn module.
@@ -3121,7 +3121,7 @@ Params defines the parameters of the earn module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `allowed_vaults` | [AllowedVault](#kava.earn.v1beta1.AllowedVault) | repeated |  |
+| `allowed_vaults` | [AllowedVault](#mage.earn.v1beta1.AllowedVault) | repeated |  |
 
 
 
@@ -3137,14 +3137,14 @@ Params defines the parameters of the earn module.
 
 
 
-<a name="kava/earn/v1beta1/genesis.proto"></a>
+<a name="mage/earn/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/genesis.proto
+## mage/earn/v1beta1/genesis.proto
 
 
 
-<a name="kava.earn.v1beta1.GenesisState"></a>
+<a name="mage.earn.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the earn module's genesis state.
@@ -3152,9 +3152,9 @@ GenesisState defines the earn module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.earn.v1beta1.Params) |  | params defines all the paramaters related to earn |
-| `vault_records` | [VaultRecord](#kava.earn.v1beta1.VaultRecord) | repeated | vault_records defines the available vaults |
-| `vault_share_records` | [VaultShareRecord](#kava.earn.v1beta1.VaultShareRecord) | repeated | share_records defines the owned shares of each vault |
+| `params` | [Params](#mage.earn.v1beta1.Params) |  | params defines all the paramaters related to earn |
+| `vault_records` | [VaultRecord](#mage.earn.v1beta1.VaultRecord) | repeated | vault_records defines the available vaults |
+| `vault_share_records` | [VaultShareRecord](#mage.earn.v1beta1.VaultShareRecord) | repeated | share_records defines the owned shares of each vault |
 
 
 
@@ -3170,14 +3170,14 @@ GenesisState defines the earn module's genesis state.
 
 
 
-<a name="kava/earn/v1beta1/proposal.proto"></a>
+<a name="mage/earn/v1beta1/proposal.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/proposal.proto
+## mage/earn/v1beta1/proposal.proto
 
 
 
-<a name="kava.earn.v1beta1.CommunityPoolDepositProposal"></a>
+<a name="mage.earn.v1beta1.CommunityPoolDepositProposal"></a>
 
 ### CommunityPoolDepositProposal
 CommunityPoolDepositProposal deposits from the community pool into an earn vault
@@ -3194,7 +3194,7 @@ CommunityPoolDepositProposal deposits from the community pool into an earn vault
 
 
 
-<a name="kava.earn.v1beta1.CommunityPoolDepositProposalJSON"></a>
+<a name="mage.earn.v1beta1.CommunityPoolDepositProposalJSON"></a>
 
 ### CommunityPoolDepositProposalJSON
 CommunityPoolDepositProposalJSON defines a CommunityPoolDepositProposal with a deposit
@@ -3212,7 +3212,7 @@ CommunityPoolDepositProposalJSON defines a CommunityPoolDepositProposal with a d
 
 
 
-<a name="kava.earn.v1beta1.CommunityPoolWithdrawProposal"></a>
+<a name="mage.earn.v1beta1.CommunityPoolWithdrawProposal"></a>
 
 ### CommunityPoolWithdrawProposal
 CommunityPoolWithdrawProposal withdraws from an earn vault back to community pool
@@ -3229,7 +3229,7 @@ CommunityPoolWithdrawProposal withdraws from an earn vault back to community poo
 
 
 
-<a name="kava.earn.v1beta1.CommunityPoolWithdrawProposalJSON"></a>
+<a name="mage.earn.v1beta1.CommunityPoolWithdrawProposalJSON"></a>
 
 ### CommunityPoolWithdrawProposalJSON
 CommunityPoolWithdrawProposalJSON defines a CommunityPoolWithdrawProposal with a deposit
@@ -3256,14 +3256,14 @@ CommunityPoolWithdrawProposalJSON defines a CommunityPoolWithdrawProposal with a
 
 
 
-<a name="kava/earn/v1beta1/query.proto"></a>
+<a name="mage/earn/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/query.proto
+## mage/earn/v1beta1/query.proto
 
 
 
-<a name="kava.earn.v1beta1.DepositResponse"></a>
+<a name="mage.earn.v1beta1.DepositResponse"></a>
 
 ### DepositResponse
 DepositResponse defines a deposit query response type.
@@ -3272,7 +3272,7 @@ DepositResponse defines a deposit query response type.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `depositor` | [string](#string) |  | depositor represents the owner of the deposit. |
-| `shares` | [VaultShare](#kava.earn.v1beta1.VaultShare) | repeated | Shares represent the issued shares from their corresponding vaults. |
+| `shares` | [VaultShare](#mage.earn.v1beta1.VaultShare) | repeated | Shares represent the issued shares from their corresponding vaults. |
 | `value` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated | Value represents the total accumulated value of denom coins supplied to vaults. This may be greater than or equal to amount_supplied depending on the strategy. |
 
 
@@ -3280,7 +3280,7 @@ DepositResponse defines a deposit query response type.
 
 
 
-<a name="kava.earn.v1beta1.QueryDepositsRequest"></a>
+<a name="mage.earn.v1beta1.QueryDepositsRequest"></a>
 
 ### QueryDepositsRequest
 QueryDepositsRequest is the request type for the Query/Deposits RPC method.
@@ -3290,7 +3290,7 @@ QueryDepositsRequest is the request type for the Query/Deposits RPC method.
 | ----- | ---- | ----- | ----------- |
 | `depositor` | [string](#string) |  | depositor optionally filters deposits by depositor |
 | `denom` | [string](#string) |  | denom optionally filters deposits by vault denom |
-| `value_in_staked_tokens` | [bool](#bool) |  | respond with vault value in ukava for bkava vaults |
+| `value_in_staked_tokens` | [bool](#bool) |  | respond with vault value in umage for bmage vaults |
 | `pagination` | [cosmos.base.query.v1beta1.PageRequest](#cosmos.base.query.v1beta1.PageRequest) |  | pagination defines an optional pagination for the request. |
 
 
@@ -3298,7 +3298,7 @@ QueryDepositsRequest is the request type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.earn.v1beta1.QueryDepositsResponse"></a>
+<a name="mage.earn.v1beta1.QueryDepositsResponse"></a>
 
 ### QueryDepositsResponse
 QueryDepositsResponse is the response type for the Query/Deposits RPC method.
@@ -3306,7 +3306,7 @@ QueryDepositsResponse is the response type for the Query/Deposits RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `deposits` | [DepositResponse](#kava.earn.v1beta1.DepositResponse) | repeated | deposits returns the deposits matching the requested parameters |
+| `deposits` | [DepositResponse](#mage.earn.v1beta1.DepositResponse) | repeated | deposits returns the deposits matching the requested parameters |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  | pagination defines the pagination in the response. |
 
 
@@ -3314,7 +3314,7 @@ QueryDepositsResponse is the response type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.earn.v1beta1.QueryParamsRequest"></a>
+<a name="mage.earn.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/earn parameters.
@@ -3324,7 +3324,7 @@ QueryParamsRequest defines the request type for querying x/earn parameters.
 
 
 
-<a name="kava.earn.v1beta1.QueryParamsResponse"></a>
+<a name="mage.earn.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/earn parameters.
@@ -3332,14 +3332,14 @@ QueryParamsResponse defines the response type for querying x/earn parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.earn.v1beta1.Params) |  | params represents the earn module parameters |
+| `params` | [Params](#mage.earn.v1beta1.Params) |  | params represents the earn module parameters |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.QueryTotalSupplyRequest"></a>
+<a name="mage.earn.v1beta1.QueryTotalSupplyRequest"></a>
 
 ### QueryTotalSupplyRequest
 QueryTotalSupplyRequest defines the request type for Query/TotalSupply method.
@@ -3349,7 +3349,7 @@ QueryTotalSupplyRequest defines the request type for Query/TotalSupply method.
 
 
 
-<a name="kava.earn.v1beta1.QueryTotalSupplyResponse"></a>
+<a name="mage.earn.v1beta1.QueryTotalSupplyResponse"></a>
 
 ### QueryTotalSupplyResponse
 TotalSupplyResponse defines the response type for the Query/TotalSupply method.
@@ -3365,7 +3365,7 @@ TotalSupplyResponse defines the response type for the Query/TotalSupply method.
 
 
 
-<a name="kava.earn.v1beta1.QueryVaultRequest"></a>
+<a name="mage.earn.v1beta1.QueryVaultRequest"></a>
 
 ### QueryVaultRequest
 QueryVaultRequest is the request type for the Query/Vault RPC method.
@@ -3380,7 +3380,7 @@ QueryVaultRequest is the request type for the Query/Vault RPC method.
 
 
 
-<a name="kava.earn.v1beta1.QueryVaultResponse"></a>
+<a name="mage.earn.v1beta1.QueryVaultResponse"></a>
 
 ### QueryVaultResponse
 QueryVaultResponse is the response type for the Query/Vault RPC method.
@@ -3388,14 +3388,14 @@ QueryVaultResponse is the response type for the Query/Vault RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `vault` | [VaultResponse](#kava.earn.v1beta1.VaultResponse) |  | vault represents the queried earn module vault |
+| `vault` | [VaultResponse](#mage.earn.v1beta1.VaultResponse) |  | vault represents the queried earn module vault |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.QueryVaultsRequest"></a>
+<a name="mage.earn.v1beta1.QueryVaultsRequest"></a>
 
 ### QueryVaultsRequest
 QueryVaultsRequest is the request type for the Query/Vaults RPC method.
@@ -3405,7 +3405,7 @@ QueryVaultsRequest is the request type for the Query/Vaults RPC method.
 
 
 
-<a name="kava.earn.v1beta1.QueryVaultsResponse"></a>
+<a name="mage.earn.v1beta1.QueryVaultsResponse"></a>
 
 ### QueryVaultsResponse
 QueryVaultsResponse is the response type for the Query/Vaults RPC method.
@@ -3413,14 +3413,14 @@ QueryVaultsResponse is the response type for the Query/Vaults RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `vaults` | [VaultResponse](#kava.earn.v1beta1.VaultResponse) | repeated | vaults represents the earn module vaults |
+| `vaults` | [VaultResponse](#mage.earn.v1beta1.VaultResponse) | repeated | vaults represents the earn module vaults |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.VaultResponse"></a>
+<a name="mage.earn.v1beta1.VaultResponse"></a>
 
 ### VaultResponse
 VaultResponse is the response type for a vault.
@@ -3429,7 +3429,7 @@ VaultResponse is the response type for a vault.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `denom` | [string](#string) |  | denom represents the denom of the vault |
-| `strategies` | [StrategyType](#kava.earn.v1beta1.StrategyType) | repeated | VaultStrategy is the strategy used for this vault. |
+| `strategies` | [StrategyType](#mage.earn.v1beta1.StrategyType) | repeated | VaultStrategy is the strategy used for this vault. |
 | `is_private_vault` | [bool](#bool) |  | IsPrivateVault is true if the vault only allows depositors contained in AllowedDepositors. |
 | `allowed_depositors` | [string](#string) | repeated | AllowedDepositors is a list of addresses that are allowed to deposit to this vault if IsPrivateVault is true. Addresses not contained in this list are not allowed to deposit into this vault. If IsPrivateVault is false, this should be empty and ignored. |
 | `total_shares` | [string](#string) |  | TotalShares is the total amount of shares issued to depositors. |
@@ -3446,31 +3446,31 @@ VaultResponse is the response type for a vault.
  <!-- end HasExtensions -->
 
 
-<a name="kava.earn.v1beta1.Query"></a>
+<a name="mage.earn.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for earn module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.earn.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.earn.v1beta1.QueryParamsResponse) | Params queries all parameters of the earn module. | GET|/kava/earn/v1beta1/params|
-| `Vaults` | [QueryVaultsRequest](#kava.earn.v1beta1.QueryVaultsRequest) | [QueryVaultsResponse](#kava.earn.v1beta1.QueryVaultsResponse) | Vaults queries all vaults | GET|/kava/earn/v1beta1/vaults|
-| `Vault` | [QueryVaultRequest](#kava.earn.v1beta1.QueryVaultRequest) | [QueryVaultResponse](#kava.earn.v1beta1.QueryVaultResponse) | Vault queries a single vault based on the vault denom | GET|/kava/earn/v1beta1/vaults/{denom=**}|
-| `Deposits` | [QueryDepositsRequest](#kava.earn.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#kava.earn.v1beta1.QueryDepositsResponse) | Deposits queries deposit details based on depositor address and vault | GET|/kava/earn/v1beta1/deposits|
-| `TotalSupply` | [QueryTotalSupplyRequest](#kava.earn.v1beta1.QueryTotalSupplyRequest) | [QueryTotalSupplyResponse](#kava.earn.v1beta1.QueryTotalSupplyResponse) | TotalSupply returns the total sum of all coins currently locked into the earn module. | GET|/kava/earn/v1beta1/total_supply|
+| `Params` | [QueryParamsRequest](#mage.earn.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.earn.v1beta1.QueryParamsResponse) | Params queries all parameters of the earn module. | GET|/mage/earn/v1beta1/params|
+| `Vaults` | [QueryVaultsRequest](#mage.earn.v1beta1.QueryVaultsRequest) | [QueryVaultsResponse](#mage.earn.v1beta1.QueryVaultsResponse) | Vaults queries all vaults | GET|/mage/earn/v1beta1/vaults|
+| `Vault` | [QueryVaultRequest](#mage.earn.v1beta1.QueryVaultRequest) | [QueryVaultResponse](#mage.earn.v1beta1.QueryVaultResponse) | Vault queries a single vault based on the vault denom | GET|/mage/earn/v1beta1/vaults/{denom=**}|
+| `Deposits` | [QueryDepositsRequest](#mage.earn.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#mage.earn.v1beta1.QueryDepositsResponse) | Deposits queries deposit details based on depositor address and vault | GET|/mage/earn/v1beta1/deposits|
+| `TotalSupply` | [QueryTotalSupplyRequest](#mage.earn.v1beta1.QueryTotalSupplyRequest) | [QueryTotalSupplyResponse](#mage.earn.v1beta1.QueryTotalSupplyResponse) | TotalSupply returns the total sum of all coins currently locked into the earn module. | GET|/mage/earn/v1beta1/total_supply|
 
  <!-- end services -->
 
 
 
-<a name="kava/earn/v1beta1/tx.proto"></a>
+<a name="mage/earn/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/earn/v1beta1/tx.proto
+## mage/earn/v1beta1/tx.proto
 
 
 
-<a name="kava.earn.v1beta1.MsgDeposit"></a>
+<a name="mage.earn.v1beta1.MsgDeposit"></a>
 
 ### MsgDeposit
 MsgDeposit represents a message for depositing assedts into a vault
@@ -3480,14 +3480,14 @@ MsgDeposit represents a message for depositing assedts into a vault
 | ----- | ---- | ----- | ----------- |
 | `depositor` | [string](#string) |  | depositor represents the address to deposit funds from |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  | Amount represents the token to deposit. The vault corresponds to the denom of the amount coin. |
-| `strategy` | [StrategyType](#kava.earn.v1beta1.StrategyType) |  | Strategy is the vault strategy to use. |
+| `strategy` | [StrategyType](#mage.earn.v1beta1.StrategyType) |  | Strategy is the vault strategy to use. |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.MsgDepositResponse"></a>
+<a name="mage.earn.v1beta1.MsgDepositResponse"></a>
 
 ### MsgDepositResponse
 MsgDepositResponse defines the Msg/Deposit response type.
@@ -3495,14 +3495,14 @@ MsgDepositResponse defines the Msg/Deposit response type.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `shares` | [VaultShare](#kava.earn.v1beta1.VaultShare) |  |  |
+| `shares` | [VaultShare](#mage.earn.v1beta1.VaultShare) |  |  |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.MsgWithdraw"></a>
+<a name="mage.earn.v1beta1.MsgWithdraw"></a>
 
 ### MsgWithdraw
 MsgWithdraw represents a message for withdrawing liquidity from a vault
@@ -3512,14 +3512,14 @@ MsgWithdraw represents a message for withdrawing liquidity from a vault
 | ----- | ---- | ----- | ----------- |
 | `from` | [string](#string) |  | from represents the address we are withdrawing for |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  | Amount represents the token to withdraw. The vault corresponds to the denom of the amount coin. |
-| `strategy` | [StrategyType](#kava.earn.v1beta1.StrategyType) |  | Strategy is the vault strategy to use. |
+| `strategy` | [StrategyType](#mage.earn.v1beta1.StrategyType) |  | Strategy is the vault strategy to use. |
 
 
 
 
 
 
-<a name="kava.earn.v1beta1.MsgWithdrawResponse"></a>
+<a name="mage.earn.v1beta1.MsgWithdrawResponse"></a>
 
 ### MsgWithdrawResponse
 MsgWithdrawResponse defines the Msg/Withdraw response type.
@@ -3527,7 +3527,7 @@ MsgWithdrawResponse defines the Msg/Withdraw response type.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `shares` | [VaultShare](#kava.earn.v1beta1.VaultShare) |  |  |
+| `shares` | [VaultShare](#mage.earn.v1beta1.VaultShare) |  |  |
 
 
 
@@ -3540,37 +3540,37 @@ MsgWithdrawResponse defines the Msg/Withdraw response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.earn.v1beta1.Msg"></a>
+<a name="mage.earn.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the earn Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Deposit` | [MsgDeposit](#kava.earn.v1beta1.MsgDeposit) | [MsgDepositResponse](#kava.earn.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing assets into a vault | |
-| `Withdraw` | [MsgWithdraw](#kava.earn.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#kava.earn.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing assets into a vault | |
+| `Deposit` | [MsgDeposit](#mage.earn.v1beta1.MsgDeposit) | [MsgDepositResponse](#mage.earn.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing assets into a vault | |
+| `Withdraw` | [MsgWithdraw](#mage.earn.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#mage.earn.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing assets into a vault | |
 
  <!-- end services -->
 
 
 
-<a name="kava/evmutil/v1beta1/conversion_pair.proto"></a>
+<a name="mage/evmutil/v1beta1/conversion_pair.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/evmutil/v1beta1/conversion_pair.proto
+## mage/evmutil/v1beta1/conversion_pair.proto
 
 
 
-<a name="kava.evmutil.v1beta1.ConversionPair"></a>
+<a name="mage.evmutil.v1beta1.ConversionPair"></a>
 
 ### ConversionPair
-ConversionPair defines a Kava ERC20 address and corresponding denom that is
+ConversionPair defines a Mage ERC20 address and corresponding denom that is
 allowed to be converted between ERC20 and sdk.Coin
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `kava_erc20_address` | [bytes](#bytes) |  | ERC20 address of the token on the Kava EVM |
+| `mage_erc20_address` | [bytes](#bytes) |  | ERC20 address of the token on the Mage EVM |
 | `denom` | [string](#string) |  | Denom of the corresponding sdk.Coin |
 
 
@@ -3587,14 +3587,14 @@ allowed to be converted between ERC20 and sdk.Coin
 
 
 
-<a name="kava/evmutil/v1beta1/genesis.proto"></a>
+<a name="mage/evmutil/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/evmutil/v1beta1/genesis.proto
+## mage/evmutil/v1beta1/genesis.proto
 
 
 
-<a name="kava.evmutil.v1beta1.Account"></a>
+<a name="mage.evmutil.v1beta1.Account"></a>
 
 ### Account
 BalanceAccount defines an account in the evmutil module.
@@ -3603,14 +3603,14 @@ BalanceAccount defines an account in the evmutil module.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `address` | [bytes](#bytes) |  |  |
-| `balance` | [string](#string) |  | balance indicates the amount of akava owned by the address. |
+| `balance` | [string](#string) |  | balance indicates the amount of amage owned by the address. |
 
 
 
 
 
 
-<a name="kava.evmutil.v1beta1.GenesisState"></a>
+<a name="mage.evmutil.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the evmutil module's genesis state.
@@ -3618,15 +3618,15 @@ GenesisState defines the evmutil module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `accounts` | [Account](#kava.evmutil.v1beta1.Account) | repeated |  |
-| `params` | [Params](#kava.evmutil.v1beta1.Params) |  | params defines all the parameters of the module. |
+| `accounts` | [Account](#mage.evmutil.v1beta1.Account) | repeated |  |
+| `params` | [Params](#mage.evmutil.v1beta1.Params) |  | params defines all the parameters of the module. |
 
 
 
 
 
 
-<a name="kava.evmutil.v1beta1.Params"></a>
+<a name="mage.evmutil.v1beta1.Params"></a>
 
 ### Params
 Params defines the evmutil module params
@@ -3634,7 +3634,7 @@ Params defines the evmutil module params
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `enabled_conversion_pairs` | [ConversionPair](#kava.evmutil.v1beta1.ConversionPair) | repeated | enabled_conversion_pairs defines the list of conversion pairs allowed to be converted between Kava ERC20 and sdk.Coin |
+| `enabled_conversion_pairs` | [ConversionPair](#mage.evmutil.v1beta1.ConversionPair) | repeated | enabled_conversion_pairs defines the list of conversion pairs allowed to be converted between Mage ERC20 and sdk.Coin |
 
 
 
@@ -3650,14 +3650,14 @@ Params defines the evmutil module params
 
 
 
-<a name="kava/evmutil/v1beta1/query.proto"></a>
+<a name="mage/evmutil/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/evmutil/v1beta1/query.proto
+## mage/evmutil/v1beta1/query.proto
 
 
 
-<a name="kava.evmutil.v1beta1.QueryParamsRequest"></a>
+<a name="mage.evmutil.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/evmutil parameters.
@@ -3667,7 +3667,7 @@ QueryParamsRequest defines the request type for querying x/evmutil parameters.
 
 
 
-<a name="kava.evmutil.v1beta1.QueryParamsResponse"></a>
+<a name="mage.evmutil.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/evmutil parameters.
@@ -3675,7 +3675,7 @@ QueryParamsResponse defines the response type for querying x/evmutil parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.evmutil.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.evmutil.v1beta1.Params) |  |  |
 
 
 
@@ -3688,36 +3688,36 @@ QueryParamsResponse defines the response type for querying x/evmutil parameters.
  <!-- end HasExtensions -->
 
 
-<a name="kava.evmutil.v1beta1.Query"></a>
+<a name="mage.evmutil.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for evmutil module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.evmutil.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.evmutil.v1beta1.QueryParamsResponse) | Params queries all parameters of the evmutil module. | GET|/kava/evmutil/v1beta1/params|
+| `Params` | [QueryParamsRequest](#mage.evmutil.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.evmutil.v1beta1.QueryParamsResponse) | Params queries all parameters of the evmutil module. | GET|/mage/evmutil/v1beta1/params|
 
  <!-- end services -->
 
 
 
-<a name="kava/evmutil/v1beta1/tx.proto"></a>
+<a name="mage/evmutil/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/evmutil/v1beta1/tx.proto
+## mage/evmutil/v1beta1/tx.proto
 
 
 
-<a name="kava.evmutil.v1beta1.MsgConvertCoinToERC20"></a>
+<a name="mage.evmutil.v1beta1.MsgConvertCoinToERC20"></a>
 
 ### MsgConvertCoinToERC20
-MsgConvertCoinToERC20 defines a conversion from sdk.Coin to Kava ERC20.
+MsgConvertCoinToERC20 defines a conversion from sdk.Coin to Mage ERC20.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `initiator` | [string](#string) |  | Kava bech32 address initiating the conversion. |
-| `receiver` | [string](#string) |  | EVM 0x hex address that will receive the converted Kava ERC20 tokens. |
+| `initiator` | [string](#string) |  | Mage bech32 address initiating the conversion. |
+| `receiver` | [string](#string) |  | EVM 0x hex address that will receive the converted Mage ERC20 tokens. |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) |  | Amount is the sdk.Coin amount to convert. |
 
 
@@ -3725,7 +3725,7 @@ MsgConvertCoinToERC20 defines a conversion from sdk.Coin to Kava ERC20.
 
 
 
-<a name="kava.evmutil.v1beta1.MsgConvertCoinToERC20Response"></a>
+<a name="mage.evmutil.v1beta1.MsgConvertCoinToERC20Response"></a>
 
 ### MsgConvertCoinToERC20Response
 MsgConvertCoinToERC20Response defines the response value from Msg/ConvertCoinToERC20.
@@ -3735,17 +3735,17 @@ MsgConvertCoinToERC20Response defines the response value from Msg/ConvertCoinToE
 
 
 
-<a name="kava.evmutil.v1beta1.MsgConvertERC20ToCoin"></a>
+<a name="mage.evmutil.v1beta1.MsgConvertERC20ToCoin"></a>
 
 ### MsgConvertERC20ToCoin
-MsgConvertERC20ToCoin defines a conversion from Kava ERC20 to sdk.Coin.
+MsgConvertERC20ToCoin defines a conversion from Mage ERC20 to sdk.Coin.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `initiator` | [string](#string) |  | EVM 0x hex address initiating the conversion. |
-| `receiver` | [string](#string) |  | Kava bech32 address that will receive the converted sdk.Coin. |
-| `kava_erc20_address` | [string](#string) |  | EVM 0x hex address of the ERC20 contract. |
+| `receiver` | [string](#string) |  | Mage bech32 address that will receive the converted sdk.Coin. |
+| `mage_erc20_address` | [string](#string) |  | EVM 0x hex address of the ERC20 contract. |
 | `amount` | [string](#string) |  | ERC20 token amount to convert. |
 
 
@@ -3753,7 +3753,7 @@ MsgConvertERC20ToCoin defines a conversion from Kava ERC20 to sdk.Coin.
 
 
 
-<a name="kava.evmutil.v1beta1.MsgConvertERC20ToCoinResponse"></a>
+<a name="mage.evmutil.v1beta1.MsgConvertERC20ToCoinResponse"></a>
 
 ### MsgConvertERC20ToCoinResponse
 MsgConvertERC20ToCoinResponse defines the response value from
@@ -3770,28 +3770,28 @@ Msg/MsgConvertERC20ToCoin.
  <!-- end HasExtensions -->
 
 
-<a name="kava.evmutil.v1beta1.Msg"></a>
+<a name="mage.evmutil.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the evmutil Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `ConvertCoinToERC20` | [MsgConvertCoinToERC20](#kava.evmutil.v1beta1.MsgConvertCoinToERC20) | [MsgConvertCoinToERC20Response](#kava.evmutil.v1beta1.MsgConvertCoinToERC20Response) | ConvertCoinToERC20 defines a method for converting sdk.Coin to Kava ERC20. | |
-| `ConvertERC20ToCoin` | [MsgConvertERC20ToCoin](#kava.evmutil.v1beta1.MsgConvertERC20ToCoin) | [MsgConvertERC20ToCoinResponse](#kava.evmutil.v1beta1.MsgConvertERC20ToCoinResponse) | ConvertERC20ToCoin defines a method for converting Kava ERC20 to sdk.Coin. | |
+| `ConvertCoinToERC20` | [MsgConvertCoinToERC20](#mage.evmutil.v1beta1.MsgConvertCoinToERC20) | [MsgConvertCoinToERC20Response](#mage.evmutil.v1beta1.MsgConvertCoinToERC20Response) | ConvertCoinToERC20 defines a method for converting sdk.Coin to Mage ERC20. | |
+| `ConvertERC20ToCoin` | [MsgConvertERC20ToCoin](#mage.evmutil.v1beta1.MsgConvertERC20ToCoin) | [MsgConvertERC20ToCoinResponse](#mage.evmutil.v1beta1.MsgConvertERC20ToCoinResponse) | ConvertERC20ToCoin defines a method for converting Mage ERC20 to sdk.Coin. | |
 
  <!-- end services -->
 
 
 
-<a name="kava/hard/v1beta1/hard.proto"></a>
+<a name="mage/hard/v1beta1/hard.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/hard/v1beta1/hard.proto
+## mage/hard/v1beta1/hard.proto
 
 
 
-<a name="kava.hard.v1beta1.Borrow"></a>
+<a name="mage.hard.v1beta1.Borrow"></a>
 
 ### Borrow
 Borrow defines an amount of coins borrowed from a hard module account.
@@ -3801,14 +3801,14 @@ Borrow defines an amount of coins borrowed from a hard module account.
 | ----- | ---- | ----- | ----------- |
 | `borrower` | [string](#string) |  |  |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
-| `index` | [BorrowInterestFactor](#kava.hard.v1beta1.BorrowInterestFactor) | repeated |  |
+| `index` | [BorrowInterestFactor](#mage.hard.v1beta1.BorrowInterestFactor) | repeated |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.BorrowInterestFactor"></a>
+<a name="mage.hard.v1beta1.BorrowInterestFactor"></a>
 
 ### BorrowInterestFactor
 BorrowInterestFactor defines an individual borrow interest factor.
@@ -3824,7 +3824,7 @@ BorrowInterestFactor defines an individual borrow interest factor.
 
 
 
-<a name="kava.hard.v1beta1.BorrowLimit"></a>
+<a name="mage.hard.v1beta1.BorrowLimit"></a>
 
 ### BorrowLimit
 BorrowLimit enforces restrictions on a money market.
@@ -3841,7 +3841,7 @@ BorrowLimit enforces restrictions on a money market.
 
 
 
-<a name="kava.hard.v1beta1.CoinsProto"></a>
+<a name="mage.hard.v1beta1.CoinsProto"></a>
 
 ### CoinsProto
 CoinsProto defines a Protobuf wrapper around a Coins slice
@@ -3856,7 +3856,7 @@ CoinsProto defines a Protobuf wrapper around a Coins slice
 
 
 
-<a name="kava.hard.v1beta1.Deposit"></a>
+<a name="mage.hard.v1beta1.Deposit"></a>
 
 ### Deposit
 Deposit defines an amount of coins deposited into a hard module account.
@@ -3866,14 +3866,14 @@ Deposit defines an amount of coins deposited into a hard module account.
 | ----- | ---- | ----- | ----------- |
 | `depositor` | [string](#string) |  |  |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
-| `index` | [SupplyInterestFactor](#kava.hard.v1beta1.SupplyInterestFactor) | repeated |  |
+| `index` | [SupplyInterestFactor](#mage.hard.v1beta1.SupplyInterestFactor) | repeated |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.InterestRateModel"></a>
+<a name="mage.hard.v1beta1.InterestRateModel"></a>
 
 ### InterestRateModel
 InterestRateModel contains information about an asset's interest rate.
@@ -3891,7 +3891,7 @@ InterestRateModel contains information about an asset's interest rate.
 
 
 
-<a name="kava.hard.v1beta1.MoneyMarket"></a>
+<a name="mage.hard.v1beta1.MoneyMarket"></a>
 
 ### MoneyMarket
 MoneyMarket is a money market for an individual asset.
@@ -3900,10 +3900,10 @@ MoneyMarket is a money market for an individual asset.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `denom` | [string](#string) |  |  |
-| `borrow_limit` | [BorrowLimit](#kava.hard.v1beta1.BorrowLimit) |  |  |
+| `borrow_limit` | [BorrowLimit](#mage.hard.v1beta1.BorrowLimit) |  |  |
 | `spot_market_id` | [string](#string) |  |  |
 | `conversion_factor` | [string](#string) |  |  |
-| `interest_rate_model` | [InterestRateModel](#kava.hard.v1beta1.InterestRateModel) |  |  |
+| `interest_rate_model` | [InterestRateModel](#mage.hard.v1beta1.InterestRateModel) |  |  |
 | `reserve_factor` | [string](#string) |  |  |
 | `keeper_reward_percentage` | [string](#string) |  |  |
 
@@ -3912,7 +3912,7 @@ MoneyMarket is a money market for an individual asset.
 
 
 
-<a name="kava.hard.v1beta1.Params"></a>
+<a name="mage.hard.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the hard module.
@@ -3920,7 +3920,7 @@ Params defines the parameters for the hard module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `money_markets` | [MoneyMarket](#kava.hard.v1beta1.MoneyMarket) | repeated |  |
+| `money_markets` | [MoneyMarket](#mage.hard.v1beta1.MoneyMarket) | repeated |  |
 | `minimum_borrow_usd_value` | [string](#string) |  |  |
 
 
@@ -3928,7 +3928,7 @@ Params defines the parameters for the hard module.
 
 
 
-<a name="kava.hard.v1beta1.SupplyInterestFactor"></a>
+<a name="mage.hard.v1beta1.SupplyInterestFactor"></a>
 
 ### SupplyInterestFactor
 SupplyInterestFactor defines an individual borrow interest factor.
@@ -3953,14 +3953,14 @@ SupplyInterestFactor defines an individual borrow interest factor.
 
 
 
-<a name="kava/hard/v1beta1/genesis.proto"></a>
+<a name="mage/hard/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/hard/v1beta1/genesis.proto
+## mage/hard/v1beta1/genesis.proto
 
 
 
-<a name="kava.hard.v1beta1.GenesisAccumulationTime"></a>
+<a name="mage.hard.v1beta1.GenesisAccumulationTime"></a>
 
 ### GenesisAccumulationTime
 GenesisAccumulationTime stores the previous distribution time and its corresponding denom.
@@ -3978,7 +3978,7 @@ GenesisAccumulationTime stores the previous distribution time and its correspond
 
 
 
-<a name="kava.hard.v1beta1.GenesisState"></a>
+<a name="mage.hard.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the hard module's genesis state.
@@ -3986,10 +3986,10 @@ GenesisState defines the hard module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.hard.v1beta1.Params) |  |  |
-| `previous_accumulation_times` | [GenesisAccumulationTime](#kava.hard.v1beta1.GenesisAccumulationTime) | repeated |  |
-| `deposits` | [Deposit](#kava.hard.v1beta1.Deposit) | repeated |  |
-| `borrows` | [Borrow](#kava.hard.v1beta1.Borrow) | repeated |  |
+| `params` | [Params](#mage.hard.v1beta1.Params) |  |  |
+| `previous_accumulation_times` | [GenesisAccumulationTime](#mage.hard.v1beta1.GenesisAccumulationTime) | repeated |  |
+| `deposits` | [Deposit](#mage.hard.v1beta1.Deposit) | repeated |  |
+| `borrows` | [Borrow](#mage.hard.v1beta1.Borrow) | repeated |  |
 | `total_supplied` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
 | `total_borrowed` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
 | `total_reserves` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
@@ -4008,14 +4008,14 @@ GenesisState defines the hard module's genesis state.
 
 
 
-<a name="kava/hard/v1beta1/query.proto"></a>
+<a name="mage/hard/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/hard/v1beta1/query.proto
+## mage/hard/v1beta1/query.proto
 
 
 
-<a name="kava.hard.v1beta1.BorrowInterestFactorResponse"></a>
+<a name="mage.hard.v1beta1.BorrowInterestFactorResponse"></a>
 
 ### BorrowInterestFactorResponse
 BorrowInterestFactorResponse defines an individual borrow interest factor.
@@ -4031,7 +4031,7 @@ BorrowInterestFactorResponse defines an individual borrow interest factor.
 
 
 
-<a name="kava.hard.v1beta1.BorrowResponse"></a>
+<a name="mage.hard.v1beta1.BorrowResponse"></a>
 
 ### BorrowResponse
 BorrowResponse defines an amount of coins borrowed from a hard module account.
@@ -4041,14 +4041,14 @@ BorrowResponse defines an amount of coins borrowed from a hard module account.
 | ----- | ---- | ----- | ----------- |
 | `borrower` | [string](#string) |  |  |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
-| `index` | [BorrowInterestFactorResponse](#kava.hard.v1beta1.BorrowInterestFactorResponse) | repeated |  |
+| `index` | [BorrowInterestFactorResponse](#mage.hard.v1beta1.BorrowInterestFactorResponse) | repeated |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.DepositResponse"></a>
+<a name="mage.hard.v1beta1.DepositResponse"></a>
 
 ### DepositResponse
 DepositResponse defines an amount of coins deposited into a hard module account.
@@ -4058,14 +4058,14 @@ DepositResponse defines an amount of coins deposited into a hard module account.
 | ----- | ---- | ----- | ----------- |
 | `depositor` | [string](#string) |  |  |
 | `amount` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
-| `index` | [SupplyInterestFactorResponse](#kava.hard.v1beta1.SupplyInterestFactorResponse) | repeated |  |
+| `index` | [SupplyInterestFactorResponse](#mage.hard.v1beta1.SupplyInterestFactorResponse) | repeated |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.InterestFactor"></a>
+<a name="mage.hard.v1beta1.InterestFactor"></a>
 
 ### InterestFactor
 InterestFactor is a unique type returned by interest factor queries
@@ -4082,7 +4082,7 @@ InterestFactor is a unique type returned by interest factor queries
 
 
 
-<a name="kava.hard.v1beta1.MoneyMarketInterestRate"></a>
+<a name="mage.hard.v1beta1.MoneyMarketInterestRate"></a>
 
 ### MoneyMarketInterestRate
 MoneyMarketInterestRate is a unique type returned by interest rate queries
@@ -4099,7 +4099,7 @@ MoneyMarketInterestRate is a unique type returned by interest rate queries
 
 
 
-<a name="kava.hard.v1beta1.QueryAccountsRequest"></a>
+<a name="mage.hard.v1beta1.QueryAccountsRequest"></a>
 
 ### QueryAccountsRequest
 QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -4109,7 +4109,7 @@ QueryAccountsRequest is the request type for the Query/Accounts RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryAccountsResponse"></a>
+<a name="mage.hard.v1beta1.QueryAccountsResponse"></a>
 
 ### QueryAccountsResponse
 QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -4124,7 +4124,7 @@ QueryAccountsResponse is the response type for the Query/Accounts RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryBorrowsRequest"></a>
+<a name="mage.hard.v1beta1.QueryBorrowsRequest"></a>
 
 ### QueryBorrowsRequest
 QueryBorrowsRequest is the request type for the Query/Borrows RPC method.
@@ -4141,7 +4141,7 @@ QueryBorrowsRequest is the request type for the Query/Borrows RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryBorrowsResponse"></a>
+<a name="mage.hard.v1beta1.QueryBorrowsResponse"></a>
 
 ### QueryBorrowsResponse
 QueryBorrowsResponse is the response type for the Query/Borrows RPC method.
@@ -4149,7 +4149,7 @@ QueryBorrowsResponse is the response type for the Query/Borrows RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `borrows` | [BorrowResponse](#kava.hard.v1beta1.BorrowResponse) | repeated |  |
+| `borrows` | [BorrowResponse](#mage.hard.v1beta1.BorrowResponse) | repeated |  |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -4157,7 +4157,7 @@ QueryBorrowsResponse is the response type for the Query/Borrows RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryDepositsRequest"></a>
+<a name="mage.hard.v1beta1.QueryDepositsRequest"></a>
 
 ### QueryDepositsRequest
 QueryDepositsRequest is the request type for the Query/Deposits RPC method.
@@ -4174,7 +4174,7 @@ QueryDepositsRequest is the request type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryDepositsResponse"></a>
+<a name="mage.hard.v1beta1.QueryDepositsResponse"></a>
 
 ### QueryDepositsResponse
 QueryDepositsResponse is the response type for the Query/Deposits RPC method.
@@ -4182,7 +4182,7 @@ QueryDepositsResponse is the response type for the Query/Deposits RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `deposits` | [DepositResponse](#kava.hard.v1beta1.DepositResponse) | repeated |  |
+| `deposits` | [DepositResponse](#mage.hard.v1beta1.DepositResponse) | repeated |  |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -4190,7 +4190,7 @@ QueryDepositsResponse is the response type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryInterestFactorsRequest"></a>
+<a name="mage.hard.v1beta1.QueryInterestFactorsRequest"></a>
 
 ### QueryInterestFactorsRequest
 QueryInterestFactorsRequest is the request type for the Query/InterestFactors RPC method.
@@ -4205,7 +4205,7 @@ QueryInterestFactorsRequest is the request type for the Query/InterestFactors RP
 
 
 
-<a name="kava.hard.v1beta1.QueryInterestFactorsResponse"></a>
+<a name="mage.hard.v1beta1.QueryInterestFactorsResponse"></a>
 
 ### QueryInterestFactorsResponse
 QueryInterestFactorsResponse is the response type for the Query/InterestFactors RPC method.
@@ -4213,14 +4213,14 @@ QueryInterestFactorsResponse is the response type for the Query/InterestFactors 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `interest_factors` | [InterestFactor](#kava.hard.v1beta1.InterestFactor) | repeated |  |
+| `interest_factors` | [InterestFactor](#mage.hard.v1beta1.InterestFactor) | repeated |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.QueryInterestRateRequest"></a>
+<a name="mage.hard.v1beta1.QueryInterestRateRequest"></a>
 
 ### QueryInterestRateRequest
 QueryInterestRateRequest is the request type for the Query/InterestRate RPC method.
@@ -4235,7 +4235,7 @@ QueryInterestRateRequest is the request type for the Query/InterestRate RPC meth
 
 
 
-<a name="kava.hard.v1beta1.QueryInterestRateResponse"></a>
+<a name="mage.hard.v1beta1.QueryInterestRateResponse"></a>
 
 ### QueryInterestRateResponse
 QueryInterestRateResponse is the response type for the Query/InterestRate RPC method.
@@ -4243,14 +4243,14 @@ QueryInterestRateResponse is the response type for the Query/InterestRate RPC me
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `interest_rates` | [MoneyMarketInterestRate](#kava.hard.v1beta1.MoneyMarketInterestRate) | repeated |  |
+| `interest_rates` | [MoneyMarketInterestRate](#mage.hard.v1beta1.MoneyMarketInterestRate) | repeated |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.QueryParamsRequest"></a>
+<a name="mage.hard.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest is the request type for the Query/Params RPC method.
@@ -4260,7 +4260,7 @@ QueryParamsRequest is the request type for the Query/Params RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryParamsResponse"></a>
+<a name="mage.hard.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse is the response type for the Query/Params RPC method.
@@ -4268,14 +4268,14 @@ QueryParamsResponse is the response type for the Query/Params RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.hard.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.hard.v1beta1.Params) |  |  |
 
 
 
 
 
 
-<a name="kava.hard.v1beta1.QueryReservesRequest"></a>
+<a name="mage.hard.v1beta1.QueryReservesRequest"></a>
 
 ### QueryReservesRequest
 QueryReservesRequest is the request type for the Query/Reserves RPC method.
@@ -4290,7 +4290,7 @@ QueryReservesRequest is the request type for the Query/Reserves RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryReservesResponse"></a>
+<a name="mage.hard.v1beta1.QueryReservesResponse"></a>
 
 ### QueryReservesResponse
 QueryReservesResponse is the response type for the Query/Reserves RPC method.
@@ -4305,7 +4305,7 @@ QueryReservesResponse is the response type for the Query/Reserves RPC method.
 
 
 
-<a name="kava.hard.v1beta1.QueryTotalBorrowedRequest"></a>
+<a name="mage.hard.v1beta1.QueryTotalBorrowedRequest"></a>
 
 ### QueryTotalBorrowedRequest
 QueryTotalBorrowedRequest is the request type for the Query/TotalBorrowed RPC method.
@@ -4320,7 +4320,7 @@ QueryTotalBorrowedRequest is the request type for the Query/TotalBorrowed RPC me
 
 
 
-<a name="kava.hard.v1beta1.QueryTotalBorrowedResponse"></a>
+<a name="mage.hard.v1beta1.QueryTotalBorrowedResponse"></a>
 
 ### QueryTotalBorrowedResponse
 QueryTotalBorrowedResponse is the response type for the Query/TotalBorrowed RPC method.
@@ -4335,7 +4335,7 @@ QueryTotalBorrowedResponse is the response type for the Query/TotalBorrowed RPC 
 
 
 
-<a name="kava.hard.v1beta1.QueryTotalDepositedRequest"></a>
+<a name="mage.hard.v1beta1.QueryTotalDepositedRequest"></a>
 
 ### QueryTotalDepositedRequest
 QueryTotalDepositedRequest is the request type for the Query/TotalDeposited RPC method.
@@ -4350,7 +4350,7 @@ QueryTotalDepositedRequest is the request type for the Query/TotalDeposited RPC 
 
 
 
-<a name="kava.hard.v1beta1.QueryTotalDepositedResponse"></a>
+<a name="mage.hard.v1beta1.QueryTotalDepositedResponse"></a>
 
 ### QueryTotalDepositedResponse
 QueryTotalDepositedResponse is the response type for the Query/TotalDeposited RPC method.
@@ -4365,7 +4365,7 @@ QueryTotalDepositedResponse is the response type for the Query/TotalDeposited RP
 
 
 
-<a name="kava.hard.v1beta1.QueryUnsyncedBorrowsRequest"></a>
+<a name="mage.hard.v1beta1.QueryUnsyncedBorrowsRequest"></a>
 
 ### QueryUnsyncedBorrowsRequest
 QueryUnsyncedBorrowsRequest is the request type for the Query/UnsyncedBorrows RPC method.
@@ -4382,7 +4382,7 @@ QueryUnsyncedBorrowsRequest is the request type for the Query/UnsyncedBorrows RP
 
 
 
-<a name="kava.hard.v1beta1.QueryUnsyncedBorrowsResponse"></a>
+<a name="mage.hard.v1beta1.QueryUnsyncedBorrowsResponse"></a>
 
 ### QueryUnsyncedBorrowsResponse
 QueryUnsyncedBorrowsResponse is the response type for the Query/UnsyncedBorrows RPC method.
@@ -4390,7 +4390,7 @@ QueryUnsyncedBorrowsResponse is the response type for the Query/UnsyncedBorrows 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `borrows` | [BorrowResponse](#kava.hard.v1beta1.BorrowResponse) | repeated |  |
+| `borrows` | [BorrowResponse](#mage.hard.v1beta1.BorrowResponse) | repeated |  |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -4398,7 +4398,7 @@ QueryUnsyncedBorrowsResponse is the response type for the Query/UnsyncedBorrows 
 
 
 
-<a name="kava.hard.v1beta1.QueryUnsyncedDepositsRequest"></a>
+<a name="mage.hard.v1beta1.QueryUnsyncedDepositsRequest"></a>
 
 ### QueryUnsyncedDepositsRequest
 QueryUnsyncedDepositsRequest is the request type for the Query/UnsyncedDeposits RPC method.
@@ -4415,7 +4415,7 @@ QueryUnsyncedDepositsRequest is the request type for the Query/UnsyncedDeposits 
 
 
 
-<a name="kava.hard.v1beta1.QueryUnsyncedDepositsResponse"></a>
+<a name="mage.hard.v1beta1.QueryUnsyncedDepositsResponse"></a>
 
 ### QueryUnsyncedDepositsResponse
 QueryUnsyncedDepositsResponse is the response type for the Query/UnsyncedDeposits RPC method.
@@ -4423,7 +4423,7 @@ QueryUnsyncedDepositsResponse is the response type for the Query/UnsyncedDeposit
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `deposits` | [DepositResponse](#kava.hard.v1beta1.DepositResponse) | repeated |  |
+| `deposits` | [DepositResponse](#mage.hard.v1beta1.DepositResponse) | repeated |  |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -4431,7 +4431,7 @@ QueryUnsyncedDepositsResponse is the response type for the Query/UnsyncedDeposit
 
 
 
-<a name="kava.hard.v1beta1.SupplyInterestFactorResponse"></a>
+<a name="mage.hard.v1beta1.SupplyInterestFactorResponse"></a>
 
 ### SupplyInterestFactorResponse
 SupplyInterestFactorResponse defines an individual borrow interest factor.
@@ -4453,37 +4453,37 @@ SupplyInterestFactorResponse defines an individual borrow interest factor.
  <!-- end HasExtensions -->
 
 
-<a name="kava.hard.v1beta1.Query"></a>
+<a name="mage.hard.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for bep3 module.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.hard.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.hard.v1beta1.QueryParamsResponse) | Params queries module params. | GET|/kava/hard/v1beta1/params|
-| `Accounts` | [QueryAccountsRequest](#kava.hard.v1beta1.QueryAccountsRequest) | [QueryAccountsResponse](#kava.hard.v1beta1.QueryAccountsResponse) | Accounts queries module accounts. | GET|/kava/hard/v1beta1/accounts|
-| `Deposits` | [QueryDepositsRequest](#kava.hard.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#kava.hard.v1beta1.QueryDepositsResponse) | Deposits queries hard deposits. | GET|/kava/hard/v1beta1/deposits|
-| `UnsyncedDeposits` | [QueryUnsyncedDepositsRequest](#kava.hard.v1beta1.QueryUnsyncedDepositsRequest) | [QueryUnsyncedDepositsResponse](#kava.hard.v1beta1.QueryUnsyncedDepositsResponse) | UnsyncedDeposits queries unsynced deposits. | GET|/kava/hard/v1beta1/unsynced-deposits|
-| `TotalDeposited` | [QueryTotalDepositedRequest](#kava.hard.v1beta1.QueryTotalDepositedRequest) | [QueryTotalDepositedResponse](#kava.hard.v1beta1.QueryTotalDepositedResponse) | TotalDeposited queries total coins deposited to hard liquidity pools. | GET|/kava/hard/v1beta1/total-deposited/{denom}|
-| `Borrows` | [QueryBorrowsRequest](#kava.hard.v1beta1.QueryBorrowsRequest) | [QueryBorrowsResponse](#kava.hard.v1beta1.QueryBorrowsResponse) | Borrows queries hard borrows. | GET|/kava/hard/v1beta1/borrows|
-| `UnsyncedBorrows` | [QueryUnsyncedBorrowsRequest](#kava.hard.v1beta1.QueryUnsyncedBorrowsRequest) | [QueryUnsyncedBorrowsResponse](#kava.hard.v1beta1.QueryUnsyncedBorrowsResponse) | UnsyncedBorrows queries unsynced borrows. | GET|/kava/hard/v1beta1/unsynced-borrows|
-| `TotalBorrowed` | [QueryTotalBorrowedRequest](#kava.hard.v1beta1.QueryTotalBorrowedRequest) | [QueryTotalBorrowedResponse](#kava.hard.v1beta1.QueryTotalBorrowedResponse) | TotalBorrowed queries total coins borrowed from hard liquidity pools. | GET|/kava/hard/v1beta1/total-borrowed/{denom}|
-| `InterestRate` | [QueryInterestRateRequest](#kava.hard.v1beta1.QueryInterestRateRequest) | [QueryInterestRateResponse](#kava.hard.v1beta1.QueryInterestRateResponse) | InterestRate queries the hard module interest rates. | GET|/kava/hard/v1beta1/interest-rate/{denom}|
-| `Reserves` | [QueryReservesRequest](#kava.hard.v1beta1.QueryReservesRequest) | [QueryReservesResponse](#kava.hard.v1beta1.QueryReservesResponse) | Reserves queries total hard reserve coins. | GET|/kava/hard/v1beta1/reserves/{denom}|
-| `InterestFactors` | [QueryInterestFactorsRequest](#kava.hard.v1beta1.QueryInterestFactorsRequest) | [QueryInterestFactorsResponse](#kava.hard.v1beta1.QueryInterestFactorsResponse) | InterestFactors queries hard module interest factors. | GET|/kava/hard/v1beta1/interest-factors/{denom}|
+| `Params` | [QueryParamsRequest](#mage.hard.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.hard.v1beta1.QueryParamsResponse) | Params queries module params. | GET|/mage/hard/v1beta1/params|
+| `Accounts` | [QueryAccountsRequest](#mage.hard.v1beta1.QueryAccountsRequest) | [QueryAccountsResponse](#mage.hard.v1beta1.QueryAccountsResponse) | Accounts queries module accounts. | GET|/mage/hard/v1beta1/accounts|
+| `Deposits` | [QueryDepositsRequest](#mage.hard.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#mage.hard.v1beta1.QueryDepositsResponse) | Deposits queries hard deposits. | GET|/mage/hard/v1beta1/deposits|
+| `UnsyncedDeposits` | [QueryUnsyncedDepositsRequest](#mage.hard.v1beta1.QueryUnsyncedDepositsRequest) | [QueryUnsyncedDepositsResponse](#mage.hard.v1beta1.QueryUnsyncedDepositsResponse) | UnsyncedDeposits queries unsynced deposits. | GET|/mage/hard/v1beta1/unsynced-deposits|
+| `TotalDeposited` | [QueryTotalDepositedRequest](#mage.hard.v1beta1.QueryTotalDepositedRequest) | [QueryTotalDepositedResponse](#mage.hard.v1beta1.QueryTotalDepositedResponse) | TotalDeposited queries total coins deposited to hard liquidity pools. | GET|/mage/hard/v1beta1/total-deposited/{denom}|
+| `Borrows` | [QueryBorrowsRequest](#mage.hard.v1beta1.QueryBorrowsRequest) | [QueryBorrowsResponse](#mage.hard.v1beta1.QueryBorrowsResponse) | Borrows queries hard borrows. | GET|/mage/hard/v1beta1/borrows|
+| `UnsyncedBorrows` | [QueryUnsyncedBorrowsRequest](#mage.hard.v1beta1.QueryUnsyncedBorrowsRequest) | [QueryUnsyncedBorrowsResponse](#mage.hard.v1beta1.QueryUnsyncedBorrowsResponse) | UnsyncedBorrows queries unsynced borrows. | GET|/mage/hard/v1beta1/unsynced-borrows|
+| `TotalBorrowed` | [QueryTotalBorrowedRequest](#mage.hard.v1beta1.QueryTotalBorrowedRequest) | [QueryTotalBorrowedResponse](#mage.hard.v1beta1.QueryTotalBorrowedResponse) | TotalBorrowed queries total coins borrowed from hard liquidity pools. | GET|/mage/hard/v1beta1/total-borrowed/{denom}|
+| `InterestRate` | [QueryInterestRateRequest](#mage.hard.v1beta1.QueryInterestRateRequest) | [QueryInterestRateResponse](#mage.hard.v1beta1.QueryInterestRateResponse) | InterestRate queries the hard module interest rates. | GET|/mage/hard/v1beta1/interest-rate/{denom}|
+| `Reserves` | [QueryReservesRequest](#mage.hard.v1beta1.QueryReservesRequest) | [QueryReservesResponse](#mage.hard.v1beta1.QueryReservesResponse) | Reserves queries total hard reserve coins. | GET|/mage/hard/v1beta1/reserves/{denom}|
+| `InterestFactors` | [QueryInterestFactorsRequest](#mage.hard.v1beta1.QueryInterestFactorsRequest) | [QueryInterestFactorsResponse](#mage.hard.v1beta1.QueryInterestFactorsResponse) | InterestFactors queries hard module interest factors. | GET|/mage/hard/v1beta1/interest-factors/{denom}|
 
  <!-- end services -->
 
 
 
-<a name="kava/hard/v1beta1/tx.proto"></a>
+<a name="mage/hard/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/hard/v1beta1/tx.proto
+## mage/hard/v1beta1/tx.proto
 
 
 
-<a name="kava.hard.v1beta1.MsgBorrow"></a>
+<a name="mage.hard.v1beta1.MsgBorrow"></a>
 
 ### MsgBorrow
 MsgBorrow defines the Msg/Borrow request type.
@@ -4499,7 +4499,7 @@ MsgBorrow defines the Msg/Borrow request type.
 
 
 
-<a name="kava.hard.v1beta1.MsgBorrowResponse"></a>
+<a name="mage.hard.v1beta1.MsgBorrowResponse"></a>
 
 ### MsgBorrowResponse
 MsgBorrowResponse defines the Msg/Borrow response type.
@@ -4509,7 +4509,7 @@ MsgBorrowResponse defines the Msg/Borrow response type.
 
 
 
-<a name="kava.hard.v1beta1.MsgDeposit"></a>
+<a name="mage.hard.v1beta1.MsgDeposit"></a>
 
 ### MsgDeposit
 MsgDeposit defines the Msg/Deposit request type.
@@ -4525,7 +4525,7 @@ MsgDeposit defines the Msg/Deposit request type.
 
 
 
-<a name="kava.hard.v1beta1.MsgDepositResponse"></a>
+<a name="mage.hard.v1beta1.MsgDepositResponse"></a>
 
 ### MsgDepositResponse
 MsgDepositResponse defines the Msg/Deposit response type.
@@ -4535,7 +4535,7 @@ MsgDepositResponse defines the Msg/Deposit response type.
 
 
 
-<a name="kava.hard.v1beta1.MsgLiquidate"></a>
+<a name="mage.hard.v1beta1.MsgLiquidate"></a>
 
 ### MsgLiquidate
 MsgLiquidate defines the Msg/Liquidate request type.
@@ -4551,7 +4551,7 @@ MsgLiquidate defines the Msg/Liquidate request type.
 
 
 
-<a name="kava.hard.v1beta1.MsgLiquidateResponse"></a>
+<a name="mage.hard.v1beta1.MsgLiquidateResponse"></a>
 
 ### MsgLiquidateResponse
 MsgLiquidateResponse defines the Msg/Liquidate response type.
@@ -4561,7 +4561,7 @@ MsgLiquidateResponse defines the Msg/Liquidate response type.
 
 
 
-<a name="kava.hard.v1beta1.MsgRepay"></a>
+<a name="mage.hard.v1beta1.MsgRepay"></a>
 
 ### MsgRepay
 MsgRepay defines the Msg/Repay request type.
@@ -4578,7 +4578,7 @@ MsgRepay defines the Msg/Repay request type.
 
 
 
-<a name="kava.hard.v1beta1.MsgRepayResponse"></a>
+<a name="mage.hard.v1beta1.MsgRepayResponse"></a>
 
 ### MsgRepayResponse
 MsgRepayResponse defines the Msg/Repay response type.
@@ -4588,7 +4588,7 @@ MsgRepayResponse defines the Msg/Repay response type.
 
 
 
-<a name="kava.hard.v1beta1.MsgWithdraw"></a>
+<a name="mage.hard.v1beta1.MsgWithdraw"></a>
 
 ### MsgWithdraw
 MsgWithdraw defines the Msg/Withdraw request type.
@@ -4604,7 +4604,7 @@ MsgWithdraw defines the Msg/Withdraw request type.
 
 
 
-<a name="kava.hard.v1beta1.MsgWithdrawResponse"></a>
+<a name="mage.hard.v1beta1.MsgWithdrawResponse"></a>
 
 ### MsgWithdrawResponse
 MsgWithdrawResponse defines the Msg/Withdraw response type.
@@ -4620,31 +4620,31 @@ MsgWithdrawResponse defines the Msg/Withdraw response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.hard.v1beta1.Msg"></a>
+<a name="mage.hard.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the hard Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Deposit` | [MsgDeposit](#kava.hard.v1beta1.MsgDeposit) | [MsgDepositResponse](#kava.hard.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing funds to hard liquidity pool. | |
-| `Withdraw` | [MsgWithdraw](#kava.hard.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#kava.hard.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing funds from hard liquidity pool. | |
-| `Borrow` | [MsgBorrow](#kava.hard.v1beta1.MsgBorrow) | [MsgBorrowResponse](#kava.hard.v1beta1.MsgBorrowResponse) | Borrow defines a method for borrowing funds from hard liquidity pool. | |
-| `Repay` | [MsgRepay](#kava.hard.v1beta1.MsgRepay) | [MsgRepayResponse](#kava.hard.v1beta1.MsgRepayResponse) | Repay defines a method for repaying funds borrowed from hard liquidity pool. | |
-| `Liquidate` | [MsgLiquidate](#kava.hard.v1beta1.MsgLiquidate) | [MsgLiquidateResponse](#kava.hard.v1beta1.MsgLiquidateResponse) | Liquidate defines a method for attempting to liquidate a borrower that is over their loan-to-value. | |
+| `Deposit` | [MsgDeposit](#mage.hard.v1beta1.MsgDeposit) | [MsgDepositResponse](#mage.hard.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing funds to hard liquidity pool. | |
+| `Withdraw` | [MsgWithdraw](#mage.hard.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#mage.hard.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing funds from hard liquidity pool. | |
+| `Borrow` | [MsgBorrow](#mage.hard.v1beta1.MsgBorrow) | [MsgBorrowResponse](#mage.hard.v1beta1.MsgBorrowResponse) | Borrow defines a method for borrowing funds from hard liquidity pool. | |
+| `Repay` | [MsgRepay](#mage.hard.v1beta1.MsgRepay) | [MsgRepayResponse](#mage.hard.v1beta1.MsgRepayResponse) | Repay defines a method for repaying funds borrowed from hard liquidity pool. | |
+| `Liquidate` | [MsgLiquidate](#mage.hard.v1beta1.MsgLiquidate) | [MsgLiquidateResponse](#mage.hard.v1beta1.MsgLiquidateResponse) | Liquidate defines a method for attempting to liquidate a borrower that is over their loan-to-value. | |
 
  <!-- end services -->
 
 
 
-<a name="kava/incentive/v1beta1/claims.proto"></a>
+<a name="mage/incentive/v1beta1/claims.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/incentive/v1beta1/claims.proto
+## mage/incentive/v1beta1/claims.proto
 
 
 
-<a name="kava.incentive.v1beta1.BaseClaim"></a>
+<a name="mage.incentive.v1beta1.BaseClaim"></a>
 
 ### BaseClaim
 BaseClaim is a claim with a single reward coin types
@@ -4660,7 +4660,7 @@ BaseClaim is a claim with a single reward coin types
 
 
 
-<a name="kava.incentive.v1beta1.BaseMultiClaim"></a>
+<a name="mage.incentive.v1beta1.BaseMultiClaim"></a>
 
 ### BaseMultiClaim
 BaseMultiClaim is a claim with multiple reward coin types
@@ -4676,7 +4676,7 @@ BaseMultiClaim is a claim with multiple reward coin types
 
 
 
-<a name="kava.incentive.v1beta1.Claim"></a>
+<a name="mage.incentive.v1beta1.Claim"></a>
 
 ### Claim
 Claim stores any generic rewards that can be claimed by owner
@@ -4684,17 +4684,17 @@ Claim stores any generic rewards that can be claimed by owner
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `type` | [ClaimType](#kava.incentive.v1beta1.ClaimType) |  |  |
+| `type` | [ClaimType](#mage.incentive.v1beta1.ClaimType) |  |  |
 | `owner` | [bytes](#bytes) |  |  |
 | `reward` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
-| `reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.DelegatorClaim"></a>
+<a name="mage.incentive.v1beta1.DelegatorClaim"></a>
 
 ### DelegatorClaim
 DelegatorClaim stores delegation rewards that can be claimed by owner
@@ -4702,15 +4702,15 @@ DelegatorClaim stores delegation rewards that can be claimed by owner
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_claim` | [BaseMultiClaim](#kava.incentive.v1beta1.BaseMultiClaim) |  |  |
-| `reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `base_claim` | [BaseMultiClaim](#mage.incentive.v1beta1.BaseMultiClaim) |  |  |
+| `reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.EarnClaim"></a>
+<a name="mage.incentive.v1beta1.EarnClaim"></a>
 
 ### EarnClaim
 EarnClaim stores the earn rewards that can be claimed by owner
@@ -4718,15 +4718,15 @@ EarnClaim stores the earn rewards that can be claimed by owner
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_claim` | [BaseMultiClaim](#kava.incentive.v1beta1.BaseMultiClaim) |  |  |
-| `reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `base_claim` | [BaseMultiClaim](#mage.incentive.v1beta1.BaseMultiClaim) |  |  |
+| `reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.HardLiquidityProviderClaim"></a>
+<a name="mage.incentive.v1beta1.HardLiquidityProviderClaim"></a>
 
 ### HardLiquidityProviderClaim
 HardLiquidityProviderClaim stores the hard liquidity provider rewards that can be claimed by owner
@@ -4734,16 +4734,16 @@ HardLiquidityProviderClaim stores the hard liquidity provider rewards that can b
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_claim` | [BaseMultiClaim](#kava.incentive.v1beta1.BaseMultiClaim) |  |  |
-| `supply_reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
-| `borrow_reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `base_claim` | [BaseMultiClaim](#mage.incentive.v1beta1.BaseMultiClaim) |  |  |
+| `supply_reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `borrow_reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MultiRewardIndex"></a>
+<a name="mage.incentive.v1beta1.MultiRewardIndex"></a>
 
 ### MultiRewardIndex
 MultiRewardIndex stores reward accumulation information on multiple reward types
@@ -4752,14 +4752,14 @@ MultiRewardIndex stores reward accumulation information on multiple reward types
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `collateral_type` | [string](#string) |  |  |
-| `reward_indexes` | [RewardIndex](#kava.incentive.v1beta1.RewardIndex) | repeated |  |
+| `reward_indexes` | [RewardIndex](#mage.incentive.v1beta1.RewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MultiRewardIndexesProto"></a>
+<a name="mage.incentive.v1beta1.MultiRewardIndexesProto"></a>
 
 ### MultiRewardIndexesProto
 MultiRewardIndexesProto defines a Protobuf wrapper around a MultiRewardIndexes slice
@@ -4767,14 +4767,14 @@ MultiRewardIndexesProto defines a Protobuf wrapper around a MultiRewardIndexes s
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `multi_reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `multi_reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.RewardIndex"></a>
+<a name="mage.incentive.v1beta1.RewardIndex"></a>
 
 ### RewardIndex
 RewardIndex stores reward accumulation information
@@ -4790,7 +4790,7 @@ RewardIndex stores reward accumulation information
 
 
 
-<a name="kava.incentive.v1beta1.RewardIndexesProto"></a>
+<a name="mage.incentive.v1beta1.RewardIndexesProto"></a>
 
 ### RewardIndexesProto
 RewardIndexesProto defines a Protobuf wrapper around a RewardIndexes slice
@@ -4798,14 +4798,14 @@ RewardIndexesProto defines a Protobuf wrapper around a RewardIndexes slice
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `reward_indexes` | [RewardIndex](#kava.incentive.v1beta1.RewardIndex) | repeated |  |
+| `reward_indexes` | [RewardIndex](#mage.incentive.v1beta1.RewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.SavingsClaim"></a>
+<a name="mage.incentive.v1beta1.SavingsClaim"></a>
 
 ### SavingsClaim
 SavingsClaim stores the savings rewards that can be claimed by owner
@@ -4813,15 +4813,15 @@ SavingsClaim stores the savings rewards that can be claimed by owner
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_claim` | [BaseMultiClaim](#kava.incentive.v1beta1.BaseMultiClaim) |  |  |
-| `reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `base_claim` | [BaseMultiClaim](#mage.incentive.v1beta1.BaseMultiClaim) |  |  |
+| `reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.SwapClaim"></a>
+<a name="mage.incentive.v1beta1.SwapClaim"></a>
 
 ### SwapClaim
 SwapClaim stores the swap rewards that can be claimed by owner
@@ -4829,15 +4829,15 @@ SwapClaim stores the swap rewards that can be claimed by owner
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_claim` | [BaseMultiClaim](#kava.incentive.v1beta1.BaseMultiClaim) |  |  |
-| `reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `base_claim` | [BaseMultiClaim](#mage.incentive.v1beta1.BaseMultiClaim) |  |  |
+| `reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.TypedRewardIndexes"></a>
+<a name="mage.incentive.v1beta1.TypedRewardIndexes"></a>
 
 ### TypedRewardIndexes
 TypedRewardIndexes defines a RewardIndexes slice with its corresponding
@@ -4846,25 +4846,25 @@ claim and collateral type
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `claim_type` | [ClaimType](#kava.incentive.v1beta1.ClaimType) |  |  |
+| `claim_type` | [ClaimType](#mage.incentive.v1beta1.ClaimType) |  |  |
 | `collateral_type` | [string](#string) |  |  |
-| `reward_indexes` | [RewardIndex](#kava.incentive.v1beta1.RewardIndex) | repeated |  |
+| `reward_indexes` | [RewardIndex](#mage.incentive.v1beta1.RewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.USDXMintingClaim"></a>
+<a name="mage.incentive.v1beta1.FUSDMintingClaim"></a>
 
-### USDXMintingClaim
-USDXMintingClaim is for USDX minting rewards
+### FUSDMintingClaim
+FUSDMintingClaim is for FUSD minting rewards
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `base_claim` | [BaseClaim](#kava.incentive.v1beta1.BaseClaim) |  |  |
-| `reward_indexes` | [RewardIndex](#kava.incentive.v1beta1.RewardIndex) | repeated |  |
+| `base_claim` | [BaseClaim](#mage.incentive.v1beta1.BaseClaim) |  |  |
+| `reward_indexes` | [RewardIndex](#mage.incentive.v1beta1.RewardIndex) | repeated |  |
 
 
 
@@ -4873,7 +4873,7 @@ USDXMintingClaim is for USDX minting rewards
  <!-- end messages -->
 
 
-<a name="kava.incentive.v1beta1.ClaimType"></a>
+<a name="mage.incentive.v1beta1.ClaimType"></a>
 
 ### ClaimType
 ClaimType is the type of claim
@@ -4887,7 +4887,7 @@ ClaimType is the type of claim
 | CLAIM_TYPE_EARN | 4 | claim type for earn rewards |
 | CLAIM_TYPE_SAVINGS | 5 | claim type for savings rewards |
 | CLAIM_TYPE_SWAP | 6 | claim type for swap rewards |
-| CLAIM_TYPE_USDX_MINTING | 7 | claim type for usdx minting rewards |
+| CLAIM_TYPE_FUSD_MINTING | 7 | claim type for fusd minting rewards |
 
 
  <!-- end enums -->
@@ -4898,14 +4898,14 @@ ClaimType is the type of claim
 
 
 
-<a name="kava/incentive/v1beta1/params.proto"></a>
+<a name="mage/incentive/v1beta1/params.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/incentive/v1beta1/params.proto
+## mage/incentive/v1beta1/params.proto
 
 
 
-<a name="kava.incentive.v1beta1.MultiRewardPeriod"></a>
+<a name="mage.incentive.v1beta1.MultiRewardPeriod"></a>
 
 ### MultiRewardPeriod
 MultiRewardPeriod supports multiple reward types
@@ -4924,7 +4924,7 @@ MultiRewardPeriod supports multiple reward types
 
 
 
-<a name="kava.incentive.v1beta1.Multiplier"></a>
+<a name="mage.incentive.v1beta1.Multiplier"></a>
 
 ### Multiplier
 Multiplier amount the claim rewards get increased by, along with how long the
@@ -4942,7 +4942,7 @@ claim rewards are locked
 
 
 
-<a name="kava.incentive.v1beta1.MultipliersPerDenom"></a>
+<a name="mage.incentive.v1beta1.MultipliersPerDenom"></a>
 
 ### MultipliersPerDenom
 MultipliersPerDenom is a map of denoms to a set of multipliers
@@ -4951,14 +4951,14 @@ MultipliersPerDenom is a map of denoms to a set of multipliers
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `denom` | [string](#string) |  |  |
-| `multipliers` | [Multiplier](#kava.incentive.v1beta1.Multiplier) | repeated |  |
+| `multipliers` | [Multiplier](#mage.incentive.v1beta1.Multiplier) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.Params"></a>
+<a name="mage.incentive.v1beta1.Params"></a>
 
 ### Params
 Params
@@ -4966,23 +4966,23 @@ Params
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `usdx_minting_reward_periods` | [RewardPeriod](#kava.incentive.v1beta1.RewardPeriod) | repeated |  |
-| `hard_supply_reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
-| `hard_borrow_reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
-| `delegator_reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
-| `swap_reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
-| `claim_multipliers` | [MultipliersPerDenom](#kava.incentive.v1beta1.MultipliersPerDenom) | repeated |  |
+| `fusd_minting_reward_periods` | [RewardPeriod](#mage.incentive.v1beta1.RewardPeriod) | repeated |  |
+| `hard_supply_reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `hard_borrow_reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `delegator_reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `swap_reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `claim_multipliers` | [MultipliersPerDenom](#mage.incentive.v1beta1.MultipliersPerDenom) | repeated |  |
 | `claim_end` | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
-| `savings_reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
-| `earn_reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
-| `reward_periods` | [TypedMultiRewardPeriod](#kava.incentive.v1beta1.TypedMultiRewardPeriod) | repeated |  |
+| `savings_reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `earn_reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `reward_periods` | [TypedMultiRewardPeriod](#mage.incentive.v1beta1.TypedMultiRewardPeriod) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.RewardPeriod"></a>
+<a name="mage.incentive.v1beta1.RewardPeriod"></a>
 
 ### RewardPeriod
 RewardPeriod stores the state of an ongoing reward
@@ -5001,7 +5001,7 @@ RewardPeriod stores the state of an ongoing reward
 
 
 
-<a name="kava.incentive.v1beta1.TypedMultiRewardPeriod"></a>
+<a name="mage.incentive.v1beta1.TypedMultiRewardPeriod"></a>
 
 ### TypedMultiRewardPeriod
 TypedMultiRewardPeriod stores mutiple reward types of a claim type
@@ -5009,8 +5009,8 @@ TypedMultiRewardPeriod stores mutiple reward types of a claim type
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `claim_type` | [ClaimType](#kava.incentive.v1beta1.ClaimType) |  |  |
-| `reward_periods` | [MultiRewardPeriod](#kava.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
+| `claim_type` | [ClaimType](#mage.incentive.v1beta1.ClaimType) |  |  |
+| `reward_periods` | [MultiRewardPeriod](#mage.incentive.v1beta1.MultiRewardPeriod) | repeated |  |
 
 
 
@@ -5026,14 +5026,14 @@ TypedMultiRewardPeriod stores mutiple reward types of a claim type
 
 
 
-<a name="kava/incentive/v1beta1/genesis.proto"></a>
+<a name="mage/incentive/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/incentive/v1beta1/genesis.proto
+## mage/incentive/v1beta1/genesis.proto
 
 
 
-<a name="kava.incentive.v1beta1.AccrualTime"></a>
+<a name="mage.incentive.v1beta1.AccrualTime"></a>
 
 ### AccrualTime
 AccrualTime stores the previous reward distribution time and its
@@ -5043,7 +5043,7 @@ AccumulationTime that is used for the new claim types.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `claim_type` | [ClaimType](#kava.incentive.v1beta1.ClaimType) |  |  |
+| `claim_type` | [ClaimType](#mage.incentive.v1beta1.ClaimType) |  |  |
 | `collateral_type` | [string](#string) |  |  |
 | `previous_accumulation_time` | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
 
@@ -5052,7 +5052,7 @@ AccumulationTime that is used for the new claim types.
 
 
 
-<a name="kava.incentive.v1beta1.AccumulationTime"></a>
+<a name="mage.incentive.v1beta1.AccumulationTime"></a>
 
 ### AccumulationTime
 AccumulationTime stores the previous reward distribution time and its corresponding collateral type
@@ -5068,7 +5068,7 @@ AccumulationTime stores the previous reward distribution time and its correspond
 
 
 
-<a name="kava.incentive.v1beta1.GenesisRewardState"></a>
+<a name="mage.incentive.v1beta1.GenesisRewardState"></a>
 
 ### GenesisRewardState
 GenesisRewardState groups together the global state for a particular reward so it can be exported in genesis.
@@ -5076,15 +5076,15 @@ GenesisRewardState groups together the global state for a particular reward so i
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `accumulation_times` | [AccumulationTime](#kava.incentive.v1beta1.AccumulationTime) | repeated |  |
-| `multi_reward_indexes` | [MultiRewardIndex](#kava.incentive.v1beta1.MultiRewardIndex) | repeated |  |
+| `accumulation_times` | [AccumulationTime](#mage.incentive.v1beta1.AccumulationTime) | repeated |  |
+| `multi_reward_indexes` | [MultiRewardIndex](#mage.incentive.v1beta1.MultiRewardIndex) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.GenesisState"></a>
+<a name="mage.incentive.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState is the state that must be provided at genesis.
@@ -5092,23 +5092,23 @@ GenesisState is the state that must be provided at genesis.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.incentive.v1beta1.Params) |  |  |
-| `usdx_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `hard_supply_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `hard_borrow_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `delegator_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `swap_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `usdx_minting_claims` | [USDXMintingClaim](#kava.incentive.v1beta1.USDXMintingClaim) | repeated |  |
-| `hard_liquidity_provider_claims` | [HardLiquidityProviderClaim](#kava.incentive.v1beta1.HardLiquidityProviderClaim) | repeated |  |
-| `delegator_claims` | [DelegatorClaim](#kava.incentive.v1beta1.DelegatorClaim) | repeated |  |
-| `swap_claims` | [SwapClaim](#kava.incentive.v1beta1.SwapClaim) | repeated |  |
-| `savings_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `savings_claims` | [SavingsClaim](#kava.incentive.v1beta1.SavingsClaim) | repeated |  |
-| `earn_reward_state` | [GenesisRewardState](#kava.incentive.v1beta1.GenesisRewardState) |  |  |
-| `earn_claims` | [EarnClaim](#kava.incentive.v1beta1.EarnClaim) | repeated |  |
-| `claims` | [Claim](#kava.incentive.v1beta1.Claim) | repeated |  |
-| `accrual_times` | [AccrualTime](#kava.incentive.v1beta1.AccrualTime) | repeated |  |
-| `reward_indexes` | [TypedRewardIndexes](#kava.incentive.v1beta1.TypedRewardIndexes) | repeated |  |
+| `params` | [Params](#mage.incentive.v1beta1.Params) |  |  |
+| `fusd_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `hard_supply_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `hard_borrow_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `delegator_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `swap_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `fusd_minting_claims` | [FUSDMintingClaim](#mage.incentive.v1beta1.FUSDMintingClaim) | repeated |  |
+| `hard_liquidity_provider_claims` | [HardLiquidityProviderClaim](#mage.incentive.v1beta1.HardLiquidityProviderClaim) | repeated |  |
+| `delegator_claims` | [DelegatorClaim](#mage.incentive.v1beta1.DelegatorClaim) | repeated |  |
+| `swap_claims` | [SwapClaim](#mage.incentive.v1beta1.SwapClaim) | repeated |  |
+| `savings_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `savings_claims` | [SavingsClaim](#mage.incentive.v1beta1.SavingsClaim) | repeated |  |
+| `earn_reward_state` | [GenesisRewardState](#mage.incentive.v1beta1.GenesisRewardState) |  |  |
+| `earn_claims` | [EarnClaim](#mage.incentive.v1beta1.EarnClaim) | repeated |  |
+| `claims` | [Claim](#mage.incentive.v1beta1.Claim) | repeated |  |
+| `accrual_times` | [AccrualTime](#mage.incentive.v1beta1.AccrualTime) | repeated |  |
+| `reward_indexes` | [TypedRewardIndexes](#mage.incentive.v1beta1.TypedRewardIndexes) | repeated |  |
 
 
 
@@ -5124,14 +5124,14 @@ GenesisState is the state that must be provided at genesis.
 
 
 
-<a name="kava/incentive/v1beta1/tx.proto"></a>
+<a name="mage/incentive/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/incentive/v1beta1/tx.proto
+## mage/incentive/v1beta1/tx.proto
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimDelegatorReward"></a>
+<a name="mage.incentive.v1beta1.MsgClaimDelegatorReward"></a>
 
 ### MsgClaimDelegatorReward
 MsgClaimDelegatorReward message type used to claim delegator rewards
@@ -5140,14 +5140,14 @@ MsgClaimDelegatorReward message type used to claim delegator rewards
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `sender` | [string](#string) |  |  |
-| `denoms_to_claim` | [Selection](#kava.incentive.v1beta1.Selection) | repeated |  |
+| `denoms_to_claim` | [Selection](#mage.incentive.v1beta1.Selection) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimDelegatorRewardResponse"></a>
+<a name="mage.incentive.v1beta1.MsgClaimDelegatorRewardResponse"></a>
 
 ### MsgClaimDelegatorRewardResponse
 MsgClaimDelegatorRewardResponse defines the Msg/ClaimDelegatorReward response type.
@@ -5157,7 +5157,7 @@ MsgClaimDelegatorRewardResponse defines the Msg/ClaimDelegatorReward response ty
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimEarnReward"></a>
+<a name="mage.incentive.v1beta1.MsgClaimEarnReward"></a>
 
 ### MsgClaimEarnReward
 MsgClaimEarnReward message type used to claim earn rewards
@@ -5166,14 +5166,14 @@ MsgClaimEarnReward message type used to claim earn rewards
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `sender` | [string](#string) |  |  |
-| `denoms_to_claim` | [Selection](#kava.incentive.v1beta1.Selection) | repeated |  |
+| `denoms_to_claim` | [Selection](#mage.incentive.v1beta1.Selection) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimEarnRewardResponse"></a>
+<a name="mage.incentive.v1beta1.MsgClaimEarnRewardResponse"></a>
 
 ### MsgClaimEarnRewardResponse
 MsgClaimEarnRewardResponse defines the Msg/ClaimEarnReward response type.
@@ -5183,7 +5183,7 @@ MsgClaimEarnRewardResponse defines the Msg/ClaimEarnReward response type.
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimHardReward"></a>
+<a name="mage.incentive.v1beta1.MsgClaimHardReward"></a>
 
 ### MsgClaimHardReward
 MsgClaimHardReward message type used to claim Hard liquidity provider rewards
@@ -5192,14 +5192,14 @@ MsgClaimHardReward message type used to claim Hard liquidity provider rewards
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `sender` | [string](#string) |  |  |
-| `denoms_to_claim` | [Selection](#kava.incentive.v1beta1.Selection) | repeated |  |
+| `denoms_to_claim` | [Selection](#mage.incentive.v1beta1.Selection) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimHardRewardResponse"></a>
+<a name="mage.incentive.v1beta1.MsgClaimHardRewardResponse"></a>
 
 ### MsgClaimHardRewardResponse
 MsgClaimHardRewardResponse defines the Msg/ClaimHardReward response type.
@@ -5209,7 +5209,7 @@ MsgClaimHardRewardResponse defines the Msg/ClaimHardReward response type.
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimSavingsReward"></a>
+<a name="mage.incentive.v1beta1.MsgClaimSavingsReward"></a>
 
 ### MsgClaimSavingsReward
 MsgClaimSavingsReward message type used to claim savings rewards
@@ -5218,14 +5218,14 @@ MsgClaimSavingsReward message type used to claim savings rewards
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `sender` | [string](#string) |  |  |
-| `denoms_to_claim` | [Selection](#kava.incentive.v1beta1.Selection) | repeated |  |
+| `denoms_to_claim` | [Selection](#mage.incentive.v1beta1.Selection) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimSavingsRewardResponse"></a>
+<a name="mage.incentive.v1beta1.MsgClaimSavingsRewardResponse"></a>
 
 ### MsgClaimSavingsRewardResponse
 MsgClaimSavingsRewardResponse defines the Msg/ClaimSavingsReward response type.
@@ -5235,7 +5235,7 @@ MsgClaimSavingsRewardResponse defines the Msg/ClaimSavingsReward response type.
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimSwapReward"></a>
+<a name="mage.incentive.v1beta1.MsgClaimSwapReward"></a>
 
 ### MsgClaimSwapReward
 MsgClaimSwapReward message type used to claim delegator rewards
@@ -5244,14 +5244,14 @@ MsgClaimSwapReward message type used to claim delegator rewards
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `sender` | [string](#string) |  |  |
-| `denoms_to_claim` | [Selection](#kava.incentive.v1beta1.Selection) | repeated |  |
+| `denoms_to_claim` | [Selection](#mage.incentive.v1beta1.Selection) | repeated |  |
 
 
 
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimSwapRewardResponse"></a>
+<a name="mage.incentive.v1beta1.MsgClaimSwapRewardResponse"></a>
 
 ### MsgClaimSwapRewardResponse
 MsgClaimSwapRewardResponse defines the Msg/ClaimSwapReward response type.
@@ -5261,10 +5261,10 @@ MsgClaimSwapRewardResponse defines the Msg/ClaimSwapReward response type.
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimUSDXMintingReward"></a>
+<a name="mage.incentive.v1beta1.MsgClaimFUSDMintingReward"></a>
 
-### MsgClaimUSDXMintingReward
-MsgClaimUSDXMintingReward message type used to claim USDX minting rewards
+### MsgClaimFUSDMintingReward
+MsgClaimFUSDMintingReward message type used to claim FUSD minting rewards
 
 
 | Field | Type | Label | Description |
@@ -5277,17 +5277,17 @@ MsgClaimUSDXMintingReward message type used to claim USDX minting rewards
 
 
 
-<a name="kava.incentive.v1beta1.MsgClaimUSDXMintingRewardResponse"></a>
+<a name="mage.incentive.v1beta1.MsgClaimFUSDMintingRewardResponse"></a>
 
-### MsgClaimUSDXMintingRewardResponse
-MsgClaimUSDXMintingRewardResponse defines the Msg/ClaimUSDXMintingReward response type.
-
-
+### MsgClaimFUSDMintingRewardResponse
+MsgClaimFUSDMintingRewardResponse defines the Msg/ClaimFUSDMintingReward response type.
 
 
 
 
-<a name="kava.incentive.v1beta1.Selection"></a>
+
+
+<a name="mage.incentive.v1beta1.Selection"></a>
 
 ### Selection
 Selection is a pair of denom and multiplier name. It holds the choice of multiplier a user makes when they claim a
@@ -5310,32 +5310,32 @@ denom.
  <!-- end HasExtensions -->
 
 
-<a name="kava.incentive.v1beta1.Msg"></a>
+<a name="mage.incentive.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the incentive Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `ClaimUSDXMintingReward` | [MsgClaimUSDXMintingReward](#kava.incentive.v1beta1.MsgClaimUSDXMintingReward) | [MsgClaimUSDXMintingRewardResponse](#kava.incentive.v1beta1.MsgClaimUSDXMintingRewardResponse) | ClaimUSDXMintingReward is a message type used to claim USDX minting rewards | |
-| `ClaimHardReward` | [MsgClaimHardReward](#kava.incentive.v1beta1.MsgClaimHardReward) | [MsgClaimHardRewardResponse](#kava.incentive.v1beta1.MsgClaimHardRewardResponse) | ClaimHardReward is a message type used to claim Hard liquidity provider rewards | |
-| `ClaimDelegatorReward` | [MsgClaimDelegatorReward](#kava.incentive.v1beta1.MsgClaimDelegatorReward) | [MsgClaimDelegatorRewardResponse](#kava.incentive.v1beta1.MsgClaimDelegatorRewardResponse) | ClaimDelegatorReward is a message type used to claim delegator rewards | |
-| `ClaimSwapReward` | [MsgClaimSwapReward](#kava.incentive.v1beta1.MsgClaimSwapReward) | [MsgClaimSwapRewardResponse](#kava.incentive.v1beta1.MsgClaimSwapRewardResponse) | ClaimSwapReward is a message type used to claim swap rewards | |
-| `ClaimSavingsReward` | [MsgClaimSavingsReward](#kava.incentive.v1beta1.MsgClaimSavingsReward) | [MsgClaimSavingsRewardResponse](#kava.incentive.v1beta1.MsgClaimSavingsRewardResponse) | ClaimSavingsReward is a message type used to claim savings rewards | |
-| `ClaimEarnReward` | [MsgClaimEarnReward](#kava.incentive.v1beta1.MsgClaimEarnReward) | [MsgClaimEarnRewardResponse](#kava.incentive.v1beta1.MsgClaimEarnRewardResponse) | ClaimEarnReward is a message type used to claim earn rewards | |
+| `ClaimFUSDMintingReward` | [MsgClaimFUSDMintingReward](#mage.incentive.v1beta1.MsgClaimFUSDMintingReward) | [MsgClaimFUSDMintingRewardResponse](#mage.incentive.v1beta1.MsgClaimFUSDMintingRewardResponse) | ClaimFUSDMintingReward is a message type used to claim FUSD minting rewards | |
+| `ClaimHardReward` | [MsgClaimHardReward](#mage.incentive.v1beta1.MsgClaimHardReward) | [MsgClaimHardRewardResponse](#mage.incentive.v1beta1.MsgClaimHardRewardResponse) | ClaimHardReward is a message type used to claim Hard liquidity provider rewards | |
+| `ClaimDelegatorReward` | [MsgClaimDelegatorReward](#mage.incentive.v1beta1.MsgClaimDelegatorReward) | [MsgClaimDelegatorRewardResponse](#mage.incentive.v1beta1.MsgClaimDelegatorRewardResponse) | ClaimDelegatorReward is a message type used to claim delegator rewards | |
+| `ClaimSwapReward` | [MsgClaimSwapReward](#mage.incentive.v1beta1.MsgClaimSwapReward) | [MsgClaimSwapRewardResponse](#mage.incentive.v1beta1.MsgClaimSwapRewardResponse) | ClaimSwapReward is a message type used to claim swap rewards | |
+| `ClaimSavingsReward` | [MsgClaimSavingsReward](#mage.incentive.v1beta1.MsgClaimSavingsReward) | [MsgClaimSavingsRewardResponse](#mage.incentive.v1beta1.MsgClaimSavingsRewardResponse) | ClaimSavingsReward is a message type used to claim savings rewards | |
+| `ClaimEarnReward` | [MsgClaimEarnReward](#mage.incentive.v1beta1.MsgClaimEarnReward) | [MsgClaimEarnRewardResponse](#mage.incentive.v1beta1.MsgClaimEarnRewardResponse) | ClaimEarnReward is a message type used to claim earn rewards | |
 
  <!-- end services -->
 
 
 
-<a name="kava/issuance/v1beta1/genesis.proto"></a>
+<a name="mage/issuance/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/issuance/v1beta1/genesis.proto
+## mage/issuance/v1beta1/genesis.proto
 
 
 
-<a name="kava.issuance.v1beta1.Asset"></a>
+<a name="mage.issuance.v1beta1.Asset"></a>
 
 ### Asset
 Asset type for assets in the issuance module
@@ -5348,14 +5348,14 @@ Asset type for assets in the issuance module
 | `blocked_addresses` | [string](#string) | repeated |  |
 | `paused` | [bool](#bool) |  |  |
 | `blockable` | [bool](#bool) |  |  |
-| `rate_limit` | [RateLimit](#kava.issuance.v1beta1.RateLimit) |  |  |
+| `rate_limit` | [RateLimit](#mage.issuance.v1beta1.RateLimit) |  |  |
 
 
 
 
 
 
-<a name="kava.issuance.v1beta1.AssetSupply"></a>
+<a name="mage.issuance.v1beta1.AssetSupply"></a>
 
 ### AssetSupply
 AssetSupply contains information about an asset's rate-limited supply (the
@@ -5372,7 +5372,7 @@ total supply of the asset is tracked in the top-level supply module)
 
 
 
-<a name="kava.issuance.v1beta1.GenesisState"></a>
+<a name="mage.issuance.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the issuance module's genesis state.
@@ -5380,15 +5380,15 @@ GenesisState defines the issuance module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.issuance.v1beta1.Params) |  | params defines all the paramaters of the module. |
-| `supplies` | [AssetSupply](#kava.issuance.v1beta1.AssetSupply) | repeated |  |
+| `params` | [Params](#mage.issuance.v1beta1.Params) |  | params defines all the paramaters of the module. |
+| `supplies` | [AssetSupply](#mage.issuance.v1beta1.AssetSupply) | repeated |  |
 
 
 
 
 
 
-<a name="kava.issuance.v1beta1.Params"></a>
+<a name="mage.issuance.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the issuance module.
@@ -5396,14 +5396,14 @@ Params defines the parameters for the issuance module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `assets` | [Asset](#kava.issuance.v1beta1.Asset) | repeated |  |
+| `assets` | [Asset](#mage.issuance.v1beta1.Asset) | repeated |  |
 
 
 
 
 
 
-<a name="kava.issuance.v1beta1.RateLimit"></a>
+<a name="mage.issuance.v1beta1.RateLimit"></a>
 
 ### RateLimit
 RateLimit parameters for rate-limiting the supply of an issued asset
@@ -5429,14 +5429,14 @@ RateLimit parameters for rate-limiting the supply of an issued asset
 
 
 
-<a name="kava/issuance/v1beta1/query.proto"></a>
+<a name="mage/issuance/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/issuance/v1beta1/query.proto
+## mage/issuance/v1beta1/query.proto
 
 
 
-<a name="kava.issuance.v1beta1.QueryParamsRequest"></a>
+<a name="mage.issuance.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/issuance parameters.
@@ -5446,7 +5446,7 @@ QueryParamsRequest defines the request type for querying x/issuance parameters.
 
 
 
-<a name="kava.issuance.v1beta1.QueryParamsResponse"></a>
+<a name="mage.issuance.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/issuance parameters.
@@ -5454,7 +5454,7 @@ QueryParamsResponse defines the response type for querying x/issuance parameters
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.issuance.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.issuance.v1beta1.Params) |  |  |
 
 
 
@@ -5467,27 +5467,27 @@ QueryParamsResponse defines the response type for querying x/issuance parameters
  <!-- end HasExtensions -->
 
 
-<a name="kava.issuance.v1beta1.Query"></a>
+<a name="mage.issuance.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for issuance module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.issuance.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.issuance.v1beta1.QueryParamsResponse) | Params queries all parameters of the issuance module. | GET|/kava/issuance/v1beta1/params|
+| `Params` | [QueryParamsRequest](#mage.issuance.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.issuance.v1beta1.QueryParamsResponse) | Params queries all parameters of the issuance module. | GET|/mage/issuance/v1beta1/params|
 
  <!-- end services -->
 
 
 
-<a name="kava/issuance/v1beta1/tx.proto"></a>
+<a name="mage/issuance/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/issuance/v1beta1/tx.proto
+## mage/issuance/v1beta1/tx.proto
 
 
 
-<a name="kava.issuance.v1beta1.MsgBlockAddress"></a>
+<a name="mage.issuance.v1beta1.MsgBlockAddress"></a>
 
 ### MsgBlockAddress
 MsgBlockAddress represents a message used by the issuer to block an address from holding or transferring tokens
@@ -5504,7 +5504,7 @@ MsgBlockAddress represents a message used by the issuer to block an address from
 
 
 
-<a name="kava.issuance.v1beta1.MsgBlockAddressResponse"></a>
+<a name="mage.issuance.v1beta1.MsgBlockAddressResponse"></a>
 
 ### MsgBlockAddressResponse
 MsgBlockAddressResponse defines the Msg/BlockAddress response type.
@@ -5514,7 +5514,7 @@ MsgBlockAddressResponse defines the Msg/BlockAddress response type.
 
 
 
-<a name="kava.issuance.v1beta1.MsgIssueTokens"></a>
+<a name="mage.issuance.v1beta1.MsgIssueTokens"></a>
 
 ### MsgIssueTokens
 MsgIssueTokens represents a message used by the issuer to issue new tokens
@@ -5531,7 +5531,7 @@ MsgIssueTokens represents a message used by the issuer to issue new tokens
 
 
 
-<a name="kava.issuance.v1beta1.MsgIssueTokensResponse"></a>
+<a name="mage.issuance.v1beta1.MsgIssueTokensResponse"></a>
 
 ### MsgIssueTokensResponse
 MsgIssueTokensResponse defines the Msg/IssueTokens response type.
@@ -5541,7 +5541,7 @@ MsgIssueTokensResponse defines the Msg/IssueTokens response type.
 
 
 
-<a name="kava.issuance.v1beta1.MsgRedeemTokens"></a>
+<a name="mage.issuance.v1beta1.MsgRedeemTokens"></a>
 
 ### MsgRedeemTokens
 MsgRedeemTokens represents a message used by the issuer to redeem (burn) tokens
@@ -5557,7 +5557,7 @@ MsgRedeemTokens represents a message used by the issuer to redeem (burn) tokens
 
 
 
-<a name="kava.issuance.v1beta1.MsgRedeemTokensResponse"></a>
+<a name="mage.issuance.v1beta1.MsgRedeemTokensResponse"></a>
 
 ### MsgRedeemTokensResponse
 MsgRedeemTokensResponse defines the Msg/RedeemTokens response type.
@@ -5567,7 +5567,7 @@ MsgRedeemTokensResponse defines the Msg/RedeemTokens response type.
 
 
 
-<a name="kava.issuance.v1beta1.MsgSetPauseStatus"></a>
+<a name="mage.issuance.v1beta1.MsgSetPauseStatus"></a>
 
 ### MsgSetPauseStatus
 MsgSetPauseStatus message type used by the issuer to pause or unpause status
@@ -5584,7 +5584,7 @@ MsgSetPauseStatus message type used by the issuer to pause or unpause status
 
 
 
-<a name="kava.issuance.v1beta1.MsgSetPauseStatusResponse"></a>
+<a name="mage.issuance.v1beta1.MsgSetPauseStatusResponse"></a>
 
 ### MsgSetPauseStatusResponse
 MsgSetPauseStatusResponse defines the Msg/SetPauseStatus response type.
@@ -5594,7 +5594,7 @@ MsgSetPauseStatusResponse defines the Msg/SetPauseStatus response type.
 
 
 
-<a name="kava.issuance.v1beta1.MsgUnblockAddress"></a>
+<a name="mage.issuance.v1beta1.MsgUnblockAddress"></a>
 
 ### MsgUnblockAddress
 MsgUnblockAddress message type used by the issuer to unblock an address from holding or transferring tokens
@@ -5611,7 +5611,7 @@ MsgUnblockAddress message type used by the issuer to unblock an address from hol
 
 
 
-<a name="kava.issuance.v1beta1.MsgUnblockAddressResponse"></a>
+<a name="mage.issuance.v1beta1.MsgUnblockAddressResponse"></a>
 
 ### MsgUnblockAddressResponse
 MsgUnblockAddressResponse defines the Msg/UnblockAddress response type.
@@ -5627,31 +5627,31 @@ MsgUnblockAddressResponse defines the Msg/UnblockAddress response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.issuance.v1beta1.Msg"></a>
+<a name="mage.issuance.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the issuance Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `IssueTokens` | [MsgIssueTokens](#kava.issuance.v1beta1.MsgIssueTokens) | [MsgIssueTokensResponse](#kava.issuance.v1beta1.MsgIssueTokensResponse) | IssueTokens message type used by the issuer to issue new tokens | |
-| `RedeemTokens` | [MsgRedeemTokens](#kava.issuance.v1beta1.MsgRedeemTokens) | [MsgRedeemTokensResponse](#kava.issuance.v1beta1.MsgRedeemTokensResponse) | RedeemTokens message type used by the issuer to redeem (burn) tokens | |
-| `BlockAddress` | [MsgBlockAddress](#kava.issuance.v1beta1.MsgBlockAddress) | [MsgBlockAddressResponse](#kava.issuance.v1beta1.MsgBlockAddressResponse) | BlockAddress message type used by the issuer to block an address from holding or transferring tokens | |
-| `UnblockAddress` | [MsgUnblockAddress](#kava.issuance.v1beta1.MsgUnblockAddress) | [MsgUnblockAddressResponse](#kava.issuance.v1beta1.MsgUnblockAddressResponse) | UnblockAddress message type used by the issuer to unblock an address from holding or transferring tokens | |
-| `SetPauseStatus` | [MsgSetPauseStatus](#kava.issuance.v1beta1.MsgSetPauseStatus) | [MsgSetPauseStatusResponse](#kava.issuance.v1beta1.MsgSetPauseStatusResponse) | SetPauseStatus message type used to pause or unpause status | |
+| `IssueTokens` | [MsgIssueTokens](#mage.issuance.v1beta1.MsgIssueTokens) | [MsgIssueTokensResponse](#mage.issuance.v1beta1.MsgIssueTokensResponse) | IssueTokens message type used by the issuer to issue new tokens | |
+| `RedeemTokens` | [MsgRedeemTokens](#mage.issuance.v1beta1.MsgRedeemTokens) | [MsgRedeemTokensResponse](#mage.issuance.v1beta1.MsgRedeemTokensResponse) | RedeemTokens message type used by the issuer to redeem (burn) tokens | |
+| `BlockAddress` | [MsgBlockAddress](#mage.issuance.v1beta1.MsgBlockAddress) | [MsgBlockAddressResponse](#mage.issuance.v1beta1.MsgBlockAddressResponse) | BlockAddress message type used by the issuer to block an address from holding or transferring tokens | |
+| `UnblockAddress` | [MsgUnblockAddress](#mage.issuance.v1beta1.MsgUnblockAddress) | [MsgUnblockAddressResponse](#mage.issuance.v1beta1.MsgUnblockAddressResponse) | UnblockAddress message type used by the issuer to unblock an address from holding or transferring tokens | |
+| `SetPauseStatus` | [MsgSetPauseStatus](#mage.issuance.v1beta1.MsgSetPauseStatus) | [MsgSetPauseStatusResponse](#mage.issuance.v1beta1.MsgSetPauseStatusResponse) | SetPauseStatus message type used to pause or unpause status | |
 
  <!-- end services -->
 
 
 
-<a name="kava/kavadist/v1beta1/params.proto"></a>
+<a name="mage/magedist/v1beta1/params.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavadist/v1beta1/params.proto
+## mage/magedist/v1beta1/params.proto
 
 
 
-<a name="kava.kavadist.v1beta1.CoreReward"></a>
+<a name="mage.magedist.v1beta1.CoreReward"></a>
 
 ### CoreReward
 CoreReward defines the reward weights for core infrastructure providers.
@@ -5667,7 +5667,7 @@ CoreReward defines the reward weights for core infrastructure providers.
 
 
 
-<a name="kava.kavadist.v1beta1.InfrastructureParams"></a>
+<a name="mage.magedist.v1beta1.InfrastructureParams"></a>
 
 ### InfrastructureParams
 InfrastructureParams define the parameters for infrastructure rewards.
@@ -5675,33 +5675,33 @@ InfrastructureParams define the parameters for infrastructure rewards.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `infrastructure_periods` | [Period](#kava.kavadist.v1beta1.Period) | repeated |  |
-| `core_rewards` | [CoreReward](#kava.kavadist.v1beta1.CoreReward) | repeated |  |
-| `partner_rewards` | [PartnerReward](#kava.kavadist.v1beta1.PartnerReward) | repeated |  |
+| `infrastructure_periods` | [Period](#mage.magedist.v1beta1.Period) | repeated |  |
+| `core_rewards` | [CoreReward](#mage.magedist.v1beta1.CoreReward) | repeated |  |
+| `partner_rewards` | [PartnerReward](#mage.magedist.v1beta1.PartnerReward) | repeated |  |
 
 
 
 
 
 
-<a name="kava.kavadist.v1beta1.Params"></a>
+<a name="mage.magedist.v1beta1.Params"></a>
 
 ### Params
-Params governance parameters for kavadist module
+Params governance parameters for magedist module
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | `active` | [bool](#bool) |  |  |
-| `periods` | [Period](#kava.kavadist.v1beta1.Period) | repeated |  |
-| `infrastructure_params` | [InfrastructureParams](#kava.kavadist.v1beta1.InfrastructureParams) |  |  |
+| `periods` | [Period](#mage.magedist.v1beta1.Period) | repeated |  |
+| `infrastructure_params` | [InfrastructureParams](#mage.magedist.v1beta1.InfrastructureParams) |  |  |
 
 
 
 
 
 
-<a name="kava.kavadist.v1beta1.PartnerReward"></a>
+<a name="mage.magedist.v1beta1.PartnerReward"></a>
 
 ### PartnerReward
 PartnerRewards defines the reward schedule for partner infrastructure providers.
@@ -5717,11 +5717,11 @@ PartnerRewards defines the reward schedule for partner infrastructure providers.
 
 
 
-<a name="kava.kavadist.v1beta1.Period"></a>
+<a name="mage.magedist.v1beta1.Period"></a>
 
 ### Period
 Period stores the specified start and end dates, and the inflation, expressed as a decimal
-representing the yearly APR of KAVA tokens that will be minted during that period
+representing the yearly APR of MAGE tokens that will be minted during that period
 
 
 | Field | Type | Label | Description |
@@ -5744,22 +5744,22 @@ representing the yearly APR of KAVA tokens that will be minted during that perio
 
 
 
-<a name="kava/kavadist/v1beta1/genesis.proto"></a>
+<a name="mage/magedist/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavadist/v1beta1/genesis.proto
+## mage/magedist/v1beta1/genesis.proto
 
 
 
-<a name="kava.kavadist.v1beta1.GenesisState"></a>
+<a name="mage.magedist.v1beta1.GenesisState"></a>
 
 ### GenesisState
-GenesisState defines the kavadist module's genesis state.
+GenesisState defines the magedist module's genesis state.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.kavadist.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.magedist.v1beta1.Params) |  |  |
 | `previous_block_time` | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
 
 
@@ -5776,14 +5776,14 @@ GenesisState defines the kavadist module's genesis state.
 
 
 
-<a name="kava/kavadist/v1beta1/proposal.proto"></a>
+<a name="mage/magedist/v1beta1/proposal.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavadist/v1beta1/proposal.proto
+## mage/magedist/v1beta1/proposal.proto
 
 
 
-<a name="kava.kavadist.v1beta1.CommunityPoolMultiSpendProposal"></a>
+<a name="mage.magedist.v1beta1.CommunityPoolMultiSpendProposal"></a>
 
 ### CommunityPoolMultiSpendProposal
 CommunityPoolMultiSpendProposal spends from the community pool by sending to one or more
@@ -5794,14 +5794,14 @@ addresses
 | ----- | ---- | ----- | ----------- |
 | `title` | [string](#string) |  |  |
 | `description` | [string](#string) |  |  |
-| `recipient_list` | [MultiSpendRecipient](#kava.kavadist.v1beta1.MultiSpendRecipient) | repeated |  |
+| `recipient_list` | [MultiSpendRecipient](#mage.magedist.v1beta1.MultiSpendRecipient) | repeated |  |
 
 
 
 
 
 
-<a name="kava.kavadist.v1beta1.CommunityPoolMultiSpendProposalJSON"></a>
+<a name="mage.magedist.v1beta1.CommunityPoolMultiSpendProposalJSON"></a>
 
 ### CommunityPoolMultiSpendProposalJSON
 CommunityPoolMultiSpendProposalJSON defines a CommunityPoolMultiSpendProposal with a deposit
@@ -5811,7 +5811,7 @@ CommunityPoolMultiSpendProposalJSON defines a CommunityPoolMultiSpendProposal wi
 | ----- | ---- | ----- | ----------- |
 | `title` | [string](#string) |  |  |
 | `description` | [string](#string) |  |  |
-| `recipient_list` | [MultiSpendRecipient](#kava.kavadist.v1beta1.MultiSpendRecipient) | repeated |  |
+| `recipient_list` | [MultiSpendRecipient](#mage.magedist.v1beta1.MultiSpendRecipient) | repeated |  |
 | `deposit` | [cosmos.base.v1beta1.Coin](#cosmos.base.v1beta1.Coin) | repeated |  |
 
 
@@ -5819,7 +5819,7 @@ CommunityPoolMultiSpendProposalJSON defines a CommunityPoolMultiSpendProposal wi
 
 
 
-<a name="kava.kavadist.v1beta1.MultiSpendRecipient"></a>
+<a name="mage.magedist.v1beta1.MultiSpendRecipient"></a>
 
 ### MultiSpendRecipient
 MultiSpendRecipient defines a recipient and the amount of coins they are receiving
@@ -5844,27 +5844,27 @@ MultiSpendRecipient defines a recipient and the amount of coins they are receivi
 
 
 
-<a name="kava/kavadist/v1beta1/query.proto"></a>
+<a name="mage/magedist/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavadist/v1beta1/query.proto
+## mage/magedist/v1beta1/query.proto
 
 
 
-<a name="kava.kavadist.v1beta1.QueryBalanceRequest"></a>
+<a name="mage.magedist.v1beta1.QueryBalanceRequest"></a>
 
 ### QueryBalanceRequest
-QueryBalanceRequest defines the request type for querying x/kavadist balance.
+QueryBalanceRequest defines the request type for querying x/magedist balance.
 
 
 
 
 
 
-<a name="kava.kavadist.v1beta1.QueryBalanceResponse"></a>
+<a name="mage.magedist.v1beta1.QueryBalanceResponse"></a>
 
 ### QueryBalanceResponse
-QueryBalanceResponse defines the response type for querying x/kavadist balance.
+QueryBalanceResponse defines the response type for querying x/magedist balance.
 
 
 | Field | Type | Label | Description |
@@ -5876,25 +5876,25 @@ QueryBalanceResponse defines the response type for querying x/kavadist balance.
 
 
 
-<a name="kava.kavadist.v1beta1.QueryParamsRequest"></a>
+<a name="mage.magedist.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
-QueryParamsRequest defines the request type for querying x/kavadist parameters.
+QueryParamsRequest defines the request type for querying x/magedist parameters.
 
 
 
 
 
 
-<a name="kava.kavadist.v1beta1.QueryParamsResponse"></a>
+<a name="mage.magedist.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
-QueryParamsResponse defines the response type for querying x/kavadist parameters.
+QueryParamsResponse defines the response type for querying x/magedist parameters.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.kavadist.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.magedist.v1beta1.Params) |  |  |
 
 
 
@@ -5907,31 +5907,31 @@ QueryParamsResponse defines the response type for querying x/kavadist parameters
  <!-- end HasExtensions -->
 
 
-<a name="kava.kavadist.v1beta1.Query"></a>
+<a name="mage.magedist.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.kavadist.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.kavadist.v1beta1.QueryParamsResponse) | Params queries the parameters of x/kavadist module. | GET|/kava/kavadist/v1beta1/parameters|
-| `Balance` | [QueryBalanceRequest](#kava.kavadist.v1beta1.QueryBalanceRequest) | [QueryBalanceResponse](#kava.kavadist.v1beta1.QueryBalanceResponse) | Balance queries the balance of all coins of x/kavadist module. | GET|/kava/kavadist/v1beta1/balance|
+| `Params` | [QueryParamsRequest](#mage.magedist.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.magedist.v1beta1.QueryParamsResponse) | Params queries the parameters of x/magedist module. | GET|/mage/magedist/v1beta1/parameters|
+| `Balance` | [QueryBalanceRequest](#mage.magedist.v1beta1.QueryBalanceRequest) | [QueryBalanceResponse](#mage.magedist.v1beta1.QueryBalanceResponse) | Balance queries the balance of all coins of x/magedist module. | GET|/mage/magedist/v1beta1/balance|
 
  <!-- end services -->
 
 
 
-<a name="kava/kavamint/v1beta1/kavamint.proto"></a>
+<a name="mage/magemint/v1beta1/magemint.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavamint/v1beta1/kavamint.proto
+## mage/magemint/v1beta1/magemint.proto
 
 
 
-<a name="kava.kavamint.v1beta1.Params"></a>
+<a name="mage.magemint.v1beta1.Params"></a>
 
 ### Params
-Params wraps the governance parameters for the kavamint module
+Params wraps the governance parameters for the magemint module
 
 
 | Field | Type | Label | Description |
@@ -5953,22 +5953,22 @@ Params wraps the governance parameters for the kavamint module
 
 
 
-<a name="kava/kavamint/v1beta1/genesis.proto"></a>
+<a name="mage/magemint/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavamint/v1beta1/genesis.proto
+## mage/magemint/v1beta1/genesis.proto
 
 
 
-<a name="kava.kavamint.v1beta1.GenesisState"></a>
+<a name="mage.magemint.v1beta1.GenesisState"></a>
 
 ### GenesisState
-GenesisState defines the kavamint module's genesis state.
+GenesisState defines the magemint module's genesis state.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.kavamint.v1beta1.Params) |  | Params defines all the parameters of the module. |
+| `params` | [Params](#mage.magemint.v1beta1.Params) |  | Params defines all the parameters of the module. |
 | `previous_block_time` | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | PreviousBlockTime holds the last last time tokens were minted. On first block, tokens will be minted for total number of seconds passed since this time. |
 
 
@@ -5985,14 +5985,14 @@ GenesisState defines the kavamint module's genesis state.
 
 
 
-<a name="kava/kavamint/v1beta1/query.proto"></a>
+<a name="mage/magemint/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/kavamint/v1beta1/query.proto
+## mage/magemint/v1beta1/query.proto
 
 
 
-<a name="kava.kavamint.v1beta1.QueryInflationRequest"></a>
+<a name="mage.magemint.v1beta1.QueryInflationRequest"></a>
 
 ### QueryInflationRequest
 QueryInflationRequest is the request type for the Query/Inflation RPC method.
@@ -6002,7 +6002,7 @@ QueryInflationRequest is the request type for the Query/Inflation RPC method.
 
 
 
-<a name="kava.kavamint.v1beta1.QueryInflationResponse"></a>
+<a name="mage.magemint.v1beta1.QueryInflationResponse"></a>
 
 ### QueryInflationResponse
 QueryInflationResponse is the response type for the Query/Inflation RPC method.
@@ -6017,25 +6017,25 @@ QueryInflationResponse is the response type for the Query/Inflation RPC method.
 
 
 
-<a name="kava.kavamint.v1beta1.QueryParamsRequest"></a>
+<a name="mage.magemint.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
-QueryParamsRequest defines the request type for querying x/kavamint parameters.
+QueryParamsRequest defines the request type for querying x/magemint parameters.
 
 
 
 
 
 
-<a name="kava.kavamint.v1beta1.QueryParamsResponse"></a>
+<a name="mage.magemint.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
-QueryParamsResponse defines the response type for querying x/kavamint parameters.
+QueryParamsResponse defines the response type for querying x/magemint parameters.
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.kavamint.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.magemint.v1beta1.Params) |  |  |
 
 
 
@@ -6048,28 +6048,28 @@ QueryParamsResponse defines the response type for querying x/kavamint parameters
  <!-- end HasExtensions -->
 
 
-<a name="kava.kavamint.v1beta1.Query"></a>
+<a name="mage.magemint.v1beta1.Query"></a>
 
 ### Query
-Query defines the gRPC querier service for kavamint.
+Query defines the gRPC querier service for magemint.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.kavamint.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.kavamint.v1beta1.QueryParamsResponse) | Params queries the parameters of x/kavamint module. | GET|/kava/kavamint/v1beta1/params|
-| `Inflation` | [QueryInflationRequest](#kava.kavamint.v1beta1.QueryInflationRequest) | [QueryInflationResponse](#kava.kavamint.v1beta1.QueryInflationResponse) | Inflation queries x/kavamint for the overall cumulative inflation rate of KAVA. | GET|/kava/kavamint/v1beta1/inflation|
+| `Params` | [QueryParamsRequest](#mage.magemint.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.magemint.v1beta1.QueryParamsResponse) | Params queries the parameters of x/magemint module. | GET|/mage/magemint/v1beta1/params|
+| `Inflation` | [QueryInflationRequest](#mage.magemint.v1beta1.QueryInflationRequest) | [QueryInflationResponse](#mage.magemint.v1beta1.QueryInflationResponse) | Inflation queries x/magemint for the overall cumulative inflation rate of MAGE. | GET|/mage/magemint/v1beta1/inflation|
 
  <!-- end services -->
 
 
 
-<a name="kava/liquid/v1beta1/query.proto"></a>
+<a name="mage/liquid/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/liquid/v1beta1/query.proto
+## mage/liquid/v1beta1/query.proto
 
 
 
-<a name="kava.liquid.v1beta1.QueryDelegatedBalanceRequest"></a>
+<a name="mage.liquid.v1beta1.QueryDelegatedBalanceRequest"></a>
 
 ### QueryDelegatedBalanceRequest
 QueryDelegatedBalanceRequest defines the request type for Query/DelegatedBalance method.
@@ -6084,7 +6084,7 @@ QueryDelegatedBalanceRequest defines the request type for Query/DelegatedBalance
 
 
 
-<a name="kava.liquid.v1beta1.QueryDelegatedBalanceResponse"></a>
+<a name="mage.liquid.v1beta1.QueryDelegatedBalanceResponse"></a>
 
 ### QueryDelegatedBalanceResponse
 DelegatedBalanceResponse defines the response type for the Query/DelegatedBalance method.
@@ -6100,7 +6100,7 @@ DelegatedBalanceResponse defines the response type for the Query/DelegatedBalanc
 
 
 
-<a name="kava.liquid.v1beta1.QueryTotalSupplyRequest"></a>
+<a name="mage.liquid.v1beta1.QueryTotalSupplyRequest"></a>
 
 ### QueryTotalSupplyRequest
 QueryTotalSupplyRequest defines the request type for Query/TotalSupply method.
@@ -6110,7 +6110,7 @@ QueryTotalSupplyRequest defines the request type for Query/TotalSupply method.
 
 
 
-<a name="kava.liquid.v1beta1.QueryTotalSupplyResponse"></a>
+<a name="mage.liquid.v1beta1.QueryTotalSupplyResponse"></a>
 
 ### QueryTotalSupplyResponse
 TotalSupplyResponse defines the response type for the Query/TotalSupply method.
@@ -6132,28 +6132,28 @@ TotalSupplyResponse defines the response type for the Query/TotalSupply method.
  <!-- end HasExtensions -->
 
 
-<a name="kava.liquid.v1beta1.Query"></a>
+<a name="mage.liquid.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for liquid module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `DelegatedBalance` | [QueryDelegatedBalanceRequest](#kava.liquid.v1beta1.QueryDelegatedBalanceRequest) | [QueryDelegatedBalanceResponse](#kava.liquid.v1beta1.QueryDelegatedBalanceResponse) | DelegatedBalance returns an account's vesting and vested coins currently delegated to validators. It ignores coins in unbonding delegations. | GET|/kava/liquid/v1beta1/delegated_balance/{delegator}|
-| `TotalSupply` | [QueryTotalSupplyRequest](#kava.liquid.v1beta1.QueryTotalSupplyRequest) | [QueryTotalSupplyResponse](#kava.liquid.v1beta1.QueryTotalSupplyResponse) | TotalSupply returns the total sum of all coins currently locked into the liquid module. | GET|/kava/liquid/v1beta1/total_supply|
+| `DelegatedBalance` | [QueryDelegatedBalanceRequest](#mage.liquid.v1beta1.QueryDelegatedBalanceRequest) | [QueryDelegatedBalanceResponse](#mage.liquid.v1beta1.QueryDelegatedBalanceResponse) | DelegatedBalance returns an account's vesting and vested coins currently delegated to validators. It ignores coins in unbonding delegations. | GET|/mage/liquid/v1beta1/delegated_balance/{delegator}|
+| `TotalSupply` | [QueryTotalSupplyRequest](#mage.liquid.v1beta1.QueryTotalSupplyRequest) | [QueryTotalSupplyResponse](#mage.liquid.v1beta1.QueryTotalSupplyResponse) | TotalSupply returns the total sum of all coins currently locked into the liquid module. | GET|/mage/liquid/v1beta1/total_supply|
 
  <!-- end services -->
 
 
 
-<a name="kava/liquid/v1beta1/tx.proto"></a>
+<a name="mage/liquid/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/liquid/v1beta1/tx.proto
+## mage/liquid/v1beta1/tx.proto
 
 
 
-<a name="kava.liquid.v1beta1.MsgBurnDerivative"></a>
+<a name="mage.liquid.v1beta1.MsgBurnDerivative"></a>
 
 ### MsgBurnDerivative
 MsgBurnDerivative defines the Msg/BurnDerivative request type.
@@ -6170,7 +6170,7 @@ MsgBurnDerivative defines the Msg/BurnDerivative request type.
 
 
 
-<a name="kava.liquid.v1beta1.MsgBurnDerivativeResponse"></a>
+<a name="mage.liquid.v1beta1.MsgBurnDerivativeResponse"></a>
 
 ### MsgBurnDerivativeResponse
 MsgBurnDerivativeResponse defines the Msg/BurnDerivative response type.
@@ -6185,7 +6185,7 @@ MsgBurnDerivativeResponse defines the Msg/BurnDerivative response type.
 
 
 
-<a name="kava.liquid.v1beta1.MsgMintDerivative"></a>
+<a name="mage.liquid.v1beta1.MsgMintDerivative"></a>
 
 ### MsgMintDerivative
 MsgMintDerivative defines the Msg/MintDerivative request type.
@@ -6202,7 +6202,7 @@ MsgMintDerivative defines the Msg/MintDerivative request type.
 
 
 
-<a name="kava.liquid.v1beta1.MsgMintDerivativeResponse"></a>
+<a name="mage.liquid.v1beta1.MsgMintDerivativeResponse"></a>
 
 ### MsgMintDerivativeResponse
 MsgMintDerivativeResponse defines the Msg/MintDerivative response type.
@@ -6223,28 +6223,28 @@ MsgMintDerivativeResponse defines the Msg/MintDerivative response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.liquid.v1beta1.Msg"></a>
+<a name="mage.liquid.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the liquid Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `MintDerivative` | [MsgMintDerivative](#kava.liquid.v1beta1.MsgMintDerivative) | [MsgMintDerivativeResponse](#kava.liquid.v1beta1.MsgMintDerivativeResponse) | MintDerivative defines a method for converting a delegation into staking deriviatives. | |
-| `BurnDerivative` | [MsgBurnDerivative](#kava.liquid.v1beta1.MsgBurnDerivative) | [MsgBurnDerivativeResponse](#kava.liquid.v1beta1.MsgBurnDerivativeResponse) | BurnDerivative defines a method for converting staking deriviatives into a delegation. | |
+| `MintDerivative` | [MsgMintDerivative](#mage.liquid.v1beta1.MsgMintDerivative) | [MsgMintDerivativeResponse](#mage.liquid.v1beta1.MsgMintDerivativeResponse) | MintDerivative defines a method for converting a delegation into staking deriviatives. | |
+| `BurnDerivative` | [MsgBurnDerivative](#mage.liquid.v1beta1.MsgBurnDerivative) | [MsgBurnDerivativeResponse](#mage.liquid.v1beta1.MsgBurnDerivativeResponse) | BurnDerivative defines a method for converting staking deriviatives into a delegation. | |
 
  <!-- end services -->
 
 
 
-<a name="kava/pricefeed/v1beta1/store.proto"></a>
+<a name="mage/pricefeed/v1beta1/store.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/pricefeed/v1beta1/store.proto
+## mage/pricefeed/v1beta1/store.proto
 
 
 
-<a name="kava.pricefeed.v1beta1.CurrentPrice"></a>
+<a name="mage.pricefeed.v1beta1.CurrentPrice"></a>
 
 ### CurrentPrice
 CurrentPrice defines a current price for a particular market in the pricefeed
@@ -6261,7 +6261,7 @@ module.
 
 
 
-<a name="kava.pricefeed.v1beta1.Market"></a>
+<a name="mage.pricefeed.v1beta1.Market"></a>
 
 ### Market
 Market defines an asset in the pricefeed.
@@ -6280,7 +6280,7 @@ Market defines an asset in the pricefeed.
 
 
 
-<a name="kava.pricefeed.v1beta1.Params"></a>
+<a name="mage.pricefeed.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the pricefeed module.
@@ -6288,14 +6288,14 @@ Params defines the parameters for the pricefeed module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `markets` | [Market](#kava.pricefeed.v1beta1.Market) | repeated |  |
+| `markets` | [Market](#mage.pricefeed.v1beta1.Market) | repeated |  |
 
 
 
 
 
 
-<a name="kava.pricefeed.v1beta1.PostedPrice"></a>
+<a name="mage.pricefeed.v1beta1.PostedPrice"></a>
 
 ### PostedPrice
 PostedPrice defines a price for market posted by a specific oracle.
@@ -6322,14 +6322,14 @@ PostedPrice defines a price for market posted by a specific oracle.
 
 
 
-<a name="kava/pricefeed/v1beta1/genesis.proto"></a>
+<a name="mage/pricefeed/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/pricefeed/v1beta1/genesis.proto
+## mage/pricefeed/v1beta1/genesis.proto
 
 
 
-<a name="kava.pricefeed.v1beta1.GenesisState"></a>
+<a name="mage.pricefeed.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the pricefeed module's genesis state.
@@ -6337,8 +6337,8 @@ GenesisState defines the pricefeed module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.pricefeed.v1beta1.Params) |  | params defines all the paramaters of the module. |
-| `posted_prices` | [PostedPrice](#kava.pricefeed.v1beta1.PostedPrice) | repeated |  |
+| `params` | [Params](#mage.pricefeed.v1beta1.Params) |  | params defines all the paramaters of the module. |
+| `posted_prices` | [PostedPrice](#mage.pricefeed.v1beta1.PostedPrice) | repeated |  |
 
 
 
@@ -6354,14 +6354,14 @@ GenesisState defines the pricefeed module's genesis state.
 
 
 
-<a name="kava/pricefeed/v1beta1/query.proto"></a>
+<a name="mage/pricefeed/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/pricefeed/v1beta1/query.proto
+## mage/pricefeed/v1beta1/query.proto
 
 
 
-<a name="kava.pricefeed.v1beta1.CurrentPriceResponse"></a>
+<a name="mage.pricefeed.v1beta1.CurrentPriceResponse"></a>
 
 ### CurrentPriceResponse
 CurrentPriceResponse defines a current price for a particular market in the pricefeed
@@ -6378,7 +6378,7 @@ module.
 
 
 
-<a name="kava.pricefeed.v1beta1.MarketResponse"></a>
+<a name="mage.pricefeed.v1beta1.MarketResponse"></a>
 
 ### MarketResponse
 MarketResponse defines an asset in the pricefeed.
@@ -6397,7 +6397,7 @@ MarketResponse defines an asset in the pricefeed.
 
 
 
-<a name="kava.pricefeed.v1beta1.PostedPriceResponse"></a>
+<a name="mage.pricefeed.v1beta1.PostedPriceResponse"></a>
 
 ### PostedPriceResponse
 PostedPriceResponse defines a price for market posted by a specific oracle.
@@ -6415,7 +6415,7 @@ PostedPriceResponse defines a price for market posted by a specific oracle.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryMarketsRequest"></a>
+<a name="mage.pricefeed.v1beta1.QueryMarketsRequest"></a>
 
 ### QueryMarketsRequest
 QueryMarketsRequest is the request type for the Query/Markets RPC method.
@@ -6425,7 +6425,7 @@ QueryMarketsRequest is the request type for the Query/Markets RPC method.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryMarketsResponse"></a>
+<a name="mage.pricefeed.v1beta1.QueryMarketsResponse"></a>
 
 ### QueryMarketsResponse
 QueryMarketsResponse is the response type for the Query/Markets RPC method.
@@ -6433,14 +6433,14 @@ QueryMarketsResponse is the response type for the Query/Markets RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `markets` | [MarketResponse](#kava.pricefeed.v1beta1.MarketResponse) | repeated | List of markets |
+| `markets` | [MarketResponse](#mage.pricefeed.v1beta1.MarketResponse) | repeated | List of markets |
 
 
 
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryOraclesRequest"></a>
+<a name="mage.pricefeed.v1beta1.QueryOraclesRequest"></a>
 
 ### QueryOraclesRequest
 QueryOraclesRequest is the request type for the Query/Oracles RPC method.
@@ -6455,7 +6455,7 @@ QueryOraclesRequest is the request type for the Query/Oracles RPC method.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryOraclesResponse"></a>
+<a name="mage.pricefeed.v1beta1.QueryOraclesResponse"></a>
 
 ### QueryOraclesResponse
 QueryOraclesResponse is the response type for the Query/Oracles RPC method.
@@ -6470,7 +6470,7 @@ QueryOraclesResponse is the response type for the Query/Oracles RPC method.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryParamsRequest"></a>
+<a name="mage.pricefeed.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/pricefeed
@@ -6481,7 +6481,7 @@ parameters.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryParamsResponse"></a>
+<a name="mage.pricefeed.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/pricefeed
@@ -6490,14 +6490,14 @@ parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.pricefeed.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.pricefeed.v1beta1.Params) |  |  |
 
 
 
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryPriceRequest"></a>
+<a name="mage.pricefeed.v1beta1.QueryPriceRequest"></a>
 
 ### QueryPriceRequest
 QueryPriceRequest is the request type for the Query/PriceRequest RPC method.
@@ -6512,7 +6512,7 @@ QueryPriceRequest is the request type for the Query/PriceRequest RPC method.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryPriceResponse"></a>
+<a name="mage.pricefeed.v1beta1.QueryPriceResponse"></a>
 
 ### QueryPriceResponse
 QueryPriceResponse is the response type for the Query/Prices RPC method.
@@ -6520,14 +6520,14 @@ QueryPriceResponse is the response type for the Query/Prices RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `price` | [CurrentPriceResponse](#kava.pricefeed.v1beta1.CurrentPriceResponse) |  |  |
+| `price` | [CurrentPriceResponse](#mage.pricefeed.v1beta1.CurrentPriceResponse) |  |  |
 
 
 
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryPricesRequest"></a>
+<a name="mage.pricefeed.v1beta1.QueryPricesRequest"></a>
 
 ### QueryPricesRequest
 QueryPricesRequest is the request type for the Query/Prices RPC method.
@@ -6537,7 +6537,7 @@ QueryPricesRequest is the request type for the Query/Prices RPC method.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryPricesResponse"></a>
+<a name="mage.pricefeed.v1beta1.QueryPricesResponse"></a>
 
 ### QueryPricesResponse
 QueryPricesResponse is the response type for the Query/Prices RPC method.
@@ -6545,14 +6545,14 @@ QueryPricesResponse is the response type for the Query/Prices RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `prices` | [CurrentPriceResponse](#kava.pricefeed.v1beta1.CurrentPriceResponse) | repeated |  |
+| `prices` | [CurrentPriceResponse](#mage.pricefeed.v1beta1.CurrentPriceResponse) | repeated |  |
 
 
 
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryRawPricesRequest"></a>
+<a name="mage.pricefeed.v1beta1.QueryRawPricesRequest"></a>
 
 ### QueryRawPricesRequest
 QueryRawPricesRequest is the request type for the Query/RawPrices RPC method.
@@ -6567,7 +6567,7 @@ QueryRawPricesRequest is the request type for the Query/RawPrices RPC method.
 
 
 
-<a name="kava.pricefeed.v1beta1.QueryRawPricesResponse"></a>
+<a name="mage.pricefeed.v1beta1.QueryRawPricesResponse"></a>
 
 ### QueryRawPricesResponse
 QueryRawPricesResponse is the response type for the Query/RawPrices RPC
@@ -6576,7 +6576,7 @@ method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `raw_prices` | [PostedPriceResponse](#kava.pricefeed.v1beta1.PostedPriceResponse) | repeated |  |
+| `raw_prices` | [PostedPriceResponse](#mage.pricefeed.v1beta1.PostedPriceResponse) | repeated |  |
 
 
 
@@ -6589,32 +6589,32 @@ method.
  <!-- end HasExtensions -->
 
 
-<a name="kava.pricefeed.v1beta1.Query"></a>
+<a name="mage.pricefeed.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for pricefeed module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.pricefeed.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.pricefeed.v1beta1.QueryParamsResponse) | Params queries all parameters of the pricefeed module. | GET|/kava/pricefeed/v1beta1/params|
-| `Price` | [QueryPriceRequest](#kava.pricefeed.v1beta1.QueryPriceRequest) | [QueryPriceResponse](#kava.pricefeed.v1beta1.QueryPriceResponse) | Price queries price details based on a market | GET|/kava/pricefeed/v1beta1/prices/{market_id}|
-| `Prices` | [QueryPricesRequest](#kava.pricefeed.v1beta1.QueryPricesRequest) | [QueryPricesResponse](#kava.pricefeed.v1beta1.QueryPricesResponse) | Prices queries all prices | GET|/kava/pricefeed/v1beta1/prices|
-| `RawPrices` | [QueryRawPricesRequest](#kava.pricefeed.v1beta1.QueryRawPricesRequest) | [QueryRawPricesResponse](#kava.pricefeed.v1beta1.QueryRawPricesResponse) | RawPrices queries all raw prices based on a market | GET|/kava/pricefeed/v1beta1/rawprices/{market_id}|
-| `Oracles` | [QueryOraclesRequest](#kava.pricefeed.v1beta1.QueryOraclesRequest) | [QueryOraclesResponse](#kava.pricefeed.v1beta1.QueryOraclesResponse) | Oracles queries all oracles based on a market | GET|/kava/pricefeed/v1beta1/oracles/{market_id}|
-| `Markets` | [QueryMarketsRequest](#kava.pricefeed.v1beta1.QueryMarketsRequest) | [QueryMarketsResponse](#kava.pricefeed.v1beta1.QueryMarketsResponse) | Markets queries all markets | GET|/kava/pricefeed/v1beta1/markets|
+| `Params` | [QueryParamsRequest](#mage.pricefeed.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.pricefeed.v1beta1.QueryParamsResponse) | Params queries all parameters of the pricefeed module. | GET|/mage/pricefeed/v1beta1/params|
+| `Price` | [QueryPriceRequest](#mage.pricefeed.v1beta1.QueryPriceRequest) | [QueryPriceResponse](#mage.pricefeed.v1beta1.QueryPriceResponse) | Price queries price details based on a market | GET|/mage/pricefeed/v1beta1/prices/{market_id}|
+| `Prices` | [QueryPricesRequest](#mage.pricefeed.v1beta1.QueryPricesRequest) | [QueryPricesResponse](#mage.pricefeed.v1beta1.QueryPricesResponse) | Prices queries all prices | GET|/mage/pricefeed/v1beta1/prices|
+| `RawPrices` | [QueryRawPricesRequest](#mage.pricefeed.v1beta1.QueryRawPricesRequest) | [QueryRawPricesResponse](#mage.pricefeed.v1beta1.QueryRawPricesResponse) | RawPrices queries all raw prices based on a market | GET|/mage/pricefeed/v1beta1/rawprices/{market_id}|
+| `Oracles` | [QueryOraclesRequest](#mage.pricefeed.v1beta1.QueryOraclesRequest) | [QueryOraclesResponse](#mage.pricefeed.v1beta1.QueryOraclesResponse) | Oracles queries all oracles based on a market | GET|/mage/pricefeed/v1beta1/oracles/{market_id}|
+| `Markets` | [QueryMarketsRequest](#mage.pricefeed.v1beta1.QueryMarketsRequest) | [QueryMarketsResponse](#mage.pricefeed.v1beta1.QueryMarketsResponse) | Markets queries all markets | GET|/mage/pricefeed/v1beta1/markets|
 
  <!-- end services -->
 
 
 
-<a name="kava/pricefeed/v1beta1/tx.proto"></a>
+<a name="mage/pricefeed/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/pricefeed/v1beta1/tx.proto
+## mage/pricefeed/v1beta1/tx.proto
 
 
 
-<a name="kava.pricefeed.v1beta1.MsgPostPrice"></a>
+<a name="mage.pricefeed.v1beta1.MsgPostPrice"></a>
 
 ### MsgPostPrice
 MsgPostPrice represents a method for creating a new post price
@@ -6632,7 +6632,7 @@ MsgPostPrice represents a method for creating a new post price
 
 
 
-<a name="kava.pricefeed.v1beta1.MsgPostPriceResponse"></a>
+<a name="mage.pricefeed.v1beta1.MsgPostPriceResponse"></a>
 
 ### MsgPostPriceResponse
 MsgPostPriceResponse defines the Msg/PostPrice response type.
@@ -6648,27 +6648,27 @@ MsgPostPriceResponse defines the Msg/PostPrice response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.pricefeed.v1beta1.Msg"></a>
+<a name="mage.pricefeed.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the pricefeed Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `PostPrice` | [MsgPostPrice](#kava.pricefeed.v1beta1.MsgPostPrice) | [MsgPostPriceResponse](#kava.pricefeed.v1beta1.MsgPostPriceResponse) | PostPrice defines a method for creating a new post price | |
+| `PostPrice` | [MsgPostPrice](#mage.pricefeed.v1beta1.MsgPostPrice) | [MsgPostPriceResponse](#mage.pricefeed.v1beta1.MsgPostPriceResponse) | PostPrice defines a method for creating a new post price | |
 
  <!-- end services -->
 
 
 
-<a name="kava/router/v1beta1/tx.proto"></a>
+<a name="mage/router/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/router/v1beta1/tx.proto
+## mage/router/v1beta1/tx.proto
 
 
 
-<a name="kava.router.v1beta1.MsgDelegateMintDeposit"></a>
+<a name="mage.router.v1beta1.MsgDelegateMintDeposit"></a>
 
 ### MsgDelegateMintDeposit
 MsgDelegateMintDeposit delegates tokens to a validator, then converts them into staking derivatives,
@@ -6686,7 +6686,7 @@ then deposits to an earn vault.
 
 
 
-<a name="kava.router.v1beta1.MsgDelegateMintDepositResponse"></a>
+<a name="mage.router.v1beta1.MsgDelegateMintDepositResponse"></a>
 
 ### MsgDelegateMintDepositResponse
 MsgDelegateMintDepositResponse defines the Msg/MsgDelegateMintDeposit response type.
@@ -6696,7 +6696,7 @@ MsgDelegateMintDepositResponse defines the Msg/MsgDelegateMintDeposit response t
 
 
 
-<a name="kava.router.v1beta1.MsgMintDeposit"></a>
+<a name="mage.router.v1beta1.MsgMintDeposit"></a>
 
 ### MsgMintDeposit
 MsgMintDeposit converts a delegation into staking derivatives and deposits it all into an earn vault.
@@ -6713,7 +6713,7 @@ MsgMintDeposit converts a delegation into staking derivatives and deposits it al
 
 
 
-<a name="kava.router.v1beta1.MsgMintDepositResponse"></a>
+<a name="mage.router.v1beta1.MsgMintDepositResponse"></a>
 
 ### MsgMintDepositResponse
 MsgMintDepositResponse defines the Msg/MsgMintDeposit response type.
@@ -6723,7 +6723,7 @@ MsgMintDepositResponse defines the Msg/MsgMintDeposit response type.
 
 
 
-<a name="kava.router.v1beta1.MsgWithdrawBurn"></a>
+<a name="mage.router.v1beta1.MsgWithdrawBurn"></a>
 
 ### MsgWithdrawBurn
 MsgWithdrawBurn removes staking derivatives from an earn vault and converts them back to a staking delegation.
@@ -6740,7 +6740,7 @@ MsgWithdrawBurn removes staking derivatives from an earn vault and converts them
 
 
 
-<a name="kava.router.v1beta1.MsgWithdrawBurnResponse"></a>
+<a name="mage.router.v1beta1.MsgWithdrawBurnResponse"></a>
 
 ### MsgWithdrawBurnResponse
 MsgWithdrawBurnResponse defines the Msg/MsgWithdrawBurn response type.
@@ -6750,7 +6750,7 @@ MsgWithdrawBurnResponse defines the Msg/MsgWithdrawBurn response type.
 
 
 
-<a name="kava.router.v1beta1.MsgWithdrawBurnUndelegate"></a>
+<a name="mage.router.v1beta1.MsgWithdrawBurnUndelegate"></a>
 
 ### MsgWithdrawBurnUndelegate
 MsgWithdrawBurnUndelegate removes staking derivatives from an earn vault, converts them to a staking delegation,
@@ -6768,7 +6768,7 @@ then undelegates them from their validator.
 
 
 
-<a name="kava.router.v1beta1.MsgWithdrawBurnUndelegateResponse"></a>
+<a name="mage.router.v1beta1.MsgWithdrawBurnUndelegateResponse"></a>
 
 ### MsgWithdrawBurnUndelegateResponse
 MsgWithdrawBurnUndelegateResponse defines the Msg/MsgWithdrawBurnUndelegate response type.
@@ -6784,30 +6784,30 @@ MsgWithdrawBurnUndelegateResponse defines the Msg/MsgWithdrawBurnUndelegate resp
  <!-- end HasExtensions -->
 
 
-<a name="kava.router.v1beta1.Msg"></a>
+<a name="mage.router.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the router Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `MintDeposit` | [MsgMintDeposit](#kava.router.v1beta1.MsgMintDeposit) | [MsgMintDepositResponse](#kava.router.v1beta1.MsgMintDepositResponse) | MintDeposit converts a delegation into staking derivatives and deposits it all into an earn vault. | |
-| `DelegateMintDeposit` | [MsgDelegateMintDeposit](#kava.router.v1beta1.MsgDelegateMintDeposit) | [MsgDelegateMintDepositResponse](#kava.router.v1beta1.MsgDelegateMintDepositResponse) | DelegateMintDeposit delegates tokens to a validator, then converts them into staking derivatives, then deposits to an earn vault. | |
-| `WithdrawBurn` | [MsgWithdrawBurn](#kava.router.v1beta1.MsgWithdrawBurn) | [MsgWithdrawBurnResponse](#kava.router.v1beta1.MsgWithdrawBurnResponse) | WithdrawBurn removes staking derivatives from an earn vault and converts them back to a staking delegation. | |
-| `WithdrawBurnUndelegate` | [MsgWithdrawBurnUndelegate](#kava.router.v1beta1.MsgWithdrawBurnUndelegate) | [MsgWithdrawBurnUndelegateResponse](#kava.router.v1beta1.MsgWithdrawBurnUndelegateResponse) | WithdrawBurnUndelegate removes staking derivatives from an earn vault, converts them to a staking delegation, then undelegates them from their validator. | |
+| `MintDeposit` | [MsgMintDeposit](#mage.router.v1beta1.MsgMintDeposit) | [MsgMintDepositResponse](#mage.router.v1beta1.MsgMintDepositResponse) | MintDeposit converts a delegation into staking derivatives and deposits it all into an earn vault. | |
+| `DelegateMintDeposit` | [MsgDelegateMintDeposit](#mage.router.v1beta1.MsgDelegateMintDeposit) | [MsgDelegateMintDepositResponse](#mage.router.v1beta1.MsgDelegateMintDepositResponse) | DelegateMintDeposit delegates tokens to a validator, then converts them into staking derivatives, then deposits to an earn vault. | |
+| `WithdrawBurn` | [MsgWithdrawBurn](#mage.router.v1beta1.MsgWithdrawBurn) | [MsgWithdrawBurnResponse](#mage.router.v1beta1.MsgWithdrawBurnResponse) | WithdrawBurn removes staking derivatives from an earn vault and converts them back to a staking delegation. | |
+| `WithdrawBurnUndelegate` | [MsgWithdrawBurnUndelegate](#mage.router.v1beta1.MsgWithdrawBurnUndelegate) | [MsgWithdrawBurnUndelegateResponse](#mage.router.v1beta1.MsgWithdrawBurnUndelegateResponse) | WithdrawBurnUndelegate removes staking derivatives from an earn vault, converts them to a staking delegation, then undelegates them from their validator. | |
 
  <!-- end services -->
 
 
 
-<a name="kava/savings/v1beta1/store.proto"></a>
+<a name="mage/savings/v1beta1/store.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/savings/v1beta1/store.proto
+## mage/savings/v1beta1/store.proto
 
 
 
-<a name="kava.savings.v1beta1.Deposit"></a>
+<a name="mage.savings.v1beta1.Deposit"></a>
 
 ### Deposit
 Deposit defines an amount of coins deposited into a savings module account.
@@ -6823,7 +6823,7 @@ Deposit defines an amount of coins deposited into a savings module account.
 
 
 
-<a name="kava.savings.v1beta1.Params"></a>
+<a name="mage.savings.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the savings module.
@@ -6847,14 +6847,14 @@ Params defines the parameters for the savings module.
 
 
 
-<a name="kava/savings/v1beta1/genesis.proto"></a>
+<a name="mage/savings/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/savings/v1beta1/genesis.proto
+## mage/savings/v1beta1/genesis.proto
 
 
 
-<a name="kava.savings.v1beta1.GenesisState"></a>
+<a name="mage.savings.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the savings module's genesis state.
@@ -6862,8 +6862,8 @@ GenesisState defines the savings module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.savings.v1beta1.Params) |  | params defines all the parameters of the module. |
-| `deposits` | [Deposit](#kava.savings.v1beta1.Deposit) | repeated |  |
+| `params` | [Params](#mage.savings.v1beta1.Params) |  | params defines all the parameters of the module. |
+| `deposits` | [Deposit](#mage.savings.v1beta1.Deposit) | repeated |  |
 
 
 
@@ -6879,14 +6879,14 @@ GenesisState defines the savings module's genesis state.
 
 
 
-<a name="kava/savings/v1beta1/query.proto"></a>
+<a name="mage/savings/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/savings/v1beta1/query.proto
+## mage/savings/v1beta1/query.proto
 
 
 
-<a name="kava.savings.v1beta1.QueryDepositsRequest"></a>
+<a name="mage.savings.v1beta1.QueryDepositsRequest"></a>
 
 ### QueryDepositsRequest
 QueryDepositsRequest defines the request type for querying x/savings
@@ -6904,7 +6904,7 @@ deposits.
 
 
 
-<a name="kava.savings.v1beta1.QueryDepositsResponse"></a>
+<a name="mage.savings.v1beta1.QueryDepositsResponse"></a>
 
 ### QueryDepositsResponse
 QueryDepositsResponse defines the response type for querying x/savings
@@ -6913,7 +6913,7 @@ deposits.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `deposits` | [Deposit](#kava.savings.v1beta1.Deposit) | repeated |  |
+| `deposits` | [Deposit](#mage.savings.v1beta1.Deposit) | repeated |  |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  |  |
 
 
@@ -6921,7 +6921,7 @@ deposits.
 
 
 
-<a name="kava.savings.v1beta1.QueryParamsRequest"></a>
+<a name="mage.savings.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/savings
@@ -6932,7 +6932,7 @@ parameters.
 
 
 
-<a name="kava.savings.v1beta1.QueryParamsResponse"></a>
+<a name="mage.savings.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/savings
@@ -6941,14 +6941,14 @@ parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.savings.v1beta1.Params) |  |  |
+| `params` | [Params](#mage.savings.v1beta1.Params) |  |  |
 
 
 
 
 
 
-<a name="kava.savings.v1beta1.QueryTotalSupplyRequest"></a>
+<a name="mage.savings.v1beta1.QueryTotalSupplyRequest"></a>
 
 ### QueryTotalSupplyRequest
 QueryTotalSupplyRequest defines the request type for Query/TotalSupply method.
@@ -6958,7 +6958,7 @@ QueryTotalSupplyRequest defines the request type for Query/TotalSupply method.
 
 
 
-<a name="kava.savings.v1beta1.QueryTotalSupplyResponse"></a>
+<a name="mage.savings.v1beta1.QueryTotalSupplyResponse"></a>
 
 ### QueryTotalSupplyResponse
 TotalSupplyResponse defines the response type for the Query/TotalSupply method.
@@ -6980,29 +6980,29 @@ TotalSupplyResponse defines the response type for the Query/TotalSupply method.
  <!-- end HasExtensions -->
 
 
-<a name="kava.savings.v1beta1.Query"></a>
+<a name="mage.savings.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for savings module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.savings.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.savings.v1beta1.QueryParamsResponse) | Params queries all parameters of the savings module. | GET|/kava/savings/v1beta1/params|
-| `Deposits` | [QueryDepositsRequest](#kava.savings.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#kava.savings.v1beta1.QueryDepositsResponse) | Deposits queries savings deposits. | GET|/kava/savings/v1beta1/deposits|
-| `TotalSupply` | [QueryTotalSupplyRequest](#kava.savings.v1beta1.QueryTotalSupplyRequest) | [QueryTotalSupplyResponse](#kava.savings.v1beta1.QueryTotalSupplyResponse) | TotalSupply returns the total sum of all coins currently locked into the savings module. | GET|/kava/savings/v1beta1/total_supply|
+| `Params` | [QueryParamsRequest](#mage.savings.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.savings.v1beta1.QueryParamsResponse) | Params queries all parameters of the savings module. | GET|/mage/savings/v1beta1/params|
+| `Deposits` | [QueryDepositsRequest](#mage.savings.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#mage.savings.v1beta1.QueryDepositsResponse) | Deposits queries savings deposits. | GET|/mage/savings/v1beta1/deposits|
+| `TotalSupply` | [QueryTotalSupplyRequest](#mage.savings.v1beta1.QueryTotalSupplyRequest) | [QueryTotalSupplyResponse](#mage.savings.v1beta1.QueryTotalSupplyResponse) | TotalSupply returns the total sum of all coins currently locked into the savings module. | GET|/mage/savings/v1beta1/total_supply|
 
  <!-- end services -->
 
 
 
-<a name="kava/savings/v1beta1/tx.proto"></a>
+<a name="mage/savings/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/savings/v1beta1/tx.proto
+## mage/savings/v1beta1/tx.proto
 
 
 
-<a name="kava.savings.v1beta1.MsgDeposit"></a>
+<a name="mage.savings.v1beta1.MsgDeposit"></a>
 
 ### MsgDeposit
 MsgDeposit defines the Msg/Deposit request type.
@@ -7018,7 +7018,7 @@ MsgDeposit defines the Msg/Deposit request type.
 
 
 
-<a name="kava.savings.v1beta1.MsgDepositResponse"></a>
+<a name="mage.savings.v1beta1.MsgDepositResponse"></a>
 
 ### MsgDepositResponse
 MsgDepositResponse defines the Msg/Deposit response type.
@@ -7028,7 +7028,7 @@ MsgDepositResponse defines the Msg/Deposit response type.
 
 
 
-<a name="kava.savings.v1beta1.MsgWithdraw"></a>
+<a name="mage.savings.v1beta1.MsgWithdraw"></a>
 
 ### MsgWithdraw
 MsgWithdraw defines the Msg/Withdraw request type.
@@ -7044,7 +7044,7 @@ MsgWithdraw defines the Msg/Withdraw request type.
 
 
 
-<a name="kava.savings.v1beta1.MsgWithdrawResponse"></a>
+<a name="mage.savings.v1beta1.MsgWithdrawResponse"></a>
 
 ### MsgWithdrawResponse
 MsgWithdrawResponse defines the Msg/Withdraw response type.
@@ -7060,28 +7060,28 @@ MsgWithdrawResponse defines the Msg/Withdraw response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.savings.v1beta1.Msg"></a>
+<a name="mage.savings.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the savings Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Deposit` | [MsgDeposit](#kava.savings.v1beta1.MsgDeposit) | [MsgDepositResponse](#kava.savings.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing funds to the savings module account | |
-| `Withdraw` | [MsgWithdraw](#kava.savings.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#kava.savings.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing funds to the savings module account | |
+| `Deposit` | [MsgDeposit](#mage.savings.v1beta1.MsgDeposit) | [MsgDepositResponse](#mage.savings.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing funds to the savings module account | |
+| `Withdraw` | [MsgWithdraw](#mage.savings.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#mage.savings.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing funds to the savings module account | |
 
  <!-- end services -->
 
 
 
-<a name="kava/swap/v1beta1/swap.proto"></a>
+<a name="mage/swap/v1beta1/swap.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/swap/v1beta1/swap.proto
+## mage/swap/v1beta1/swap.proto
 
 
 
-<a name="kava.swap.v1beta1.AllowedPool"></a>
+<a name="mage.swap.v1beta1.AllowedPool"></a>
 
 ### AllowedPool
 AllowedPool defines a pool that is allowed to be created
@@ -7097,7 +7097,7 @@ AllowedPool defines a pool that is allowed to be created
 
 
 
-<a name="kava.swap.v1beta1.Params"></a>
+<a name="mage.swap.v1beta1.Params"></a>
 
 ### Params
 Params defines the parameters for the swap module.
@@ -7105,7 +7105,7 @@ Params defines the parameters for the swap module.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `allowed_pools` | [AllowedPool](#kava.swap.v1beta1.AllowedPool) | repeated | allowed_pools defines that pools that are allowed to be created |
+| `allowed_pools` | [AllowedPool](#mage.swap.v1beta1.AllowedPool) | repeated | allowed_pools defines that pools that are allowed to be created |
 | `swap_fee` | [string](#string) |  | swap_fee defines the swap fee for all pools |
 
 
@@ -7113,7 +7113,7 @@ Params defines the parameters for the swap module.
 
 
 
-<a name="kava.swap.v1beta1.PoolRecord"></a>
+<a name="mage.swap.v1beta1.PoolRecord"></a>
 
 ### PoolRecord
 PoolRecord represents the state of a liquidity pool
@@ -7132,7 +7132,7 @@ and is used to store the state of a denominated pool
 
 
 
-<a name="kava.swap.v1beta1.ShareRecord"></a>
+<a name="mage.swap.v1beta1.ShareRecord"></a>
 
 ### ShareRecord
 ShareRecord stores the shares owned for a depositor and pool
@@ -7158,14 +7158,14 @@ ShareRecord stores the shares owned for a depositor and pool
 
 
 
-<a name="kava/swap/v1beta1/genesis.proto"></a>
+<a name="mage/swap/v1beta1/genesis.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/swap/v1beta1/genesis.proto
+## mage/swap/v1beta1/genesis.proto
 
 
 
-<a name="kava.swap.v1beta1.GenesisState"></a>
+<a name="mage.swap.v1beta1.GenesisState"></a>
 
 ### GenesisState
 GenesisState defines the swap module's genesis state.
@@ -7173,9 +7173,9 @@ GenesisState defines the swap module's genesis state.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.swap.v1beta1.Params) |  | params defines all the paramaters related to swap |
-| `pool_records` | [PoolRecord](#kava.swap.v1beta1.PoolRecord) | repeated | pool_records defines the available pools |
-| `share_records` | [ShareRecord](#kava.swap.v1beta1.ShareRecord) | repeated | share_records defines the owned shares of each pool |
+| `params` | [Params](#mage.swap.v1beta1.Params) |  | params defines all the paramaters related to swap |
+| `pool_records` | [PoolRecord](#mage.swap.v1beta1.PoolRecord) | repeated | pool_records defines the available pools |
+| `share_records` | [ShareRecord](#mage.swap.v1beta1.ShareRecord) | repeated | share_records defines the owned shares of each pool |
 
 
 
@@ -7191,14 +7191,14 @@ GenesisState defines the swap module's genesis state.
 
 
 
-<a name="kava/swap/v1beta1/query.proto"></a>
+<a name="mage/swap/v1beta1/query.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/swap/v1beta1/query.proto
+## mage/swap/v1beta1/query.proto
 
 
 
-<a name="kava.swap.v1beta1.DepositResponse"></a>
+<a name="mage.swap.v1beta1.DepositResponse"></a>
 
 ### DepositResponse
 DepositResponse defines a single deposit query response type.
@@ -7216,7 +7216,7 @@ DepositResponse defines a single deposit query response type.
 
 
 
-<a name="kava.swap.v1beta1.PoolResponse"></a>
+<a name="mage.swap.v1beta1.PoolResponse"></a>
 
 ### PoolResponse
 Pool represents the state of a single pool
@@ -7233,7 +7233,7 @@ Pool represents the state of a single pool
 
 
 
-<a name="kava.swap.v1beta1.QueryDepositsRequest"></a>
+<a name="mage.swap.v1beta1.QueryDepositsRequest"></a>
 
 ### QueryDepositsRequest
 QueryDepositsRequest is the request type for the Query/Deposits RPC method.
@@ -7250,7 +7250,7 @@ QueryDepositsRequest is the request type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.swap.v1beta1.QueryDepositsResponse"></a>
+<a name="mage.swap.v1beta1.QueryDepositsResponse"></a>
 
 ### QueryDepositsResponse
 QueryDepositsResponse is the response type for the Query/Deposits RPC method.
@@ -7258,7 +7258,7 @@ QueryDepositsResponse is the response type for the Query/Deposits RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `deposits` | [DepositResponse](#kava.swap.v1beta1.DepositResponse) | repeated | deposits returns the deposits matching the requested parameters |
+| `deposits` | [DepositResponse](#mage.swap.v1beta1.DepositResponse) | repeated | deposits returns the deposits matching the requested parameters |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  | pagination defines the pagination in the response. |
 
 
@@ -7266,7 +7266,7 @@ QueryDepositsResponse is the response type for the Query/Deposits RPC method.
 
 
 
-<a name="kava.swap.v1beta1.QueryParamsRequest"></a>
+<a name="mage.swap.v1beta1.QueryParamsRequest"></a>
 
 ### QueryParamsRequest
 QueryParamsRequest defines the request type for querying x/swap parameters.
@@ -7276,7 +7276,7 @@ QueryParamsRequest defines the request type for querying x/swap parameters.
 
 
 
-<a name="kava.swap.v1beta1.QueryParamsResponse"></a>
+<a name="mage.swap.v1beta1.QueryParamsResponse"></a>
 
 ### QueryParamsResponse
 QueryParamsResponse defines the response type for querying x/swap parameters.
@@ -7284,14 +7284,14 @@ QueryParamsResponse defines the response type for querying x/swap parameters.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `params` | [Params](#kava.swap.v1beta1.Params) |  | params represents the swap module parameters |
+| `params` | [Params](#mage.swap.v1beta1.Params) |  | params represents the swap module parameters |
 
 
 
 
 
 
-<a name="kava.swap.v1beta1.QueryPoolsRequest"></a>
+<a name="mage.swap.v1beta1.QueryPoolsRequest"></a>
 
 ### QueryPoolsRequest
 QueryPoolsRequest is the request type for the Query/Pools RPC method.
@@ -7307,7 +7307,7 @@ QueryPoolsRequest is the request type for the Query/Pools RPC method.
 
 
 
-<a name="kava.swap.v1beta1.QueryPoolsResponse"></a>
+<a name="mage.swap.v1beta1.QueryPoolsResponse"></a>
 
 ### QueryPoolsResponse
 QueryPoolsResponse is the response type for the Query/Pools RPC method.
@@ -7315,7 +7315,7 @@ QueryPoolsResponse is the response type for the Query/Pools RPC method.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `pools` | [PoolResponse](#kava.swap.v1beta1.PoolResponse) | repeated | pools represents returned pools |
+| `pools` | [PoolResponse](#mage.swap.v1beta1.PoolResponse) | repeated | pools represents returned pools |
 | `pagination` | [cosmos.base.query.v1beta1.PageResponse](#cosmos.base.query.v1beta1.PageResponse) |  | pagination defines the pagination in the response. |
 
 
@@ -7329,29 +7329,29 @@ QueryPoolsResponse is the response type for the Query/Pools RPC method.
  <!-- end HasExtensions -->
 
 
-<a name="kava.swap.v1beta1.Query"></a>
+<a name="mage.swap.v1beta1.Query"></a>
 
 ### Query
 Query defines the gRPC querier service for swap module
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Params` | [QueryParamsRequest](#kava.swap.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#kava.swap.v1beta1.QueryParamsResponse) | Params queries all parameters of the swap module. | GET|/kava/swap/v1beta1/params|
-| `Pools` | [QueryPoolsRequest](#kava.swap.v1beta1.QueryPoolsRequest) | [QueryPoolsResponse](#kava.swap.v1beta1.QueryPoolsResponse) | Pools queries pools based on pool ID | GET|/kava/swap/v1beta1/pools|
-| `Deposits` | [QueryDepositsRequest](#kava.swap.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#kava.swap.v1beta1.QueryDepositsResponse) | Deposits queries deposit details based on owner address and pool | GET|/kava/swap/v1beta1/deposits|
+| `Params` | [QueryParamsRequest](#mage.swap.v1beta1.QueryParamsRequest) | [QueryParamsResponse](#mage.swap.v1beta1.QueryParamsResponse) | Params queries all parameters of the swap module. | GET|/mage/swap/v1beta1/params|
+| `Pools` | [QueryPoolsRequest](#mage.swap.v1beta1.QueryPoolsRequest) | [QueryPoolsResponse](#mage.swap.v1beta1.QueryPoolsResponse) | Pools queries pools based on pool ID | GET|/mage/swap/v1beta1/pools|
+| `Deposits` | [QueryDepositsRequest](#mage.swap.v1beta1.QueryDepositsRequest) | [QueryDepositsResponse](#mage.swap.v1beta1.QueryDepositsResponse) | Deposits queries deposit details based on owner address and pool | GET|/mage/swap/v1beta1/deposits|
 
  <!-- end services -->
 
 
 
-<a name="kava/swap/v1beta1/tx.proto"></a>
+<a name="mage/swap/v1beta1/tx.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kava/swap/v1beta1/tx.proto
+## mage/swap/v1beta1/tx.proto
 
 
 
-<a name="kava.swap.v1beta1.MsgDeposit"></a>
+<a name="mage.swap.v1beta1.MsgDeposit"></a>
 
 ### MsgDeposit
 MsgDeposit represents a message for depositing liquidity into a pool
@@ -7370,7 +7370,7 @@ MsgDeposit represents a message for depositing liquidity into a pool
 
 
 
-<a name="kava.swap.v1beta1.MsgDepositResponse"></a>
+<a name="mage.swap.v1beta1.MsgDepositResponse"></a>
 
 ### MsgDepositResponse
 MsgDepositResponse defines the Msg/Deposit response type.
@@ -7380,7 +7380,7 @@ MsgDepositResponse defines the Msg/Deposit response type.
 
 
 
-<a name="kava.swap.v1beta1.MsgSwapExactForTokens"></a>
+<a name="mage.swap.v1beta1.MsgSwapExactForTokens"></a>
 
 ### MsgSwapExactForTokens
 MsgSwapExactForTokens represents a message for trading exact coinA for coinB
@@ -7399,7 +7399,7 @@ MsgSwapExactForTokens represents a message for trading exact coinA for coinB
 
 
 
-<a name="kava.swap.v1beta1.MsgSwapExactForTokensResponse"></a>
+<a name="mage.swap.v1beta1.MsgSwapExactForTokensResponse"></a>
 
 ### MsgSwapExactForTokensResponse
 MsgSwapExactForTokensResponse defines the Msg/SwapExactForTokens response
@@ -7410,7 +7410,7 @@ type.
 
 
 
-<a name="kava.swap.v1beta1.MsgSwapForExactTokens"></a>
+<a name="mage.swap.v1beta1.MsgSwapForExactTokens"></a>
 
 ### MsgSwapForExactTokens
 MsgSwapForExactTokens represents a message for trading coinA for an exact
@@ -7430,7 +7430,7 @@ coinB
 
 
 
-<a name="kava.swap.v1beta1.MsgSwapForExactTokensResponse"></a>
+<a name="mage.swap.v1beta1.MsgSwapForExactTokensResponse"></a>
 
 ### MsgSwapForExactTokensResponse
 MsgSwapForExactTokensResponse defines the Msg/SwapForExactTokensResponse
@@ -7441,7 +7441,7 @@ response type.
 
 
 
-<a name="kava.swap.v1beta1.MsgWithdraw"></a>
+<a name="mage.swap.v1beta1.MsgWithdraw"></a>
 
 ### MsgWithdraw
 MsgWithdraw represents a message for withdrawing liquidity from a pool
@@ -7460,7 +7460,7 @@ MsgWithdraw represents a message for withdrawing liquidity from a pool
 
 
 
-<a name="kava.swap.v1beta1.MsgWithdrawResponse"></a>
+<a name="mage.swap.v1beta1.MsgWithdrawResponse"></a>
 
 ### MsgWithdrawResponse
 MsgWithdrawResponse defines the Msg/Withdraw response type.
@@ -7476,17 +7476,17 @@ MsgWithdrawResponse defines the Msg/Withdraw response type.
  <!-- end HasExtensions -->
 
 
-<a name="kava.swap.v1beta1.Msg"></a>
+<a name="mage.swap.v1beta1.Msg"></a>
 
 ### Msg
 Msg defines the swap Msg service.
 
 | Method Name | Request Type | Response Type | Description | HTTP Verb | Endpoint |
 | ----------- | ------------ | ------------- | ------------| ------- | -------- |
-| `Deposit` | [MsgDeposit](#kava.swap.v1beta1.MsgDeposit) | [MsgDepositResponse](#kava.swap.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing liquidity into a pool | |
-| `Withdraw` | [MsgWithdraw](#kava.swap.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#kava.swap.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing liquidity into a pool | |
-| `SwapExactForTokens` | [MsgSwapExactForTokens](#kava.swap.v1beta1.MsgSwapExactForTokens) | [MsgSwapExactForTokensResponse](#kava.swap.v1beta1.MsgSwapExactForTokensResponse) | SwapExactForTokens represents a message for trading exact coinA for coinB | |
-| `SwapForExactTokens` | [MsgSwapForExactTokens](#kava.swap.v1beta1.MsgSwapForExactTokens) | [MsgSwapForExactTokensResponse](#kava.swap.v1beta1.MsgSwapForExactTokensResponse) | SwapForExactTokens represents a message for trading coinA for an exact coinB | |
+| `Deposit` | [MsgDeposit](#mage.swap.v1beta1.MsgDeposit) | [MsgDepositResponse](#mage.swap.v1beta1.MsgDepositResponse) | Deposit defines a method for depositing liquidity into a pool | |
+| `Withdraw` | [MsgWithdraw](#mage.swap.v1beta1.MsgWithdraw) | [MsgWithdrawResponse](#mage.swap.v1beta1.MsgWithdrawResponse) | Withdraw defines a method for withdrawing liquidity into a pool | |
+| `SwapExactForTokens` | [MsgSwapExactForTokens](#mage.swap.v1beta1.MsgSwapExactForTokens) | [MsgSwapExactForTokensResponse](#mage.swap.v1beta1.MsgSwapExactForTokensResponse) | SwapExactForTokens represents a message for trading exact coinA for coinB | |
+| `SwapForExactTokens` | [MsgSwapForExactTokens](#mage.swap.v1beta1.MsgSwapForExactTokens) | [MsgSwapForExactTokensResponse](#mage.swap.v1beta1.MsgSwapForExactTokensResponse) | SwapForExactTokens represents a message for trading coinA for an exact coinB | |
 
  <!-- end services -->
 

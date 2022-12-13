@@ -1,0 +1,23 @@
+syntax = "proto3";
+package mage.magemint.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "google/protobuf/timestamp.proto";
+import "mage/magemint/v1beta1/magemint.proto";
+
+option go_package = "github.com/mage-coven/mage/x/magemint/types";
+
+// GenesisState defines the magemint module's genesis state.
+message GenesisState {
+  option (gogoproto.goproto_getters) = false;
+
+  // Params defines all the parameters of the module.
+  Params params = 1 [(gogoproto.nullable) = false];
+
+  // PreviousBlockTime holds the last last time tokens were minted.
+  // On first block, tokens will be minted for total number of seconds passed since this time.
+  google.protobuf.Timestamp previous_block_time = 2 [
+    (gogoproto.stdtime) = true,
+    (gogoproto.nullable) = false
+  ];
+}

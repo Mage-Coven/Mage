@@ -7,10 +7,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/app"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	"github.com/kava-labs/kava/x/incentive/types"
-	savingstypes "github.com/kava-labs/kava/x/savings/types"
+	"github.com/mage-coven/mage/app"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	"github.com/mage-coven/mage/x/incentive/types"
+	savingstypes "github.com/mage-coven/mage/x/savings/types"
 )
 
 const (
@@ -144,19 +144,19 @@ func (builder IncentiveGenesisBuilder) WithSimpleSwapRewardPeriod(poolID string,
 	return builder.WithInitializedSwapRewardPeriod(builder.simpleRewardPeriod(poolID, rewardsPerSecond))
 }
 
-// WithInitializedUSDXRewardPeriod sets the genesis time as the previous accumulation time for the specified period.
+// WithInitializedFUSDRewardPeriod sets the genesis time as the previous accumulation time for the specified period.
 // This can be helpful in tests. With no prev time set, the first block accrues no rewards as it just sets the prev time to the current.
-func (builder IncentiveGenesisBuilder) WithInitializedUSDXRewardPeriod(period types.RewardPeriod) IncentiveGenesisBuilder {
-	builder.Params.USDXMintingRewardPeriods = append(builder.Params.USDXMintingRewardPeriods, period)
+func (builder IncentiveGenesisBuilder) WithInitializedFUSDRewardPeriod(period types.RewardPeriod) IncentiveGenesisBuilder {
+	builder.Params.FUSDMintingRewardPeriods = append(builder.Params.FUSDMintingRewardPeriods, period)
 
 	accumulationTimeForPeriod := types.NewAccumulationTime(period.CollateralType, builder.genesisTime)
-	builder.USDXRewardState.AccumulationTimes = append(
-		builder.USDXRewardState.AccumulationTimes,
+	builder.FUSDRewardState.AccumulationTimes = append(
+		builder.FUSDRewardState.AccumulationTimes,
 		accumulationTimeForPeriod,
 	)
 
 	// TODO remove to better reflect real states
-	builder.USDXRewardState.MultiRewardIndexes = builder.USDXRewardState.MultiRewardIndexes.With(
+	builder.FUSDRewardState.MultiRewardIndexes = builder.FUSDRewardState.MultiRewardIndexes.With(
 		period.CollateralType,
 		newZeroRewardIndexesFromCoins(period.RewardsPerSecond),
 	)
@@ -164,8 +164,8 @@ func (builder IncentiveGenesisBuilder) WithInitializedUSDXRewardPeriod(period ty
 	return builder
 }
 
-func (builder IncentiveGenesisBuilder) WithSimpleUSDXRewardPeriod(ctype string, rewardsPerSecond sdk.Coin) IncentiveGenesisBuilder {
-	return builder.WithInitializedUSDXRewardPeriod(types.NewRewardPeriod(
+func (builder IncentiveGenesisBuilder) WithSimpleFUSDRewardPeriod(ctype string, rewardsPerSecond sdk.Coin) IncentiveGenesisBuilder {
+	return builder.WithInitializedFUSDRewardPeriod(types.NewRewardPeriod(
 		true,
 		ctype,
 		builder.genesisTime,

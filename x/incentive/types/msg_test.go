@@ -10,11 +10,11 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 func TestMsgClaim_Validate(t *testing.T) {
-	validAddress := sdk.AccAddress(crypto.AddressHash([]byte("KavaTest1"))).String()
+	validAddress := sdk.AccAddress(crypto.AddressHash([]byte("MageTest1"))).String()
 
 	type expectedErr struct {
 		wraps error
@@ -159,8 +159,8 @@ func TestMsgClaim_Validate(t *testing.T) {
 	}
 }
 
-func TestMsgClaimUSDXMintingReward_Validate(t *testing.T) {
-	validAddress := sdk.AccAddress(crypto.AddressHash([]byte("KavaTest1"))).String()
+func TestMsgClaimFUSDMintingReward_Validate(t *testing.T) {
+	validAddress := sdk.AccAddress(crypto.AddressHash([]byte("MageTest1"))).String()
 
 	type expectedErr struct {
 		wraps error
@@ -209,7 +209,7 @@ func TestMsgClaimUSDXMintingReward_Validate(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			msg := types.NewMsgClaimUSDXMintingReward(tc.msgArgs.sender, tc.msgArgs.multiplierName)
+			msg := types.NewMsgClaimFUSDMintingReward(tc.msgArgs.sender, tc.msgArgs.multiplierName)
 
 			err := msg.ValidateBasic()
 			if tc.expect.pass {

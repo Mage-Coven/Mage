@@ -15,8 +15,8 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	liquidtypes "github.com/kava-labs/kava/x/liquid/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	liquidtypes "github.com/mage-coven/mage/x/liquid/types"
 )
 
 // d is an alias for sdk.MustNewDecFromStr
@@ -43,7 +43,7 @@ func (suite *tallyHandlerSuite) SetupTest() {
 	suite.ctx = suite.app.NewContext(false, tmproto.Header{Height: 1, Time: genesisTime})
 
 	suite.staking = stakingHelper{suite.app.GetStakingKeeper()}
-	suite.staking.setBondDenom(suite.ctx, "ukava")
+	suite.staking.setBondDenom(suite.ctx, "umage")
 
 	suite.tallier = NewTallyHandler(
 		suite.app.GetGovKeeper(),
@@ -62,7 +62,7 @@ func (suite *tallyHandlerSuite) TestVotePower_AllSourcesCounted() {
 
 	derivatives := suite.mintDerivative(user.GetAddress(), validator.GetOperator(), sdk.NewInt(500e6))
 
-	suite.allowBKavaEarnDeposits()
+	suite.allowBMageEarnDeposits()
 	suite.earnDeposit(
 		user.GetAddress(),
 		sdk.NewCoin(derivatives.Denom, sdk.NewInt(250e6)),
@@ -87,7 +87,7 @@ func (suite *tallyHandlerSuite) TestVotePower_UserOverridesValidator() {
 
 	derivatives := suite.mintDerivative(user.GetAddress(), validator.GetOperator(), sdk.NewInt(500e6))
 
-	suite.allowBKavaEarnDeposits()
+	suite.allowBMageEarnDeposits()
 	suite.earnDeposit(
 		user.GetAddress(),
 		sdk.NewCoin(derivatives.Denom, sdk.NewInt(250e6)),
@@ -95,7 +95,7 @@ func (suite *tallyHandlerSuite) TestVotePower_UserOverridesValidator() {
 
 	proposal := suite.createProposal()
 
-	// Validator votes, inheriting user's stake and bkava.
+	// Validator votes, inheriting user's stake and bmage.
 	suite.voteOnProposal(validator.GetOperator().Bytes(), proposal.ProposalId, govtypes.OptionYes)
 
 	// use wrapped context to discard the state changes
@@ -257,7 +257,7 @@ func (suite *tallyHandlerSuite) newBondCoin(amount sdk.Int) sdk.Coin {
 	return suite.staking.newBondCoin(suite.ctx, amount)
 }
 
-func (suite *tallyHandlerSuite) allowBKavaEarnDeposits() {
+func (suite *tallyHandlerSuite) allowBMageEarnDeposits() {
 	ek := suite.app.GetEarnKeeper()
 	earnParams := ek.GetParams(suite.ctx)
 

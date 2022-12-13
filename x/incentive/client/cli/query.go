@@ -11,7 +11,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/version"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 const (
@@ -22,13 +22,13 @@ const (
 
 	typeDelegator   = "delegator"
 	typeHard        = "hard"
-	typeUSDXMinting = "usdx-minting"
+	typeFUSDMinting = "fusd-minting"
 	typeSwap        = "swap"
 	typeSavings     = "savings"
 	typeEarn        = "earn"
 )
 
-var rewardTypes = []string{typeDelegator, typeHard, typeUSDXMinting, typeSwap, typeEarn}
+var rewardTypes = []string{typeDelegator, typeHard, typeFUSDMinting, typeSwap, typeEarn}
 
 // GetQueryCmd returns the cli query commands for the incentive module
 func GetQueryCmd() *cobra.Command {
@@ -61,14 +61,14 @@ func queryRewardsCmd() *cobra.Command {
 
 			Example:
 			$ %[1]s query %[2]s rewards
-			$ %[1]s query %[2]s rewards --owner kava15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw
+			$ %[1]s query %[2]s rewards --owner mage15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw
 			$ %[1]s query %[2]s rewards --type hard
-			$ %[1]s query %[2]s rewards --type usdx-minting
+			$ %[1]s query %[2]s rewards --type fusd-minting
 			$ %[1]s query %[2]s rewards --type delegator
 			$ %[1]s query %[2]s rewards --type swap
 			$ %[1]s query %[2]s rewards --type savings
 			$ %[1]s query %[2]s rewards --type earn
-			$ %[1]s query %[2]s rewards --type hard --owner kava15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw
+			$ %[1]s query %[2]s rewards --type hard --owner mage15qdefkmwswysgg4qxgqpqr35k3m49pkx2jdfnw
 			$ %[1]s query %[2]s rewards --type hard --unsynced
 			`,
 				version.AppName, types.ModuleName)),
@@ -101,9 +101,9 @@ func queryRewardsCmd() *cobra.Command {
 					return err
 				}
 				return cliCtx.PrintObjectLegacy(claims)
-			case typeUSDXMinting:
+			case typeFUSDMinting:
 				params := types.NewQueryRewardsParams(page, limit, owner, boolUnsynced)
-				claims, err := executeUSDXMintingRewardsQuery(cliCtx, params)
+				claims, err := executeFUSDMintingRewardsQuery(cliCtx, params)
 				if err != nil {
 					return err
 				}
@@ -143,7 +143,7 @@ func queryRewardsCmd() *cobra.Command {
 				if err != nil {
 					return err
 				}
-				usdxMintingClaims, err := executeUSDXMintingRewardsQuery(cliCtx, params)
+				fusdMintingClaims, err := executeFUSDMintingRewardsQuery(cliCtx, params)
 				if err != nil {
 					return err
 				}
@@ -169,8 +169,8 @@ func queryRewardsCmd() *cobra.Command {
 						return err
 					}
 				}
-				if len(usdxMintingClaims) > 0 {
-					if err := cliCtx.PrintObjectLegacy(usdxMintingClaims); err != nil {
+				if len(fusdMintingClaims) > 0 {
+					if err := cliCtx.PrintObjectLegacy(fusdMintingClaims); err != nil {
 						return err
 					}
 				}
@@ -290,23 +290,23 @@ func executeHardRewardsQuery(cliCtx client.Context, params types.QueryRewardsPar
 	return claims, nil
 }
 
-func executeUSDXMintingRewardsQuery(cliCtx client.Context, params types.QueryRewardsParams) (types.USDXMintingClaims, error) {
+func executeFUSDMintingRewardsQuery(cliCtx client.Context, params types.QueryRewardsParams) (types.FUSDMintingClaims, error) {
 	bz, err := cliCtx.LegacyAmino.MarshalJSON(params)
 	if err != nil {
-		return types.USDXMintingClaims{}, err
+		return types.FUSDMintingClaims{}, err
 	}
 
-	route := fmt.Sprintf("custom/%s/%s", types.ModuleName, types.QueryGetUSDXMintingRewards)
+	route := fmt.Sprintf("custom/%s/%s", types.ModuleName, types.QueryGetFUSDMintingRewards)
 	res, height, err := cliCtx.QueryWithData(route, bz)
 	if err != nil {
-		return types.USDXMintingClaims{}, err
+		return types.FUSDMintingClaims{}, err
 	}
 
 	cliCtx = cliCtx.WithHeight(height)
 
-	var claims types.USDXMintingClaims
+	var claims types.FUSDMintingClaims
 	if err := cliCtx.LegacyAmino.UnmarshalJSON(res, &claims); err != nil {
-		return types.USDXMintingClaims{}, fmt.Errorf("failed to unmarshal claims: %w", err)
+		return types.FUSDMintingClaims{}, fmt.Errorf("failed to unmarshal claims: %w", err)
 	}
 
 	return claims, nil

@@ -5,11 +5,11 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/incentive/keeper"
-	"github.com/kava-labs/kava/x/incentive/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/incentive/keeper"
+	"github.com/mage-coven/mage/x/incentive/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -29,7 +29,7 @@ func (suite *QuerierTestSuite) TestGetStakingAPR() {
 	liquidStakedTokens := int64(60_000_000_000000)
 	totalSupply := int64(289_138_414_286684)
 
-	// inflation values below are used to regression test the switch from x/mint to x/kavamint
+	// inflation values below are used to regression test the switch from x/mint to x/magemint
 	// rather than define the total inflation w/ a community tax, we now directly define
 	// inflation for staking rewards & inflation for the community pool.
 	// derive these values from the above values in order to verify no change to output
@@ -45,12 +45,12 @@ func (suite *QuerierTestSuite) TestGetStakingAPR() {
 	usdcSupply := int64(2_500_000_000000)
 
 	earnKeeper := newFakeEarnKeeper().
-		addVault("bkava-asdf", earntypes.NewVaultShare("bkava-asdf", sdk.NewDec(liquidStakedTokens))).
+		addVault("bmage-asdf", earntypes.NewVaultShare("bmage-asdf", sdk.NewDec(liquidStakedTokens))).
 		addVault(usdcDenom, earntypes.NewVaultShare(usdcDenom, sdk.NewDec(usdcSupply)))
 
 	suite.keeper = suite.NewTestKeeper(&fakeParamSubspace{}).
-		WithKavamintKeeper(
-			newFakeKavamintKeeper().
+		WithMagemintKeeper(
+			newFakeMagemintKeeper().
 				setCommunityInflation(communityInflation).
 				setStakingApy(stakingRewardsApy),
 		).
@@ -62,11 +62,11 @@ func (suite *QuerierTestSuite) TestGetStakingAPR() {
 		).
 		WithEarnKeeper(earnKeeper).
 		WithLiquidKeeper(
-			newFakeLiquidKeeper().addDerivative(suite.ctx, "bkava-asdf", sdk.NewInt(liquidStakedTokens)),
+			newFakeLiquidKeeper().addDerivative(suite.ctx, "bmage-asdf", sdk.NewInt(liquidStakedTokens)),
 		).
 		WithPricefeedKeeper(
 			newFakePricefeedKeeper().
-				setPrice(pricefeedtypes.NewCurrentPrice("kava:usd:30", sdk.MustNewDecFromStr("1.5"))).
+				setPrice(pricefeedtypes.NewCurrentPrice("mage:usd:30", sdk.MustNewDecFromStr("1.5"))).
 				setPrice(pricefeedtypes.NewCurrentPrice("usdc:usd:30", sdk.OneDec())),
 		).
 		Build()
@@ -90,11 +90,11 @@ func (suite *QuerierTestSuite) TestGetStakingAPR() {
 		EarnRewardPeriods: types.MultiRewardPeriods{
 			{
 				Active:         true,
-				CollateralType: "bkava",
+				CollateralType: "bmage",
 				Start:          suite.ctx.BlockTime().Add(-time.Hour),
 				End:            suite.ctx.BlockTime().Add(time.Hour),
 				RewardsPerSecond: sdk.NewCoins(
-					sdk.NewCoin("ukava", sdk.NewInt(190258)),
+					sdk.NewCoin("umage", sdk.NewInt(190258)),
 				),
 			},
 			{
@@ -103,7 +103,7 @@ func (suite *QuerierTestSuite) TestGetStakingAPR() {
 				Start:          suite.ctx.BlockTime().Add(-time.Hour),
 				End:            suite.ctx.BlockTime().Add(time.Hour),
 				RewardsPerSecond: sdk.NewCoins(
-					sdk.NewCoin("ukava", sdk.NewInt(5284)),
+					sdk.NewCoin("umage", sdk.NewInt(5284)),
 				),
 			},
 		},

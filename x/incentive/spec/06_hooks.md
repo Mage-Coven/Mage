@@ -11,21 +11,21 @@ This module implements the `Hooks` interface for the following modules:
 - swap
 - staking (defined in cosmos-sdk)
 
-CDP module hooks manage the creation and synchronization of USDX minting incentives.
+CDP module hooks manage the creation and synchronization of FUSD minting incentives.
 
 ```go
 // ------------------- Cdp Module Hooks -------------------
 
 // AfterCDPCreated function that runs after a cdp is created
 func (h Hooks) AfterCDPCreated(ctx sdk.Context, cdp cdptypes.CDP) {
-  h.k.InitializeUSDXMintingClaim(ctx, cdp)
+  h.k.InitializeFUSDMintingClaim(ctx, cdp)
 }
 
 // BeforeCDPModified function that runs before a cdp is modified
 // note that this is called immediately after interest is synchronized, and so could potentially
 // be called AfterCDPInterestUpdated or something like that, if we we're to expand the scope of cdp hooks
 func (h Hooks) BeforeCDPModified(ctx sdk.Context, cdp cdptypes.CDP) {
-  h.k.SynchronizeUSDXMintingReward(ctx, cdp)
+  h.k.SynchronizeFUSDMintingReward(ctx, cdp)
 }
 ```
 

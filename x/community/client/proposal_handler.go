@@ -7,8 +7,8 @@ import (
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 	govrest "github.com/cosmos/cosmos-sdk/x/gov/client/rest"
 
-	"github.com/kava-labs/kava/x/community/client/cli"
-	"github.com/kava-labs/kava/x/community/types"
+	"github.com/mage-coven/mage/x/community/client/cli"
+	"github.com/mage-coven/mage/x/community/types"
 )
 
 // community-pool deposit/withdraw lend proposal handlers

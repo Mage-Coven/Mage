@@ -32,15 +32,15 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	"github.com/cosmos/cosmos-sdk/x/supply"
 
-	"github.com/kava-labs/kava/x/auction"
-	"github.com/kava-labs/kava/x/bep3"
-	"github.com/kava-labs/kava/x/cdp"
-	"github.com/kava-labs/kava/x/committee"
-	"github.com/kava-labs/kava/x/incentive"
-	"github.com/kava-labs/kava/x/kavadist"
-	"github.com/kava-labs/kava/x/pricefeed"
-	"github.com/kava-labs/kava/x/swap"
-	validatorvesting "github.com/kava-labs/kava/x/validator-vesting"
+	"github.com/mage-coven/mage/x/auction"
+	"github.com/mage-coven/mage/x/bep3"
+	"github.com/mage-coven/mage/x/cdp"
+	"github.com/mage-coven/mage/x/committee"
+	"github.com/mage-coven/mage/x/incentive"
+	"github.com/mage-coven/mage/x/magedist"
+	"github.com/mage-coven/mage/x/pricefeed"
+	"github.com/mage-coven/mage/x/swap"
+	validatorvesting "github.com/mage-coven/mage/x/validator-vesting"
 )
 
 type StoreKeysPrefixes struct {
@@ -184,7 +184,7 @@ func TestAppImportExport(t *testing.T) {
 		{app.keys[bep3.StoreKey], newApp.keys[bep3.StoreKey], [][]byte{}},
 		{app.keys[cdp.StoreKey], newApp.keys[cdp.StoreKey], [][]byte{}},
 		{app.keys[incentive.StoreKey], newApp.keys[incentive.StoreKey], [][]byte{}},
-		{app.keys[kavadist.StoreKey], newApp.keys[kavadist.StoreKey], [][]byte{}},
+		{app.keys[magedist.StoreKey], newApp.keys[magedist.StoreKey], [][]byte{}},
 		{app.keys[pricefeed.StoreKey], newApp.keys[pricefeed.StoreKey], [][]byte{}},
 		{app.keys[validatorvesting.StoreKey], newApp.keys[validatorvesting.StoreKey], [][]byte{}},
 		{app.keys[committee.StoreKey], newApp.keys[committee.StoreKey], [][]byte{}},

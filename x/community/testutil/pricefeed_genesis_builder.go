@@ -4,11 +4,11 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
 )
 
-// lendGenesisBuilder builds the Hard and Pricefeed genesis states for setting up Kava Lend
+// lendGenesisBuilder builds the Hard and Pricefeed genesis states for setting up Mage Lend
 type lendGenesisBuilder struct {
 	hardMarkets []hardtypes.MoneyMarket
 	pfMarkets   []pricefeedtypes.Market

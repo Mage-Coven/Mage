@@ -7,9 +7,9 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/community/keeper"
-	"github.com/kava-labs/kava/x/community/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/community/keeper"
+	"github.com/mage-coven/mage/x/community/types"
 )
 
 // Test suite used for all community tests
@@ -35,7 +35,7 @@ func (suite *Suite) SetupTest() {
 	suite.Keeper = tApp.GetCommunityKeeper()
 	communityPoolAddress := tApp.GetAccountKeeper().GetModuleAddress(types.ModuleAccountName)
 	// hello, greppers!
-	suite.Equal("kava17d2wax0zhjrrecvaszuyxdf5wcu5a0p4qlx3t5", communityPoolAddress.String())
+	suite.Equal("mage17d2wax0zhjrrecvaszuyxdf5wcu5a0p4qlx3t5", communityPoolAddress.String())
 	suite.MaccAddress = communityPoolAddress
 }
 

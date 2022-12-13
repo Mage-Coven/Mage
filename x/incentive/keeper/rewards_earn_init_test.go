@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // InitializeEarnRewardTests runs unit tests for the keeper.InitializeEarnReward method
@@ -29,7 +29,7 @@ func (suite *InitializeEarnRewardTests) TestClaimAddedWhenClaimDoesNotExistAndNo
 	// When a claim doesn't exist, and a user deposits to a non-rewarded pool;
 	// then a claim is added with no rewards and no indexes
 
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	// no global indexes stored as this pool is not rewarded
 
@@ -53,7 +53,7 @@ func (suite *InitializeEarnRewardTests) TestClaimAddedWhenClaimDoesNotExistAndRe
 	// When a claim doesn't exist, and a user deposits to a rewarded pool;
 	// then a claim is added with no rewards and indexes matching the global indexes
 
-	vaultDenom := "usdx"
+	vaultDenom := "fusd"
 
 	globalIndexes := types.MultiRewardIndexes{
 		{
@@ -92,7 +92,7 @@ func (suite *InitializeEarnRewardTests) TestClaimUpdatedWhenClaimExistsAndNoRewa
 		},
 	}
 
-	newVaultDenom := "btcb:usdx"
+	newVaultDenom := "btcb:fusd"
 
 	claim := types.EarnClaim{
 		BaseMultiClaim: types.BaseMultiClaim{
@@ -141,7 +141,7 @@ func (suite *InitializeEarnRewardTests) TestClaimUpdatedWhenClaimExistsAndReward
 		},
 	}
 
-	newVaultDenom := "btcb:usdx"
+	newVaultDenom := "btcb:fusd"
 	newIndexes := types.RewardIndexes{
 		{
 			CollateralType: "otherrewarddenom",

@@ -9,9 +9,9 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	earntypes "github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/incentive/types"
-	liquidtypes "github.com/kava-labs/kava/x/liquid/types"
+	earntypes "github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/incentive/types"
+	liquidtypes "github.com/mage-coven/mage/x/liquid/types"
 )
 
 const (
@@ -27,8 +27,8 @@ func NewQuerier(k Keeper, legacyQuerierCdc *codec.LegacyAmino) sdk.Querier {
 
 		case types.QueryGetHardRewards:
 			return queryGetHardRewards(ctx, req, k, legacyQuerierCdc)
-		case types.QueryGetUSDXMintingRewards:
-			return queryGetUSDXMintingRewards(ctx, req, k, legacyQuerierCdc)
+		case types.QueryGetFUSDMintingRewards:
+			return queryGetFUSDMintingRewards(ctx, req, k, legacyQuerierCdc)
 		case types.QueryGetDelegatorRewards:
 			return queryGetDelegatorRewards(ctx, req, k, legacyQuerierCdc)
 		case types.QueryGetSwapRewards:
@@ -101,7 +101,7 @@ func queryGetHardRewards(ctx sdk.Context, req abci.RequestQuery, k Keeper, legac
 	return bz, nil
 }
 
-func queryGetUSDXMintingRewards(ctx sdk.Context, req abci.RequestQuery, k Keeper, legacyQuerierCdc *codec.LegacyAmino) ([]byte, error) {
+func queryGetFUSDMintingRewards(ctx sdk.Context, req abci.RequestQuery, k Keeper, legacyQuerierCdc *codec.LegacyAmino) ([]byte, error) {
 	var params types.QueryRewardsParams
 	err := legacyQuerierCdc.UnmarshalJSON(req.Data, &params)
 	if err != nil {
@@ -109,32 +109,32 @@ func queryGetUSDXMintingRewards(ctx sdk.Context, req abci.RequestQuery, k Keeper
 	}
 	owner := len(params.Owner) > 0
 
-	var usdxMintingClaims types.USDXMintingClaims
+	var fusdMintingClaims types.FUSDMintingClaims
 	switch {
 	case owner:
-		usdxMintingClaim, foundUsdxMintingClaim := k.GetUSDXMintingClaim(ctx, params.Owner)
+		fusdMintingClaim, foundUsdxMintingClaim := k.GetFUSDMintingClaim(ctx, params.Owner)
 		if foundUsdxMintingClaim {
-			usdxMintingClaims = append(usdxMintingClaims, usdxMintingClaim)
+			fusdMintingClaims = append(fusdMintingClaims, fusdMintingClaim)
 		}
 	default:
-		usdxMintingClaims = k.GetAllUSDXMintingClaims(ctx)
+		fusdMintingClaims = k.GetAllFUSDMintingClaims(ctx)
 	}
 
-	var paginatedUsdxMintingClaims types.USDXMintingClaims
-	startU, endU := client.Paginate(len(usdxMintingClaims), params.Page, params.Limit, 100)
+	var paginatedUsdxMintingClaims types.FUSDMintingClaims
+	startU, endU := client.Paginate(len(fusdMintingClaims), params.Page, params.Limit, 100)
 	if startU < 0 || endU < 0 {
-		paginatedUsdxMintingClaims = types.USDXMintingClaims{}
+		paginatedUsdxMintingClaims = types.FUSDMintingClaims{}
 	} else {
-		paginatedUsdxMintingClaims = usdxMintingClaims[startU:endU]
+		paginatedUsdxMintingClaims = fusdMintingClaims[startU:endU]
 	}
 
 	if !params.Unsynchronized {
 		for i, claim := range paginatedUsdxMintingClaims {
-			paginatedUsdxMintingClaims[i] = k.SimulateUSDXMintingSynchronization(ctx, claim)
+			paginatedUsdxMintingClaims[i] = k.SimulateFUSDMintingSynchronization(ctx, claim)
 		}
 	}
 
-	// Marshal USDX minting claims
+	// Marshal FUSD minting claims
 	bz, err := codec.MarshalJSONIndent(legacyQuerierCdc, paginatedUsdxMintingClaims)
 	if err != nil {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
@@ -319,9 +319,9 @@ func queryGetEarnRewards(ctx sdk.Context, req abci.RequestQuery, k Keeper, legac
 }
 
 func queryGetRewardFactors(ctx sdk.Context, req abci.RequestQuery, k Keeper, legacyQuerierCdc *codec.LegacyAmino) ([]byte, error) {
-	var usdxFactors types.RewardIndexes
-	k.IterateUSDXMintingRewardFactors(ctx, func(collateralType string, factor sdk.Dec) (stop bool) {
-		usdxFactors = usdxFactors.With(collateralType, factor)
+	var fusdFactors types.RewardIndexes
+	k.IterateFUSDMintingRewardFactors(ctx, func(collateralType string, factor sdk.Dec) (stop bool) {
+		fusdFactors = fusdFactors.With(collateralType, factor)
 		return false
 	})
 
@@ -362,7 +362,7 @@ func queryGetRewardFactors(ctx sdk.Context, req abci.RequestQuery, k Keeper, leg
 	})
 
 	response := types.NewQueryGetRewardFactorsResponse(
-		usdxFactors,
+		fusdFactors,
 		supplyFactors,
 		borrowFactors,
 		delegatorFactors,
@@ -383,7 +383,7 @@ func queryGetAPYs(ctx sdk.Context, req abci.RequestQuery, k Keeper, legacyQuerie
 	params := k.GetParams(ctx)
 	var apys types.APYs
 
-	// bkava APY (staking + incentive rewards)
+	// bmage APY (staking + incentive rewards)
 	stakingAPR, err := GetStakingAPR(ctx, k, params)
 	if err != nil {
 		return nil, err
@@ -393,7 +393,7 @@ func queryGetAPYs(ctx sdk.Context, req abci.RequestQuery, k Keeper, legacyQuerie
 
 	// Incentive only APYs
 	for _, param := range params.EarnRewardPeriods {
-		// Skip bkava as it's calculated earlier with staking rewards
+		// Skip bmage as it's calculated earlier with staking rewards
 		if param.CollateralType == liquidtypes.DefaultDerivativeDenom {
 			continue
 		}
@@ -423,18 +423,18 @@ func queryGetAPYs(ctx sdk.Context, req abci.RequestQuery, k Keeper, legacyQuerie
 // GetStakingAPR returns the total APR for staking and incentive rewards
 func GetStakingAPR(ctx sdk.Context, k Keeper, params types.Params) (sdk.Dec, error) {
 	// Get staking APR
-	stakingAPR := k.kavamintKeeper.GetStakingApy(ctx)
+	stakingAPR := k.magemintKeeper.GetStakingApy(ctx)
 
 	// Get incentive APR
-	bkavaRewardPeriod, found := params.EarnRewardPeriods.GetMultiRewardPeriod(liquidtypes.DefaultDerivativeDenom)
+	bmageRewardPeriod, found := params.EarnRewardPeriods.GetMultiRewardPeriod(liquidtypes.DefaultDerivativeDenom)
 	if !found {
-		// No incentive rewards for bkava, only staking rewards
+		// No incentive rewards for bmage, only staking rewards
 		return stakingAPR, nil
 	}
 
-	// Total amount of bkava in earn vaults, this may be lower than total bank
-	// supply of bkava as some bkava may not be deposited in earn vaults
-	totalEarnBkavaDeposited := sdk.ZeroInt()
+	// Total amount of bmage in earn vaults, this may be lower than total bank
+	// supply of bmage as some bmage may not be deposited in earn vaults
+	totalEarnBmageDeposited := sdk.ZeroInt()
 
 	var iterErr error
 	k.earnKeeper.IterateVaultRecords(ctx, func(record earntypes.VaultRecord) (stop bool) {
@@ -448,7 +448,7 @@ func GetStakingAPR(ctx sdk.Context, k Keeper, params types.Params) (sdk.Dec, err
 			return false
 		}
 
-		totalEarnBkavaDeposited = totalEarnBkavaDeposited.Add(vaultValue.Amount)
+		totalEarnBmageDeposited = totalEarnBmageDeposited.Add(vaultValue.Amount)
 
 		return false
 	})
@@ -458,8 +458,8 @@ func GetStakingAPR(ctx sdk.Context, k Keeper, params types.Params) (sdk.Dec, err
 	}
 
 	// Incentive APR = rewards per second * seconds per year / total supplied to earn vaults
-	// Override collateral type to use "kava" instead of "bkava" when fetching
-	incentiveAPY, err := GetAPYFromMultiRewardPeriod(ctx, k, types.BondDenom, bkavaRewardPeriod, totalEarnBkavaDeposited)
+	// Override collateral type to use "mage" instead of "bmage" when fetching
+	incentiveAPY, err := GetAPYFromMultiRewardPeriod(ctx, k, types.BondDenom, bmageRewardPeriod, totalEarnBmageDeposited)
 	if err != nil {
 		return sdk.ZeroDec(), err
 	}
@@ -518,15 +518,15 @@ func GetAPYFromMultiRewardPeriod(
 
 func getMarketID(denom string) string {
 	// Rewrite denoms as pricefeed has different names for some assets,
-	// e.g. "ukava" -> "kava", "erc20/multichain/usdc" -> "usdc"
-	// bkava is not included as it is handled separately
+	// e.g. "umage" -> "mage", "erc20/multichain/usdc" -> "usdc"
+	// bmage is not included as it is handled separately
 
 	// TODO: Replace hardcoded conversion with possible params set somewhere
 	// to be more flexible. E.g. a map of denoms to pricefeed market denoms in
 	// pricefeed params.
 	switch denom {
 	case types.BondDenom:
-		denom = "kava"
+		denom = "mage"
 	case "erc20/multichain/usdc":
 		denom = "usdc"
 	case "erc20/multichain/usdt":

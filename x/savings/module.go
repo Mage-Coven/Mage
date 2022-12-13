@@ -17,9 +17,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/kava-labs/kava/x/savings/client/cli"
-	"github.com/kava-labs/kava/x/savings/keeper"
-	"github.com/kava-labs/kava/x/savings/types"
+	"github.com/mage-coven/mage/x/savings/client/cli"
+	"github.com/mage-coven/mage/x/savings/keeper"
+	"github.com/mage-coven/mage/x/savings/types"
 )
 
 var (

@@ -11,10 +11,10 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/hard"
-	"github.com/kava-labs/kava/x/hard/keeper"
-	"github.com/kava-labs/kava/x/hard/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/hard"
+	"github.com/mage-coven/mage/x/hard/keeper"
+	"github.com/mage-coven/mage/x/hard/types"
 )
 
 type GenesisTestSuite struct {
@@ -43,13 +43,13 @@ func (suite *GenesisTestSuite) Test_InitExportGenesis() {
 	params := types.NewParams(
 		types.MoneyMarkets{
 			types.NewMoneyMarket(
-				"ukava",
+				"umage",
 				types.NewBorrowLimit(
 					false,
 					sdk.NewDec(1e15),
 					loanToValue,
 				),
-				"kava:usd",
+				"mage:usd",
 				sdk.NewInt(1e6),
 				types.NewInterestRateModel(
 					sdk.MustNewDecFromStr("0.05"),
@@ -67,10 +67,10 @@ func (suite *GenesisTestSuite) Test_InitExportGenesis() {
 	deposits := types.Deposits{
 		types.NewDeposit(
 			suite.addrs[0],
-			sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e8))), // 100 ukava
+			sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e8))), // 100 umage
 			types.SupplyInterestFactors{
 				{
-					Denom: "ukava",
+					Denom: "umage",
 					Value: sdk.NewDec(1),
 				},
 			},
@@ -85,10 +85,10 @@ func (suite *GenesisTestSuite) Test_InitExportGenesis() {
 	borrows := types.Borrows{
 		types.NewBorrow(
 			suite.addrs[1],
-			sdk.NewCoins(sdk.NewCoin("ukava", sdk.NewInt(1e7))), // 10 ukava
+			sdk.NewCoins(sdk.NewCoin("umage", sdk.NewInt(1e7))), // 10 umage
 			types.BorrowInterestFactors{
 				{
-					Denom: "ukava",
+					Denom: "umage",
 					Value: sdk.NewDec(1),
 				},
 			},
@@ -103,7 +103,7 @@ func (suite *GenesisTestSuite) Test_InitExportGenesis() {
 	supplyInterestFactor := sdk.MustNewDecFromStr("1.0001")
 	borrowInterestFactor := sdk.MustNewDecFromStr("1.1234")
 	accuralTimes := types.GenesisAccumulationTimes{
-		types.NewGenesisAccumulationTime("ukava", suite.genTime, supplyInterestFactor, borrowInterestFactor),
+		types.NewGenesisAccumulationTime("umage", suite.genTime, supplyInterestFactor, borrowInterestFactor),
 	}
 
 	hardGenesis := types.NewGenesisState(

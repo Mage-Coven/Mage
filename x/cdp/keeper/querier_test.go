@@ -18,11 +18,11 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/cdp/keeper"
-	"github.com/kava-labs/kava/x/cdp/types"
-	pfkeeper "github.com/kava-labs/kava/x/pricefeed/keeper"
-	pftypes "github.com/kava-labs/kava/x/pricefeed/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/cdp/keeper"
+	"github.com/mage-coven/mage/x/cdp/types"
+	pfkeeper "github.com/mage-coven/mage/x/pricefeed/keeper"
+	pftypes "github.com/mage-coven/mage/x/pricefeed/types"
 )
 
 const (
@@ -99,7 +99,7 @@ func (suite *QuerierTestSuite) SetupTest() {
 			amount = simulation.RandIntBetween(rand.New(rand.NewSource(int64(j))), 500000000, 5000000000)
 			debt = simulation.RandIntBetween(rand.New(rand.NewSource(int64(j))), 1000000000, 25000000000)
 		}
-		err = suite.keeper.AddCdp(suite.ctx, addrs[j], c(collateral, int64(amount)), c("usdx", int64(debt)), collateral+"-a")
+		err = suite.keeper.AddCdp(suite.ctx, addrs[j], c(collateral, int64(amount)), c("fusd", int64(debt)), collateral+"-a")
 		suite.NoError(err)
 		c, f := suite.keeper.GetCDP(suite.ctx, collateral+"-a", uint64(j+1))
 		suite.True(f)

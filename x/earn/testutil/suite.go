@@ -6,16 +6,16 @@ import (
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/crypto/keys/ed25519"
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/earn/keeper"
-	"github.com/kava-labs/kava/x/earn/types"
-	"github.com/kava-labs/kava/x/hard"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/earn/keeper"
+	"github.com/mage-coven/mage/x/earn/types"
+	"github.com/mage-coven/mage/x/hard"
 
-	hardkeeper "github.com/kava-labs/kava/x/hard/keeper"
-	hardtypes "github.com/kava-labs/kava/x/hard/types"
-	pricefeedtypes "github.com/kava-labs/kava/x/pricefeed/types"
-	savingskeeper "github.com/kava-labs/kava/x/savings/keeper"
-	savingstypes "github.com/kava-labs/kava/x/savings/types"
+	hardkeeper "github.com/mage-coven/mage/x/hard/keeper"
+	hardtypes "github.com/mage-coven/mage/x/hard/types"
+	pricefeedtypes "github.com/mage-coven/mage/x/pricefeed/types"
+	savingskeeper "github.com/mage-coven/mage/x/savings/keeper"
+	savingstypes "github.com/mage-coven/mage/x/savings/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
@@ -30,10 +30,10 @@ import (
 	tmtime "github.com/tendermint/tendermint/types/time"
 )
 
-var TestBkavaDenoms = []string{
-	"bkava-kavavaloper15gqc744d05xacn4n6w2furuads9fu4pqn6zxlu",
-	"bkava-kavavaloper15qdefkmwswysgg4qxgqpqr35k3m49pkx8yhpte",
-	"bkava-kavavaloper1ypjp0m04pyp73hwgtc0dgkx0e9rrydeckewa42",
+var TestBmageDenoms = []string{
+	"bmage-magevaloper15gqc744d05xacn4n6w2furuads9fu4pqn6zxlu",
+	"bmage-magevaloper15qdefkmwswysgg4qxgqpqr35k3m49pkx8yhpte",
+	"bmage-magevaloper1ypjp0m04pyp73hwgtc0dgkx0e9rrydeckewa42",
 }
 
 // Suite implements a test suite for the earn module integration tests
@@ -56,20 +56,20 @@ func (suite *Suite) SetupTest() {
 	pricefeedGS := pricefeedtypes.GenesisState{
 		Params: pricefeedtypes.Params{
 			Markets: []pricefeedtypes.Market{
-				{MarketID: "usdx:usd", BaseAsset: "usdx", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
-				{MarketID: "kava:usd", BaseAsset: "kava", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "fusd:usd", BaseAsset: "fusd", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "mage:usd", BaseAsset: "mage", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 				{MarketID: "bnb:usd", BaseAsset: "bnb", QuoteAsset: "usd", Oracles: []sdk.AccAddress{}, Active: true},
 			},
 		},
 		PostedPrices: []pricefeedtypes.PostedPrice{
 			{
-				MarketID:      "usdx:usd",
+				MarketID:      "fusd:usd",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.MustNewDecFromStr("1.00"),
 				Expiry:        time.Now().Add(100 * time.Hour),
 			},
 			{
-				MarketID:      "kava:usd",
+				MarketID:      "mage:usd",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.MustNewDecFromStr("2.00"),
 				Expiry:        time.Now().Add(100 * time.Hour),
@@ -86,13 +86,13 @@ func (suite *Suite) SetupTest() {
 	hardGS := hardtypes.NewGenesisState(hardtypes.NewParams(
 		hardtypes.MoneyMarkets{
 			hardtypes.NewMoneyMarket(
-				"usdx",
+				"fusd",
 				hardtypes.NewBorrowLimit(
 					true,
 					sdk.MustNewDecFromStr("20000000"),
 					sdk.MustNewDecFromStr("1"),
 				),
-				"usdx:usd",
+				"fusd:usd",
 				sdk.NewInt(1000000),
 				hardtypes.NewInterestRateModel(
 					sdk.MustNewDecFromStr("0.05"),
@@ -122,13 +122,13 @@ func (suite *Suite) SetupTest() {
 				sdk.ZeroDec(),
 			),
 			hardtypes.NewMoneyMarket(
-				"kava",
+				"mage",
 				hardtypes.NewBorrowLimit(
 					true,
 					sdk.MustNewDecFromStr("20000000"),
 					sdk.MustNewDecFromStr("1"),
 				),
-				"kava:usd",
+				"mage:usd",
 				sdk.NewInt(1000000),
 				hardtypes.NewInterestRateModel(
 					sdk.MustNewDecFromStr("0.05"),
@@ -153,19 +153,19 @@ func (suite *Suite) SetupTest() {
 	savingsGS := savingstypes.NewGenesisState(
 		savingstypes.NewParams(
 			[]string{
-				"ukava",
+				"umage",
 				"busd",
-				"usdx",
-				TestBkavaDenoms[0],
-				TestBkavaDenoms[1],
-				TestBkavaDenoms[2],
+				"fusd",
+				TestBmageDenoms[0],
+				TestBmageDenoms[1],
+				TestBmageDenoms[2],
 			},
 		),
 		nil,
 	)
 
 	stakingParams := stakingtypes.DefaultParams()
-	stakingParams.BondDenom = "ukava"
+	stakingParams.BondDenom = "umage"
 
 	stakingGs := stakingtypes.GenesisState{
 		Params: stakingParams,

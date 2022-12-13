@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/libs/bytes"
 
-	app "github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/bep3/types"
+	app "github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/bep3/types"
 )
 
 type migrateTestSuite struct {

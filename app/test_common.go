@@ -30,29 +30,29 @@ import (
 	evmkeeper "github.com/tharsis/ethermint/x/evm/keeper"
 	feemarketkeeper "github.com/tharsis/ethermint/x/feemarket/keeper"
 
-	auctionkeeper "github.com/kava-labs/kava/x/auction/keeper"
-	bep3keeper "github.com/kava-labs/kava/x/bep3/keeper"
-	cdpkeeper "github.com/kava-labs/kava/x/cdp/keeper"
-	committeekeeper "github.com/kava-labs/kava/x/committee/keeper"
-	communitykeeper "github.com/kava-labs/kava/x/community/keeper"
-	earnkeeper "github.com/kava-labs/kava/x/earn/keeper"
-	evmutilkeeper "github.com/kava-labs/kava/x/evmutil/keeper"
-	hardkeeper "github.com/kava-labs/kava/x/hard/keeper"
-	incentivekeeper "github.com/kava-labs/kava/x/incentive/keeper"
-	issuancekeeper "github.com/kava-labs/kava/x/issuance/keeper"
-	kavadistkeeper "github.com/kava-labs/kava/x/kavadist/keeper"
-	kavamintkeeper "github.com/kava-labs/kava/x/kavamint/keeper"
-	kavaminttypes "github.com/kava-labs/kava/x/kavamint/types"
-	liquidkeeper "github.com/kava-labs/kava/x/liquid/keeper"
-	pricefeedkeeper "github.com/kava-labs/kava/x/pricefeed/keeper"
-	routerkeeper "github.com/kava-labs/kava/x/router/keeper"
-	savingskeeper "github.com/kava-labs/kava/x/savings/keeper"
-	swapkeeper "github.com/kava-labs/kava/x/swap/keeper"
+	auctionkeeper "github.com/mage-coven/mage/x/auction/keeper"
+	bep3keeper "github.com/mage-coven/mage/x/bep3/keeper"
+	cdpkeeper "github.com/mage-coven/mage/x/cdp/keeper"
+	committeekeeper "github.com/mage-coven/mage/x/committee/keeper"
+	communitykeeper "github.com/mage-coven/mage/x/community/keeper"
+	earnkeeper "github.com/mage-coven/mage/x/earn/keeper"
+	evmutilkeeper "github.com/mage-coven/mage/x/evmutil/keeper"
+	hardkeeper "github.com/mage-coven/mage/x/hard/keeper"
+	incentivekeeper "github.com/mage-coven/mage/x/incentive/keeper"
+	issuancekeeper "github.com/mage-coven/mage/x/issuance/keeper"
+	magedistkeeper "github.com/mage-coven/mage/x/magedist/keeper"
+	magemintkeeper "github.com/mage-coven/mage/x/magemint/keeper"
+	mageminttypes "github.com/mage-coven/mage/x/magemint/types"
+	liquidkeeper "github.com/mage-coven/mage/x/liquid/keeper"
+	pricefeedkeeper "github.com/mage-coven/mage/x/pricefeed/keeper"
+	routerkeeper "github.com/mage-coven/mage/x/router/keeper"
+	savingskeeper "github.com/mage-coven/mage/x/savings/keeper"
+	swapkeeper "github.com/mage-coven/mage/x/swap/keeper"
 )
 
 var (
 	emptyTime            time.Time
-	testChainID                = "kavatest_1-1"
+	testChainID                = "magetest_1-1"
 	defaultInitialHeight int64 = 1
 )
 
@@ -102,7 +102,7 @@ func (tApp TestApp) GetGovKeeper() govkeeper.Keeper             { return tApp.go
 func (tApp TestApp) GetCrisisKeeper() crisiskeeper.Keeper       { return tApp.crisisKeeper }
 func (tApp TestApp) GetParamsKeeper() paramskeeper.Keeper       { return tApp.paramsKeeper }
 
-func (tApp TestApp) GetKavadistKeeper() kavadistkeeper.Keeper   { return tApp.kavadistKeeper }
+func (tApp TestApp) GetMagedistKeeper() magedistkeeper.Keeper   { return tApp.magedistKeeper }
 func (tApp TestApp) GetAuctionKeeper() auctionkeeper.Keeper     { return tApp.auctionKeeper }
 func (tApp TestApp) GetIssuanceKeeper() issuancekeeper.Keeper   { return tApp.issuanceKeeper }
 func (tApp TestApp) GetBep3Keeper() bep3keeper.Keeper           { return tApp.bep3Keeper }
@@ -119,7 +119,7 @@ func (tApp TestApp) GetFeeMarketKeeper() feemarketkeeper.Keeper { return tApp.fe
 func (tApp TestApp) GetLiquidKeeper() liquidkeeper.Keeper       { return tApp.liquidKeeper }
 func (tApp TestApp) GetEarnKeeper() earnkeeper.Keeper           { return tApp.earnKeeper }
 func (tApp TestApp) GetRouterKeeper() routerkeeper.Keeper       { return tApp.routerKeeper }
-func (tApp TestApp) GetKavamintKeeper() kavamintkeeper.Keeper   { return tApp.kavamintKeeper }
+func (tApp TestApp) GetMagemintKeeper() magemintkeeper.Keeper   { return tApp.magemintKeeper }
 func (tApp TestApp) GetCommunityKeeper() communitykeeper.Keeper { return tApp.communityKeeper }
 
 func (tApp TestApp) GetKeys() map[string]*sdk.KVStoreKey {
@@ -210,11 +210,11 @@ func (tApp TestApp) GetModuleAccountBalance(ctx sdk.Context, moduleName string, 
 
 // FundAccount is a utility function that funds an account by minting and sending the coins to the address.
 func (tApp TestApp) FundAccount(ctx sdk.Context, addr sdk.AccAddress, amounts sdk.Coins) error {
-	if err := tApp.bankKeeper.MintCoins(ctx, kavaminttypes.ModuleAccountName, amounts); err != nil {
+	if err := tApp.bankKeeper.MintCoins(ctx, mageminttypes.ModuleAccountName, amounts); err != nil {
 		return err
 	}
 
-	return tApp.bankKeeper.SendCoinsFromModuleToAccount(ctx, kavaminttypes.ModuleAccountName, addr, amounts)
+	return tApp.bankKeeper.SendCoinsFromModuleToAccount(ctx, mageminttypes.ModuleAccountName, addr, amounts)
 }
 
 // NewQueryServerTestHelper creates a new QueryServiceTestHelper that wraps the provided sdk.Context.
@@ -224,11 +224,11 @@ func (tApp TestApp) NewQueryServerTestHelper(ctx sdk.Context) *baseapp.QueryServ
 
 // FundModuleAccount is a utility function that funds a module account by minting and sending the coins to the address.
 func (tApp TestApp) FundModuleAccount(ctx sdk.Context, recipientMod string, amounts sdk.Coins) error {
-	if err := tApp.bankKeeper.MintCoins(ctx, kavaminttypes.ModuleAccountName, amounts); err != nil {
+	if err := tApp.bankKeeper.MintCoins(ctx, mageminttypes.ModuleAccountName, amounts); err != nil {
 		return err
 	}
 
-	return tApp.bankKeeper.SendCoinsFromModuleToModule(ctx, kavaminttypes.ModuleAccountName, recipientMod, amounts)
+	return tApp.bankKeeper.SendCoinsFromModuleToModule(ctx, mageminttypes.ModuleAccountName, recipientMod, amounts)
 }
 
 // CreateNewUnbondedValidator creates a new validator in the staking module.

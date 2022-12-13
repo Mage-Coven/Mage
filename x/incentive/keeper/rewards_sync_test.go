@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 // SynchronizeClaimTests runs unit tests for the keeper.SynchronizeClaim method
@@ -33,7 +33,7 @@ func (suite *SynchronizeClaimTests) TestClaimUpdatedWhenGlobalIndexesHaveIncreas
 
 	originalReward := arbitraryCoins()
 	collateralType := "base:quote"
-	claimType := types.CLAIM_TYPE_USDX_MINTING
+	claimType := types.CLAIM_TYPE_FUSD_MINTING
 
 	claim := types.Claim{
 		Type:   claimType,
@@ -84,7 +84,7 @@ func (suite *SynchronizeClaimTests) TestClaimUnchangedWhenGlobalIndexesUnchanged
 	// It should be safe to call SynchronizeClaim multiple times
 
 	collateralType := "base:quote"
-	claimType := types.CLAIM_TYPE_USDX_MINTING
+	claimType := types.CLAIM_TYPE_FUSD_MINTING
 
 	unchangingIndexes := types.MultiRewardIndexes{
 		{
@@ -123,7 +123,7 @@ func (suite *SynchronizeClaimTests) TestClaimUpdatedWhenNewRewardAdded() {
 
 	originalReward := arbitraryCoins()
 	newlyRewardcollateralType := "newlyRewardedPool"
-	claimType := types.CLAIM_TYPE_USDX_MINTING
+	claimType := types.CLAIM_TYPE_FUSD_MINTING
 
 	claim := types.Claim{
 		Type:   claimType,
@@ -189,7 +189,7 @@ func (suite *SynchronizeClaimTests) TestClaimUnchangedWhenNoReward() {
 	// Then the claim should be the same.
 
 	collateralType := "nonRewardPool"
-	claimType := types.CLAIM_TYPE_USDX_MINTING
+	claimType := types.CLAIM_TYPE_FUSD_MINTING
 
 	claim := types.Claim{
 		Type:          claimType,
@@ -215,7 +215,7 @@ func (suite *SynchronizeClaimTests) TestClaimUpdatedWhenNewRewardDenomAdded() {
 
 	originalReward := arbitraryCoins()
 	collateralType := "base:quote"
-	claimType := types.CLAIM_TYPE_USDX_MINTING
+	claimType := types.CLAIM_TYPE_FUSD_MINTING
 
 	claim := types.Claim{
 		Type:   claimType,
@@ -275,7 +275,7 @@ func (suite *SynchronizeClaimTests) TestClaimUpdatedWhenGlobalIndexesIncreasedAn
 	// The user earns no rewards for the time passed, but the claim indexes are updated
 
 	collateralType := "base:quote"
-	claimType := types.CLAIM_TYPE_USDX_MINTING
+	claimType := types.CLAIM_TYPE_FUSD_MINTING
 
 	claim := types.Claim{
 		Type:   claimType,
@@ -320,7 +320,7 @@ func (suite *SynchronizeClaimTests) TestClaimUpdatedWhenGlobalIndexesIncreasedAn
 }
 
 func (suite *SynchronizeClaimTests) TestGetSyncedClaim_ClaimUnchangedWhenNoGlobalIndexes() {
-	collateralType_1 := "btcb:usdx"
+	collateralType_1 := "btcb:fusd"
 	owner := arbitraryAddress()
 	claimType := types.CLAIM_TYPE_SWAP
 
@@ -353,8 +353,8 @@ func (suite *SynchronizeClaimTests) TestGetSyncedClaim_ClaimUnchangedWhenNoGloba
 }
 
 func (suite *SynchronizeClaimTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIndexAndHasNoSourceShares() {
-	collateralType_1 := "btcb:usdx"
-	collateralType_2 := "ukava:usdx"
+	collateralType_1 := "btcb:fusd"
+	collateralType_2 := "umage:fusd"
 	owner := arbitraryAddress()
 	claimType := types.CLAIM_TYPE_SWAP
 
@@ -411,8 +411,8 @@ func (suite *SynchronizeClaimTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIn
 }
 
 func (suite *SynchronizeClaimTests) TestGetSyncedClaim_ClaimUpdatedWhenMissingIndexButHasSourceShares() {
-	collateralType_1 := "btcb:usdx"
-	collateralType_2 := "ukava:usdx"
+	collateralType_1 := "btcb:fusd"
+	collateralType_2 := "umage:fusd"
 	owner := arbitraryAddress()
 	claimType := types.CLAIM_TYPE_SWAP
 

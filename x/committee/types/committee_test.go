@@ -11,15 +11,15 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto"
 
-	"github.com/kava-labs/kava/x/committee/testutil"
-	"github.com/kava-labs/kava/x/committee/types"
+	"github.com/mage-coven/mage/x/committee/testutil"
+	"github.com/mage-coven/mage/x/committee/types"
 )
 
 func TestBaseCommittee(t *testing.T) {
 	addresses := []sdk.AccAddress{
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest1"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest2"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest3"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest1"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest2"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest3"))),
 	}
 
 	testCases := []struct {
@@ -205,9 +205,9 @@ func TestBaseCommittee(t *testing.T) {
 
 func TestMemberCommittee(t *testing.T) {
 	addresses := []sdk.AccAddress{
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest1"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest2"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest3"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest1"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest2"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest3"))),
 	}
 
 	testCases := []struct {
@@ -251,9 +251,9 @@ func TestMemberCommittee(t *testing.T) {
 // TestTokenCommittee tests unique TokenCommittee functionality
 func TestTokenCommittee(t *testing.T) {
 	addresses := []sdk.AccAddress{
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest1"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest2"))),
-		sdk.AccAddress(crypto.AddressHash([]byte("KavaTest3"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest1"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest2"))),
+		sdk.AccAddress(crypto.AddressHash([]byte("MageTest3"))),
 	}
 
 	testCases := []struct {

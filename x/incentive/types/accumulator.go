@@ -29,7 +29,7 @@ func NewAccumulator(previousAccrual time.Time, indexes RewardIndexes) *Accumulat
 // Rewards are not accrued for times outside of the start and end times of a reward period.
 // If a period ends before currentTime, the PreviousAccrualTime is shortened to the end time. This allows accumulate to be called sequentially on consecutive reward periods.
 //
-// totalSourceShares is the sum of all users' source shares. For example:total btcb supplied to hard, total usdx borrowed from all bnb CDPs, or total shares in a swap pool.
+// totalSourceShares is the sum of all users' source shares. For example:total btcb supplied to hard, total fusd borrowed from all bnb CDPs, or total shares in a swap pool.
 func (acc *Accumulator) Accumulate(period MultiRewardPeriod, totalSourceShares sdk.Dec, currentTime time.Time) {
 	acc.AccumulateDecCoins(
 		period.Start,
@@ -75,7 +75,7 @@ func (*Accumulator) getTimeElapsedWithinLimits(start, end, limitMin, limitMax ti
 // calculateNewRewards calculates the amount to increase the global reward indexes by, for a given reward rate, duration, and number of source shares.
 // The total rewards to distribute in this block are given by reward rate * duration. This value divided by the sum of all source shares to give
 // total rewards per source share, which is what the indexes store.
-// Note, duration is rounded to the nearest second to keep rewards calculation consistent with kava-7.
+// Note, duration is rounded to the nearest second to keep rewards calculation consistent with mage-7.
 func (*Accumulator) calculateNewRewards(rewardsPerSecond sdk.DecCoins, totalSourceShares sdk.Dec, duration time.Duration) RewardIndexes {
 	if totalSourceShares.LTE(sdk.ZeroDec()) {
 		// When there is zero source shares, there is no users with deposits/borrows/delegations to pay out the current block's rewards to.

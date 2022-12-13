@@ -10,13 +10,13 @@ import (
 
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	// bep3types "github.com/kava-labs/kava/x/bep3/types"
-	// cdptypes "github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/app"
+	// bep3types "github.com/mage-coven/mage/x/bep3/types"
+	// cdptypes "github.com/mage-coven/mage/x/cdp/types"
 
-	"github.com/kava-labs/kava/x/committee/testutil"
-	"github.com/kava-labs/kava/x/committee/types"
-	// "github.com/kava-labs/kava/x/pricefeed"
+	"github.com/mage-coven/mage/x/committee/testutil"
+	"github.com/mage-coven/mage/x/committee/types"
+	// "github.com/mage-coven/mage/x/pricefeed"
 )
 
 // func newCDPGenesisState(params cdptypes.Params) app.GenesisState {
@@ -91,7 +91,7 @@ import (
 // 		Denom:               "bnb",
 // 		Type:                "bnb-a",
 // 		LiquidationRatio:    testutil.D("1.5"),
-// 		DebtLimit:           testutil.C("usdx", 1000000000000),
+// 		DebtLimit:           testutil.C("fusd", 1000000000000),
 // 		StabilityFee:        testutil.D("1.000000001547125958"), // %5 apr
 // 		LiquidationPenalty:  testutil.D("0.05"),
 // 		AuctionSize:         i(100),
@@ -106,7 +106,7 @@ import (
 
 // 	newValidCP := make(cdptypes.CollateralParams, len(testCP))
 // 	copy(newValidCP, testCP)
-// 	newValidCP[0].DebtLimit = testutil.C("usdx", 500000000000)
+// 	newValidCP[0].DebtLimit = testutil.C("fusd", 500000000000)
 
 // 	newInvalidCP := make(cdptypes.CollateralParams, len(testCP))
 // 	copy(newInvalidCP, testCP)
@@ -884,7 +884,7 @@ var _ types.PubProposal = &UnregisteredPubProposal{}
 // 				[]paramsproposal.ParamChange{{
 // 					Subspace: cdptypes.ModuleName,
 // 					Key:      string(cdptypes.KeyGlobalDebtLimit),
-// 					Value:    string(types.ModuleCdc.MustMarshalJSON(c("usdx", 100000000000))),
+// 					Value:    string(types.ModuleCdc.MustMarshalJSON(c("fusd", 100000000000))),
 // 				}},
 // 			),
 // 			expectErr: false,
@@ -938,7 +938,7 @@ var _ types.PubProposal = &UnregisteredPubProposal{}
 // 				[]paramsproposal.ParamChange{{
 // 					Subspace: cdptypes.ModuleName,
 // 					Key:      string(cdptypes.KeyGlobalDebtLimit),
-// 					Value:    `{"denom": "usdx",`,
+// 					Value:    `{"denom": "fusd",`,
 // 				}},
 // 			),
 // 			expectErr: true,

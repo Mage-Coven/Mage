@@ -5,13 +5,13 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 
 	"github.com/stretchr/testify/suite"
 )
 
-const savingsVaultDenom = "ukava"
+const savingsVaultDenom = "umage"
 
 type strategySavingsTestSuite struct {
 	testutil.Suite
@@ -132,7 +132,7 @@ func (suite *strategySavingsTestSuite) TestGetVaultTotalValue_Empty() {
 }
 
 func (suite *strategySavingsTestSuite) TestGetVaultTotalValue_NoDenomDeposit() {
-	// 2 Vaults usdx, busd
+	// 2 Vaults fusd, busd
 	// 1st vault has deposits
 	// 2nd vault has no deposits
 
@@ -283,7 +283,7 @@ func (suite *strategySavingsTestSuite) TestWithdraw_WithAccumulatedSavings() {
 		"account should be deleted when all shares withdrawn but has %s value still",
 		accValue,
 	)
-	suite.Require().Equal("account vault share record for ukava not found", err.Error())
+	suite.Require().Equal("account vault share record for umage not found", err.Error())
 }
 
 func (suite *strategySavingsTestSuite) TestAccountShares() {
@@ -432,7 +432,7 @@ func (suite *strategySavingsTestSuite) TestWithdraw_AccumulatedTruncated() {
 
 	accBal, err := suite.Keeper.GetVaultAccountValue(suite.Ctx, savingsVaultDenom, acc1)
 	suite.Require().NoError(err)
-	suite.Equal(depositAmount.AddAmount(sdk.NewInt(5)), accBal, "acc1 should have 105 usdx")
+	suite.Equal(depositAmount.AddAmount(sdk.NewInt(5)), accBal, "acc1 should have 105 fusd")
 
 	// 3. Withdraw all from acc1 - including accumulated amount
 	_, err = suite.Keeper.Withdraw(suite.Ctx, acc1, depositAmount.AddAmount(sdk.NewInt(5)), types.STRATEGY_TYPE_SAVINGS)
@@ -465,14 +465,14 @@ func (suite *strategySavingsTestSuite) TestWithdraw_ExpensiveShares() {
 	suite.Equal(sdk.NewDec(100), acc1Shares.AmountOf(savingsVaultDenom), "initial deposit 1:1 shares")
 
 	// 2. Direct savings deposit from module account to increase vault value
-	// Total value: 100 -> 2000, shares now 10usdx each
+	// Total value: 100 -> 2000, shares now 10fusd each
 	macc := suite.AccountKeeper.GetModuleAccount(suite.Ctx, types.ModuleName)
 	err = suite.SavingsKeeper.Deposit(suite.Ctx, macc.GetAddress(), sdk.NewCoins(sdk.NewInt64Coin(savingsVaultDenom, 1900)))
 	suite.Require().NoError(err)
 
 	accBal, err := suite.Keeper.GetVaultAccountValue(suite.Ctx, savingsVaultDenom, acc1)
 	suite.Require().NoError(err)
-	suite.Equal(sdk.NewInt(2000), accBal.Amount, "acc1 should have 2000 usdx")
+	suite.Equal(sdk.NewInt(2000), accBal.Amount, "acc1 should have 2000 fusd")
 
 	// 3. Withdraw all from acc1 - including accumulated amount
 	_, err = suite.Keeper.Withdraw(suite.Ctx, acc1, sdk.NewInt64Coin(savingsVaultDenom, 2000), types.STRATEGY_TYPE_SAVINGS)

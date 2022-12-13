@@ -10,9 +10,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
 
-	app "github.com/kava-labs/kava/app"
-	v015incentive "github.com/kava-labs/kava/x/incentive/legacy/v0_15"
-	v016incentive "github.com/kava-labs/kava/x/incentive/types"
+	app "github.com/mage-coven/mage/app"
+	v015incentive "github.com/mage-coven/mage/x/incentive/legacy/v0_15"
+	v016incentive "github.com/mage-coven/mage/x/incentive/types"
 )
 
 type migrateTestSuite struct {
@@ -56,22 +56,22 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 	v15genstate := v015incentive.GenesisState{
 		Params: v015incentive.Params{
 			ClaimEnd: time.Date(2020, time.March, 1, 2, 0, 0, 0, time.UTC),
-			USDXMintingRewardPeriods: []v015incentive.RewardPeriod{
+			FUSDMintingRewardPeriods: []v015incentive.RewardPeriod{
 				{
 					Active:           true,
-					CollateralType:   "usdx",
+					CollateralType:   "fusd",
 					Start:            time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 					End:              time.Date(2021, time.January, 1, 0, 0, 0, 0, time.UTC),
-					RewardsPerSecond: sdk.NewCoin("usdx", sdk.NewInt(10)),
+					RewardsPerSecond: sdk.NewCoin("fusd", sdk.NewInt(10)),
 				},
 			},
 			HardSupplyRewardPeriods: v015incentive.MultiRewardPeriods{
 				{
 					Active:           true,
-					CollateralType:   "usdx",
+					CollateralType:   "fusd",
 					Start:            time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 					End:              time.Date(2021, time.January, 1, 0, 0, 0, 0, time.UTC),
-					RewardsPerSecond: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(10))),
+					RewardsPerSecond: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(10))),
 				},
 			},
 			HardBorrowRewardPeriods: v015incentive.MultiRewardPeriods{
@@ -103,7 +103,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			},
 			ClaimMultipliers: v015incentive.MultipliersPerDenom{
 				{
-					Denom: "usdx",
+					Denom: "fusd",
 					Multipliers: v015incentive.Multipliers{
 						{
 							Name:         v015incentive.Small,
@@ -124,16 +124,16 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 				},
 			},
 		},
-		USDXRewardState: v015incentive.GenesisRewardState{
+		FUSDRewardState: v015incentive.GenesisRewardState{
 			AccumulationTimes: v015incentive.AccumulationTimes{
 				{
-					CollateralType:           "usdx",
+					CollateralType:           "fusd",
 					PreviousAccumulationTime: time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			MultiRewardIndexes: v015incentive.MultiRewardIndexes{
 				{
-					CollateralType: "usdx",
+					CollateralType: "fusd",
 					RewardIndexes: []v015incentive.RewardIndex{
 						{
 							CollateralType: "bnb",
@@ -143,15 +143,15 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 				},
 			},
 		},
-		USDXMintingClaims: v015incentive.USDXMintingClaims{
+		FUSDMintingClaims: v015incentive.FUSDMintingClaims{
 			{
 				BaseClaim: v015incentive.BaseClaim{
 					Owner:  s.addresses[0],
-					Reward: sdk.NewCoin("usdx", sdk.NewInt(100)),
+					Reward: sdk.NewCoin("fusd", sdk.NewInt(100)),
 				},
 				RewardIndexes: v015incentive.RewardIndexes{
 					{
-						CollateralType: "kava",
+						CollateralType: "mage",
 						RewardFactor:   sdk.MustNewDecFromStr("0.5"),
 					},
 				},
@@ -160,13 +160,13 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 		HardSupplyRewardState: v015incentive.GenesisRewardState{
 			AccumulationTimes: v015incentive.AccumulationTimes{
 				{
-					CollateralType:           "usdx",
+					CollateralType:           "fusd",
 					PreviousAccumulationTime: time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			MultiRewardIndexes: v015incentive.MultiRewardIndexes{
 				{
-					CollateralType: "usdx",
+					CollateralType: "fusd",
 					RewardIndexes: []v015incentive.RewardIndex{
 						{
 							CollateralType: "bnb",
@@ -198,13 +198,13 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 		DelegatorRewardState: v015incentive.GenesisRewardState{
 			AccumulationTimes: v015incentive.AccumulationTimes{
 				{
-					CollateralType:           "usdx",
+					CollateralType:           "fusd",
 					PreviousAccumulationTime: time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			MultiRewardIndexes: v015incentive.MultiRewardIndexes{
 				{
-					CollateralType: "usdx",
+					CollateralType: "fusd",
 					RewardIndexes: []v015incentive.RewardIndex{
 						{
 							CollateralType: "bnb",
@@ -237,7 +237,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			{
 				BaseMultiClaim: v015incentive.BaseMultiClaim{
 					Owner:  s.addresses[1],
-					Reward: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(100))),
+					Reward: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(100))),
 				},
 				SupplyRewardIndexes: v015incentive.MultiRewardIndexes{
 					{
@@ -267,7 +267,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			{
 				BaseMultiClaim: v015incentive.BaseMultiClaim{
 					Owner:  s.addresses[1],
-					Reward: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(100))),
+					Reward: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(100))),
 				},
 				RewardIndexes: v015incentive.MultiRewardIndexes{
 					{
@@ -286,7 +286,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			{
 				BaseMultiClaim: v015incentive.BaseMultiClaim{
 					Owner:  s.addresses[1],
-					Reward: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(100))),
+					Reward: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(100))),
 				},
 				RewardIndexes: v015incentive.MultiRewardIndexes{
 					{
@@ -303,16 +303,16 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 		},
 	}
 	expected := v016incentive.GenesisState{
-		USDXRewardState: v016incentive.GenesisRewardState{
+		FUSDRewardState: v016incentive.GenesisRewardState{
 			AccumulationTimes: v016incentive.AccumulationTimes{
 				{
-					CollateralType:           "usdx",
+					CollateralType:           "fusd",
 					PreviousAccumulationTime: time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			MultiRewardIndexes: v016incentive.MultiRewardIndexes{
 				{
-					CollateralType: "usdx",
+					CollateralType: "fusd",
 					RewardIndexes: []v016incentive.RewardIndex{
 						{
 							CollateralType: "bnb",
@@ -324,22 +324,22 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 		},
 		Params: v016incentive.Params{
 			ClaimEnd: time.Date(2020, time.March, 1, 2, 0, 0, 0, time.UTC),
-			USDXMintingRewardPeriods: []v016incentive.RewardPeriod{
+			FUSDMintingRewardPeriods: []v016incentive.RewardPeriod{
 				{
 					Active:           true,
-					CollateralType:   "usdx",
+					CollateralType:   "fusd",
 					Start:            time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 					End:              time.Date(2021, time.January, 1, 0, 0, 0, 0, time.UTC),
-					RewardsPerSecond: sdk.NewCoin("usdx", sdk.NewInt(10)),
+					RewardsPerSecond: sdk.NewCoin("fusd", sdk.NewInt(10)),
 				},
 			},
 			HardSupplyRewardPeriods: v016incentive.MultiRewardPeriods{
 				{
 					Active:           true,
-					CollateralType:   "usdx",
+					CollateralType:   "fusd",
 					Start:            time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 					End:              time.Date(2021, time.January, 1, 0, 0, 0, 0, time.UTC),
-					RewardsPerSecond: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(10))),
+					RewardsPerSecond: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(10))),
 				},
 			},
 			HardBorrowRewardPeriods: v016incentive.MultiRewardPeriods{
@@ -371,7 +371,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			},
 			ClaimMultipliers: []v016incentive.MultipliersPerDenom{
 				{
-					Denom: "usdx",
+					Denom: "fusd",
 					Multipliers: v016incentive.Multipliers{
 						{
 							Name:         "small",
@@ -392,15 +392,15 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 				},
 			},
 		},
-		USDXMintingClaims: v016incentive.USDXMintingClaims{
+		FUSDMintingClaims: v016incentive.FUSDMintingClaims{
 			{
 				BaseClaim: v016incentive.BaseClaim{
 					Owner:  s.addresses[0],
-					Reward: sdk.NewCoin("usdx", sdk.NewInt(100)),
+					Reward: sdk.NewCoin("fusd", sdk.NewInt(100)),
 				},
 				RewardIndexes: v016incentive.RewardIndexes{
 					{
-						CollateralType: "kava",
+						CollateralType: "mage",
 						RewardFactor:   sdk.MustNewDecFromStr("0.5"),
 					},
 				},
@@ -409,13 +409,13 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 		HardSupplyRewardState: v016incentive.GenesisRewardState{
 			AccumulationTimes: v016incentive.AccumulationTimes{
 				{
-					CollateralType:           "usdx",
+					CollateralType:           "fusd",
 					PreviousAccumulationTime: time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			MultiRewardIndexes: v016incentive.MultiRewardIndexes{
 				{
-					CollateralType: "usdx",
+					CollateralType: "fusd",
 					RewardIndexes: []v016incentive.RewardIndex{
 						{
 							CollateralType: "bnb",
@@ -447,13 +447,13 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 		DelegatorRewardState: v016incentive.GenesisRewardState{
 			AccumulationTimes: v016incentive.AccumulationTimes{
 				{
-					CollateralType:           "usdx",
+					CollateralType:           "fusd",
 					PreviousAccumulationTime: time.Date(2020, time.January, 1, 0, 0, 0, 0, time.UTC),
 				},
 			},
 			MultiRewardIndexes: v016incentive.MultiRewardIndexes{
 				{
-					CollateralType: "usdx",
+					CollateralType: "fusd",
 					RewardIndexes: []v016incentive.RewardIndex{
 						{
 							CollateralType: "bnb",
@@ -486,7 +486,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			{
 				BaseMultiClaim: v016incentive.BaseMultiClaim{
 					Owner:  s.addresses[1],
-					Reward: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(100))),
+					Reward: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(100))),
 				},
 				SupplyRewardIndexes: v016incentive.MultiRewardIndexes{
 					{
@@ -516,7 +516,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			{
 				BaseMultiClaim: v016incentive.BaseMultiClaim{
 					Owner:  s.addresses[1],
-					Reward: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(100))),
+					Reward: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(100))),
 				},
 				RewardIndexes: v016incentive.MultiRewardIndexes{
 					{
@@ -535,7 +535,7 @@ func (s *migrateTestSuite) TestMigrate_GenState() {
 			{
 				BaseMultiClaim: v016incentive.BaseMultiClaim{
 					Owner:  s.addresses[1],
-					Reward: sdk.NewCoins(sdk.NewCoin("usdx", sdk.NewInt(100))),
+					Reward: sdk.NewCoins(sdk.NewCoin("fusd", sdk.NewInt(100))),
 				},
 				RewardIndexes: v016incentive.MultiRewardIndexes{
 					{

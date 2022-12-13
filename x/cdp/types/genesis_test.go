@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/kava-labs/kava/x/cdp/types"
+	"github.com/mage-coven/mage/x/cdp/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -26,10 +26,10 @@ func TestGenesisTotalPrincipal(t *testing.T) {
 		wantIsError        bool
 		wantError          string
 	}{
-		{"valid", "usdx", sdk.NewInt(10), false, ""},
-		{"zero principal", "usdx", sdk.NewInt(0), false, ""},
+		{"valid", "fusd", sdk.NewInt(10), false, ""},
+		{"zero principal", "fusd", sdk.NewInt(0), false, ""},
 		{"invalid empty collateral type", "", sdk.NewInt(10), true, "collateral type cannot be empty"},
-		{"invalid negative principal", "usdx", sdk.NewInt(-10), true, "total principal should be positive"},
+		{"invalid negative principal", "fusd", sdk.NewInt(-10), true, "total principal should be positive"},
 		{"both invalid", "", sdk.NewInt(-10), true, "collateral type cannot be empty"},
 	}
 

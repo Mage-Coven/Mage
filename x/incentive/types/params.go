@@ -10,12 +10,12 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	kavadistTypes "github.com/kava-labs/kava/x/kavadist/types"
+	magedistTypes "github.com/mage-coven/mage/x/magedist/types"
 )
 
 // Parameter keys and default values
 var (
-	KeyUSDXMintingRewardPeriods = []byte("USDXMintingRewardPeriods")
+	KeyFUSDMintingRewardPeriods = []byte("FUSDMintingRewardPeriods")
 	KeyHardSupplyRewardPeriods  = []byte("HardSupplyRewardPeriods")
 	KeyHardBorrowRewardPeriods  = []byte("HardBorrowRewardPeriods")
 	KeyDelegatorRewardPeriods   = []byte("DelegatorRewardPeriods")
@@ -33,15 +33,15 @@ var (
 	DefaultTypedMultiRewardPeriods = TypedMultiRewardPeriods{}
 	DefaultClaimEnd                = tmtime.Canonical(time.Unix(1, 0))
 
-	BondDenom              = "ukava"
-	USDXMintingRewardDenom = "ukava"
+	BondDenom              = "umage"
+	FUSDMintingRewardDenom = "umage"
 
-	IncentiveMacc = kavadistTypes.ModuleName
+	IncentiveMacc = magedistTypes.ModuleName
 )
 
 // NewParams returns a new params object
 func NewParams(
-	usdxMinting RewardPeriods,
+	fusdMinting RewardPeriods,
 	// MultiRewardPeriods
 	hardSupply, hardBorrow, delegator, swap, savings, earn MultiRewardPeriods,
 	multipliers MultipliersPerDenoms,
@@ -49,7 +49,7 @@ func NewParams(
 	rewardPeriods TypedMultiRewardPeriods,
 ) Params {
 	return Params{
-		USDXMintingRewardPeriods: usdxMinting,
+		FUSDMintingRewardPeriods: fusdMinting,
 		HardSupplyRewardPeriods:  hardSupply,
 		HardBorrowRewardPeriods:  hardBorrow,
 		DelegatorRewardPeriods:   delegator,
@@ -86,7 +86,7 @@ func ParamKeyTable() paramtypes.KeyTable {
 // ParamSetPairs implements the ParamSet interface and returns all the key/value pairs
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(KeyUSDXMintingRewardPeriods, &p.USDXMintingRewardPeriods, validateRewardPeriodsParam),
+		paramtypes.NewParamSetPair(KeyFUSDMintingRewardPeriods, &p.FUSDMintingRewardPeriods, validateRewardPeriodsParam),
 		paramtypes.NewParamSetPair(KeyHardSupplyRewardPeriods, &p.HardSupplyRewardPeriods, validateMultiRewardPeriodsParam),
 		paramtypes.NewParamSetPair(KeyHardBorrowRewardPeriods, &p.HardBorrowRewardPeriods, validateMultiRewardPeriodsParam),
 		paramtypes.NewParamSetPair(KeyDelegatorRewardPeriods, &p.DelegatorRewardPeriods, validateMultiRewardPeriodsParam),
@@ -105,7 +105,7 @@ func (p Params) Validate() error {
 		return err
 	}
 
-	if err := validateRewardPeriodsParam(p.USDXMintingRewardPeriods); err != nil {
+	if err := validateRewardPeriodsParam(p.FUSDMintingRewardPeriods); err != nil {
 		return err
 	}
 
@@ -221,8 +221,8 @@ func (rp RewardPeriod) Validate() error {
 		// This is needed to ensure that the begin blocker accumulation does not panic.
 		return fmt.Errorf("end period time %s cannot be before start time %s", rp.End, rp.Start)
 	}
-	if rp.RewardsPerSecond.Denom != USDXMintingRewardDenom {
-		return fmt.Errorf("reward denom must be %s, got: %s", USDXMintingRewardDenom, rp.RewardsPerSecond.Denom)
+	if rp.RewardsPerSecond.Denom != FUSDMintingRewardDenom {
+		return fmt.Errorf("reward denom must be %s, got: %s", FUSDMintingRewardDenom, rp.RewardsPerSecond.Denom)
 	}
 	if !rp.RewardsPerSecond.IsValid() {
 		return fmt.Errorf("invalid reward amount: %s", rp.RewardsPerSecond)

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -42,7 +42,7 @@ func (suite *AccumulateTestSuite) storedIndexesEquals(
 
 func (suite *AccumulateTestSuite) TestStateUpdatedWhenBlockTimeHasIncreased() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper().addPool(pool, i(1e6))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -56,7 +56,7 @@ func (suite *AccumulateTestSuite) TestStateUpdatedWhenBlockTimeHasIncreased() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -73,7 +73,7 @@ func (suite *AccumulateTestSuite) TestStateUpdatedWhenBlockTimeHasIncreased() {
 		pool,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("swap", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("swap", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateRewards(suite.ctx, claimType, period)
@@ -87,7 +87,7 @@ func (suite *AccumulateTestSuite) TestStateUpdatedWhenBlockTimeHasIncreased() {
 			RewardFactor:   d("7.22"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor:   d("3.64"),
 		},
 	})
@@ -95,7 +95,7 @@ func (suite *AccumulateTestSuite) TestStateUpdatedWhenBlockTimeHasIncreased() {
 
 func (suite *AccumulateTestSuite) TestStateUnchangedWhenBlockTimeHasNotIncreased() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper().addPool(pool, i(1e6))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -109,7 +109,7 @@ func (suite *AccumulateTestSuite) TestStateUnchangedWhenBlockTimeHasNotIncreased
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -126,7 +126,7 @@ func (suite *AccumulateTestSuite) TestStateUnchangedWhenBlockTimeHasNotIncreased
 		pool,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("swap", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("swap", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateRewards(suite.ctx, claimType, period)
@@ -141,7 +141,7 @@ func (suite *AccumulateTestSuite) TestStateUnchangedWhenBlockTimeHasNotIncreased
 
 func (suite *AccumulateTestSuite) TestNoAccumulationWhenSourceSharesAreZero() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper() // no pools, so no source shares
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -155,7 +155,7 @@ func (suite *AccumulateTestSuite) TestNoAccumulationWhenSourceSharesAreZero() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -173,7 +173,7 @@ func (suite *AccumulateTestSuite) TestNoAccumulationWhenSourceSharesAreZero() {
 		pool,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("swap", 2000), c("ukava", 1000)), // same denoms as in global indexes
+		cs(c("swap", 2000), c("umage", 1000)), // same denoms as in global indexes
 	)
 
 	suite.keeper.AccumulateRewards(suite.ctx, claimType, period)
@@ -188,7 +188,7 @@ func (suite *AccumulateTestSuite) TestNoAccumulationWhenSourceSharesAreZero() {
 
 func (suite *AccumulateTestSuite) TestStateAddedWhenStateDoesNotExist() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper().addPool(pool, i(1e6))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -198,7 +198,7 @@ func (suite *AccumulateTestSuite) TestStateAddedWhenStateDoesNotExist() {
 		pool,
 		time.Unix(0, 0), // ensure the test is within start and end times
 		distantFuture,
-		cs(c("swap", 2000), c("ukava", 1000)),
+		cs(c("swap", 2000), c("umage", 1000)),
 	)
 
 	firstAccrualTime := time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC)
@@ -224,7 +224,7 @@ func (suite *AccumulateTestSuite) TestStateAddedWhenStateDoesNotExist() {
 			RewardFactor:   d("0.02"),
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardFactor:   d("0.01"),
 		},
 	})
@@ -232,7 +232,7 @@ func (suite *AccumulateTestSuite) TestStateAddedWhenStateDoesNotExist() {
 
 func (suite *AccumulateTestSuite) TestNoPanicWhenStateDoesNotExist() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper()
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -261,7 +261,7 @@ func (suite *AccumulateTestSuite) TestNoPanicWhenStateDoesNotExist() {
 
 func (suite *AccumulateTestSuite) TestNoAccumulationWhenBeforeStartTime() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper().addPool(pool, i(1e6))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -275,7 +275,7 @@ func (suite *AccumulateTestSuite) TestNoAccumulationWhenBeforeStartTime() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -292,7 +292,7 @@ func (suite *AccumulateTestSuite) TestNoAccumulationWhenBeforeStartTime() {
 		pool,
 		firstAccrualTime.Add(time.Nanosecond), // start time after accrual time
 		distantFuture,
-		cs(c("swap", 2000), c("ukava", 1000)),
+		cs(c("swap", 2000), c("umage", 1000)),
 	)
 
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)
@@ -308,7 +308,7 @@ func (suite *AccumulateTestSuite) TestNoAccumulationWhenBeforeStartTime() {
 
 func (suite *AccumulateTestSuite) TestPanicWhenCurrentTimeLessThanPrevious() {
 	claimType := types.CLAIM_TYPE_SWAP
-	pool := "btc:usdx"
+	pool := "btc:fusd"
 
 	swapKeeper := newFakeSwapKeeper().addPool(pool, i(1e6))
 	suite.keeper = suite.NewKeeper(&fakeParamSubspace{}, nil, nil, nil, nil, nil, swapKeeper, nil, nil, nil)
@@ -323,7 +323,7 @@ func (suite *AccumulateTestSuite) TestPanicWhenCurrentTimeLessThanPrevious() {
 		pool,
 		time.Time{}, // start time after accrual time
 		distantFuture,
-		cs(c("swap", 2000), c("ukava", 1000)),
+		cs(c("swap", 2000), c("umage", 1000)),
 	)
 
 	suite.ctx = suite.ctx.WithBlockTime(firstAccrualTime)

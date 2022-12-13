@@ -6,9 +6,9 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/committee/keeper"
-	"github.com/kava-labs/kava/x/committee/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/committee/keeper"
+	"github.com/mage-coven/mage/x/committee/types"
 )
 
 // Suite implements a test suite for the module integration tests

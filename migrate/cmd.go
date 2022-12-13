@@ -9,8 +9,8 @@ import (
 	"github.com/spf13/cobra"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/app/params"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/app/params"
 )
 
 // MigrateGenesisCmd returns a command to execute genesis state migration.

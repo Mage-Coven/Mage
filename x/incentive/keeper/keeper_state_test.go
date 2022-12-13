@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"time"
 
-	"github.com/kava-labs/kava/x/incentive/types"
+	"github.com/mage-coven/mage/x/incentive/types"
 )
 
 func (suite *KeeperTestSuite) TestGetSetDeleteClaims() {
@@ -97,12 +97,12 @@ func (suite *KeeperTestSuite) TestGetSetRewardAccrualTimes() {
 	}{
 		{
 			name:        "normal time can be written and read",
-			subKey:      "btc/usdx",
+			subKey:      "btc/fusd",
 			accrualTime: time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC),
 		},
 		{
 			name:        "zero time can be written and read",
-			subKey:      "btc/usdx",
+			subKey:      "btc/fusd",
 			accrualTime: time.Time{},
 		},
 	}
@@ -111,11 +111,11 @@ func (suite *KeeperTestSuite) TestGetSetRewardAccrualTimes() {
 		suite.Run(tc.name, func() {
 			suite.SetupApp()
 
-			_, found := suite.keeper.Store.GetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_USDX_MINTING, tc.subKey)
+			_, found := suite.keeper.Store.GetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_FUSD_MINTING, tc.subKey)
 			suite.False(found)
 
 			setFunc := func() {
-				suite.keeper.Store.SetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_USDX_MINTING, tc.subKey, tc.accrualTime)
+				suite.keeper.Store.SetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_FUSD_MINTING, tc.subKey, tc.accrualTime)
 			}
 			if tc.panics {
 				suite.Panics(setFunc)
@@ -127,7 +127,7 @@ func (suite *KeeperTestSuite) TestGetSetRewardAccrualTimes() {
 			for _, claimTypeValue := range types.ClaimType_value {
 				claimType := types.ClaimType(claimTypeValue)
 
-				if claimType == types.CLAIM_TYPE_USDX_MINTING {
+				if claimType == types.CLAIM_TYPE_FUSD_MINTING {
 					continue
 				}
 
@@ -135,7 +135,7 @@ func (suite *KeeperTestSuite) TestGetSetRewardAccrualTimes() {
 				suite.False(found, "reward accrual time for claim type %s should not exist", claimType)
 			}
 
-			storedTime, found := suite.keeper.Store.GetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_USDX_MINTING, tc.subKey)
+			storedTime, found := suite.keeper.Store.GetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_FUSD_MINTING, tc.subKey)
 			suite.True(found)
 			suite.Equal(tc.accrualTime, storedTime)
 		})
@@ -152,14 +152,14 @@ func (suite *KeeperTestSuite) TestGetSetRewardIndexes() {
 	}{
 		{
 			name:           "two factors can be written and read",
-			collateralType: "btc/usdx",
+			collateralType: "btc/fusd",
 			indexes: types.RewardIndexes{
 				{
 					CollateralType: "hard",
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -169,7 +169,7 @@ func (suite *KeeperTestSuite) TestGetSetRewardIndexes() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -183,7 +183,7 @@ func (suite *KeeperTestSuite) TestGetSetRewardIndexes() {
 					RewardFactor:   d("0.02"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -192,7 +192,7 @@ func (suite *KeeperTestSuite) TestGetSetRewardIndexes() {
 		{
 			// this test is to detect any changes in behavior
 			name:           "setting empty indexes does not panic",
-			collateralType: "btc/usdx",
+			collateralType: "btc/fusd",
 			// Marshalling empty slice results in [] bytes, unmarshalling the []
 			// empty bytes results in a nil slice instead of an empty slice
 			indexes:   types.RewardIndexes{},
@@ -202,7 +202,7 @@ func (suite *KeeperTestSuite) TestGetSetRewardIndexes() {
 		{
 			// this test is to detect any changes in behavior
 			name:           "setting nil indexes does not panic",
-			collateralType: "btc/usdx",
+			collateralType: "btc/fusd",
 			indexes:        nil,
 			wantIndex:      nil,
 			panics:         false,
@@ -252,11 +252,11 @@ func (suite *KeeperTestSuite) TestIterateRewardAccrualTimes() {
 	expectedAccrualTimes := nonEmptyAccrualTimes
 
 	for _, at := range expectedAccrualTimes {
-		suite.keeper.Store.SetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_USDX_MINTING, at.denom, at.time)
+		suite.keeper.Store.SetRewardAccrualTime(suite.ctx, types.CLAIM_TYPE_FUSD_MINTING, at.denom, at.time)
 	}
 
 	var actualAccrualTimes []accrualtime
-	suite.keeper.Store.IterateRewardAccrualTimesByClaimType(suite.ctx, types.CLAIM_TYPE_USDX_MINTING, func(denom string, accrualTime time.Time) bool {
+	suite.keeper.Store.IterateRewardAccrualTimesByClaimType(suite.ctx, types.CLAIM_TYPE_FUSD_MINTING, func(denom string, accrualTime time.Time) bool {
 		actualAccrualTimes = append(actualAccrualTimes, accrualtime{denom: denom, time: accrualTime})
 		return false
 	})
@@ -312,7 +312,7 @@ func (suite *KeeperTestSuite) TestIterateRewardIndexes() {
 					RewardFactor:   d("0.0000002"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
@@ -337,16 +337,16 @@ func (suite *KeeperTestSuite) TestIterateRewardIndexes() {
 					RewardFactor:   d("0.0000002"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},
 		},
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardIndexes: types.RewardIndexes{
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.02"),
 				},
 			},
@@ -376,14 +376,14 @@ func (suite *KeeperTestSuite) TestIterateAllRewardIndexes() {
 	suite.SetupApp()
 	multiIndexes := types.MultiRewardIndexes{
 		{
-			CollateralType: "ukava",
+			CollateralType: "umage",
 			RewardIndexes: types.RewardIndexes{
 				{
 					CollateralType: "swap",
 					RewardFactor:   d("0.0000002"),
 				},
 				{
-					CollateralType: "ukava",
+					CollateralType: "umage",
 					RewardFactor:   d("0.04"),
 				},
 			},

@@ -8,10 +8,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 
-	"github.com/kava-labs/kava/x/validator-vesting/types"
+	"github.com/mage-coven/mage/x/validator-vesting/types"
 )
 
-// GetQueryCmd returns the cli query commands for the kavadist module
+// GetQueryCmd returns the cli query commands for the magedist module
 func GetQueryCmd() *cobra.Command {
 	valVestingQueryCmd := &cobra.Command{
 		Use:   types.QueryPath,
@@ -22,10 +22,10 @@ func GetQueryCmd() *cobra.Command {
 		queryCirculatingSupply(),
 		queryTotalSupply(),
 		queryCirculatingSupplyHARD(),
-		queryCirculatingSupplyUSDX(),
+		queryCirculatingSupplyFUSD(),
 		queryCirculatingSupplySWP(),
 		queryTotalSupplyHARD(),
-		queryTotalSupplyUSDX(),
+		queryTotalSupplyFUSD(),
 	}
 
 	for _, cmd := range cmds {
@@ -40,7 +40,7 @@ func queryCirculatingSupply() *cobra.Command {
 	return &cobra.Command{
 		Use:   "circulating-supply",
 		Short: "Get circulating supply",
-		Long:  "Get the current circulating supply of kava tokens",
+		Long:  "Get the current circulating supply of mage tokens",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx, err := client.GetClientQueryContext(cmd)
@@ -69,7 +69,7 @@ func queryTotalSupply() *cobra.Command {
 	return &cobra.Command{
 		Use:   "total-supply",
 		Short: "Get total supply",
-		Long:  "Get the current total supply of kava tokens",
+		Long:  "Get the current total supply of mage tokens",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx, err := client.GetClientQueryContext(cmd)
@@ -123,11 +123,11 @@ func queryCirculatingSupplyHARD() *cobra.Command {
 	}
 }
 
-func queryCirculatingSupplyUSDX() *cobra.Command {
+func queryCirculatingSupplyFUSD() *cobra.Command {
 	return &cobra.Command{
-		Use:   "circulating-supply-usdx",
-		Short: "Get USDX circulating supply",
-		Long:  "Get the current circulating supply of USDX tokens",
+		Use:   "circulating-supply-fusd",
+		Short: "Get FUSD circulating supply",
+		Long:  "Get the current circulating supply of FUSD tokens",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx, err := client.GetClientQueryContext(cmd)
@@ -136,7 +136,7 @@ func queryCirculatingSupplyUSDX() *cobra.Command {
 			}
 
 			// Query
-			res, height, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryCirculatingSupplyUSDX), nil)
+			res, height, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryCirculatingSupplyFUSD), nil)
 			if err != nil {
 				return err
 			}
@@ -210,11 +210,11 @@ func queryTotalSupplyHARD() *cobra.Command {
 	}
 }
 
-func queryTotalSupplyUSDX() *cobra.Command {
+func queryTotalSupplyFUSD() *cobra.Command {
 	return &cobra.Command{
-		Use:   "total-supply-usdx",
-		Short: "Get USDX total supply",
-		Long:  "Get the current total supply of USDX tokens",
+		Use:   "total-supply-fusd",
+		Short: "Get FUSD total supply",
+		Long:  "Get the current total supply of FUSD tokens",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx, err := client.GetClientQueryContext(cmd)
@@ -223,7 +223,7 @@ func queryTotalSupplyUSDX() *cobra.Command {
 			}
 
 			// Query
-			res, height, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryTotalSupplyUSDX), nil)
+			res, height, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryTotalSupplyFUSD), nil)
 			if err != nil {
 				return err
 			}

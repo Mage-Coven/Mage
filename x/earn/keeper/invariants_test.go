@@ -3,10 +3,10 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/kava-labs/kava/app"
-	"github.com/kava-labs/kava/x/earn/keeper"
-	"github.com/kava-labs/kava/x/earn/testutil"
-	"github.com/kava-labs/kava/x/earn/types"
+	"github.com/mage-coven/mage/app"
+	"github.com/mage-coven/mage/x/earn/keeper"
+	"github.com/mage-coven/mage/x/earn/testutil"
+	"github.com/mage-coven/mage/x/earn/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/suite"
@@ -34,26 +34,26 @@ func (suite *invariantTestSuite) SetupTest() {
 
 func (suite *invariantTestSuite) SetupValidState() {
 	suite.Keeper.SetVaultRecord(suite.Ctx, types.NewVaultRecord(
-		"usdx",
+		"fusd",
 		sdk.MustNewDecFromStr("100"),
 	))
 	suite.Keeper.SetVaultRecord(suite.Ctx, types.NewVaultRecord(
-		"ukava",
+		"umage",
 		sdk.MustNewDecFromStr("250.123456"),
 	))
 
 	vaultShare1 := types.NewVaultShareRecord(
 		suite.addrs[0],
 		types.NewVaultShares(
-			types.NewVaultShare("usdx", sdk.MustNewDecFromStr("50")),
-			types.NewVaultShare("ukava", sdk.MustNewDecFromStr("105.123")),
+			types.NewVaultShare("fusd", sdk.MustNewDecFromStr("50")),
+			types.NewVaultShare("umage", sdk.MustNewDecFromStr("105.123")),
 		),
 	)
 	vaultShare2 := types.NewVaultShareRecord(
 		suite.addrs[1],
 		types.NewVaultShares(
-			types.NewVaultShare("usdx", sdk.MustNewDecFromStr("50")),
-			types.NewVaultShare("ukava", sdk.MustNewDecFromStr("145.000456")),
+			types.NewVaultShare("fusd", sdk.MustNewDecFromStr("50")),
+			types.NewVaultShare("umage", sdk.MustNewDecFromStr("145.000456")),
 		),
 	)
 
@@ -137,8 +137,8 @@ func (suite *invariantTestSuite) TestShareRecordsInvariant() {
 		suite.addrs[0],
 		// Directly create vaultshares instead of NewVaultShares() to avoid sanitization
 		types.VaultShares{
-			types.NewVaultShare("ukava", sdk.MustNewDecFromStr("50")),
-			types.NewVaultShare("ukava", sdk.MustNewDecFromStr("105.123")),
+			types.NewVaultShare("umage", sdk.MustNewDecFromStr("50")),
+			types.NewVaultShare("umage", sdk.MustNewDecFromStr("105.123")),
 		},
 	))
 	message, broken = suite.runInvariant("share-records", keeper.ShareRecordsInvariant)
@@ -158,7 +158,7 @@ func (suite *invariantTestSuite) TestVaultSharesInvariant() {
 
 	// broken when total shares are greater than depositor shares
 	suite.Keeper.SetVaultRecord(suite.Ctx, types.NewVaultRecord(
-		"usdx",
+		"fusd",
 		sdk.MustNewDecFromStr("101"),
 	))
 	message, broken = suite.runInvariant("vault-shares", keeper.VaultSharesInvariant)
@@ -167,7 +167,7 @@ func (suite *invariantTestSuite) TestVaultSharesInvariant() {
 
 	// broken when total shares are less than the depositor shares
 	suite.Keeper.SetVaultRecord(suite.Ctx, types.NewVaultRecord(
-		"usdx",
+		"fusd",
 		sdk.MustNewDecFromStr("99.999"),
 	))
 	message, broken = suite.runInvariant("vault-shares", keeper.VaultSharesInvariant)
@@ -175,7 +175,7 @@ func (suite *invariantTestSuite) TestVaultSharesInvariant() {
 	suite.Equal(true, broken)
 
 	// broken when vault record is missing
-	suite.Keeper.DeleteVaultRecord(suite.Ctx, "usdx")
+	suite.Keeper.DeleteVaultRecord(suite.Ctx, "fusd")
 	message, broken = suite.runInvariant("vault-shares", keeper.VaultSharesInvariant)
 	suite.Equal("earn: vault shares broken invariant\nvault shares do not match depositor shares\n", message)
 	suite.Equal(true, broken)
