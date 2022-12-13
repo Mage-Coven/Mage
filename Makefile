@@ -279,7 +279,7 @@ test:
 
 # Run cli integration tests
 # `-p 4` to use 4 cores, `-tags cli_test` to tell go not to ignore the cli package
-# These tests use the `mge` or `kvcli` binaries in the build dir, or in `$BUILDDIR` if that env var is set.
+# These tests use the `mge` or `mgecli` binaries in the build dir, or in `$BUILDDIR` if that env var is set.
 test-cli: build
 	@go test ./cli_test -tags cli_test -v -p 4
 

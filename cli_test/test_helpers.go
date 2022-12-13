@@ -114,9 +114,9 @@ func NewFixtures(t *testing.T) *Fixtures {
 		BuildDir:    buildDir,
 		RootDir:     tmpDir,
 		KvdBinary:   filepath.Join(buildDir, "mge"),
-		KvcliBinary: filepath.Join(buildDir, "kvcli"),
+		KvcliBinary: filepath.Join(buildDir, "mgecli"),
 		KvdHome:     filepath.Join(tmpDir, ".mge"),
-		KvcliHome:   filepath.Join(tmpDir, ".kvcli"),
+		KvcliHome:   filepath.Join(tmpDir, ".mgecli"),
 		RPCAddr:     servAddr,
 		P2PAddr:     p2pAddr,
 		Port:        port,
@@ -272,37 +272,37 @@ func (f *Fixtures) ValidateGenesis() {
 }
 
 //___________________________________________________________________________________
-// kvcli keys
+// mgecli keys
 
-// KeysDelete is kvcli keys delete
+// KeysDelete is mgecli keys delete
 func (f *Fixtures) KeysDelete(name string, flags ...string) {
 	cmd := fmt.Sprintf("%s keys delete --keyring-backend=test --home=%s %s", f.KvcliBinary,
 		f.KvcliHome, name)
 	executeWrite(f.T, addFlags(cmd, append(append(flags, "-y"), "-f")))
 }
 
-// KeysAdd is kvcli keys add
+// KeysAdd is mgecli keys add
 func (f *Fixtures) KeysAdd(name string, flags ...string) {
 	cmd := fmt.Sprintf("%s keys add --keyring-backend=test --home=%s %s", f.KvcliBinary,
 		f.KvcliHome, name)
 	executeWriteCheckErr(f.T, addFlags(cmd, flags))
 }
 
-// KeysAddRecover prepares kvcli keys add --recover
+// KeysAddRecover prepares mgecli keys add --recover
 func (f *Fixtures) KeysAddRecover(name, mnemonic string, flags ...string) (exitSuccess bool, stdout, stderr string) {
 	cmd := fmt.Sprintf("%s keys add --keyring-backend=test --home=%s --recover %s",
 		f.KvcliBinary, f.KvcliHome, name)
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), mnemonic)
 }
 
-// KeysAddRecoverHDPath prepares kvcli keys add --recover --account --index
+// KeysAddRecoverHDPath prepares mgecli keys add --recover --account --index
 func (f *Fixtures) KeysAddRecoverHDPath(name, mnemonic string, account uint32, index uint32, flags ...string) {
 	cmd := fmt.Sprintf("%s keys add --keyring-backend=test --home=%s --recover %s --account %d"+
 		" --index %d", f.KvcliBinary, f.KvcliHome, name, account, index)
 	executeWriteCheckErr(f.T, addFlags(cmd, flags), mnemonic)
 }
 
-// KeysShow is kvcli keys show
+// KeysShow is mgecli keys show
 func (f *Fixtures) KeysShow(name string, flags ...string) keys.KeyOutput {
 	cmd := fmt.Sprintf("%s keys show --keyring-backend=test --home=%s %s", f.KvcliBinary,
 		f.KvcliHome, name)
@@ -322,50 +322,50 @@ func (f *Fixtures) KeyAddress(name string) sdk.AccAddress {
 }
 
 //___________________________________________________________________________________
-// kvcli config
+// mgecli config
 
-// CLIConfig is kvcli config
+// CLIConfig is mgecli config
 func (f *Fixtures) CLIConfig(key, value string, flags ...string) {
 	cmd := fmt.Sprintf("%s config --home=%s %s %s", f.KvcliBinary, f.KvcliHome, key, value)
 	executeWriteCheckErr(f.T, addFlags(cmd, flags))
 }
 
 //___________________________________________________________________________________
-// kvcli tx send/sign/broadcast
+// mgecli tx send/sign/broadcast
 
-// Status is kvcli status
+// Status is mgecli status
 func (f *Fixtures) Status(flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s status %s", f.KvcliBinary, f.Flags())
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxSend is kvcli tx send
+// TxSend is mgecli tx send
 func (f *Fixtures) TxSend(from string, to sdk.AccAddress, amount sdk.Coin, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx send --keyring-backend=test %s %s %s %v", f.KvcliBinary, from,
 		to, amount, f.Flags())
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxSign is kvcli tx sign
+// TxSign is mgecli tx sign
 func (f *Fixtures) TxSign(signer, fileName string, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx sign %v --keyring-backend=test --from=%s %v", f.KvcliBinary,
 		f.Flags(), signer, fileName)
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxBroadcast is kvcli tx broadcast
+// TxBroadcast is mgecli tx broadcast
 func (f *Fixtures) TxBroadcast(fileName string, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx broadcast %v %v", f.KvcliBinary, f.Flags(), fileName)
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxEncode is kvcli tx encode
+// TxEncode is mgecli tx encode
 func (f *Fixtures) TxEncode(fileName string, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx encode %v %v", f.KvcliBinary, f.Flags(), fileName)
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxMultisign is kvcli tx multisign
+// TxMultisign is mgecli tx multisign
 func (f *Fixtures) TxMultisign(fileName, name string, signaturesFiles []string,
 	flags ...string,
 ) (bool, string, string) {
@@ -376,9 +376,9 @@ func (f *Fixtures) TxMultisign(fileName, name string, signaturesFiles []string,
 }
 
 //___________________________________________________________________________________
-// kvcli tx staking
+// mgecli tx staking
 
-// TxStakingCreateValidator is kvcli tx staking create-validator
+// TxStakingCreateValidator is mgecli tx staking create-validator
 func (f *Fixtures) TxStakingCreateValidator(from, consPubKey string, amount sdk.Coin, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx staking create-validator %v --keyring-backend=test --from=%s"+
 		" --pubkey=%s", f.KvcliBinary, f.Flags(), from, consPubKey)
@@ -388,7 +388,7 @@ func (f *Fixtures) TxStakingCreateValidator(from, consPubKey string, amount sdk.
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxStakingUnbond is kvcli tx staking unbond
+// TxStakingUnbond is mgecli tx staking unbond
 func (f *Fixtures) TxStakingUnbond(from, shares string, validator sdk.ValAddress, flags ...string) bool {
 	cmd := fmt.Sprintf("%s tx staking unbond --keyring-backend=test %s %v --from=%s %v",
 		f.KvcliBinary, validator, shares, from, f.Flags())
@@ -396,9 +396,9 @@ func (f *Fixtures) TxStakingUnbond(from, shares string, validator sdk.ValAddress
 }
 
 //___________________________________________________________________________________
-// kvcli tx gov
+// mgecli tx gov
 
-// TxGovSubmitProposal is kvcli tx gov submit-proposal
+// TxGovSubmitProposal is mgecli tx gov submit-proposal
 func (f *Fixtures) TxGovSubmitProposal(from, typ, title, description string, deposit sdk.Coin, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx gov submit-proposal %v --keyring-backend=test --from=%s --type=%s",
 		f.KvcliBinary, f.Flags(), from, typ)
@@ -406,14 +406,14 @@ func (f *Fixtures) TxGovSubmitProposal(from, typ, title, description string, dep
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxGovDeposit is kvcli tx gov deposit
+// TxGovDeposit is mgecli tx gov deposit
 func (f *Fixtures) TxGovDeposit(proposalID int, from string, amount sdk.Coin, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx gov deposit %d %s --keyring-backend=test --from=%s %v",
 		f.KvcliBinary, proposalID, amount, from, f.Flags())
 	return executeWriteRetStdStreams(f.T, addFlags(cmd, flags), clientkeys.DefaultKeyPass)
 }
 
-// TxGovVote is kvcli tx gov vote
+// TxGovVote is mgecli tx gov vote
 func (f *Fixtures) TxGovVote(proposalID int, option gov.VoteOption, from string, flags ...string) (bool, string, string) {
 	cmd := fmt.Sprintf("%s tx gov vote %d %s --keyring-backend=test --from=%s %v",
 		f.KvcliBinary, proposalID, option, from, f.Flags())
@@ -447,9 +447,9 @@ func (f *Fixtures) TxGovSubmitCommunityPoolSpendProposal(
 }
 
 //___________________________________________________________________________________
-// kvcli query account
+// mgecli query account
 
-// QueryAccount is kvcli query account
+// QueryAccount is mgecli query account
 func (f *Fixtures) QueryAccount(address sdk.AccAddress, flags ...string) auth.BaseAccount {
 	cmd := fmt.Sprintf("%s query account %s %v", f.KvcliBinary, address, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -466,9 +466,9 @@ func (f *Fixtures) QueryAccount(address sdk.AccAddress, flags ...string) auth.Ba
 }
 
 //___________________________________________________________________________________
-// kvcli query txs
+// mgecli query txs
 
-// QueryTxs is kvcli query txs
+// QueryTxs is mgecli query txs
 func (f *Fixtures) QueryTxs(page, limit int, events ...string) *sdk.SearchTxsResult {
 	cmd := fmt.Sprintf("%s query txs --page=%d --limit=%d --events='%s' %v", f.KvcliBinary, page, limit, queryEvents(events), f.Flags())
 	out, _ := tests.ExecuteT(f.T, cmd, "")
@@ -487,9 +487,9 @@ func (f *Fixtures) QueryTxsInvalid(expectedErr error, page, limit int, events ..
 }
 
 //___________________________________________________________________________________
-// kvcli query staking
+// mgecli query staking
 
-// QueryStakingValidator is kvcli query staking validator
+// QueryStakingValidator is mgecli query staking validator
 func (f *Fixtures) QueryStakingValidator(valAddr sdk.ValAddress, flags ...string) staking.Validator {
 	cmd := fmt.Sprintf("%s query staking validator %s %v", f.KvcliBinary, valAddr, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -500,7 +500,7 @@ func (f *Fixtures) QueryStakingValidator(valAddr sdk.ValAddress, flags ...string
 	return validator
 }
 
-// QueryStakingUnbondingDelegationsFrom is kvcli query staking unbonding-delegations-from
+// QueryStakingUnbondingDelegationsFrom is mgecli query staking unbonding-delegations-from
 func (f *Fixtures) QueryStakingUnbondingDelegationsFrom(valAddr sdk.ValAddress, flags ...string) []staking.UnbondingDelegation {
 	cmd := fmt.Sprintf("%s query staking unbonding-delegations-from %s %v", f.KvcliBinary, valAddr, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -511,7 +511,7 @@ func (f *Fixtures) QueryStakingUnbondingDelegationsFrom(valAddr sdk.ValAddress, 
 	return ubds
 }
 
-// QueryStakingDelegationsTo is kvcli query staking delegations-to
+// QueryStakingDelegationsTo is mgecli query staking delegations-to
 func (f *Fixtures) QueryStakingDelegationsTo(valAddr sdk.ValAddress, flags ...string) []staking.Delegation {
 	cmd := fmt.Sprintf("%s query staking delegations-to %s %v", f.KvcliBinary, valAddr, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -522,7 +522,7 @@ func (f *Fixtures) QueryStakingDelegationsTo(valAddr sdk.ValAddress, flags ...st
 	return delegations
 }
 
-// QueryStakingPool is kvcli query staking pool
+// QueryStakingPool is mgecli query staking pool
 func (f *Fixtures) QueryStakingPool(flags ...string) staking.Pool {
 	cmd := fmt.Sprintf("%s query staking pool %v", f.KvcliBinary, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -533,7 +533,7 @@ func (f *Fixtures) QueryStakingPool(flags ...string) staking.Pool {
 	return pool
 }
 
-// QueryStakingParameters is kvcli query staking parameters
+// QueryStakingParameters is mgecli query staking parameters
 func (f *Fixtures) QueryStakingParameters(flags ...string) staking.Params {
 	cmd := fmt.Sprintf("%s query staking params %v", f.KvcliBinary, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -545,9 +545,9 @@ func (f *Fixtures) QueryStakingParameters(flags ...string) staking.Params {
 }
 
 //___________________________________________________________________________________
-// kvcli query gov
+// mgecli query gov
 
-// QueryGovParamDeposit is kvcli query gov param deposit
+// QueryGovParamDeposit is mgecli query gov param deposit
 func (f *Fixtures) QueryGovParamDeposit() gov.DepositParams {
 	cmd := fmt.Sprintf("%s query gov param deposit %s", f.KvcliBinary, f.Flags())
 	out, _ := tests.ExecuteT(f.T, cmd, "")
@@ -558,7 +558,7 @@ func (f *Fixtures) QueryGovParamDeposit() gov.DepositParams {
 	return depositParam
 }
 
-// QueryGovParamVoting is kvcli query gov param voting
+// QueryGovParamVoting is mgecli query gov param voting
 func (f *Fixtures) QueryGovParamVoting() gov.VotingParams {
 	cmd := fmt.Sprintf("%s query gov param voting %s", f.KvcliBinary, f.Flags())
 	out, _ := tests.ExecuteT(f.T, cmd, "")
@@ -569,7 +569,7 @@ func (f *Fixtures) QueryGovParamVoting() gov.VotingParams {
 	return votingParam
 }
 
-// QueryGovParamTallying is kvcli query gov param tallying
+// QueryGovParamTallying is mgecli query gov param tallying
 func (f *Fixtures) QueryGovParamTallying() gov.TallyParams {
 	cmd := fmt.Sprintf("%s query gov param tallying %s", f.KvcliBinary, f.Flags())
 	out, _ := tests.ExecuteT(f.T, cmd, "")
@@ -580,7 +580,7 @@ func (f *Fixtures) QueryGovParamTallying() gov.TallyParams {
 	return tallyingParam
 }
 
-// QueryGovProposals is kvcli query gov proposals
+// QueryGovProposals is mgecli query gov proposals
 func (f *Fixtures) QueryGovProposals(flags ...string) gov.Proposals {
 	cmd := fmt.Sprintf("%s query gov proposals %v", f.KvcliBinary, f.Flags())
 	stdout, stderr := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -595,7 +595,7 @@ func (f *Fixtures) QueryGovProposals(flags ...string) gov.Proposals {
 	return out
 }
 
-// QueryGovProposal is kvcli query gov proposal
+// QueryGovProposal is mgecli query gov proposal
 func (f *Fixtures) QueryGovProposal(proposalID int, flags ...string) gov.Proposal {
 	cmd := fmt.Sprintf("%s query gov proposal %d %v", f.KvcliBinary, proposalID, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -606,7 +606,7 @@ func (f *Fixtures) QueryGovProposal(proposalID int, flags ...string) gov.Proposa
 	return proposal
 }
 
-// QueryGovVote is kvcli query gov vote
+// QueryGovVote is mgecli query gov vote
 func (f *Fixtures) QueryGovVote(proposalID int, voter sdk.AccAddress, flags ...string) gov.Vote {
 	cmd := fmt.Sprintf("%s query gov vote %d %s %v", f.KvcliBinary, proposalID, voter, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -617,7 +617,7 @@ func (f *Fixtures) QueryGovVote(proposalID int, voter sdk.AccAddress, flags ...s
 	return vote
 }
 
-// QueryGovVotes is kvcli query gov votes
+// QueryGovVotes is mgecli query gov votes
 func (f *Fixtures) QueryGovVotes(proposalID int, flags ...string) []gov.Vote {
 	cmd := fmt.Sprintf("%s query gov votes %d %v", f.KvcliBinary, proposalID, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -628,7 +628,7 @@ func (f *Fixtures) QueryGovVotes(proposalID int, flags ...string) []gov.Vote {
 	return votes
 }
 
-// QueryGovDeposit is kvcli query gov deposit
+// QueryGovDeposit is mgecli query gov deposit
 func (f *Fixtures) QueryGovDeposit(proposalID int, depositor sdk.AccAddress, flags ...string) gov.Deposit {
 	cmd := fmt.Sprintf("%s query gov deposit %d %s %v", f.KvcliBinary, proposalID, depositor, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -639,7 +639,7 @@ func (f *Fixtures) QueryGovDeposit(proposalID int, depositor sdk.AccAddress, fla
 	return deposit
 }
 
-// QueryGovDeposits is kvcli query gov deposits
+// QueryGovDeposits is mgecli query gov deposits
 func (f *Fixtures) QueryGovDeposits(propsalID int, flags ...string) []gov.Deposit {
 	cmd := fmt.Sprintf("%s query gov deposits %d %v", f.KvcliBinary, propsalID, f.Flags())
 	out, _ := tests.ExecuteT(f.T, addFlags(cmd, flags), "")
@@ -665,7 +665,7 @@ func (f *Fixtures) QuerySigningInfo(val string) slashing.ValidatorSigningInfo {
 	return sinfo
 }
 
-// QuerySlashingParams is kvcli query slashing params
+// QuerySlashingParams is mgecli query slashing params
 func (f *Fixtures) QuerySlashingParams() slashing.Params {
 	cmd := fmt.Sprintf("%s query slashing params %s", f.KvcliBinary, f.Flags())
 	res, errStr := tests.ExecuteT(f.T, cmd, "")

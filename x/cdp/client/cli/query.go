@@ -94,11 +94,11 @@ func QueryGetCdpsCmd() *cobra.Command {
 		Short: "query cdps with optional filters",
 		Long: strings.TrimSpace(`Query for all paginated cdps that match optional filters:
 Example:
-$ kvcli q cdp cdps --collateral-type=bnb
-$ kvcli q cdp cdps --owner=mage1hatdq32u5x4wnxrtv5wzjzmq49sxgjgsj0mffm
-$ kvcli q cdp cdps --id=21
-$ kvcli q cdp cdps --ratio=2.75
-$ kvcli q cdp cdps --page=2 --limit=100
+$ mgecli q cdp cdps --collateral-type=bnb
+$ mgecli q cdp cdps --owner=mage1hatdq32u5x4wnxrtv5wzjzmq49sxgjgsj0mffm
+$ mgecli q cdp cdps --id=21
+$ mgecli q cdp cdps --ratio=2.75
+$ mgecli q cdp cdps --page=2 --limit=100
 `,
 		),
 		RunE: func(cmd *cobra.Command, args []string) error {

@@ -9,13 +9,13 @@ Resources and examples for running and interacting with mage-testnet-4000
 Before making a request, query account information for the signing account. Note the 'accountnumber' and 'sequence' fields, we'll need them later in order to send our request:
 
 ```bash
-    kvcli q auth account $(kvcli keys show accB -a)
+    mgecli q auth account $(mgecli keys show accB -a)
 ```
 
 If testing locally, start the Mage rest server:
 
 ```bash
-    kvcli rest-server
+    mgecli rest-server
 ```
 
 Now we'll create an unsigned request, sign it, and broadcast it to the Mage blockchain via the rest server. Note that if you're using the mainnet or testnet, the host IP address will need to be updated to point at an active rest server instead of http://127.0.0.1.
@@ -29,10 +29,10 @@ Format the base request in create-cdp.json. You'll need to update the 'from', 'c
     curl -H "Content-Type: application/json" -X PUT -d @./contrib/testnet-4000/rest_examples/cdp/create-cdp.json http://127.0.0.1:1317/cdp | jq > ./contrib/testnet-4000/rest_examples/cdp/create-cdp-unsigned.json
 
     # Sign the request
-    kvcli tx sign ./contrib/testnet-4000/rest_examples/cdp/create-cdp-unsigned.json --from accB --offline --chain-id testing --sequence 1 --account-number 2 | jq  > ./contrib/testnet-4000/rest_examples/cdp/broadcast-create-cdp.json
+    mgecli tx sign ./contrib/testnet-4000/rest_examples/cdp/create-cdp-unsigned.json --from accB --offline --chain-id testing --sequence 1 --account-number 2 | jq  > ./contrib/testnet-4000/rest_examples/cdp/broadcast-create-cdp.json
 
     # Broadcast the request
-    kvcli tx broadcast ./contrib/testnet-4000/rest_examples/cdp/broadcast-create-cdp.json
+    mgecli tx broadcast ./contrib/testnet-4000/rest_examples/cdp/broadcast-create-cdp.json
 ```
 
 Congratulations, you've just created a CDP on Mage using the rest server!
@@ -49,10 +49,10 @@ Format the base request in post-price.json. You'll need to update the 'from', 'c
 
 
     # Sign the request
-    kvcli tx sign ./contrib/testnet-4000/rest_examples/pricefeed/post-price-unsigned.json --from validator --offline --chain-id testing --sequence 96 --account-number 0 | jq > ./contrib/testnet-4000/rest_examples/pricefeed/broadcast-post-price.json
+    mgecli tx sign ./contrib/testnet-4000/rest_examples/pricefeed/post-price-unsigned.json --from validator --offline --chain-id testing --sequence 96 --account-number 0 | jq > ./contrib/testnet-4000/rest_examples/pricefeed/broadcast-post-price.json
 
     # Broadcast the request
-    kvcli tx broadcast ./contrib/testnet-4000/rest_examples/pricefeed/broadcast-post-price.json
+    mgecli tx broadcast ./contrib/testnet-4000/rest_examples/pricefeed/broadcast-post-price.json
 ```
 
 Congratulations, you've just posted a current market price on Mage using the rest server!
